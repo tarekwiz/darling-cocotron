@@ -45,7 +45,7 @@ enum
 };
 
 #if LIBPNG_PRESENT
-#include <libpng/include/png.h>
+#include <png.h>
 
 typedef struct png_data_t {
 	const uint8_t *data;

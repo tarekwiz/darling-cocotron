@@ -15,7 +15,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import "O2Defines_libtiff.h"
 
 #if LIBTIFF_PRESENT
-#import <libtiff/include/tiffio.h>
+#define uint64 tiff_uint64
+#import <tiffio.h>
+#undef uint64
 
 // TIFF Reader from NSData memory
 @interface O2TIFFReader : NSObject

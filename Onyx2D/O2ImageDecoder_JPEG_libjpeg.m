@@ -4,7 +4,7 @@
 
 #ifdef LIBJPEG_PRESENT
 
-#import <libjpeg/include/jpeglib.h>
+#import <jpeglib.h>
 
 @implementation O2ImageDecoder_JPEG_libjpeg
 

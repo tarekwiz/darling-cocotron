@@ -75,4 +75,5 @@ add_framework(CoreGraphics
 		objc
 		system
 		CoreFoundation
+		Onyx2D
 )
