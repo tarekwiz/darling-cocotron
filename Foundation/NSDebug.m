@@ -20,12 +20,16 @@ BOOL NSZombieEnabled=NO;
 BOOL NSDebugEnabled=NO;
 BOOL NSCooperativeThreadsEnabled=NO;
 
+#ifndef DARLING
+// Under Darling, this file is symlinked from external/foundation
+// But _NSPrintForDebugger is already implemented in NSLog.m
 const char* _NSPrintForDebugger(id object) {
 	if(object && [object respondsToSelector:@selector(description)]) {
 		return [[object description] UTF8String];
 	}
 	return NULL;
 }
+#endif
 
 #ifndef WINDOWS
 void NSCooperativeThreadBlocking() {

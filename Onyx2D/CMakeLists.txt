@@ -8,7 +8,8 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} \
 	-include CoreFoundation/CoreFoundation.h \
 	-include Foundation/Foundation.h \
 	-Wno-nonportable-include-path \
-	-Wno-deprecated-objc-isa-usage"
+	-Wno-deprecated-objc-isa-usage \
+	-mmacosx-version-min=10.10"
 )
 
 find_package(Freetype REQUIRED)

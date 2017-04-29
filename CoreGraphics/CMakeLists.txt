@@ -7,7 +7,8 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} \
 	-include stdlib.h \
 	-include CoreFoundation/CoreFoundation.h \
 	-include Foundation/Foundation.h \
-	-Wno-nonportable-include-path"
+	-Wno-nonportable-include-path \
+	-mmacosx-version-min=10.10"
 )
 
 include_directories(
@@ -75,5 +76,6 @@ add_framework(CoreGraphics
 		objc
 		system
 		CoreFoundation
+		Foundation
 		Onyx2D
 )
