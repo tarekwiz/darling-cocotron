@@ -4,7 +4,7 @@
 #import <ft2build.h>
 #import FT_FREETYPE_H
 #import FT_RENDER_H
-#import <fontconfig.h>
+#import <fontconfig/fontconfig.h>
 
 @interface O2Font_FT : O2Font {
     FT_Face _face;

@@ -1,1 +1,1 @@
-../Foundation/NSException/NSRaise.h
+#import <Foundation/NSRaise.h>

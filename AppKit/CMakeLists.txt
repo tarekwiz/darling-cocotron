@@ -12,7 +12,13 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} \
 	-mmacosx-version-min=10.10"
 )
 
+find_package(X11 REQUIRED)
 find_package(Freetype REQUIRED)
+find_package(OpenGL REQUIRED)
+
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(PC_CAIRO cairo)
+pkg_check_modules(PC_FONTCONFIG fontconfig)
 
 include_directories(
 	${CMAKE_SOURCE_DIR}/src/external/foundation/include
@@ -47,7 +53,11 @@ include_directories(
 	${CMAKE_CURRENT_SOURCE_DIR}/NSToolbar.subproj
 	${CMAKE_CURRENT_SOURCE_DIR}/NSDrawer.subproj
 
+	${X11_INCLUDE_DIRS}
 	${FREETYPE_INCLUDE_DIRS}
+	${OPENGL_INCLUDE_DIRS}
+	${PC_CAIRO_INCLUDE_DIRS}
+	${PC_FONTCONFIG_INCLUDE_DIRS}
 )
 
 set(AppKit_sources
@@ -256,7 +266,7 @@ set(AppKit_sources
 	NSOpenGL/NSOpenGLPixelBuffer.m
 	NSOpenGL/NSOpenGLPixelFormat.m
 	NSOpenGL/NSOpenGLDrawable.m
-	NSOpenGL/NSOpenGLContext.m
+	# NSOpenGL/NSOpenGLContext.m
 
 	NSPopUpButtonCell.m
 	NSPredicateEditor.m
@@ -377,5 +387,6 @@ add_framework(AppKit
 		Onyx2D
 		# native libraries
 		FreeType
+		fontconfig
 		jpeg png tiff
 )
