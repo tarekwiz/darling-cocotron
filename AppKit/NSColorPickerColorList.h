@@ -1,0 +1,1 @@
+NSColorPicker.subproj/NSColorPickerColorList.h
