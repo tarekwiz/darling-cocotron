@@ -11,6 +11,7 @@
 #import "X11Window.h"
 #import <AppKit/NSScreen.h>
 #import <AppKit/NSApplication.h>
+#import <Foundation/NSDebug.h>
 #import <Foundation/NSSelectInputSource.h>
 #import <Foundation/NSSocket_bsd.h>
 #import <AppKit/NSColor.h>
@@ -22,7 +23,7 @@
 #import <AppKit/NSFontTypeface.h>
 #import <AppKit/NSWindow.h>
 #import <fcntl.h>
-#import <fontconfig.h>
+#import <fontconfig/fontconfig.h>
 #import <X11/Xutil.h>
 
 @implementation NSDisplay(X11)

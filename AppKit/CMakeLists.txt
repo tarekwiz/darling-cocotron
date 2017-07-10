@@ -296,7 +296,7 @@ set(AppKit_sources
 	X11.subproj/KTFont_FT.m
 	X11.subproj/O2Font_FT.m
 	X11.subproj/CGLContext.m
-	X11.subproj/NSOpenGLDrawable_X11.m
+	# X11.subproj/NSOpenGLDrawable_X11.m
 	X11.subproj/O2Context_cairo.m
 	X11.subproj/X11Display.m
 	X11.subproj/O2Context_builtin_FT.m
