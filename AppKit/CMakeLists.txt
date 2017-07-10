@@ -388,5 +388,8 @@ add_framework(AppKit
 		# native libraries
 		FreeType
 		fontconfig
+		X11
+		GL
+		cairo
 		jpeg png tiff
 )
