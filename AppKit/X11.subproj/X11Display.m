@@ -12,8 +12,12 @@
 #import <AppKit/NSScreen.h>
 #import <AppKit/NSApplication.h>
 #import <Foundation/NSDebug.h>
+
+#ifndef DARLING
 #import <Foundation/NSSelectInputSource.h>
 #import <Foundation/NSSocket_bsd.h>
+#endif
+
 #import <AppKit/NSColor.h>
 #import <AppKit/NSImage.h>
 #import <AppKit/KTFont_FT.h>
@@ -40,6 +44,19 @@ static int errorHandler(Display *display,XErrorEvent *errorEvent) {
    return [(X11Display*)[X11Display currentDisplay] handleError:errorEvent];
 }
 
+#ifdef DARLING
+static void socketCallback(
+    CFSocketRef s,
+    CFSocketCallBackType type,
+    CFDataRef address,
+    const void *data,
+    void *info
+) {
+    X11Display *self = info;
+    [self processPendingEvents];
+}
+#endif
+
 -init {
    if(self=[super init]){
    
@@ -60,10 +77,25 @@ static int errorHandler(Display *display,XErrorEvent *errorEvent) {
     XSetErrorHandler(errorHandler);
       
     _fileDescriptor=ConnectionNumber(_display);
+#ifndef DARLING
     _inputSource=[[NSSelectInputSource socketInputSourceWithSocket:[NSSocket_bsd socketWithDescriptor:_fileDescriptor]] retain];
     [_inputSource setDelegate:self];
     [_inputSource setSelectEventMask:NSSelectReadEvent];
-      
+#else
+    // There's no need to retain/release the display,
+    // because the display is guaranteed to outlive
+    // the socket.
+    CFSocketContext context = {
+        .version = 0,
+        .info = self,
+        .retain = NULL,
+        .release = NULL,
+        .copyDescription = NULL
+    };
+    _cfSocket = CFSocketCreateWithNative(kCFAllocatorDefault, _fileDescriptor, kCFSocketReadCallBack, socketCallback, &context);
+    _source = CFSocketCreateRunLoopSource(kCFAllocatorDefault, _cfSocket, 0);
+#endif
+
     _windowsByID=[NSMutableDictionary new];
 
     lastFocusedWindow=nil;
@@ -75,6 +107,10 @@ static int errorHandler(Display *display,XErrorEvent *errorEvent) {
 
 -(void)dealloc {
    if(_display)
+#ifdef DARLING
+   CFRelease(_source);
+   CFRelease(_cfSocket);
+#endif
     XCloseDisplay(_display);
     
    [_windowsByID release];
@@ -313,10 +349,20 @@ static int errorHandler(Display *display,XErrorEvent *errorEvent) {
 -(NSEvent *)nextEventMatchingMask:(unsigned)mask untilDate:(NSDate *)untilDate inMode:(NSString *)mode dequeue:(BOOL)dequeue {
    NSEvent *result;
    
+#ifndef DARLING
    [[NSRunLoop currentRunLoop] addInputSource:_inputSource forMode:mode];
+#else
+    CFRunLoopAddSource(CFRunLoopGetCurrent(), _source, (CFStringRef) mode);
+#endif
+
    result=[super nextEventMatchingMask:mask untilDate:untilDate inMode:mode dequeue:dequeue];
+
+#ifndef DARLING
    [[NSRunLoop currentRunLoop] removeInputSource:_inputSource forMode:mode];
-   
+#else
+    CFRunLoopRemoveSource(CFRunLoopGetCurrent(), _source, (CFStringRef) mode);
+#endif
+
    return result;
 }
 
@@ -578,7 +624,11 @@ NSArray *CGSOrderedWindowNumbers() {
 
 }
 
+#ifndef DARLING
 -(void)selectInputSource:(NSSelectInputSource *)inputSource selectEvent:(NSUInteger)selectEvent {
+#else
+- (void) processPendingEvents {
+#endif
    int numEvents;
    
    while((numEvents=XPending(_display))>0) {

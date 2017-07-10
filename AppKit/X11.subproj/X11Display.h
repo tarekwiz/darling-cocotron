@@ -9,10 +9,23 @@
 #import <AppKit/NSDisplay.h>
 #import <X11/Xlib.h>
 
+#ifdef DARLING
+#import <CoreFoundation/CFRunLoop.h>
+#import <CoreFoundation/CFSocket.h>
+#endif
+
 @interface X11Display : NSDisplay {
     Display *_display;
     int _fileDescriptor;
+#ifndef DARLING
     NSSelectInputSource *_inputSource;
+#else
+    // We use CFRunLoop directly, without going through any Foundation wrapper,
+    // because Apple's Cocoa has none. Unlike Apple's Cocoa, we need to watch
+    // over a Unix domain socket, not a Mach port.
+    CFSocketRef _cfSocket;
+    CFRunLoopSourceRef _source;
+#endif
     NSMutableDictionary *_windowsByID;
 
     id lastFocusedWindow;
