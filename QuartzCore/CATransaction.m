@@ -3,7 +3,6 @@
 #import <Foundation/NSString.h>
 #import <Foundation/NSNumber.h>
 #import <Foundation/NSArray.h>
-#import <Foundation/NSThread-Private.h>
 #import "CATransactionGroup.h"
 
 NSString * const kCATransactionAnimationDuration=@"kCATransactionAnimationDuration";
