@@ -139,6 +139,7 @@ set_source_files_properties(${Onyx2D_sources} LANGUAGE C)
 add_framework(Onyx2D
 	FAT
 	CURRENT_VERSION
+	PRIVATE
 	SOURCES
 		${Onyx2D_sources}
 	VERSION "A"
