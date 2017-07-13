@@ -1,4 +1,4 @@
-project(QuartzCore)
+project(OpenGL)
 
 include(darling_framework)
 
@@ -33,50 +33,29 @@ include_directories(
 	${CMAKE_CURRENT_SOURCE_DIR}
 )
 
-set(QuartzCore_sources
-	CAAnimationGroup.m
-	CAAnimation.m
-	CABase.m
-	CABasicAnimation.m
-	CALayerContext.m
-	CALayer.m
-	CAMediaTimingFunction.m
-	CAPropertyAnimation.m
-	CARenderer.m
-	CATransactionGroup.m
-	CATransaction.m
-	CATransform3D.m
-	CATransition.m
-	CAValueFunction.m
-	CAWindowOpenGLContext.m
-	CIAffineTransform.m
-	CIBloom.m
-	CIBoxBlur.m
-	CIColor.m
-	CIContext.m
-	CIFilter.m
-	CIImage.m
-	CILinearGradient.m
-	CIVector.m
+set(OpenGL_sources
+	OpenGL.m
+
+	# weird, I know
+	../AppKit/X11.subproj/CGLContext.m
 )
 
-set_source_files_properties(${QuartzCore_sources} LANGUAGE C)
+set_source_files_properties(${OpenGL_sources} LANGUAGE C)
 
-add_framework(QuartzCore
+add_framework(OpenGL
 	FAT
 	CURRENT_VERSION
 	SOURCES
-		${QuartzCore_sources}
+		${OpenGL_sources}
 	VERSION "A"
 	DEPENDENCIES
 		objc
 		system
 		CoreFoundation
 		Foundation
-		CoreGraphics
-		Onyx2D
 		# native libraries
 		GL
+		X11
 	CIRCULAR_DEPENDENCIES
-		OpenGL
+		AppKit
 )

@@ -295,7 +295,7 @@ set(AppKit_sources
 	X11.subproj/X11Window.m
 	X11.subproj/KTFont_FT.m
 	X11.subproj/O2Font_FT.m
-	X11.subproj/CGLContext.m
+	# CGLContext.m is built in OpenGL
 	# X11.subproj/NSOpenGLDrawable_X11.m conflicting types for CGLCreateContext
 	X11.subproj/O2Context_cairo.m
 	X11.subproj/X11Display.m
@@ -386,7 +386,6 @@ add_framework(AppKit
 		CoreGraphics
 		Onyx2D
 		CoreText
-		QuartzCore
 		# native libraries
 		FreeType
 		fontconfig
@@ -394,4 +393,7 @@ add_framework(AppKit
 		GL
 		cairo
 		jpeg png tiff
+	CIRCULAR_DEPENDENCIES
+		OpenGL
+		QuartzCore
 )
