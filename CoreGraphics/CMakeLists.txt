@@ -61,7 +61,7 @@ set(CoreGraphics_sources
 	CGPDFPage.m
 	CGShading.m
 	CGWindow.m
-	# KTFont+PDF.m
+	# KTFont+PDF.m 'KGPDFArray.h' file not found
 )
 
 set_source_files_properties(${CoreGraphics_sources} LANGUAGE C)
