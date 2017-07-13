@@ -11,6 +11,9 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} \
 	-mmacosx-version-min=10.10"
 )
 
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(PC_CAIRO cairo)
+
 include_directories(
 	${CMAKE_SOURCE_DIR}/src/external/foundation/include
 	${CMAKE_SOURCE_DIR}/src/external/foundation/include/Foundation
@@ -32,6 +35,8 @@ include_directories(
 	${CMAKE_CURRENT_SOURCE_DIR}
 	${CMAKE_CURRENT_SOURCE_DIR}/..
 	${CMAKE_CURRENT_SOURCE_DIR}/../CoreText
+
+	${PC_CAIRO_INCLUDE_DIRS}
 )
 
 set(CoreGraphics_sources
@@ -53,7 +58,7 @@ set(CoreGraphics_sources
 	CGImageProperties.m
 	CGImageSource.m
 	CGLayer.m
-	# CGLPixelSurface.m
+	CGLPixelSurface.m
 	CGPath.m
 	CGPattern.m
 	CGPDFContext.m
@@ -78,4 +83,8 @@ add_framework(CoreGraphics
 		CoreFoundation
 		Foundation
 		Onyx2D
+		GL
+	CIRCULAR_DEPENDENCIES
+		AppKit
+		OpenGL
 )

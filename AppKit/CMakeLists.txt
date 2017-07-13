@@ -383,7 +383,6 @@ add_framework(AppKit
 		system
 		CoreFoundation
 		Foundation
-		CoreGraphics
 		Onyx2D
 		CoreText
 		# native libraries
@@ -396,4 +395,5 @@ add_framework(AppKit
 	CIRCULAR_DEPENDENCIES
 		OpenGL
 		QuartzCore
+		CoreGraphics
 )
