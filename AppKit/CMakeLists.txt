@@ -385,6 +385,7 @@ add_framework(AppKit
 		Foundation
 		Onyx2D
 		CoreText
+		CoreData
 		# native libraries
 		FreeType
 		fontconfig
