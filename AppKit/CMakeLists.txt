@@ -266,7 +266,7 @@ set(AppKit_sources
 	NSOpenGL/NSOpenGLPixelBuffer.m
 	NSOpenGL/NSOpenGLPixelFormat.m
 	NSOpenGL/NSOpenGLDrawable.m
-	# NSOpenGL/NSOpenGLContext.m needs NSThread-Private.h
+	NSOpenGL/NSOpenGLContext.m
 
 	NSPopUpButtonCell.m
 	NSPredicateEditor.m

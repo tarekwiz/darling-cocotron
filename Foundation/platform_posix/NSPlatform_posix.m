@@ -8,8 +8,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #if defined(LINUX) || defined(__APPLE__)
 #import <objc/runtime.h>
 #import <Foundation/Foundation.h>
+
+#ifndef DARLING
 #import <Foundation/NSSelectInputSourceSet.h>
-#import <Foundation/NSPlatform_posix.h>
 #import <Foundation/NSFileHandle_posix.h>
 #import <Foundation/NSFileManager_posix.h>
 #import <Foundation/NSLock_posix.h>
@@ -21,6 +22,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <Foundation/NSTask_posix.h>
 #import <Foundation/NSSocketPort_posix.h>
 #import <Foundation/NSPipe_posix.h>
+#endif
+
+#import <Foundation/NSPlatform_posix.h>
 #import <Foundation/NSRaiseException.h>
 
 #include <pwd.h>
@@ -48,6 +52,7 @@ BOOL NSCurrentLocaleIsMetric(){
 
 @implementation NSPlatform_posix
 
+#ifndef DARLING
 -(Class)taskClass {
     return [NSTask_posix class];
 }
@@ -83,6 +88,7 @@ BOOL NSCurrentLocaleIsMetric(){
 -(Class)conditionClass {
 	return [NSCondition_posix class];
 }
+#endif
 
 static struct passwd *pwent = NULL;
 
@@ -118,6 +124,7 @@ static struct passwd *pwent = NULL;
 }
 
 -(NSArray *)arguments {
+#ifndef DARLING
     extern int                NSProcessInfoArgc;
     extern const char *const *NSProcessInfoArgv;
     NSMutableArray *result=[NSMutableArray array];
@@ -127,6 +134,12 @@ static struct passwd *pwent = NULL;
         [result addObject:[NSString stringWithCString:NSProcessInfoArgv[i]]];
 
     return result;
+#else
+    // this is only called from Cocotron's NSProcessInfo,
+    // whereas ours takes argc/argv directly from libsystem's
+    // _NSGetArgc and _NSGetArgv (just like on the real macOS)
+    return nil;
+#endif
 }
 
 -(NSDictionary *)environment {
