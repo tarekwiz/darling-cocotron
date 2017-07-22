@@ -23,6 +23,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #define IBOutlet
 #endif
 
+#if defined(DARLING) && !defined(NIBDEBUG)
+#define NIBDEBUG(desc, ...)
+#endif
+
 #ifndef IBAction
 #define IBAction void
 #endif

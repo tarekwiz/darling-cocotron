@@ -16,7 +16,8 @@
 #import <OpenGL/OpenGL.h>
 #include <GL/glx.h>
 
-CGL_EXPORT CGLError CGLCreateContext(CGLPixelFormatObj pixelFormat,Display *dpy,XVisualInfo *vis,Window window,CGLContextObj *resultp);
+// defined in AppKit/X11.subproj/CGLContext.m
+CGLError CGLCreateContextForWindow(CGLPixelFormatObj pixelFormat,CGLContextObj share,CGLContextObj *resultp,Display *display,XVisualInfo *visualInfo,Window window);
 
 @implementation NSOpenGLDrawable(X11)
 
@@ -96,9 +97,16 @@ CGL_EXPORT CGLError CGLCreateContext(CGLPixelFormatObj pixelFormat,Display *dpy,
 
 -(CGLContextObj)createGLContext {
    CGLContextObj result=NULL;
-   CGLError error;
+   CGLError error = CGLCreateContextForWindow(
+        NULL, /* CGLPixelFormatObj pixelFormat, unused */
+        NULL, /* CGLContextObj share, unused */
+        &result,
+        _display,
+        _visualInfo,
+        _window
+   );
 
-   if((error=CGLCreateContext(NULL,_display,_visualInfo,_window,&result))!=kCGLNoError)
+   if(error != kCGLNoError)
     NSLog(@"CGLCreateContext failed with %d in %s %d",error,__FILE__,__LINE__);
 
    return result;
