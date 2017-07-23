@@ -13,6 +13,9 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} \
 )
 
 find_package(Freetype REQUIRED)
+find_package(PNG REQUIRED)
+find_package(TIFF REQUIRED)
+find_package(JPEG REQUIRED)
 
 include_directories(
 	${CMAKE_SOURCE_DIR}/src/external/foundation/include
@@ -37,6 +40,9 @@ include_directories(
 	${CMAKE_CURRENT_SOURCE_DIR}/../CoreText
 
 	${FREETYPE_INCLUDE_DIRS}
+	${PNG_INCLUDE_DIRS}
+	${TIFF_INCLUDE_DIRS}
+	${JPEG_INCLUDE_DIRS}
 )
 
 set(Onyx2D_sources

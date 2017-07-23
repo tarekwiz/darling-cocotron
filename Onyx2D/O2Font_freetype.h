@@ -3,8 +3,16 @@
 
 #ifdef FREETYPE_PRESENT
 
+#ifdef DARLING
+#define __linux__
+#endif
+
 #include <ft2build.h>
 #include FT_FREETYPE_H
+
+#ifdef DARLING
+#undef __linux__
+#endif
 
 @interface O2Font_freetype : O2Font {
     FT_Face _face;

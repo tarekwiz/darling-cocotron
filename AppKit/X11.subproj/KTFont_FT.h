@@ -8,6 +8,10 @@
 
 #import <AppKit/KTFont.h>
 
+#ifdef DARLING
+#define __linux__
+#endif
+
 #import <stddef.h>
 #import <ft2build.h>
 
@@ -16,6 +20,10 @@ typedef int ptrdiff_t;
 #endif
 #import FT_FREETYPE_H
 #import FT_RENDER_H
+
+#ifdef DARLING
+#undef __linux__
+#endif
 
 @class NSSet;
 

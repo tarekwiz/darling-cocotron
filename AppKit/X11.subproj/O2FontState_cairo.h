@@ -1,5 +1,14 @@
 #import <Onyx2D/O2Geometry.h>
+
+#ifdef DARLING
+#define __linux__
+#endif
+
 #import <cairo/cairo-ft.h>
+
+#ifdef DARLING
+#undef __linux__
+#endif
 
 @class O2Font_FT;
 
