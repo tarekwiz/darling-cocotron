@@ -9,7 +9,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 // 01/08/2007 original - Dirk Theisen
 
 
-#import "NSFileWrapper.h"
+#import <AppKit/NSFileWrapper.h>
 #import <Foundation/NSDebug.h>
 
 

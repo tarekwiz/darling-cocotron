@@ -7,6 +7,8 @@
 #import <OpenGL/CGLTypes.h>
 #import <OpenGL/CGLCurrent.h>
 
+#include <OpenGL/gltypes.h>
+
 CGL_EXPORT CGLError CGLCreateContext(CGLPixelFormatObj pixelFormat, CGLContextObj share, CGLContextObj *result);
 
 CGL_EXPORT CGLContextObj CGLRetainContext(CGLContextObj context);
