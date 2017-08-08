@@ -372,6 +372,9 @@ set(AppKit_sources
 
 set_source_files_properties(${AppKit_sources} LANGUAGE C)
 
+set(DYLIB_COMPAT_VERSION "45.0.0")
+set(DYLIB_CURRENT_VERSION "1499.11.0")
+
 add_framework(AppKit
 	FAT
 	CURRENT_VERSION

@@ -59,6 +59,9 @@ set(CoreData_sources
 
 set_source_files_properties(${CoreData_sources} LANGUAGE C)
 
+set(DYLIB_COMPAT_VERSION "1.0.0")
+set(DYLIB_CURRENT_VERSION "752.0.0")
+
 add_framework(CoreData
 	FAT
 	CURRENT_VERSION
