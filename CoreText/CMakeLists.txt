@@ -49,7 +49,7 @@ add_framework(CoreText
 	DEPENDENCIES
 		objc
 		system
-		${CoreFoundation}
+		CoreFoundation
 		Foundation
 		CoreGraphics
 )
