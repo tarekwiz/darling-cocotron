@@ -152,7 +152,7 @@ add_framework(Onyx2D
 	DEPENDENCIES
 		objc
 		system
-		CoreFoundation
+		${CoreFoundation}
 		Foundation
 		# native libraries
 		FreeType

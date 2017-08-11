@@ -80,7 +80,7 @@ add_framework(CoreGraphics
 	DEPENDENCIES
 		objc
 		system
-		CoreFoundation
+		${CoreFoundation}
 		Foundation
 		Onyx2D
 		GL

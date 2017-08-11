@@ -34,7 +34,7 @@ add_framework(OpenGL
 	DEPENDENCIES
 		objc
 		system
-		CoreFoundation
+		${CoreFoundation}
 		Foundation
 		# native libraries
 		GL

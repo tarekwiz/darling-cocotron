@@ -384,7 +384,7 @@ add_framework(AppKit
 	DEPENDENCIES
 		objc
 		system
-		CoreFoundation
+		${CoreFoundation}
 		Foundation
 		Onyx2D
 		CoreText
