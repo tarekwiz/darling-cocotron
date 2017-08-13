@@ -71,6 +71,9 @@ set(CoreGraphics_sources
 
 set_source_files_properties(${CoreGraphics_sources} LANGUAGE C)
 
+set(DYLIB_COMPAT_VERSION "64.0.0")
+set(DYLIB_CURRENT_VERSION "1070.22.0")
+
 add_framework(CoreGraphics
 	FAT
 	CURRENT_VERSION
