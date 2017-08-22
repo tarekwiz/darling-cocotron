@@ -71,6 +71,6 @@ add_framework(CoreData
 	DEPENDENCIES
 		objc
 		system
-		${CoreFoundation}
+		CoreFoundation
 		Foundation
 )

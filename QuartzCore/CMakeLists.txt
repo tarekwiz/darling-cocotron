@@ -71,7 +71,7 @@ add_framework(QuartzCore
 	DEPENDENCIES
 		objc
 		system
-		${CoreFoundation}
+		CoreFoundation
 		Foundation
 		Onyx2D
 		# native libraries
