@@ -9,7 +9,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <AppKit/NSView.h>
 #import <AppKit/NSSpellProtocol.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class NSColor, NSFont;
+@protocol NSTextDelegate;
 
 enum {
     NSEnterCharacter = 0x0003,
@@ -146,3 +149,16 @@ APPKIT_EXPORT NSString *const NSTextDidChangeNotification;
 - (void)textDidChange:(NSNotification *)note;
 - (void)textDidEndEditing:(NSNotification *)note;
 @end
+
+@protocol NSTextDelegate <NSObject>
+@optional
+
+- (BOOL)textShouldBeginEditing:(NSText *)textObject;
+- (BOOL)textShouldEndEditing:(NSText *)textObject;
+- (void)textDidBeginEditing:(NSNotification *)notification;
+- (void)textDidEndEditing:(NSNotification *)notification;
+- (void)textDidChange:(NSNotification *)notification;
+
+@end
+
+NS_ASSUME_NONNULL_END
