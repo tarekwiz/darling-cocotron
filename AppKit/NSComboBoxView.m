@@ -48,7 +48,7 @@ enum {
    _font=[font retain];
 }
 
--(void)setSelectedIndex:(int)index {
+-(void)setSelectedIndex:(NSInteger)index {
    _selectedIndex = index;
 }
 
@@ -74,7 +74,7 @@ enum {
    return result;
 }
 
--(unsigned)itemIndexForPoint:(NSPoint)point {
+-(NSUInteger)itemIndexForPoint:(NSPoint)point {
    unsigned result;
 
    result=floor(point.y/_cellSize.height);
@@ -161,10 +161,10 @@ enum {
    _selectedIndex=NSNotFound;
 
    do {
-    unsigned index=[self itemIndexForPoint:point];
+    NSUInteger index=[self itemIndexForPoint:point];
 
     if(_selectedIndex!=index){
-     unsigned previous=_selectedIndex;
+     NSUInteger previous=_selectedIndex;
 
       _selectedIndex=index;
 
@@ -205,7 +205,7 @@ enum {
 #endif
 
 // DWY: trying to do keyboard navigation with as little impact on the rest of the code as possible...
--(int)runTrackingWithEvent:(NSEvent *)event {
+-(NSInteger)runTrackingWithEvent:(NSEvent *)event {
    enum {
     STATE_FIRSTMOUSEDOWN,
     STATE_MOUSEDOWN,
@@ -213,7 +213,7 @@ enum {
     STATE_EXIT
    } state=STATE_FIRSTMOUSEDOWN;
    NSPoint firstLocation,point=[event locationInWindow];
-   unsigned initialSelectedIndex = _selectedIndex;
+   NSInteger initialSelectedIndex = _selectedIndex;
 
 
 // point comes in on controls window
@@ -229,12 +229,12 @@ enum {
 	BOOL cancelled = NO;
     	
    do {
-    unsigned index=[self itemIndexForPoint:point];
+    NSInteger index=[self itemIndexForPoint:point];
     NSRect   screenVisible;
 
     if(index!=NSNotFound && _keyboardUIState == KEYBOARD_INACTIVE){
      if(_selectedIndex!=index){
-      unsigned previous=_selectedIndex;
+      NSInteger previous=_selectedIndex;
 
       _selectedIndex=index;
 
@@ -325,7 +325,7 @@ enum {
 }
 
 - (void)moveUp:(id)sender {
-    int previous = _selectedIndex;
+    NSInteger previous = _selectedIndex;
     
     _selectedIndex--;
     if ((int)_selectedIndex < 0)
@@ -338,7 +338,7 @@ enum {
 }
 
 - (void)moveDown:(id)sender {
-    int previous = _selectedIndex;
+    NSInteger previous = _selectedIndex;
     
     _selectedIndex++;
     if (_selectedIndex >= [_objects count])

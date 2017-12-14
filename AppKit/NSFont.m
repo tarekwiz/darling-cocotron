@@ -104,7 +104,7 @@ static NSLock *_cacheLock=nil;
    }
 }
 
-+(unsigned)_cacheIndexOfFontWithName:(NSString *)name size:(float)size {
++(NSUInteger)_cacheIndexOfFontWithName:(NSString *)name size:(float)size {
    unsigned i;
 
    for(i=0;i<_fontCacheSize;i++){
@@ -121,7 +121,7 @@ static NSLock *_cacheLock=nil;
     
     NSFont *font = nil;
     [_cacheLock lock];
-    unsigned i=[self _cacheIndexOfFontWithName:name size:size];
+    NSUInteger i=[self _cacheIndexOfFontWithName:name size:size];
         
     font = (i==NSNotFound)?(NSFont *)nil:_fontCache[i];
     [_cacheLock unlock];

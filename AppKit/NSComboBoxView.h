@@ -12,7 +12,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     NSSize _cellSize;
     NSArray *_objects;
     NSFont *_font;
-    int _selectedIndex;
+    NSInteger _selectedIndex;
     int _keyboardUIState;
 }
 

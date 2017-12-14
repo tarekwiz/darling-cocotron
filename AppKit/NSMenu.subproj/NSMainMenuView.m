@@ -234,8 +234,8 @@ static void drawSunkenBorder(NSRect rect){
    return NSNotFound;
 }
 
--(unsigned)itemIndexAtPoint:(NSPoint)point {
-   unsigned      result=NSNotFound;
+-(NSUInteger)itemIndexAtPoint:(NSPoint)point {
+   NSUInteger    result=NSNotFound;
    NSRect        bounds=[self bounds];
    NSArray      *items=[[self menu] itemArray];
    unsigned      i,count=[items count];

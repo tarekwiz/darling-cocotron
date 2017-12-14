@@ -21,8 +21,8 @@ typedef enum {
     NSSegmentStyle _style;
     NSSegmentSwitchTracking _trackingMode;
     NSRect _lastDrawRect;
-    int _selectedSegment;
-    int _firstTrackingSegmentIndex;
+    NSInteger _selectedSegment;
+    NSInteger _firstTrackingSegmentIndex;
     BOOL _firstTrackingSegmentInitialState;
 }
 

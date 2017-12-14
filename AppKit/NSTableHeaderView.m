@@ -74,7 +74,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     return headerRect;
 }
 
--(int)columnAtPoint:(NSPoint)point {
+-(NSUInteger)columnAtPoint:(NSPoint)point {
     int i, count = [[_tableView tableColumns] count];
 
     for (i = 0; i < count; ++i) {

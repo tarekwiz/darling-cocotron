@@ -182,7 +182,7 @@ NSString * const NSSpellingStateAttributeName=@"NSSpellingStateAttributeName"; /
 }
 
 /* as usual, the documentation says one thing and the system behaves differently, this is the way i think it should work... (dwy 5/11/2003) */
--(unsigned)nextWordFromIndex:(unsigned)location forward:(BOOL)forward {
+-(NSUInteger)nextWordFromIndex:(NSUInteger)location forward:(BOOL)forward {
     NSCharacterSet *alpha = [NSCharacterSet alphanumericCharacterSet];
     NSString *string = [self string];
     int i = location, length = [self length];

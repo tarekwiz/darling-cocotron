@@ -267,7 +267,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     return [_items indexOfObject:item];
 }
 
--(int)indexOfTabViewItemWithIdentifier:identifier {
+-(NSInteger)indexOfTabViewItemWithIdentifier:identifier {
     int i, count=[_items count];
 
     for (i = 0; i < count; ++i)
@@ -290,9 +290,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 
 -(void)removeTabViewItem:(NSTabViewItem *)item {
-	int selectedIndex = [self indexOfTabViewItem:_selectedItem];
+	NSInteger selectedIndex = [self indexOfTabViewItem:_selectedItem];
 	if (item == _selectedItem) {
-        int newIndex = selectedIndex - 1;
+        NSInteger newIndex = selectedIndex - 1;
 		
         if (newIndex < 0) {
             newIndex = selectedIndex + 1;
@@ -318,7 +318,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     [self setNeedsDisplay:YES];
 }
 
--(void)insertTabViewItem:(NSTabViewItem *)item atIndex:(int)index {
+-(void)insertTabViewItem:(NSTabViewItem *)item atIndex:(NSInteger)index {
     [_items insertObject:item atIndex:index];
     if (_selectedItem==nil)
         [self selectTabViewItem:item];
@@ -429,7 +429,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         case NSLeftTabsBezelBorder:
         case NSBottomTabsBezelBorder:
         case NSRightTabsBezelBorder: {
-            int    i,count=[_items count];
+            NSInteger i,count=[_items count];
 
             for(i=0;i<count;i++){
                 NSTabViewItem *item=[_items objectAtIndex:i];

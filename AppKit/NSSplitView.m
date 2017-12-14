@@ -310,7 +310,7 @@ NSString * const NSSplitViewWillResizeSubviewsNotification = @"NSSplitViewWillRe
    }
 }
 
--(unsigned)dividerIndexAtPoint:(NSPoint)point {
+-(NSUInteger)dividerIndexAtPoint:(NSPoint)point {
    int i,count=[[self subviews] count];
 
    for(i=0;i<count-1;i++){
@@ -334,7 +334,7 @@ static float constrainTo(float value,float min,float max){
 -(void)mouseDown:(NSEvent *)event {
 
     NSPoint  firstPoint=[self convertPoint:[event locationInWindow] fromView:nil];
-    unsigned divider=[self dividerIndexAtPoint:firstPoint];
+    NSUInteger divider=[self dividerIndexAtPoint:firstPoint];
 
     if (divider == NSNotFound) {
         return;
