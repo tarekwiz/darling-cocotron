@@ -17,6 +17,9 @@ find_package(PNG REQUIRED)
 find_package(TIFF REQUIRED)
 find_package(JPEG REQUIRED)
 
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(PC_FONTCONFIG fontconfig)
+
 include_directories(
 	${CMAKE_SOURCE_DIR}/src/external/foundation/include
 	${CMAKE_SOURCE_DIR}/src/external/foundation/include/Foundation
@@ -43,6 +46,7 @@ include_directories(
 	${PNG_INCLUDE_DIRS}
 	${TIFF_INCLUDE_DIRS}
 	${JPEG_INCLUDE_DIRS}
+	${PC_FONTCONFIG_INCLUDE_DIRS}
 )
 
 set(Onyx2D_sources
@@ -71,7 +75,7 @@ set(Onyx2D_sources
 	O2Font_freetype.m
 	O2Font.m
 	O2Font+PDF.m
-	O2Font_ttf.m
+	# O2Font_ttf.m
 	O2Function.m
 	O2Function+PDF.m
 	O2Geometry.m
@@ -138,6 +142,8 @@ set(Onyx2D_sources
 	O2TTFDecoder.m
 	O2zlib.m
 	VGPath.m
+
+	../AppKit/X11.subproj/O2Font_FT.m
 )
 
 set_source_files_properties(${Onyx2D_sources} LANGUAGE C)
@@ -157,4 +163,5 @@ add_framework(Onyx2D
 		# native libraries
 		FreeType
 		jpeg png tiff
+		fontconfig
 )
