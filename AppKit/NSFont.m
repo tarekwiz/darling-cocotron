@@ -154,7 +154,7 @@ static NSLock *_cacheLock=nil;
 
 +(void)removeFontFromCache:(NSFont *)font {
     [_cacheLock lock];
-   unsigned i=[self _cacheIndexOfFontWithName:[font fontName] size:[font pointSize]];
+   NSUInteger i=[self _cacheIndexOfFontWithName:[font fontName] size:[font pointSize]];
 
    if(i!=NSNotFound)
     _fontCache[i]=nil;
