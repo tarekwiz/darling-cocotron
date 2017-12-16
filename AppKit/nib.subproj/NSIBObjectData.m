@@ -230,7 +230,7 @@
 - (NSArray *)topLevelObjects
 {
 	NSMutableIndexSet   *indexes = [NSMutableIndexSet indexSet];
-	int                 i;
+	NSInteger                 i;
 	NSMutableArray      *topLevelObjects;
 	
 	for(i = [_objectsValues count] - 1; i >= 0; i--){
@@ -240,10 +240,8 @@
 			[indexes addIndex:i];
 	}
 	
-	topLevelObjects = [NSMutableArray arrayWithCapacity:[indexes
-														 count]];
-	for(i = [indexes firstIndex]; i != NSNotFound; i = [indexes
-														indexGreaterThanIndex:i]){
+	topLevelObjects = [NSMutableArray arrayWithCapacity:[indexes count]];
+	for(i = [indexes firstIndex]; i != NSNotFound; i = [indexes indexGreaterThanIndex:i]){
 		id  anObject = [_objectsKeys objectAtIndex:i];
 		
 		if(anObject != _fileOwner)
