@@ -91,7 +91,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    if(self==otherObject)
     return YES;
 
-   if([otherObject isKindOfClass:isa]){
+   if([otherObject isKindOfClass:[self class]]){
     NSColor_CGColor *other=otherObject;
 
     return CGColorEqualToColor(_colorRef,other->_colorRef);
@@ -122,7 +122,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 -(NSColor *)colorWithAlphaComponent:(CGFloat)alpha {
    CGColorRef ref=CGColorCreateCopyWithAlpha(_colorRef,alpha);
-   NSColor   *result=[[[isa alloc] initWithColorRef:ref spaceName:_colorSpaceName] autorelease];
+   NSColor   *result=[[[[self class] alloc] initWithColorRef:ref spaceName:_colorSpaceName] autorelease];
 
    CGColorRelease(ref);
    return result;
@@ -258,7 +258,7 @@ static inline CGFloat calibratedWhiteFromRGB(CGFloat r, CGFloat g, CGFloat b) {
     return;
    }
 
-   NSLog(@"-[%@ %s] failed, space=%@",isa,_cmd,_colorSpaceName);
+   NSLog(@"-[%@ %s] failed, space=%@",[self class],_cmd,_colorSpaceName);
 }
 
 -(void)getRed:(float *)red green:(float *)green blue:(float *)blue alpha:(float *)alpha {
@@ -290,7 +290,7 @@ static inline CGFloat calibratedWhiteFromRGB(CGFloat r, CGFloat g, CGFloat b) {
     return;
    }
 
-   NSLog(@"-[%@ %s] failed, space=%@",isa,_cmd,_colorSpaceName);
+   NSLog(@"-[%@ %s] failed, space=%@",[self class],_cmd,_colorSpaceName);
 }
 
 -(void)getHue:(float *)huep saturation:(float *)saturationp brightness:(float *)brightnessp alpha:(float *)alphap {
@@ -312,7 +312,7 @@ static inline CGFloat calibratedWhiteFromRGB(CGFloat r, CGFloat g, CGFloat b) {
     return;
    }
 
-   NSLog(@"-[%@ %s] failed, space=%@",isa,_cmd,_colorSpaceName);
+   NSLog(@"-[%@ %s] failed, space=%@",[self class],_cmd,_colorSpaceName);
 }
 
 -(void)getCyan:(float *)cyan magenta:(float *)magenta yellow:(float *)yellow black:(float *)black alpha:(float *)alpha {
@@ -334,7 +334,7 @@ static inline CGFloat calibratedWhiteFromRGB(CGFloat r, CGFloat g, CGFloat b) {
     return;
    }
 
-   NSLog(@"-[%@ %s] failed",isa,_cmd);
+   NSLog(@"-[%@ %s] failed",[self class],_cmd);
 }
 
 -(CGColorRef)CGColorRef {

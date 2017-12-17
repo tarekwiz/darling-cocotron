@@ -65,7 +65,7 @@ id NSAllocateObject(Class class, NSUInteger extraBytes, NSZone *zone)
 #else
     object_setClass(result, class);
 
-        if (!object_cxxConstruct(result, result->isa)) {
+        if (!object_cxxConstruct(result, result->[self class])) {
             NSZoneFree(zone, result);
             result = nil;
         }
@@ -87,7 +87,7 @@ void NSDeallocateObject(id object)
 #elif defined(APPLE_RUNTIME_4)
     objc_destructInstance(object);
 #else
-    object_cxxDestruct(object, object->isa);
+    object_cxxDestruct(object, object->[self class]);
 #endif
 
 #if !defined(APPLE_RUNTIME_4)
@@ -105,7 +105,7 @@ void NSDeallocateObject(id object)
         }
 
 #if !defined(GCC_RUNTIME_3) && !defined(APPLE_RUNTIME_4)
-        object->isa = 0;
+        object->[self class] = 0;
 #endif
 
         NSZoneFree(zone, object);

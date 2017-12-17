@@ -281,7 +281,7 @@ static NSLock *_cacheLock=nil;
      [coder encodeFloat:_pointSize forKey:@"NSSize"];
    }
    else {
-    [NSException raise:NSInvalidArgumentException format:@"%@ can not encodeWithCoder:%@",isa,[coder class]];
+    [NSException raise:NSInvalidArgumentException format:@"%@ can not encodeWithCoder:%@",[self class],[coder class]];
    }
 }
 
@@ -300,7 +300,7 @@ static NSLock *_cacheLock=nil;
        return realFont;
    }
    else {
-    [NSException raise:NSInvalidArgumentException format:@"%@ can not initWithCoder:%@",isa,[coder class]];
+    [NSException raise:NSInvalidArgumentException format:@"%@ can not initWithCoder:%@",[self class],[coder class]];
    }
    return nil;
 }
@@ -324,7 +324,7 @@ static NSLock *_cacheLock=nil;
 	_cgFont=CGFontCreateWithFontName((CFStringRef)_name);
 	if (_cgFont) {
 		_ctFont=CTFontCreateWithGraphicsFont(_cgFont,_pointSize,NULL,NULL);
-		[isa addFontToCache:self];
+		[[self class] addFontToCache:self];
         O2FontLog(@"name: %@ _cgFont: %@ _ctFont: %@", name, _cgFont, _ctFont);
 	} else {
 		[self release];
@@ -334,7 +334,7 @@ static NSLock *_cacheLock=nil;
 }
 
 -(void)dealloc {
-   [isa removeFontFromCache:self];
+   [[self class] removeFontFromCache:self];
 
    [_name release];
    CGFontRelease(_cgFont);
@@ -704,7 +704,7 @@ arrayWithArray:[_name componentsSeparatedByString:blank]];
 }
 
 -(NSString *)description {
-   return [NSString stringWithFormat:@"<%@ %@ %f>",isa,_name,_pointSize];
+   return [NSString stringWithFormat:@"<%@ %@ %f>",[self class],_name,_pointSize];
 }
 
 int NSConvertGlyphsToPackedGlyphs(NSGlyph *glyphs,int length,NSMultibyteGlyphPacking packing,char *outputX) {

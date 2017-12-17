@@ -50,7 +50,7 @@ NSString *_NSTruncatedStringWithAttributesInRect(NSString *string, NSDictionary 
     _color=[[keyed decodeObjectForKey:@"NSColor"] retain];
    }
    else {
-    [NSException raise:NSInvalidArgumentException format:@"-[%@ %s] is not implemented for coder %@",isa,sel_getName(_cmd),coder];
+    [NSException raise:NSInvalidArgumentException format:@"-[%@ %s] is not implemented for coder %@",[self class],sel_getName(_cmd),coder];
    }
 
    return self;

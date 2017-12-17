@@ -17,7 +17,7 @@
     _autoScale=[coder decodeBoolForKey:@"AutoScale"];
    }
    else
-    [NSException raise:NSInvalidArgumentException format:@"-[%@ %s] only implements keyed coding",isa,_cmd];
+    [NSException raise:NSInvalidArgumentException format:@"-[%@ %s] only implements keyed coding",[self class],_cmd];
    
    _scrollView=[[NSScrollView alloc] initWithFrame:[self bounds]];
    [_scrollView setAutoresizingMask:NSViewWidthSizable|NSViewHeightSizable];

@@ -898,7 +898,7 @@ id NSApp=nil;
 
 -(void)endModalSession:(NSModalSession)session {
     if(session!=[_modalStack lastObject])   
-        [NSException raise:NSInvalidArgumentException format:@"-[%@ %s] modal session %@ is not the current one %@",isa,sel_getName(_cmd),session,[_modalStack lastObject]];
+        [NSException raise:NSInvalidArgumentException format:@"-[%@ %s] modal session %@ is not the current one %@",[self class],sel_getName(_cmd),session,[_modalStack lastObject]];
     
     for(NSEvent *requeue in [session unprocessedEvents]){
         [self postEvent:requeue atStart:YES];

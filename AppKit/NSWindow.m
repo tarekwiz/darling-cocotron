@@ -151,7 +151,7 @@ NSString * const NSWindowDidAnimateNotification=@"NSWindowDidAnimateNotification
 
 /* This method is Cococtron specific and can be override by subclasses, do not change method name. */
 -(BOOL)hasMainMenu {
-    return [isa hasMainMenuForStyleMask:_styleMask];
+    return [[self class] hasMainMenuForStyleMask:_styleMask];
 }
 
 +(NSRect)frameRectForContentRect:(NSRect)contentRect styleMask:(unsigned)styleMask {
@@ -214,7 +214,7 @@ NSString * const NSWindowDidAnimateNotification=@"NSWindowDidAnimateNotification
 }
 
 -initWithCoder:(NSCoder *)coder {
-  [NSException raise:NSInvalidArgumentException format:@"-[%@ %s] is not implemented for coder %@",isa,sel_getName(_cmd),coder];
+  [NSException raise:NSInvalidArgumentException format:@"-[%@ %s] is not implemented for coder %@",[self class],sel_getName(_cmd),coder];
    return self;
 }
 
@@ -252,7 +252,7 @@ NSString * const NSWindowDidAnimateNotification=@"NSWindowDidAnimateNotification
     [_menuView setAutoresizingMask:NSViewWidthSizable|NSViewMinYMargin];
    }
 
-   _backgroundView=[[[isa frameViewClassForStyleMask:styleMask] alloc] initWithFrame:backgroundFrame];
+   _backgroundView=[[[[self class] frameViewClassForStyleMask:styleMask] alloc] initWithFrame:backgroundFrame];
    [_backgroundView setAutoresizesSubviews:YES];
    [_backgroundView setAutoresizingMask:NSViewWidthSizable|NSViewHeightSizable];
    [_backgroundView _setWindow:self];

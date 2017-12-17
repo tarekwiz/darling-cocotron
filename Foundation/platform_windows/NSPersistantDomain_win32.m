@@ -99,7 +99,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     void     *buffer=NULL;
     DWORD     length=0;
 
-//NSLog(@"-[%@ %s] %@ %@",isa,sel_getName(_cmd),_path,key);
+//NSLog(@"-[%@ %s] %@ %@",[self class],sel_getName(_cmd),_path,key);
 
     error=RegQueryValueExA(_handle,keyCString,NULL,&type,NULL,&length);
     if(error!=ERROR_SUCCESS){

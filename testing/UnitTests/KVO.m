@@ -30,7 +30,7 @@
 
 -(void)setUp
 {
-	[isa setKeys:[NSArray arrayWithObjects:@"someKey", @"someOtherKey", nil] triggerChangeNotificationsForDependentKey:@"derived"];
+	[[self class] setKeys:[NSArray arrayWithObjects:@"someKey", @"someOtherKey", nil] triggerChangeNotificationsForDependentKey:@"derived"];
 	dict=[NSMutableDictionary new];
 }
 

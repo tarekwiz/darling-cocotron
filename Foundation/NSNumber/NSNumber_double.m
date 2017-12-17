@@ -165,7 +165,7 @@ NS_DECLARE_CLASS_SYMBOL(NSNumber_double_const);
 
 typedef struct
 {
-    const struct objc_class * const isa;
+    const struct objc_class * const [self class];
     CFNumberType _type;
     double _value;
 } NSNumber_double_Def;

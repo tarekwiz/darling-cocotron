@@ -267,7 +267,7 @@ static BOOL _NSCreateDirectory(NSString *path,NSError **errorp)
 	DWORD       attribute=GetFileAttributesW(fsrep);
 	
 	if([path isEqualToString:@"."] || [path isEqualToString:@".."]){
-		[NSException raise:NSInvalidArgumentException format:@"-[%@ %s] path should not be . or ..",isa,sel_getName(_cmd)];
+		[NSException raise:NSInvalidArgumentException format:@"-[%@ %s] path should not be . or ..",[self class],sel_getName(_cmd)];
 		return NO;
 	}
 	

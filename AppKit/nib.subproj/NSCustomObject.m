@@ -23,7 +23,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     _className=[[keyed decodeObjectForKey:@"NSClassName"] retain];
    }
    else 
-    [NSException raise:NSInvalidArgumentException format:@"-[%@ %s] does not handle %@",isa,sel_getName(_cmd),[coder class]];
+    [NSException raise:NSInvalidArgumentException format:@"-[%@ %s] does not handle %@",[self class],sel_getName(_cmd),[coder class]];
 
    return self;
 }
@@ -83,7 +83,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #endif
 
 -(NSString *)description {
-   return [NSString stringWithFormat:@"<%@:%p:class name=%@>",isa,self,_className];
+   return [NSString stringWithFormat:@"<%@:%p:class name=%@>",[self class],self,_className];
 }
 
 @end

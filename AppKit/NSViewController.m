@@ -70,7 +70,7 @@
 
    if(name==nil){
    // should pathForResource assert name for non-nil?
-    [NSException raise:NSInvalidArgumentException format:@"-[%@ %s] nibName is nil",isa,_cmd];
+    [NSException raise:NSInvalidArgumentException format:@"-[%@ %s] nibName is nil",[self class],_cmd];
     return;
    }
    

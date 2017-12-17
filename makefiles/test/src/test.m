@@ -38,7 +38,7 @@
 
 //- forwardSelector: (SEL)sel arguments: (void *)args
 //{
-//    IMP imp = class_getMethodImplementation(isa, @selector(forwardTest)); //(id)((int)[self forwardTest]);
+//    IMP imp = class_getMethodImplementation([self class], @selector(forwardTest)); //(id)((int)[self forwardTest]);
 //    return imp(self, @selector(forwardTest));
 //}
 

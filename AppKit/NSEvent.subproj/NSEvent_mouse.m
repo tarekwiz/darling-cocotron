@@ -80,7 +80,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 -(void *)userData {
    if(_type!=NSMouseEntered && _type!=NSMouseExited){
-    [NSException raise:NSInternalInconsistencyException format:@"-[%@ userData] not valid for type %d",isa,_type];
+    [NSException raise:NSInternalInconsistencyException format:@"-[%@ userData] not valid for type %d",[self class],_type];
     return NULL;
    }
    

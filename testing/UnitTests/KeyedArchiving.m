@@ -60,7 +60,7 @@
 }
 
 -(void)testForeignDecoding {
-   id paths=[[NSBundle bundleForClass:isa] pathsForResourcesOfType:@"keyedArchive" inDirectory:@""];
+   id paths=[[NSBundle bundleForClass:[self class]] pathsForResourcesOfType:@"keyedArchive" inDirectory:@""];
    for(id archiveName in paths) {
       id data=[NSData dataWithContentsOfFile:archiveName];
       STAssertNotNil(data, @"Data file couldn't be opened");

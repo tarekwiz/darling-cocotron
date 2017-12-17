@@ -756,7 +756,7 @@ static void cgArcFromApply(void *info,const CGPathElement *element) {
 
 -(void)appendBezierPathWithArcFromPoint:(NSPoint)point toPoint:(NSPoint)toPoint radius:(float)radius {
    if(_numberOfPoints==0){
-    NSLog(@"-[%@ %s] no current point",isa,_cmd);
+    NSLog(@"-[%@ %s] no current point",[self class],_cmd);
     return;
    }
    

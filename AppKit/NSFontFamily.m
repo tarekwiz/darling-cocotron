@@ -166,6 +166,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 
 -(NSString *)description {
-	return [NSString stringWithFormat:@"<%@ 0x%x %@ %@>",isa,self,_name,_typefaces];
+	return [NSString stringWithFormat:@"<%@ 0x%x %@ %@>",[self class],self,_name,_typefaces];
 }
 @end

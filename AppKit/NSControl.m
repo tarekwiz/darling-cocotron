@@ -57,7 +57,7 @@ static NSMutableDictionary *cellClassDictionary = nil;
 	[self setCell:[keyed decodeObjectForKey:@"NSCell"]];
    }
    else {
-    [NSException raise:NSInvalidArgumentException format:@"%@ can not initWithCoder:%@",isa,[coder class]];
+    [NSException raise:NSInvalidArgumentException format:@"%@ can not initWithCoder:%@",[self class],[coder class]];
    }
 
    return self;

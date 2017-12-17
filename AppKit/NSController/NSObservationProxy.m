@@ -63,7 +63,7 @@ void NSStringKVCSplitOnDot(NSString *self,NSString **before,NSString **after){
 
 - (BOOL)isEqual:(id)other
 {
-	if([other isMemberOfClass:isa])
+	if([other isMemberOfClass:[self class]])
 	{
 		_NSObservationProxy *o=other;
 		if(o->_observer==_observer && [o->_keyPath isEqual:_keyPath] && [o->_object isEqual:_object])

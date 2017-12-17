@@ -144,13 +144,13 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
        _font=[[NSFont userFontOfSize:13 - _controlSize*2] retain];
    }
    else {
-    [NSException raise:NSInvalidArgumentException format:@"%@ can not initWithCoder:%@",isa,[coder class]];
+    [NSException raise:NSInvalidArgumentException format:@"%@ can not initWithCoder:%@",[self class],[coder class]];
    }
    return self;
 }
 
 -initTextCell:(NSString *)string {
-   _focusRingType=[isa defaultFocusRingType];
+   _focusRingType=[[self class] defaultFocusRingType];
    _state=NSOffState;
    _font=[[NSFont userFontOfSize:0] retain];
    _objectValue=[string copy];
@@ -169,7 +169,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 
 -initImageCell:(NSImage *)image {
-   _focusRingType=[isa defaultFocusRingType];
+   _focusRingType=[[self class] defaultFocusRingType];
    _state=NSOffState;
    _font=nil;
    _objectValue=nil;
@@ -513,18 +513,18 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 -(void)setTarget:target {
    [NSException raise:NSInternalInconsistencyException
-               format:@"-[%@ %s] Unimplemented",isa,sel_getName(_cmd)];
+               format:@"-[%@ %s] Unimplemented",[self class],sel_getName(_cmd)];
 }
 
 
 -(void)setAction:(SEL)action {
    [NSException raise:NSInternalInconsistencyException
-               format:@"-[%@ %s] Unimplemented",isa,sel_getName(_cmd)];
+               format:@"-[%@ %s] Unimplemented",[self class],sel_getName(_cmd)];
 }
 
 -(void)setTag:(int)tag {
    [NSException raise:NSInternalInconsistencyException
-               format:@"-[%@ %s] Unimplemented",isa,sel_getName(_cmd)];
+               format:@"-[%@ %s] Unimplemented",[self class],sel_getName(_cmd)];
 }
 
 -(void)setEntryType:(int)type {
@@ -659,7 +659,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 -(void)setStringValue:(NSString *)value {
    if(value==nil){
-    [NSException raise:NSInvalidArgumentException format:@"-[%@ %s] value==nil",isa,sel_getName(_cmd)];
+    [NSException raise:NSInvalidArgumentException format:@"-[%@ %s] value==nil",[self class],sel_getName(_cmd)];
     return;
    }
 

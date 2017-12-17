@@ -88,7 +88,7 @@ static NSString *processName(){
 
 -init {
    NSString   *entry;
-   const char *module=class_getImageName(isa);
+   const char *module=class_getImageName([self class]);
    HKEY        handle;
    DWORD       disposition,allowed;
    int         i;

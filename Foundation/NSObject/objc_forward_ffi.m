@@ -377,7 +377,7 @@ invocation_closure(ffi_cif* cif, void* result, void** args, void* userdata)
 
 id _objc_throwDoesNotRecognizeException(id object, SEL selector)
 {
-	Class       class=object->isa;
+	Class       class=object->[self class];
    NSRaiseException(NSInvalidArgumentException,
                     object,
                     selector,

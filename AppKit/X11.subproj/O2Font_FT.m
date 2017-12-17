@@ -78,9 +78,9 @@ FcConfig *O2FontSharedFontConfig() {
 -initWithFontName:(NSString *)name {
    [super initWithFontName:name];
 
-   NSString *filename=[isa filenameForPattern:name];
+   NSString *filename=[[self class] filenameForPattern:name];
    if(filename==nil) {
-    filename=[isa filenameForPattern:@""];
+    filename=[[self class] filenameForPattern:@""];
     
     if(filename==nil) {
 #ifdef LINUX

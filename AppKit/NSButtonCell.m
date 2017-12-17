@@ -148,7 +148,7 @@ static const float kImageMargin = 2.;
                                  // in synch with the bare _state of NSCell
    }
    else {
-    [NSException raise:NSInvalidArgumentException format:@"%@ can not initWithCoder:%@",isa,[coder class]];
+    [NSException raise:NSInvalidArgumentException format:@"%@ can not initWithCoder:%@",[self class],[coder class]];
    }
    return self;
 }

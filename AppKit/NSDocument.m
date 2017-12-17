@@ -406,7 +406,7 @@ static int untitled_document_number = 0;
    if([self _isSelectorOverridden:@selector(loadDataRepresentation:ofType:)])
     return [self loadDataRepresentation:data ofType:type];
    else {
-    [NSException raise:NSInternalInconsistencyException format:@"-[%@ %s]",isa,sel_getName(_cmd)];
+    [NSException raise:NSInternalInconsistencyException format:@"-[%@ %s]",[self class],sel_getName(_cmd)];
     return NO;
    }
 }
@@ -446,7 +446,7 @@ static int untitled_document_number = 0;
    if([self _isSelectorOverridden:@selector(dataRepresentationOfType:)])
     return [self dataRepresentationOfType:type];
     
-   [NSException raise:NSInternalInconsistencyException format:@"-[%@ %s]",isa,sel_getName(_cmd)];
+   [NSException raise:NSInternalInconsistencyException format:@"-[%@ %s]",[self class],sel_getName(_cmd)];
    return nil;
 }
 
@@ -790,7 +790,7 @@ forSaveOperation:(NSSaveOperationType)operation
 }
 
 -(NSPrintOperation *)printOperationWithSettings:(NSDictionary *)settings error:(NSError **)error {
-   NSLog(@"Implement %s in your subclass %@ of NSDocument to enable printing",sel_getName(_cmd),isa);
+   NSLog(@"Implement %s in your subclass %@ of NSDocument to enable printing",sel_getName(_cmd),[self class]);
    return nil;
 }
 
@@ -969,7 +969,7 @@ forSaveOperation:(NSSaveOperationType)operation
 }
 
 -(NSData *)dataRepresentationOfType:(NSString *)type {
-   [NSException raise:NSInternalInconsistencyException format:@"-[%@ %s]",isa,sel_getName(_cmd)];
+   [NSException raise:NSInternalInconsistencyException format:@"-[%@ %s]",[self class],sel_getName(_cmd)];
    return nil;
 }
 
@@ -1041,7 +1041,7 @@ forSaveOperation:(NSSaveOperationType)operation
 }
 
 -(BOOL)loadDataRepresentation:(NSData *)data ofType:(NSString *)type {
-   [NSException raise:NSInternalInconsistencyException format:@"-[%@ %s]",isa,sel_getName(_cmd)];
+   [NSException raise:NSInternalInconsistencyException format:@"-[%@ %s]",[self class],sel_getName(_cmd)];
    return NO;
 }
 

@@ -125,7 +125,7 @@ static BOOL openFileWithHelpViewer(const char *helpFilePath)
    }
    else
    {
-    NSBundle *bundle=[NSBundle bundleForClass:isa];
+    NSBundle *bundle=[NSBundle bundleForClass:[self class]];
     NSString *bundlePath=[bundle bundlePath];
     NSString *app=[[[[[[[bundlePath stringByDeletingLastPathComponent] stringByDeletingLastPathComponent] stringByAppendingPathComponent:@"Applications"] stringByAppendingPathComponent:appName] stringByAppendingPathExtension:@"app"] stringByAppendingPathComponent:appName] stringByAppendingPathExtension:@"exe"];
     NSMutableData *args=[NSMutableData data];

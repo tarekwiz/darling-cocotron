@@ -47,10 +47,10 @@
    [[NSColor darkGrayColor] set];
    NSRectFill(bounds);
    
-   bounds.origin.x+=[isa leftMargin];
-   bounds.size.width-=[isa leftMargin]+[isa rightMargin];
-   bounds.size.height-=[isa topMargin]+[isa bottomMargin];
-   bounds.origin.y+=[isa bottomMargin];
+   bounds.origin.x+=[[self class] leftMargin];
+   bounds.size.width-=[[self class] leftMargin]+[isa rightMargin];
+   bounds.size.height-=[[self class] topMargin]+[isa bottomMargin];
+   bounds.origin.y+=[[self class] bottomMargin];
    [[NSColor whiteColor] set];
    NSRectFill(bounds);
 

@@ -18,7 +18,7 @@
 }
 
 -(void)setUp {
-   id nib = [[NSNib alloc] initWithNibNamed:[self className] bundle:[NSBundle bundleForClass:isa]];
+   id nib = [[NSNib alloc] initWithNibNamed:[self className] bundle:[NSBundle bundleForClass:[self class]]];
    
    [nib instantiateNibWithOwner:self topLevelObjects:&_topLevelObjects];
    [_topLevelObjects retain];

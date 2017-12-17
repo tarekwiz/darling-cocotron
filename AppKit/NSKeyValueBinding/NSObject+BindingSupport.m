@@ -97,7 +97,7 @@ void NSDetermineBindingDebugLoggingLevel(void)
 }
 
 -(NSDictionary *)_defaultBindingOptionsForBinding:(NSString *)binding {
-	return [isa _defaultBindingOptionsForBinding:binding];
+	return [[self class] _defaultBindingOptionsForBinding:binding];
 }
 
 
@@ -130,7 +130,7 @@ void NSDetermineBindingDebugLoggingLevel(void)
 	
 	if(!binder && create)
 	{
-		binder = [[[isa _binderClassForBinding:binding] new] autorelease];
+		binder = [[[[self class] _binderClassForBinding:binding] new] autorelease];
 		[ownBinders setObject:binder forKey:binding];
 	}
 
@@ -155,7 +155,7 @@ void NSDetermineBindingDebugLoggingLevel(void)
 {
 	NSBindingDebugLog(kNSBindingDebugLogLevel1, @"binding: %@\n   toObject: %@\n   withKeyPath: %@\n   options: %@", binding, destination, keyPath, options);
 
-	if(![isa _binderClassForBinding:binding]){
+	if(![[self class] _binderClassForBinding:binding]){
 		NSBindingDebugLog(kNSBindingDebugLogLevel1, @"no binder class for binding: '%@'", binding);
 		return;
     }

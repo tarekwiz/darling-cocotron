@@ -110,7 +110,7 @@ void CGNativeBorderFrameWidthsForStyle(unsigned styleMask,CGFloat *top,CGFloat *
    [(X11Display*)[NSDisplay currentDisplay] setWindow:self forID:_window];
       
    if(styleMask == NSBorderlessWindowMask){
-     [isa removeDecorationForWindow:_window onDisplay:_display];
+     [[self class] removeDecorationForWindow:_window onDisplay:_display];
     }
    return self;
 }
