@@ -119,8 +119,8 @@ static inline void _clearCurrentContext(){
    };
    
    CGLSetParameter(_glContext,kCGLCPSurfaceBackingSize,size);
-   CGLSetParameter(_glContext,kCGLCPSurfaceBackingOrigin,origin);
-   CGLSetParameter(_glContext,kCGLCPSurfaceHidden,hidden);
+   //CGLSetParameter(_glContext,kCGLCPSurfaceBackingOrigin,origin);
+   //CGLSetParameter(_glContext,kCGLCPSurfaceHidden,hidden);
 }
 
 -(void)setView:(NSView *)view {
@@ -133,7 +133,8 @@ static inline void _clearCurrentContext(){
    
    GLint num[1]={[[_view window] windowNumber]};
    
-   CGLSetParameter(_glContext,kCGLCPSurfaceWindowNumber,num);
+#warning this was commented out because the constant isn't standard
+   //CGLSetParameter(_glContext,kCGLCPSurfaceWindowNumber,num);
    
    [self update];
 
