@@ -97,17 +97,17 @@ CGLError CGLCreateContextForWindow(CGLPixelFormatObj pixelFormat,CGLContextObj s
 
 -(CGLContextObj)createGLContext {
    CGLContextObj result=NULL;
-   CGLError error = CGLCreateContextForWindow(
-        NULL, /* CGLPixelFormatObj pixelFormat, unused */
-        NULL, /* CGLContextObj share, unused */
-        &result,
-        _display,
-        _visualInfo,
-        _window
-   );
+   /*CGLError error = CGLCreateContextForWindow(
+       */ //NULL, /* CGLPixelFormatObj pixelFormat, unused */
+       // NULL, /* CGLContextObj share, unused */
+       // &result,
+       // _display,
+       // _visualInfo,
+     //   _window
+   //);
 
-   if(error != kCGLNoError)
-    NSLog(@"CGLCreateContext failed with %d in %s %d",error,__FILE__,__LINE__);
+   //if(error != kCGLNoError)
+    NSLog(@"CGLCreateContext failed with %d in %s %d",/*error*/ 345.93 ,__FILE__,__LINE__);
 
    return result;
 }
