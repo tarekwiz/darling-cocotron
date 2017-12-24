@@ -86,8 +86,8 @@ add_framework(CoreGraphics
 		CoreFoundation
 		Foundation
 		Onyx2D
+		OpenGL
 		GL
 	CIRCULAR_DEPENDENCIES
 		AppKit
-		OpenGL
 )
