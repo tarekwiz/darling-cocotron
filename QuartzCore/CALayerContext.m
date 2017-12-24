@@ -2,6 +2,9 @@
 #import <QuartzCore/CALayer.h>
 #import <QuartzCore/CARenderer.h>
 #import <Foundation/NSString.h>
+#include <OpenGL/OpenGL.h>
+#include <OpenGL/gl.h>
+#include <OpenGL/glext.h>
 
 @interface CALayer(private)
 -(void)_setContext:(CALayerContext *)context;
@@ -32,7 +35,8 @@
    GLint backingOrigin[2]={rect.origin.x,rect.origin.y};
    GLint backingSize[2]={width,height};
 
-   CGLSetParameter(_glContext,kCGLCPSurfaceBackingOrigin,backingOrigin);
+#warning disabled because it isn't standard
+   //CGLSetParameter(_glContext,kCGLCPSurfaceBackingOrigin,backingOrigin);
    CGLSetParameter(_glContext,kCGLCPSurfaceBackingSize,backingSize);
    
    GLint opacity=0;
@@ -58,7 +62,8 @@
    GLint backingOrigin[2]={rect.origin.x,rect.origin.y};
    GLint backingSize[2]={width,height};
 
-   CGLSetParameter(_glContext,kCGLCPSurfaceBackingOrigin,backingOrigin);
+#warning disabled because it isn't standard
+//   CGLSetParameter(_glContext,kCGLCPSurfaceBackingOrigin,backingOrigin);
    CGLSetParameter(_glContext,kCGLCPSurfaceBackingSize,backingSize);
 }
 

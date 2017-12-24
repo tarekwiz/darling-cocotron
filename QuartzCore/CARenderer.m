@@ -3,8 +3,11 @@
 #import <QuartzCore/CAAnimation.h>
 #import <QuartzCore/CAMediaTimingFunction.h>
 #import <CoreVideo/CoreVideo.h>
-#import <OpenGL/OpenGL.h>
 #import <Onyx2D/O2Surface.h>
+
+#include <OpenGL/OpenGL.h>
+#include <OpenGL/gl.h>
+#include <OpenGL/glext.h>
 
 @interface CALayer(private)
 -(void)_setContext:(CALayerContext *)context;
