@@ -1,8 +1,6 @@
 #import <QuartzCore/CATransaction.h>
 #import <QuartzCore/CALayerContext.h>
-#import <Foundation/NSString.h>
-#import <Foundation/NSNumber.h>
-#import <Foundation/NSArray.h>
+#import <Foundation/Foundation.h>
 #import "CATransactionGroup.h"
 
 NSString * const kCATransactionAnimationDuration=@"kCATransactionAnimationDuration";
