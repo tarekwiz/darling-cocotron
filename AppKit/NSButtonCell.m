@@ -242,7 +242,11 @@ static const float kImageMargin = 2.;
 }
 
 -(NSAttributedString *)attributedTitle {
-   if([_titleOrAttributedTitle isKindOfClass:[NSAttributedString class]])
+   if (_titleOrAttributedTitle == nil) {
+    // attributedTitle is explicitly documented to return an empty
+    // attributed string when title is nil
+    return [[NSAttributedString alloc] initWithString: @""];
+   } else if([_titleOrAttributedTitle isKindOfClass:[NSAttributedString class]])
     return _titleOrAttributedTitle;
    else {
     NSMutableDictionary *attributes=[NSMutableDictionary dictionary];
