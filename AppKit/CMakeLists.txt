@@ -1,8 +1,6 @@
 project(AppKit)
 
-add_definitions(
-	-DOPENGL_LINUX_COMPAT
-)
+include(darling_framework)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} \
 	-include math.h \
@@ -23,6 +21,23 @@ pkg_check_modules(PC_CAIRO cairo)
 pkg_check_modules(PC_FONTCONFIG fontconfig)
 
 include_directories(
+	${CMAKE_SOURCE_DIR}/src/external/foundation/include
+	${CMAKE_SOURCE_DIR}/src/external/foundation/include/Foundation
+	${CMAKE_SOURCE_DIR}/src/external/corefoundation
+	${CMAKE_SOURCE_DIR}/src/external/objc4/runtime
+	${CMAKE_SOURCE_DIR}/src/external/libclosure
+	${CMAKE_SOURCE_DIR}/src/external/security/include
+	${CMAKE_SOURCE_DIR}/src/external/cfnetwork/include
+	${CMAKE_SOURCE_DIR}/src/external/cfnetwork/private_include
+	${CMAKE_SOURCE_DIR}/src/launchd/liblaunch
+	${CMAKE_SOURCE_DIR}/src/libmalloc/include
+	${CMAKE_SOURCE_DIR}/src/copyfile
+	${CMAKE_SOURCE_DIR}/src/libc/gen
+	${CMAKE_SOURCE_DIR}/src/external/icu/icuSources/i18n
+	${CMAKE_SOURCE_DIR}/src/external/icu/icuSources/common
+	${CMAKE_SOURCE_DIR}/src/external/libxml2/include
+	${CMAKE_BINARY_DIR}/src/external/libxml2/include
+
 	${CMAKE_CURRENT_SOURCE_DIR}
 	${CMAKE_CURRENT_SOURCE_DIR}/..
 	${CMAKE_CURRENT_SOURCE_DIR}/../CoreText
@@ -43,10 +58,6 @@ include_directories(
 	${OPENGL_INCLUDE_DIRS}
 	${PC_CAIRO_INCLUDE_DIRS}
 	${PC_FONTCONFIG_INCLUDE_DIRS}
-)
-
-include_directories(BEFORE
-	${CMAKE_SOURCE_DIR}/src/OpenGL/include
 )
 
 set(AppKit_sources
@@ -284,7 +295,7 @@ set(AppKit_sources
 	X11.subproj/X11Window.m
 	X11.subproj/KTFont_FT.m
 	# O2Font_FT.m is built in Onyx2D
-	#X11.subproj/CGLContext.m
+	# CGLContext.m is built in OpenGL
 	X11.subproj/NSOpenGLDrawable_X11.m
 	X11.subproj/O2Context_cairo.m
 	X11.subproj/X11Display.m
@@ -378,7 +389,6 @@ add_framework(AppKit
 		Onyx2D
 		CoreText
 		CoreData
-		OpenGL
 		# native libraries
 		FreeType
 		fontconfig
@@ -386,7 +396,8 @@ add_framework(AppKit
 		GL
 		cairo
 		jpeg png tiff
-		QuartzCore
 	CIRCULAR_DEPENDENCIES
+		OpenGL
+		QuartzCore
 		CoreGraphics
 )

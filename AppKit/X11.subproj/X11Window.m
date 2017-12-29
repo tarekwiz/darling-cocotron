@@ -17,8 +17,6 @@
 #import <Onyx2D/O2Surface.h>
 #import <QuartzCore/CAWindowOpenGLContext.h>
 
-#include <CoreFoundation/CFBase.h>
-
 void CGNativeBorderFrameWidthsForStyle(unsigned styleMask,CGFloat *top,CGFloat *left,CGFloat *bottom,CGFloat *right) {
    *top=0;
    *left=0;
@@ -303,13 +301,13 @@ void CGNativeBorderFrameWidthsForStyle(unsigned styleMask,CGFloat *top,CGFloat *
    return NO;
 }
 
-CF_EXPORT CGLError CGLCreateContextForWindow(CGLPixelFormatObj pixelFormat,CGLContextObj share,CGLContextObj *resultp,Display *display,XVisualInfo *visualInfo,Window window);
+CGL_EXPORT CGLError CGLCreateContextForWindow(CGLPixelFormatObj pixelFormat,CGLContextObj share,CGLContextObj *resultp,Display *display,XVisualInfo *visualInfo,Window window);
 
 -(void)createCGLContextObjIfNeeded {
    if(_cglContext==NULL){
     CGLError error;
-#warning disabled 
-    //if((error=CGLCreateContextForWindow(NULL,NULL,&_cglContext,_display,_visualInfo,_window))!=kCGLNoError)
+    
+    if((error=CGLCreateContextForWindow(NULL,NULL,&_cglContext,_display,_visualInfo,_window))!=kCGLNoError)
      NSLog(@"glXCreateContext failed at %s %d with error %d",__FILE__,__LINE__,error);
    }
    if(_cglContext!=NULL && _caContext==NULL){

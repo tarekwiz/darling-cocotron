@@ -1,9 +1,4 @@
-#include <OpenGL/OpenGL.h>
-#include <OpenGL/gl.h>
-#include <OpenGL/glext.h>
-#include <OpenGL/CGLContext.h>
-#include <OpenGL/CGLTypes.h>
-
+#import <OpenGL/OpenGL.h>
 #import <Foundation/NSString.h>
 #import "X11Display.h"
 #import "X11Window.h"
@@ -11,9 +6,9 @@
 
 #import <X11/X.h>
 #import <X11/Xlib.h>
-//#import <GL/gl.h>
-//#import <GL/glx.h>
-//#import <GL/glext.h>
+#import <GL/gl.h>
+#import <GL/glx.h>
+#import <GL/glext.h>
 #import <pthread.h>
 
 struct _CGLContextObj {
