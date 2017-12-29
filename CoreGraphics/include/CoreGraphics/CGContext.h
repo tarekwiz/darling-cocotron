@@ -6,16 +6,9 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS",WITHOUT WARRANTY OF ANY KIND,EXPRESS OR IMPLIED,INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,DAMAGES OR OTHER LIABILITY,WHETHER IN AN ACTION OF CONTRACT,TORT OR OTHERWISE,ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. */
 
-#ifndef _CGContext_H_
-#define _CGContext_H_
-
 #import <CoreGraphics/CoreGraphicsExport.h>
 
-#include <CoreFoundation/CFBase.h>
-#include <CoreFoundation/CFAvailability.h>
-#include <stdint.h>
-
-typedef struct CF_BRIDGED_TYPE(id) CGContext *CGContextRef;
+typedef void *CGContextRef;
 
 #import <CoreGraphics/CGGeometry.h>
 #import <CoreGraphics/CGAffineTransform.h>
@@ -27,9 +20,6 @@ typedef struct CF_BRIDGED_TYPE(id) CGContext *CGContextRef;
 #import <CoreGraphics/CGShading.h>
 #import <CoreGraphics/CGPDFPage.h>
 #import <CoreGraphics/CGLayer.h>
-
-CF_IMPLICIT_BRIDGING_ENABLED
-CF_ASSUME_NONNULL_BEGIN
 
 typedef enum {
     kCGEncodingFontSpecific,
@@ -269,8 +259,3 @@ COREGRAPHICS_EXPORT CFDataRef CGContextCaptureBitmap(CGContextRef context, CGRec
 COREGRAPHICS_EXPORT void CGContextCopyBits(CGContextRef context, CGRect rect, CGPoint point, int gState);
 COREGRAPHICS_EXPORT bool CGContextSupportsGlobalAlpha(CGContextRef context);
 COREGRAPHICS_EXPORT bool CGContextIsBitmapContext(CGContextRef context);
-
-CF_ASSUME_NONNULL_END
-CF_IMPLICIT_BRIDGING_DISABLED
-
-#endif

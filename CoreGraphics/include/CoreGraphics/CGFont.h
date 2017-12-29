@@ -6,34 +6,12 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. */
 
-#ifndef _CGFont_H_
-#define _CGFont_H_
-
-#include <CoreFoundation/CFBase.h>
-#include <CoreFoundation/CFAvailability.h>
+#import <CoreGraphics/CoreGraphicsExport.h>
+#import <CoreGraphics/CGGeometry.h>
 
 typedef struct O2Font *CGFontRef;
 
-typedef unsigned short CGFontIndex;
-
-typedef CF_ENUM(int32_t, CGFontPostScriptFormat) {
-	kCGFontPostScriptFormatType1 = 1,
-	kCGFontPostScriptFormatType3 = 3,
-	kCGFontPostScriptFormatType42 = 42
-};
-
-typedef CGFontIndex CGGlyph;
-
-#import <CoreGraphics/CoreGraphicsExport.h>
-#include <CoreGraphics/CGBase.h>
-#include <CoreGraphics/CGDataProvider.h>
-#include <CoreGraphics/CGGeometry.h>
-#include <CoreFoundation/CFArray.h>
-#include <CoreFoundation/CFData.h>
-#include <CoreFoundation/CFDictionary.h>
-
-CF_IMPLICIT_BRIDGING_ENABLED
-CF_ASSUME_NONNULL_BEGIN
+typedef uint16_t CGGlyph;
 
 COREGRAPHICS_EXPORT CGFontRef CGFontCreateWithFontName(CFStringRef name);
 COREGRAPHICS_EXPORT CGFontRef CGFontRetain(CGFontRef self);
@@ -57,8 +35,3 @@ COREGRAPHICS_EXPORT CGGlyph CGFontGetGlyphWithGlyphName(CGFontRef self, CFString
 COREGRAPHICS_EXPORT CFStringRef CGFontCopyGlyphNameForGlyph(CGFontRef self, CGGlyph glyph);
 
 COREGRAPHICS_EXPORT CFDataRef CGFontCopyTableForTag(CGFontRef self, uint32_t tag);
-
-CF_ASSUME_NONNULL_END
-CF_IMPLICIT_BRIDGING_DISABLED
-
-#endif

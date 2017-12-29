@@ -2,9 +2,6 @@
 #import <CoreGraphics/CGWindow.h>
 #import <Onyx2D/O2Image.h>
 
-#include <OpenGL/glext.h>
-#include <OpenGL/gl.h>
-
 // this should be fixed upstream
 #ifndef DARLING
 #import <AppKit/O2Surface_DIBSection.h>
@@ -49,7 +46,7 @@
 
 // 0's are silently ignored per spec.
    if(_numberOfBuffers>0 && _bufferObjects!=NULL) // nVidia driver will crash if bufferObjects is NULL, does not conform to spec.
-    glDeleteBuffers(_numberOfBuffers,_bufferObjects);
+    CGLDeleteBuffers(_numberOfBuffers,_bufferObjects);
       
    if(_bufferObjects!=NULL)
     free(_bufferObjects);
@@ -92,9 +89,9 @@
     }
     else {
      _readPixels[i]=NULL;
-     glBindBuffer(GL_PIXEL_PACK_BUFFER_ARB, _bufferObjects[i]);
-     glBufferData(GL_PIXEL_PACK_BUFFER_ARB, _width*_rowsPerBuffer*4, NULL,GL_STREAM_READ);
-     glBindBuffer(GL_PIXEL_PACK_BUFFER_ARB, 0);
+     CGLBindBuffer(GL_PIXEL_PACK_BUFFER_ARB, _bufferObjects[i]);
+     CGLBufferData(GL_PIXEL_PACK_BUFFER_ARB, _width*_rowsPerBuffer*4, NULL,GL_STREAM_READ);
+     CGLBindBuffer(GL_PIXEL_PACK_BUFFER_ARB, 0);
     }
     
     row+=_rowsPerBuffer;
@@ -178,7 +175,7 @@ static inline uint32_t premultiplyPixel(uint32_t value){
     if(_bufferObjects[i]==0)
      glReadPixels(0,row,_width,rowCount,PIXEL_FORMAT, GL_UNSIGNED_BYTE,_readPixels[i]);
     else {
-     glBindBuffer(GL_PIXEL_PACK_BUFFER,_bufferObjects[i]);
+     CGLBindBuffer(GL_PIXEL_PACK_BUFFER,_bufferObjects[i]);
      unbind=YES;
      
      glReadPixels(0,row,_width,rowCount,PIXEL_FORMAT, GL_UNSIGNED_BYTE, 0);
@@ -192,7 +189,7 @@ static inline uint32_t premultiplyPixel(uint32_t value){
    }
    
    if(unbind)
-    glBindBuffer(GL_PIXEL_PACK_BUFFER,0);          
+    CGLBindBuffer(GL_PIXEL_PACK_BUFFER,0);          
 
    row=0;
    unbind=NO;
@@ -206,8 +203,8 @@ static inline uint32_t premultiplyPixel(uint32_t value){
      inputRow=_readPixels[i];
     else {
      unbind=YES;
-     glBindBuffer(GL_PIXEL_PACK_BUFFER,_bufferObjects[i]);          
-     inputRow=(GLubyte*)glMapBuffer(GL_PIXEL_PACK_BUFFER,GL_READ_ONLY);
+     CGLBindBuffer(GL_PIXEL_PACK_BUFFER,_bufferObjects[i]);          
+     inputRow=(GLubyte*)CGLMapBuffer(GL_PIXEL_PACK_BUFFER,GL_READ_ONLY);
     }
     
     if(_isOpaque){
@@ -244,20 +241,20 @@ static inline uint32_t premultiplyPixel(uint32_t value){
     }
     
     if(_bufferObjects[i]!=0){
-     glUnmapBuffer(GL_PIXEL_PACK_BUFFER);
+     CGLUnmapBuffer(GL_PIXEL_PACK_BUFFER);
     }
     
     row+=rowCount;
    }
    
    if(unbind)
-    glBindBuffer(GL_PIXEL_PACK_BUFFER,0);          
+    CGLBindBuffer(GL_PIXEL_PACK_BUFFER,0);          
       
 #if 0    
    if(_usePixelBuffer){
-    glBindBuffer(GL_PIXEL_PACK_BUFFER,0);
+    CGLBindBuffer(GL_PIXEL_PACK_BUFFER,0);
     if(inputBytes!=NULL){
-     glUnmapBuffer(GL_PIXEL_PACK_BUFFER);
+     CGLUnmapBuffer(GL_PIXEL_PACK_BUFFER);
 }
    }
 #endif
