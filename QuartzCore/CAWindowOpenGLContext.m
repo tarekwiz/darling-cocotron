@@ -1,7 +1,5 @@
 #import <QuartzCore/CAWindowOpenGLContext.h>
-#include <OpenGL/OpenGL.h>
-#include <OpenGL/gl.h>
-#include <OpenGL/glext.h>
+#import <OpenGL/OpenGL.h>
 #import <Onyx2D/O2Surface.h>
 
 @implementation CAWindowOpenGLContext
