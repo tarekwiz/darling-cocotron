@@ -62,6 +62,9 @@ set(QuartzCore_sources
 
 set_source_files_properties(${QuartzCore_sources} LANGUAGE C)
 
+set(DYLIB_COMPAT_VERSION "1.2.0")
+set(DYLIB_CURRENT_VERSION "1.11.0")
+
 add_framework(QuartzCore
 	FAT
 	CURRENT_VERSION
