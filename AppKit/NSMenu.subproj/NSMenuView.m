@@ -54,7 +54,7 @@ enum {
    
    // Construct a new array of just the visible items
    if( _visibleArray == NULL )
-      _visibleArray = [[NSMutableArray init] alloc];
+      _visibleArray = [[NSMutableArray alloc] init];
 	
    [_visibleArray removeAllObjects];
    
