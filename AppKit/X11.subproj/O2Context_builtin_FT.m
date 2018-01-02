@@ -106,13 +106,23 @@ static void drawFreeTypeBitmap(O2Context_builtin_FT *self,O2Surface *surface,FT_
 -(void)showGlyphs:(const O2Glyph *)glyphs advances:(const O2Size *)advances count:(unsigned)count {
 // FIXME: use advances if not NULL
 
-   O2AffineTransform transform=O2ContextGetUserSpaceToDeviceSpaceTransform(self);
-   O2GState         *gState=O2ContextCurrentGState(self);
-   O2Paint          *paint=paintFromColor(gState->_fillColor);
-   // FIXME: _textTransform no longer exists--is this line still needed?
-   //transform = O2AffineTransformConcat(gState->_textTransform, transform);
-   O2Point           point=O2PointApplyAffineTransform(NSMakePoint(0,0),transform);
-   
+   O2SurfaceLock(_surface);
+
+   O2GState *gState = O2ContextCurrentGState(self);
+   O2Paint *paint = paintFromColor(gState->_fillColor);
+   O2AffineTransform Trm = O2ContextGetTextRenderingMatrix(self);
+
+   NSPoint point = O2PointApplyAffineTransform(NSMakePoint(0, 0), Trm);
+
+   // Only use the scaling part of the current transform to scale the font size
+   float scaleX = sqrt((Trm.a * Trm.a) + (Trm.c * Trm.c));
+   float scaleY = sqrt((Trm.b * Trm.b) + (Trm.d * Trm.d));
+   O2AffineTransform scalingTransform = O2AffineTransformMakeScale(scaleX, scaleY);
+   O2Size fontSize = O2SizeApplyAffineTransform(
+      O2SizeMake(0, O2GStatePointSize(gState)),
+      scalingTransform
+   );
+
    [self establishFontStateInDeviceIfDirty];
 
    O2Font_FT *font=(O2Font_FT *)gState->_font;
@@ -128,7 +138,7 @@ static void drawFreeTypeBitmap(O2Context_builtin_FT *self,O2Surface *surface,FT_
 
    FT_GlyphSlot slot=face->glyph;
 
-   if ((ftError = FT_Set_Char_Size(face,0,gState->_pointSize*64,72.0,72.0))) {
+   if ((ftError = FT_Set_Char_Size(face, 0, fontSize.height * 64, 72.0, 72.0))) {
     NSLog(@"FT_Set_Char_Size returned %d",ftError);
     return;
    }
@@ -161,10 +171,8 @@ static void drawFreeTypeBitmap(O2Context_builtin_FT *self,O2Surface *surface,FT_
     total+=glyphAdvances[i];
     
    total=(total/O2FontGetUnitsPerEm(font))*gState->_pointSize;
-   
-   //FIXME: _textTransform no longer exists--are these lines still needed?
-   //O2ContextCurrentGState(self)->_textTransform.tx+=total;
-   //O2ContextCurrentGState(self)->_textTransform.ty+=0;
+
+   O2SurfaceUnlock(_surface);
 }
 
 @end
