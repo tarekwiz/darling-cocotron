@@ -162,7 +162,7 @@ static void drawSunkenBorder(NSRect rect){
 -(void)drawRect:(NSRect)rect {
 	NSRect        bounds=[self bounds];
 	NSArray      *items=[[self menu] itemArray];
-	int           i,count=[items count];
+	NSUInteger    i,count=[items count];
 	NSRect        previousBorderRect=NSMakeRect(0,0,0,0);
 	BOOL          overflow=NO;
 	NSPoint       mouseLoc = [[NSApp currentEvent] locationInWindow];
@@ -214,10 +214,10 @@ static void drawSunkenBorder(NSRect rect){
 	}
 }
 
--(unsigned)overflowIndex {
+-(NSUInteger)overflowIndex {
    NSRect        bounds=[self bounds];
    NSArray      *items=[[self menu] itemArray];
-   unsigned      i,count=[items count];
+   NSUInteger    i,count=[items count];
    NSRect        previousBorderRect=NSMakeRect(0,0,0,0);
 
    for(i=0;i<count;i++){
@@ -238,7 +238,7 @@ static void drawSunkenBorder(NSRect rect){
    NSUInteger    result=NSNotFound;
    NSRect        bounds=[self bounds];
    NSArray      *items=[[self menu] itemArray];
-   unsigned      i,count=[items count];
+   NSUInteger    i,count=[items count];
    NSRect        previousBorderRect=NSMakeRect(0,0,0,0);
    BOOL          overflow=NO;
 
@@ -268,7 +268,7 @@ static void drawSunkenBorder(NSRect rect){
    NSRect        branchFrame=[branch frame];
    NSRect        screenVisible=[screen visibleFrame];
    NSArray      *items=[[self menu] itemArray];
-   unsigned      i,count=[items count];
+   NSUInteger    i,count=[items count];
    NSRect        previousBorderRect=NSMakeRect(0,0,0,0);
    NSRect        itemRect=NSZeroRect;
    NSPoint       topLeft=NSZeroPoint;

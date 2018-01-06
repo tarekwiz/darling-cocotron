@@ -27,7 +27,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    return self;
 }
 
--initWithMenu:(NSMenu *)menu overflowAtIndex:(unsigned)overflowIndex {
+-initWithMenu:(NSMenu *)menu overflowAtIndex:(NSUInteger)overflowIndex {
    NSOverflowMenuView *view=[[NSOverflowMenuView alloc] initWithMenu:menu overflowAtIndex:overflowIndex];
    NSRect              contentRect=[view frame];
 

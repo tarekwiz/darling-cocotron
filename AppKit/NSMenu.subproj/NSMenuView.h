@@ -13,9 +13,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     NSMutableArray *_visibleArray;
 }
 
-- (unsigned)itemIndexAtPoint:(NSPoint)point;
-- (unsigned)selectedItemIndex;
-- (void)setSelectedItemIndex:(unsigned)itemIndex;
+- (NSUInteger)itemIndexAtPoint:(NSPoint)point;
+- (NSUInteger)selectedItemIndex;
+- (void)setSelectedItemIndex:(NSUInteger)itemIndex;
 
 - (NSArray *)visibleItemArray;
 - (NSMenuItem *)itemAtSelectedIndex;

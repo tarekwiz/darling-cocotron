@@ -271,9 +271,9 @@ static NSRect boundsToTitleAreaRect(NSRect rect){
 	}
 }
 
--(unsigned)itemIndexAtPoint:(NSPoint)point {
+-(NSUInteger)itemIndexAtPoint:(NSPoint)point {
    NSArray *items=[[self menu] itemArray];
-   unsigned i,count=[items count];
+   NSUInteger i,count=[items count];
    NSRect   check=boundsToTitleAreaRect([self bounds]);
 
    for(i=0;i<count;i++){
@@ -294,7 +294,7 @@ static NSRect boundsToTitleAreaRect(NSRect rect){
    NSRect   branchFrame=[branch frame];
    NSRect   screenVisible=[screen visibleFrame];
    NSArray *items=[[self menu] itemArray];
-   unsigned i,count=[items count];
+   NSUInteger i,count=[items count];
    NSRect   itemRect=boundsToTitleAreaRect([self bounds]);
    NSPoint  topLeft=NSZeroPoint;
 

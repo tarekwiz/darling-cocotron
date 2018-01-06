@@ -28,16 +28,16 @@ enum {
    [super dealloc];
 }
 
--(unsigned)itemIndexAtPoint:(NSPoint)point {
+-(NSUInteger)itemIndexAtPoint:(NSPoint)point {
    NSInvalidAbstractInvocation();
    return NSNotFound;
 }
 
--(unsigned)selectedItemIndex {
+-(NSUInteger)selectedItemIndex {
    return _selectedItemIndex;
 }
 
--(void)setSelectedItemIndex:(unsigned)itemIndex {
+-(void)setSelectedItemIndex:(NSUInteger)itemIndex {
 	if (_selectedItemIndex != itemIndex) {
 		_selectedItemIndex=itemIndex;
 		[self setNeedsDisplay:YES];
@@ -190,7 +190,7 @@ const float kMouseMovementThreshold = .001f;
                     MENUDEBUG(@"found a menu: %@", checkView);
                     
                     // Which item is the cursor on top of?
-                    unsigned itemIndex=[checkView itemIndexAtPoint:checkPoint];
+                    NSUInteger itemIndex=[checkView itemIndexAtPoint:checkPoint];
 
                     MENUDEBUG(@"found an item index: %u", itemIndex);
 
@@ -320,10 +320,10 @@ const float kMouseMovementThreshold = .001f;
 				{
 					MENUDEBUG(@"Up...");
 					
-					unsigned oldIndex = [activeMenuView selectedItemIndex];
+					NSUInteger oldIndex = [activeMenuView selectedItemIndex];
 					NSArray *items = [activeMenuView itemArray];
 					// Look for the next enabled item by search up and wrapping around the bottom
-					unsigned newIndex = 0;
+					NSUInteger newIndex = 0;
 					if (oldIndex != NSNotFound) {
 						newIndex = oldIndex == 0 ? [items count] - 1 : oldIndex - 1;
 					}
@@ -356,10 +356,10 @@ const float kMouseMovementThreshold = .001f;
 				case kNSMenuKeyboardNavigationDown:
 				{
 					MENUDEBUG(@"Down...");
-					unsigned oldIndex = [activeMenuView selectedItemIndex];
+					NSUInteger oldIndex = [activeMenuView selectedItemIndex];
 					NSArray *items = [activeMenuView itemArray];
 					// Look for the next enabled item by search down and wrapping around to the top
-					unsigned newIndex = 0;
+					NSUInteger newIndex = 0;
 					if (oldIndex != NSNotFound) {
 						newIndex = oldIndex == [items count] -1 ? 0 : oldIndex + 1;
 					}
@@ -422,10 +422,10 @@ const float kMouseMovementThreshold = .001f;
 				{
 					MENUDEBUG(@"Letter...");
 					NSString *letterString = [[NSString stringWithCharacters: &ch length: 1] uppercaseString];
-					unsigned oldIndex = [activeMenuView selectedItemIndex];
+					NSUInteger oldIndex = [activeMenuView selectedItemIndex];
 					NSArray *items = [activeMenuView itemArray];
 					// Look for the next enabled item by search down and wrapping around to the top
-					unsigned newIndex = 0;
+					NSUInteger newIndex = 0;
 					if (oldIndex != NSNotFound) {
 						newIndex = oldIndex == [items count] -1 ? 0 : oldIndex + 1;
 					}
