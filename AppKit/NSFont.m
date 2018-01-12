@@ -21,6 +21,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 FOUNDATION_EXPORT char *NSUnicodeToSymbol(const unichar *characters,unsigned length,
   BOOL lossy,unsigned *resultLength,NSZone *zone);
 
+#ifndef DARLING
 @implementation NSNibFontNameTranslator
 // It seems the default mapping should really go to some platform specific place
 -(NSString *)translateToNibFontName:(NSString *)name {
@@ -83,10 +84,13 @@ FOUNDATION_EXPORT char *NSUnicodeToSymbol(const unichar *characters,unsigned len
 }
 
 @end
+#endif
 
 @implementation NSFont
 
+#ifndef DARLING
 static NSNibFontNameTranslator* _nibFontTranslator = nil;
+#endif
 
 static unsigned _fontCacheCapacity=0;
 static unsigned _fontCacheSize=0;
@@ -99,7 +103,9 @@ static NSLock *_cacheLock=nil;
     _fontCacheCapacity=4;
     _fontCacheSize=0;
     _fontCache=NSZoneMalloc([self zone],sizeof(NSFont *)*_fontCacheCapacity);
+#ifndef DARLING
 	   _nibFontTranslator = [[NSNibFontNameTranslator alloc] init];
+#endif
        _cacheLock = [[NSLock alloc] init];
    }
 }
@@ -277,7 +283,11 @@ static NSLock *_cacheLock=nil;
 
 -(void)encodeWithCoder:(NSCoder *)coder {
    if([coder allowsKeyedCoding]){
+#ifndef DARLING
      [coder encodeObject:[[NSFont nibFontTranslator] translateToNibFontName:_name] forKey:@"NSName"];
+#else
+     [coder encodeObject:_name forKey:@"NSName"];
+#endif
      [coder encodeFloat:_pointSize forKey:@"NSSize"];
    }
    else {
@@ -289,7 +299,11 @@ static NSLock *_cacheLock=nil;
    if([coder allowsKeyedCoding]){
     NSKeyedUnarchiver *keyed=(NSKeyedUnarchiver *)coder;
        NSString *fontName = [keyed decodeObjectForKey:@"NSName"];
+#ifndef DARLING
     NSString          *name=[[NSFont nibFontTranslator] translateFromNibFontName: fontName];
+#else
+    NSString *name = fontName;
+#endif
     float              size=[keyed decodeFloatForKey:@"NSSize"];
     // int                flags=[keyed decodeIntForKey:@"NSfFlags"]; // ?
     
@@ -723,6 +737,7 @@ int NSConvertGlyphsToPackedGlyphs(NSGlyph *glyphs,int length,NSMultibyteGlyphPac
 
 @end
 
+#ifndef DARLING
 @implementation NSFont (PortatibilityAdditions)
 
 + (void)setNibFontTranslator:(NSNibFontNameTranslator*)fontTranslator
@@ -738,3 +753,5 @@ int NSConvertGlyphsToPackedGlyphs(NSGlyph *glyphs,int length,NSMultibyteGlyphPac
 }
 
 @end
+#endif
+

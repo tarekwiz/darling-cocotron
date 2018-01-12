@@ -12,7 +12,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 @class NSFontDescriptor;
 
+#ifndef DARLING
 // Provides an extendable translation scheme for apps that use non-standard fonts in UI elements
+
 @interface NSNibFontNameTranslator : NSObject {
 }
 
@@ -20,6 +22,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 - (NSString *)translateFromNibFontName:(NSString *)fontName;
 
 @end
+#endif
 
 typedef unsigned NSGlyph;
 
@@ -132,11 +135,13 @@ typedef enum {
 
 @end
 
+#ifndef DARLING
 @interface NSFont (PortatibilityAdditions)
 
 + (void)setNibFontTranslator:(NSNibFontNameTranslator *)fontTranslator;
 + (NSNibFontNameTranslator *)nibFontTranslator;
 
 @end
+#endif
 
 int NSConvertGlyphsToPackedGlyphs(NSGlyph *glyphs, int length, NSMultibyteGlyphPacking packing, char *output);
