@@ -151,12 +151,14 @@ static void socketCallback(
 -(NSColor *)colorWithName:(NSString *)colorName {
    
    if([colorName isEqual:@"controlColor"])
-      return [NSColor lightGrayColor];
+      return [NSColor colorWithCalibratedWhite: 0.93 alpha: 1.0];
    if([colorName isEqual:@"disabledControlTextColor"])
       return [NSColor grayColor];
    if([colorName isEqual:@"controlTextColor"])
       return [NSColor blackColor];
    if([colorName isEqual:@"menuBackgroundColor"])
+      return [NSColor lightGrayColor];
+   if([colorName isEqual:@"mainMenuBarColor"])
       return [NSColor lightGrayColor];
    if([colorName isEqual:@"controlShadowColor"])
       return [NSColor darkGrayColor];
@@ -179,7 +181,8 @@ static void socketCallback(
       return [NSColor blueColor];
    if([colorName isEqual:@"selectedControlTextColor"])
       return [NSColor blackColor];
-   
+
+   NSLog(@"missing color for %@", colorName);
    return [NSColor redColor];
    
 }
