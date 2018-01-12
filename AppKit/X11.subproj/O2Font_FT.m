@@ -53,26 +53,27 @@ FcConfig *O2FontSharedFontConfig() {
 }
 
 +(NSString*)filenameForPattern:(NSString *)pattern {
-   int i;
-   FcPattern *pat=FcNameParse((unsigned char*)[pattern UTF8String]);
+   FcConfig *config = O2FontSharedFontConfig();
 
-   FcObjectSet *props=FcObjectSetBuild(FC_FILE, NULL);
+   FcPattern *pat = FcNameParse((unsigned char*)[pattern UTF8String]);
+   FcConfigSubstitute(config, pat, FcMatchPattern);
+   FcDefaultSubstitute(pat);
 
-   FcFontSet *set = FcFontList (O2FontSharedFontConfig(), pat, props);
-   NSString* ret=NULL;
-   for(i = 0; i < set->nfont && !ret; i++) {
-      FcChar8 *filename;
+   FcResult fcResult;
+   FcPattern *match = FcFontMatch(config, pat, &fcResult);
+   FcPatternDestroy(pat);
+   if (match == NULL) return nil;
 
-      if (FcPatternGetString (set->fonts[i], FC_FILE, 0, &filename) == FcResultMatch) {
-         ret=[NSString stringWithUTF8String:(char*)filename];
-      }
+   FcChar8 *filename = NULL;
+   FcPatternGetString(match, FC_FILE, 0, &filename);
+
+   NSString *res = nil;
+   if (filename != NULL) {
+      res = [NSString stringWithUTF8String: (char *)filename];
    }
 
-   FcPatternDestroy(pat);
-   FcObjectSetDestroy(props);
-   FcFontSetDestroy(set);
-   
-   return ret;
+   FcPatternDestroy(match);
+   return res;
 }
 
 -initWithFontName:(NSString *)name {
@@ -83,6 +84,7 @@ FcConfig *O2FontSharedFontConfig() {
     filename=[[self class] filenameForPattern:@""];
     
     if(filename==nil) {
+       NSLog(@"No font found for name %@", name);
 #ifdef LINUX
       filename=@"/usr/share/fonts/truetype/freefont/FreeSans.ttf";
 #else
@@ -90,7 +92,7 @@ FcConfig *O2FontSharedFontConfig() {
 #endif
     }
    }
-      
+
    FT_Error ret=FT_New_Face(O2FontSharedFreeTypeLibrary(),[filename fileSystemRepresentation],0,&_face);
 
    if(ret!=0)
@@ -100,7 +102,7 @@ FcConfig *O2FontSharedFontConfig() {
  //  FT_Set_Char_Size(_face,0,2048*64,72,72);
 
    if(!(_face->face_flags&FT_FACE_FLAG_SCALABLE))
-    NSLog(@"FreeType font face is not scalable");
+    NSLog(@"FreeType font face is not scalable: %@", filename);
     
    _unitsPerEm=(float)_face->units_per_EM;
    _ascent=_face->ascender;
@@ -116,6 +118,9 @@ FcConfig *O2FontSharedFontConfig() {
    _bbox.size.height=_face->bbox.yMax-_face->bbox.yMin;
    _numberOfGlyphs=_face->num_glyphs;
    _advances=NULL;
+
+   // TODO: set an actual value here
+   _coveredCharSet = [[[NSCharacterSet illegalCharacterSet] invertedSet] retain];
 
    return self;
 }
