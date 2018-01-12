@@ -219,27 +219,27 @@ static NSLock *_cacheLock=nil;
 }
 
 +(NSFont *)controlContentFontOfSize:(float)size {
-    return [self _uiFontOfType:kCTFontControlContentFontType size:(size==0)?12.0:size fallbackName:@"Arial"];
+    return [self _uiFontOfType:kCTFontControlContentFontType size:(size==0)?12.0:size fallbackName:@"San Francisco"];
 }
 
 +(NSFont *)labelFontOfSize:(float)size {
-    return [self _uiFontOfType:kCTFontLabelFontType size:(size==0)?12.0:size fallbackName:@"Arial"];
+    return [self _uiFontOfType:kCTFontLabelFontType size:(size==0)?12.0:size fallbackName:@"San Francisco"];
 }
 
 +(NSFont *)menuFontOfSize:(float)size {
-    return [self _uiFontOfType:kCTFontMenuItemFontType size:size fallbackName:@"Arial"];
+    return [self _uiFontOfType:kCTFontMenuItemFontType size:size fallbackName:@"San Francisco"];
 }
 
 +(NSFont *)menuBarFontOfSize:(float)size {
-    return [self _uiFontOfType:kCTFontMenuTitleFontType size:size fallbackName:@"Arial"];
+    return [self _uiFontOfType:kCTFontMenuTitleFontType size:size fallbackName:@"San Francisco"];
 }
 
 +(NSFont *)messageFontOfSize:(float)size {
-    return [self _uiFontOfType:kCTFontSystemFontType size:(size==0)?12.0:size fallbackName:@"Arial"];
+    return [self _uiFontOfType:kCTFontSystemFontType size:(size==0)?12.0:size fallbackName:@"San Francisco"];
 }
 
 +(NSFont *)paletteFontOfSize:(float)size {
-    return [self _uiFontOfType:kCTFontPaletteFontType size:(size==0)?12.0:size fallbackName:@"Arial"];
+    return [self _uiFontOfType:kCTFontPaletteFontType size:(size==0)?12.0:size fallbackName:@"San Francisco"];
 }
 
 +(NSFont *)systemFontOfSize:(float)size {
@@ -251,11 +251,11 @@ static NSLock *_cacheLock=nil;
 }
 
 +(NSFont *)toolTipsFontOfSize:(float)size {
-    return [self _uiFontOfType:kCTFontToolTipFontType size:(size==0)?10.:size fallbackName:@"Arial"];
+    return [self _uiFontOfType:kCTFontToolTipFontType size:(size==0)?10.:size fallbackName:@"San Francisco"];
 }
 
 +(NSFont *)userFontOfSize:(float)size {
-   return [NSFont fontWithName:[O2Font postscriptNameForDisplayName:@"Arial"] size:(size==0)?12.0:size];
+   return [NSFont fontWithName:[O2Font postscriptNameForDisplayName:@"San Francisco"] size:(size==0)?12.0:size];
 }
 
 +(NSFont *)userFixedPitchFontOfSize:(float)size {
