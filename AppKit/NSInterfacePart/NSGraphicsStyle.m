@@ -9,6 +9,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <AppKit/NSInterfacePartAttributedString.h>
 #import <AppKit/NSInterfacePartDisabledAttributedString.h>
 #import <AppKit/NSColor.h>
+#import <AppKit/NSBezierPath.h>
 #import <AppKit/NSFont.h>
 #import <AppKit/NSImage.h>
 #import <AppKit/NSWindow.h>
@@ -369,7 +370,11 @@ static NSDictionary *sDimmedMenuTextShadowAttributes = nil;
     rect = NSInsetRect(rect,1,1);
    }
 
-   NSDrawButton(rect,rect);
+   [[NSColor colorWithCalibratedWhite: 0.78 alpha: 1.0] set];
+   [[NSBezierPath bezierPathWithRoundedRect: rect xRadius: 4 yRadius: 4] fill];
+   rect = NSInsetRect(rect, 1, 1);
+   [[NSColor whiteColor] set];
+   [[NSBezierPath bezierPathWithRoundedRect: rect xRadius: 4 yRadius: 4] fill];
 }
 
 -(void)drawPushButtonPressedInRect:(NSRect)rect {
@@ -668,16 +673,18 @@ static NSDictionary *sDimmedMenuTextShadowAttributes = nil;
 @implementation NSGraphicsStyle (NSBox)
 
 -(void)drawBoxWithLineInRect:(NSRect)rect {
-   [[NSColor blackColor] setStroke];
-   NSFrameRect(rect);
+   [[NSColor colorWithCalibratedWhite: 0.78 alpha: 1.0] setStroke];
+   [[NSBezierPath bezierPathWithRoundedRect: rect xRadius: 4 yRadius: 4] stroke];
 }
 
 -(void)drawBoxWithBezelInRect:(NSRect)rect clipRect:(NSRect)clipRect {
-   NSDrawGrayBezel(rect,clipRect);
+   [[NSColor colorWithCalibratedWhite: 0.78 alpha: 1.0] setStroke];
+   [[NSBezierPath bezierPathWithRoundedRect: rect xRadius: 4 yRadius: 4] stroke];
 }
 
 -(void)drawBoxWithGrooveInRect:(NSRect)rect clipRect:(NSRect)clipRect {
-   NSDrawGroove(rect,clipRect);
+   [[NSColor colorWithCalibratedWhite: 0.78 alpha: 1.0] setStroke];
+   [[NSBezierPath bezierPathWithRoundedRect: rect xRadius: 4 yRadius: 4] stroke];
 }
 
 @end
