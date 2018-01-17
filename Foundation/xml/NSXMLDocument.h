@@ -37,10 +37,10 @@ typedef NSUInteger NSXMLDocumentContentKind;
 
 + (Class)replacementClassForClass:(Class)aClass;
 
-- initWithRootElement:(NSXMLElement *)element;
-- initWithXMLString:(NSString *)string options:(NSUInteger)options error:(NSError **)error;
-- initWithData:(NSData *)data options:(NSUInteger)options error:(NSError **)error;
-- initWithContentsOfURL:(NSURL *)url options:(NSUInteger)options error:(NSError **)error;
+- (instancetype)initWithRootElement:(NSXMLElement *)element;
+- (instancetype)initWithXMLString:(NSString *)string options:(NSUInteger)options error:(NSError **)error;
+- (instancetype)initWithData:(NSData *)data options:(NSUInteger)options error:(NSError **)error;
+- (instancetype)initWithContentsOfURL:(NSURL *)url options:(NSUInteger)options error:(NSError **)error;
 
 - (NSXMLDocumentContentKind)documentContentKind;
 - (NSString *)version;
@@ -72,8 +72,8 @@ typedef NSUInteger NSXMLDocumentContentKind;
 - (NSData *)XMLData;
 - (NSData *)XMLDataWithOptions:(NSUInteger)options;
 
-- objectByApplyingXSLT:(NSData *)xslt arguments:(NSDictionary *)arguments error:(NSError *)error;
-- objectByApplyingXSLTAtURL:(NSURL *)url arguments:(NSDictionary *)arguments error:(NSError *)error;
-- objectByApplyingXSLTString:(NSString *)string arguments:(NSDictionary *)arguments error:(NSError *)error;
+- (id)objectByApplyingXSLT:(NSData *)xslt arguments:(NSDictionary *)arguments error:(NSError *)error;
+- (id)objectByApplyingXSLTAtURL:(NSURL *)url arguments:(NSDictionary *)arguments error:(NSError *)error;
+- (id)objectByApplyingXSLTString:(NSString *)string arguments:(NSDictionary *)arguments error:(NSError *)error;
 
 @end

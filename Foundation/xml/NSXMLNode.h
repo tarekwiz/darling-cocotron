@@ -1,5 +1,4 @@
-/* Copyright (c) 2007 Christopher J. W. Lloyd
-
+/*
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
@@ -58,28 +57,28 @@ enum {
     id _value;
 }
 
-+ document;
-+ documentWithRootElement:(NSXMLElement *)element;
++ (id)document;
++ (id)documentWithRootElement:(NSXMLElement *)element;
 
-+ elementWithName:(NSString *)name;
-+ elementWithName:(NSString *)name children:(NSArray *)children attributes:(NSArray *)attributes;
-+ elementWithName:(NSString *)name stringValue:(NSString *)string;
++ (id)elementWithName:(NSString *)name;
++ (id)elementWithName:(NSString *)name children:(NSArray *)children attributes:(NSArray *)attributes;
++ (id)elementWithName:(NSString *)name stringValue:(NSString *)string;
 
-+ attributeWithName:(NSString *)name stringValue:(NSString *)string;
++ (id)attributeWithName:(NSString *)name stringValue:(NSString *)string;
 
-+ commentWithStringValue:(NSString *)string;
-+ textWithStringValue:(NSString *)string;
-+ processingInstructionWithName:(NSString *)name stringValue:(NSString *)string;
++ (id)commentWithStringValue:(NSString *)string;
++ (id)textWithStringValue:(NSString *)string;
++ (id)processingInstructionWithName:(NSString *)name stringValue:(NSString *)string;
 
-+ DTDNodeWithXMLString:(NSString *)string;
-+ namespaceWithName:(NSString *)name stringValue:(NSString *)string;
++ (id)DTDNodeWithXMLString:(NSString *)string;
++ (id)namespaceWithName:(NSString *)name stringValue:(NSString *)string;
 + (NSXMLNode *)predefinedNamespaceForPrefix:(NSString *)prefix;
 
 + (NSString *)prefixForName:(NSString *)name;
 + (NSString *)localNameForName:(NSString *)name;
 
-- initWithKind:(NSXMLNodeKind)kind;
-- initWithKind:(NSXMLNodeKind)kind options:(NSUInteger)options;
+- (instancetype)initWithKind:(NSXMLNodeKind)kind;
+- (instancetype)initWithKind:(NSXMLNodeKind)kind options:(NSUInteger)options;
 
 - (NSUInteger)index;
 - (NSXMLNodeKind)kind;
@@ -90,7 +89,7 @@ enum {
 - (NSXMLNode *)nextSibling;
 - (NSString *)stringValue;
 - (NSString *)URI;
-- objectValue;
+- (id)objectValue;
 - (NSXMLNode *)parent;
 - (NSString *)prefix;
 - (NSXMLNode *)previousNode;

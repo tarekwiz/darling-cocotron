@@ -15,10 +15,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     NSMutableDictionary *_namespaces;
 }
 
-- initWithName:(NSString *)name;
-- initWithName:(NSString *)name stringValue:(NSString *)string;
-- initWithName:(NSString *)name URI:(NSString *)uri;
-- initWithXMLString:(NSString *)xml error:(NSError **)error;
+- (instancetype)initWithName:(NSString *)name;
+- (instancetype)initWithName:(NSString *)name stringValue:(NSString *)string;
+- (instancetype)initWithName:(NSString *)name URI:(NSString *)uri;
+- (instancetype)initWithXMLString:(NSString *)xml error:(NSError **)error;
 
 - (NSArray *)attributes;
 - (NSXMLNode *)attributeForLocalName:(NSString *)name URI:(NSString *)uri;

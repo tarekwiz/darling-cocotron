@@ -17,7 +17,7 @@ typedef int NSXMLDTDNodeKind;
     NSString *_systemID;
 }
 
-- initWithXMLString:(NSString *)string;
+- (instancetype)initWithXMLString:(NSString *)string;
 
 - (NSXMLDTDNodeKind)DTDKind;
 - (BOOL)isExternal;
