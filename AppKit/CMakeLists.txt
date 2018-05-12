@@ -128,6 +128,7 @@ set(AppKit_sources
 	nib.subproj/NSNibLoading.m
 	nib.subproj/NSClassSwapper.m
 	nib.subproj/NSNibAXRelationshipConnector.m
+	nib.subproj/NSIBUserDefinedRuntimeAttributesConnector.m
 
 	NSTextFieldCell.m
 	NSFormCell.m
