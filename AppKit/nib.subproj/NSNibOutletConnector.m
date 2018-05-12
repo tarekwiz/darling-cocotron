@@ -12,8 +12,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 @implementation NSNibOutletConnector
 
 -(void)establishConnection {
-   NSString *methodName=[NSString stringWithFormat:@"set%@:",[_label capitalizedString]];
-   SEL       selector=NSSelectorFromString(methodName);
+   NSString *methodName = [NSString stringWithFormat:@"set%@%@:",
+      [[_label substringToIndex:1] uppercaseString],
+      [_label substringFromIndex:1]
+   ];
+   SEL selector = NSSelectorFromString(methodName);
 
    if(selector!=NULL)
     if([_source respondsToSelector:selector]){
@@ -21,7 +24,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
      return;
     }
 
-   object_setInstanceVariable(_source,[_label UTF8String],&_destination);
+   object_setInstanceVariable(_source,[_label UTF8String],_destination);
 }
 
 @end
