@@ -23,7 +23,7 @@
 
 - (void) establishConnection {
     for (int i = 0; i < [_values count]; i++) {
-        [_object setValue: _values[i] forKey: _keyPaths[i]];
+        [_object setValue: _values[i] forKeyPath: _keyPaths[i]];
     }
 }
 
