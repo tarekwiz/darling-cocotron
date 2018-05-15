@@ -23,8 +23,7 @@
     CAWindowOpenGLContext *_caContext;
 
     id _delegate;
-    CGSBackingStoreType _backingType;
-    O2Context *_backingContext;
+    CGSBackingStoreType _backingType;  // stored, but ignored
     O2Context *_context;
 
     NSMutableDictionary *_deviceDictionary;
