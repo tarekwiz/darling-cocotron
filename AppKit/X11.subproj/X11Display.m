@@ -608,7 +608,7 @@ NSArray *CGSOrderedWindowNumbers() {
      break;
 
     case ClientMessage:
-     if(ev->xclient.format=32 && ev->xclient.data.l[0]==XInternAtom(_display, "WM_DELETE_WINDOW", False))
+     if(ev->xclient.format == 32 && ev->xclient.data.l[0]==XInternAtom(_display, "WM_DELETE_WINDOW", False))
       [delegate platformWindowWillClose:window];
      break;
 
