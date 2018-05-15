@@ -47,15 +47,6 @@ void O2DContextClipAndFillEdges(O2Context_builtin *self,int fillRuleMask);
    return YES;
 }
 
-+(BOOL)canInitBackingWithContext:(O2Context *)context deviceDictionary:(NSDictionary *)deviceDictionary {
-   NSString *name=[deviceDictionary objectForKey:@"CGContext"];
-
-   if(name==nil)
-    return YES;
-    
-   return [name isEqual:@"Onyx"];
-}
-
 -(void)reallocateForSurface {
    size_t width=O2ImageGetWidth(_surface);
    
@@ -97,21 +88,6 @@ void O2DContextClipAndFillEdges(O2Context_builtin *self,int fillRuleMask);
 
    O2RasterizerSetViewport(self,0,0,O2ImageGetWidth(_surface),O2ImageGetHeight(_surface));
    [self reallocateForSurface];
-   return self;
-}
-
--initWithSize:(O2Size)size context:(O2Context *)context {
-   O2Surface *surface=[context createSurfaceWithWidth:size.width height:size.height];
-   
-   if(surface==nil){
-    [self dealloc];
-    return nil;
-   }
-   
-   [self initWithSurface:surface flipped:NO];
-   
-   [surface release];
-   
    return self;
 }
 

@@ -126,15 +126,7 @@ typedef void (*O2ContextShowGlyphsFunction)(O2ContextRef, SEL, const O2Glyph *, 
     O2ContextShowGlyphsFunction _showGlyphsFunction;
 }
 
-+ (O2Context *)createContextWithSize:(O2Size)size window:(CGWindow *)window;
-+ (O2Context *)createBackingContextWithSize:(O2Size)size context:(O2Context *)context deviceDictionary:(NSDictionary *)deviceDictionary;
-
-+ (BOOL)canInitWithWindow:(CGWindow *)window;
-+ (BOOL)canInitBackingWithContext:(O2Context *)context deviceDictionary:(NSDictionary *)deviceDictionary;
 + (BOOL)canInitBitmap;
-
-- initWithSize:(O2Size)size window:(CGWindow *)window;
-- initWithSize:(O2Size)size context:(O2Context *)context;
 
 - initWithGraphicsState:(O2GState *)state;
 - init;
