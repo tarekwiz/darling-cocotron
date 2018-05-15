@@ -67,18 +67,18 @@
 }
 
 - (void) setValues: (NSArray *) values {
-    values = [values retain];
+    NSMutableArray *values2 = [[values mutableCopy] retain];
     [_values release];
-    _values = values;
+    _values = values2;
 }
 - (NSArray *) values {
     return _values;
 }
 
 - (void) setKeyPaths:(NSArray *) paths {
-    paths = [paths retain];
+    NSMutableArray *paths2 = [[paths mutableCopy] retain];
     [_keyPaths release];
-    _keyPaths = paths;
+    _keyPaths = paths2;
 }
 - (NSArray *) keyPaths {
     return _keyPaths;
