@@ -11,7 +11,9 @@
 }
 
 - (void) encodeWithCoder:(NSCoder *) coder {
-   NSUnimplementedMethod();
+   [coder encodeObject: _object forKey: @"NSObject"];
+   [coder encodeObject: _keyPaths forKey: @"NSKeyPaths"];
+   [coder encodeObject: _values forKey: @"NSValues"];
 }
 
 - (void) dealloc {
