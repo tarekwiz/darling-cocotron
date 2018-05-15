@@ -564,7 +564,7 @@ NSArray *CGSOrderedWindowNumbers() {
 
     case ConfigureNotify:
      [window frameChanged];
-     [delegate platformWindow:window frameChanged:[window transformFrame:[window frame]] didSize:YES];
+     [delegate platformWindow:window frameChanged:[window frame] didSize:YES];
      break;
 
     case ConfigureRequest:
