@@ -231,6 +231,7 @@ void CGNativeBorderFrameWidthsForStyle(unsigned styleMask,CGFloat *top,CGFloat *
    frame=[self transformFrame:frame];
    XMoveResizeWindow(_display, _window, frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
    [self invalidateContextsWithNewSize:frame.size];
+   _frame = frame;
 }
 
 -(void)setLevel:(int)value {
@@ -407,6 +408,7 @@ static int ignoreBadWindow(Display* display,
       };
       
      [self invalidateContextsWithNewSize:rect.size];
+     _frame = rect;
    }
    @finally {
       XSetErrorHandler(previousHandler);
