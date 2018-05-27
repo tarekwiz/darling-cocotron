@@ -3160,5 +3160,9 @@ NSString * const NSWindowDidAnimateNotification=@"NSWindowDidAnimateNotification
 {
     [[self platformWindow] dirtyRect:rect];
 }
+
+- (CGSubWindow *) _createSubWindowWithFrame: (CGRect) frame {
+    return [_platformWindow createSubWindowWithFrame: frame];
+}
 @end
 

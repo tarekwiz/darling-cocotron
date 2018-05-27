@@ -66,6 +66,7 @@ set(CoreGraphics_sources
 	CGPDFPage.m
 	CGShading.m
 	CGWindow.m
+	CGSubWindow.m
 	# KTFont+PDF.m 'KGPDFArray.h' file not found
 )
 

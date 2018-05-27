@@ -15,6 +15,7 @@
 #import <Foundation/NSException.h>
 #import <Onyx2D/O2Surface.h>
 #import "O2Context_builtin_FT.h"
+#import "X11SubWindow.h"
 #import <QuartzCore/CAWindowOpenGLContext.h>
 
 void CGNativeBorderFrameWidthsForStyle(unsigned styleMask,CGFloat *top,CGFloat *left,CGFloat *bottom,CGFloat *right) {
@@ -407,6 +408,9 @@ static int ignoreBadWindow(Display* display,
    return NSMakePoint(pos.x, _frame.size.height-pos.y);
 }
 
+- (X11SubWindow *) createSubWindowWithFrame: (CGRect) frame {
+    return [[[X11SubWindow alloc] initWithParentWindow: self frame: frame] autorelease];
+}
 
 @end
 

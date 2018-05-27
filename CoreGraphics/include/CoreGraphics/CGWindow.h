@@ -8,6 +8,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CGWindowLevel.h>
+#import <CoreGraphics/CGSubWindow.h>
 #import <OpenGL/CGLTypes.h>
 
 @class O2Context, CGEvent;
@@ -75,6 +76,8 @@ typedef enum {
 - (void)removeCGLContext:(CGLContextObj)cglContext;
 
 - (void)flushCGLContext:(CGLContextObj)cglContext;
+
+- (CGSubWindow *) createSubWindowWithFrame: (CGRect) frame;
 
 @end
 
