@@ -64,9 +64,14 @@ static inline void _clearCurrentContext(){
    if(_currentContext()==self)
       _clearCurrentContext();
    [_pixelFormat release];
+
+   if (_cglWindow != NULL) {
+       CGLDestroyWindow(_cglWindow);
+   }
+   [_subwindow release];
    _view=nil;
-   
-   
+
+
    CGLReleaseContext(_glContext);
    [super dealloc];
 }
@@ -107,57 +112,47 @@ static inline void _clearCurrentContext(){
     
     if([_view window]!=nil)
         rect=[_view convertRect:rect toView:nil];
-   
-   GLint size[2]={
-    rect.size.width,
-    rect.size.height };
-   GLint origin[2]={
-    rect.origin.x,
-    rect.origin.y };
-   GLint hidden[1]= {
-    [_view isHidden] ? 1 : 0
-   };
-   
-   CGLSetParameter(_glContext,kCGLCPSurfaceBackingSize,size);
-   CGLSetParameter(_glContext,kCGLCPSurfaceBackingOrigin,origin);
-   CGLSetParameter(_glContext,kCGLCPSurfaceHidden,hidden);
+    if (_subwindow == nil) {
+        _subwindow = [[[_view window] _createSubWindowWithFrame: rect] retain];
+        _cglWindow = CGLGetWindow([_subwindow nativeWindow]);
+    } else {
+        [_subwindow setFrame: rect];
+    }
+
+    if ([_view isHidden]) {
+        [_subwindow hide];
+    } else {
+        [_subwindow show];
+    }
 }
 
 -(void)setView:(NSView *)view {
-   if(_view!=view)
-    _hasPrepared=NO;
-    
-   _view=view;
-      
-   CGLLockContext(_glContext);
-   
-   GLint num[1]={[[_view window] windowNumber]};
-   
-   CGLSetParameter(_glContext,kCGLCPSurfaceWindowNumber,num);
-   
-   [self update];
+   if (_view == view) return;
 
-   CGLUnlockContext(_glContext);
+    _hasPrepared = NO;
+    _view = view;
+
+    if (_cglWindow != NULL) {
+        CGLDestroyWindow(_cglWindow);
+        _cglWindow = NULL;
+    }
+    [_subwindow release];
+    _subwindow = nil;
+
+    [self updateViewParameters];
 }
 
 -(void)makeCurrentContext {
    CGLError error;
-   
-   if((error=CGLSetCurrentContext(_glContext))!=kCGLNoError)
-    NSLog(@"CGLSetCurrentContext failed with %d in %s %d",error,__FILE__,__LINE__);
-    
-   _setCurrentContext(self);
 
-#if 0
-/*
-   We need to reload the view values when becoming current because it may
-   have moved windows since the last make current
- */
- // Possible this shouldnt be done here, especially on a non-main thread
- 
- // Don't do this here due to threading reason. Figure out where to do this when moving windows, view _setWindow ?
-   [self updateViewParameters];
-#endif
+   [self performSelectorOnMainThread: @selector(updateViewParameters)
+                          withObject: nil
+                       waitUntilDone: YES];
+
+   if((error=CGLContextMakeCurrentAndAttachToWindow(_glContext, _cglWindow))!=kCGLNoError)
+    NSLog(@"CGLSetCurrentContext failed with %d in %s %d",error,__FILE__,__LINE__);
+
+   _setCurrentContext(self);
 
    if(!_hasPrepared){
     _hasPrepared=YES;

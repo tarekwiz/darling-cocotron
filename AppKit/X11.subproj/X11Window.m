@@ -64,7 +64,7 @@ void CGNativeBorderFrameWidthsForStyle(unsigned styleMask,CGFloat *top,CGFloat *
    _frame=[self transformFrame:frame];
    if(isPanel && styleMask&NSDocModalWindowMask)
     styleMask=NSBorderlessWindowMask;
-      
+    // TODO: get rid of these glX calls
    GLint att[] = {
     GLX_RGBA,
     GLX_DOUBLEBUFFER,
@@ -108,6 +108,8 @@ void CGNativeBorderFrameWidthsForStyle(unsigned styleMask,CGFloat *top,CGFloat *
    XSetWMProtocols(_display, _window, &atm , 1);
       
    XSetWindowBackgroundPixmap(_display, _window, None);
+
+   _cglWindow = CGLGetWindow(_window);
       
    [(X11Display*)[NSDisplay currentDisplay] setWindow:self forID:_window];
       
@@ -119,7 +121,6 @@ void CGNativeBorderFrameWidthsForStyle(unsigned styleMask,CGFloat *top,CGFloat *
 
 -(void)dealloc {
    [self invalidate];
-   [_context release];
    [_deviceDictionary release];
    [super dealloc];
 }
@@ -168,10 +169,26 @@ void CGNativeBorderFrameWidthsForStyle(unsigned styleMask,CGFloat *top,CGFloat *
    return _delegate;
 }
 
--(void)invalidate {
-   _delegate=nil;
-   [_context release];
-   _context=nil;
+-(void) invalidate {
+    // This is essentially dealloc; we release our contexts
+    // and windows, but unlike dealloc, this method can be called
+    // several times, so set everything to nil/NULL/0.
+    _delegate = nil;
+
+    [_context release];
+    _context = nil;
+
+    [_caContext release];
+    _caContext = nil;
+
+    if (_cglContext != NULL) {
+        CGLReleaseContext(_cglContext);
+        _cglContext = NULL;
+    }
+    if (_cglWindow != NULL) {
+        CGLDestroyWindow(_cglWindow);
+        _cglWindow = NULL;
+    }
 
    if(_window) {
       [(X11Display*)[NSDisplay currentDisplay] setWindow:nil forID:_window];
@@ -301,37 +318,37 @@ void CGNativeBorderFrameWidthsForStyle(unsigned styleMask,CGFloat *top,CGFloat *
    return NO;
 }
 
-CGL_EXPORT CGLError CGLCreateContextForWindow(CGLPixelFormatObj pixelFormat,CGLContextObj share,CGLContextObj *resultp,Display *display,XVisualInfo *visualInfo,Window window);
-
--(void)createCGLContextObjIfNeeded {
-   if(_cglContext==NULL){
+-(void) createCGLContextObjIfNeeded {
+   if (_cglContext==NULL) {
     CGLError error;
-    
-    if((error=CGLCreateContextForWindow(NULL,NULL,&_cglContext,_display,_visualInfo,_window))!=kCGLNoError)
-     NSLog(@"glXCreateContext failed at %s %d with error %d",__FILE__,__LINE__,error);
+
+    if ((error = CGLCreateContext(NULL, NULL, &_cglContext)) != kCGLNoError)
+     NSLog(@"CGLCreateContext failed at %s %d with error %d", __FILE__ , __LINE__, error);
+    if ((error = CGLContextMakeCurrentAndAttachToWindow(_cglContext, _cglWindow)) != kCGLNoError)
+     NSLog(@"CGLContextMakeCurrentAndAttachToWindow failed with error %d", error);
    }
-   if(_cglContext!=NULL && _caContext==NULL){
-    _caContext=[[CAWindowOpenGLContext alloc] initWithCGLContext:_cglContext];
+   if (_cglContext != nil && _caContext == nil){
+    _caContext = [[CAWindowOpenGLContext alloc] initWithCGLContext:_cglContext];
+    NSLog(@"Create _caContext %p %@", _caContext, _caContext);
    }
-   
 }
 
--(void)openGLFlushBuffer {
+-(void) openGLFlushBuffer {
    CGLError error;
-   
+
    [self createCGLContextObjIfNeeded];
-   if(_caContext==NULL)
+   if (_caContext == nil)
     return;
 
    O2Surface *surface = [_context surface];
-   size_t width=O2ImageGetWidth(surface);
-   size_t height=O2ImageGetHeight(surface);
+   size_t width = O2ImageGetWidth(surface);
+   size_t height = O2ImageGetHeight(surface);
 
-   [_caContext prepareViewportWidth:width height:height];
-   [_caContext renderSurface:surface];
-   
+   [_caContext prepareViewportWidth: width height: height];
+   [_caContext renderSurface: surface];
+
    glFlush();
-   glXSwapBuffers(_display,_window);
+   CGLSwapBuffers(_cglWindow);
 }
 
 -(void)flushBuffer {

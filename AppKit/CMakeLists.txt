@@ -14,6 +14,9 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} \
 
 find_package(X11 REQUIRED)
 find_package(Freetype REQUIRED)
+
+# We do not link to host's libGL (directly),
+# but we still need to include its headers
 find_package(OpenGL REQUIRED)
 
 find_package(PkgConfig REQUIRED)
@@ -297,7 +300,7 @@ set(AppKit_sources
 	X11.subproj/X11SubWindow.m
 	X11.subproj/KTFont_FT.m
 	# O2Font_FT.m is built in Onyx2D
-	# CGLContext.m is built in OpenGL
+	# CGLContext.m no longer used
 	# X11.subproj/NSOpenGLDrawable_X11.m
 	# X11.subproj/O2Context_cairo.m
 	X11.subproj/X11Display.m
@@ -391,14 +394,12 @@ add_framework(AppKit
 		Onyx2D
 		CoreText
 		CoreData
+		OpenGL
+               QuartzCore
+               CoreGraphics
 		# native libraries
 		FreeType
 		fontconfig
 		X11
-		GL
 		jpeg png tiff
-	CIRCULAR_DEPENDENCIES
-		OpenGL
-		QuartzCore
-		CoreGraphics
 )

@@ -17,35 +17,7 @@
     _parent = parent;
     frame = [self convertFrame: frame];
 
-    X11Display *x11Display = (X11Display *) [NSDisplay currentDisplay];
-    _display = x11Display.display;
-
-    /*
-    static const GLint attrs[] = {
-        GLX_RGBA,
-        GLX_DOUBLEBUFFER,
-        GLX_RED_SIZE, 4,
-        GLX_GREEN_SIZE, 4,
-        GLX_BLUE_SIZE, 4,
-        GLX_DEPTH_SIZE, 4,
-        None
-    };
-    int screen = DefaultScreen(_display);
-    // TODO: get rid of glX here
-    XVisualInfo *visualInfo = glXChooseVisual(display, screen, attrs);
-
-    Colormap cmap = XCreateColormap(
-        _display,
-        RootWindow(_display, visualInfo->screen),
-        visualInfo->visual,
-        AllocNone
-    );
-
-    XSetWindowAttributes xattr = {0};
-    xattr.colormap = cmap;
-    xattr.border_pixel = 0;
-    xattr.event_mask = ExposureMask | KeyPressMask | ButtonPressMask | StructureNotifyMask;
-    */
+    _display = [(X11Display *) [NSDisplay currentDisplay] display];
 
     _window = XCreateSimpleWindow(
         _display, [parent windowHandle],

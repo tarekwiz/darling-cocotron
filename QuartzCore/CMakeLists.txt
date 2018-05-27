@@ -77,9 +77,6 @@ add_framework(QuartzCore
 		CoreFoundation
 		Foundation
 		Onyx2D
-		# native libraries
-		GL
-	CIRCULAR_DEPENDENCIES
 		OpenGL
 		CoreGraphics
 )

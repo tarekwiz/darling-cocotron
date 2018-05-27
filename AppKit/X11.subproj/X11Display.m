@@ -26,6 +26,9 @@
 #import <AppKit/NSFontManager.h>
 #import <AppKit/NSFontTypeface.h>
 #import <AppKit/NSWindow.h>
+
+#import <OpenGL/CGLInternal.h>
+
 #import <fcntl.h>
 #import <fontconfig/fontconfig.h>
 #import <X11/Xutil.h>
@@ -94,6 +97,8 @@ static void socketCallback(
     };
     _cfSocket = CFSocketCreateWithNative(kCFAllocatorDefault, _fileDescriptor, kCFSocketReadCallBack, socketCallback, &context);
     _source = CFSocketCreateRunLoopSource(kCFAllocatorDefault, _cfSocket, 0);
+
+    CGLRegisterNativeDisplay(_display);
 #endif
 
     _windowsByID=[NSMutableDictionary new];

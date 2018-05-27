@@ -10,7 +10,7 @@
 #import <Onyx2D/O2Geometry.h>
 #import <X11/Xlib.h>
 #import <GL/glx.h>
-#import <OpenGL/OpenGL.h>
+#import <OpenGL/CGLInternal.h>
 
 @class O2Context_cairo, X11Display, CAWindowOpenGLContext;
 
@@ -20,6 +20,7 @@
     XVisualInfo *_visualInfo;
     Window _window;
     CGLContextObj _cglContext;
+    CGLWindowRef _cglWindow;
     CAWindowOpenGLContext *_caContext;
 
     id _delegate;

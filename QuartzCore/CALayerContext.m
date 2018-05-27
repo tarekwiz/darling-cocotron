@@ -32,11 +32,12 @@
    GLint backingOrigin[2]={rect.origin.x,rect.origin.y};
    GLint backingSize[2]={width,height};
 
-   CGLSetParameter(_glContext,kCGLCPSurfaceBackingOrigin,backingOrigin);
-   CGLSetParameter(_glContext,kCGLCPSurfaceBackingSize,backingSize);
+   // FIXME: convert to CGSubWindow
+   //CGLSetParameter(_glContext,kCGLCPSurfaceBackingOrigin,backingOrigin);
+   //CGLSetParameter(_glContext,kCGLCPSurfaceBackingSize,backingSize);
    
    GLint opacity=0;
-   CGLSetParameter(_glContext,kCGLCPSurfaceOpacity,&opacity);
+   //CGLSetParameter(_glContext,kCGLCPSurfaceOpacity,&opacity);
 
    _renderer=[[CARenderer rendererWithCGLContext:_glContext options:nil] retain];
       
@@ -58,8 +59,8 @@
    GLint backingOrigin[2]={rect.origin.x,rect.origin.y};
    GLint backingSize[2]={width,height};
 
-   CGLSetParameter(_glContext,kCGLCPSurfaceBackingOrigin,backingOrigin);
-   CGLSetParameter(_glContext,kCGLCPSurfaceBackingSize,backingSize);
+   // CGLSetParameter(_glContext,kCGLCPSurfaceBackingOrigin,backingOrigin);
+   // CGLSetParameter(_glContext,kCGLCPSurfaceBackingSize,backingSize);
 }
 
 -(void)setLayer:(CALayer *)layer {
