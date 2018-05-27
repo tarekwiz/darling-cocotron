@@ -266,7 +266,7 @@ set(AppKit_sources
 	NSOpenGL/NSOpenGLView.m
 	NSOpenGL/NSOpenGLPixelBuffer.m
 	NSOpenGL/NSOpenGLPixelFormat.m
-	NSOpenGL/NSOpenGLDrawable.m
+	# NSOpenGL/NSOpenGLDrawable.m
 	NSOpenGL/NSOpenGLContext.m
 
 	NSPopUpButtonCell.m
@@ -298,7 +298,7 @@ set(AppKit_sources
 	X11.subproj/KTFont_FT.m
 	# O2Font_FT.m is built in Onyx2D
 	# CGLContext.m is built in OpenGL
-	X11.subproj/NSOpenGLDrawable_X11.m
+	# X11.subproj/NSOpenGLDrawable_X11.m
 	# X11.subproj/O2Context_cairo.m
 	X11.subproj/X11Display.m
 	X11.subproj/O2Context_builtin_FT.m
