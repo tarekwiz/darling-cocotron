@@ -25,8 +25,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 +(void)initialize
 {
-	[self setKeys:[NSArray arrayWithObjects:@"color", @"something", nil]
- triggerChangeNotificationsForDependentKey:@"value"];
+    // FIXME: need [NSObject setKeys:triggerChangeNotificationsForDependentKey:]
+
+    // [self setKeys:[NSArray arrayWithObjects:@"color", @"something", nil]
+    //   triggerChangeNotificationsForDependentKey:@"value"];
 }
 
 -(id)_replacementKeyPathForBinding:(id)binding
