@@ -28,6 +28,7 @@
 
     NSMutableDictionary *_deviceDictionary;
     O2Rect _frame;
+    unsigned _styleMask;
     BOOL _mapped;
 }
 + (void)removeDecorationForWindow:(Window)w onDisplay:(Display *)dpy;

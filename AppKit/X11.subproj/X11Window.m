@@ -56,6 +56,7 @@ void CGNativeBorderFrameWidthsForStyle(unsigned styleMask,CGFloat *top,CGFloat *
 
 -initWithFrame:(O2Rect)frame styleMask:(unsigned)styleMask isPanel:(BOOL)isPanel backingType:(NSUInteger)backingType {
    _level=kCGNormalWindowLevel;
+   _styleMask = styleMask;
    _backingType=backingType;
    _deviceDictionary=[NSMutableDictionary new];
    _display=[(X11Display*)[NSDisplay currentDisplay] display];
@@ -121,6 +122,14 @@ void CGNativeBorderFrameWidthsForStyle(unsigned styleMask,CGFloat *top,CGFloat *
    [_context release];
    [_deviceDictionary release];
    [super dealloc];
+}
+
+- (unsigned) styleMask {
+    return _styleMask;
+}
+
+- (void) setStyleMask: (unsigned) mask {
+    _styleMask = mask;
 }
 
 +(void)removeDecorationForWindow:(Window)w onDisplay:(Display*)dpy
