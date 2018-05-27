@@ -59,7 +59,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
      _cellClass=[NSCell class];
     }
     _prototype=[[keyed decodeObjectForKey:@"NSProtoCell"] retain];
-    _cells=[[NSMutableArray new] initWithArray:[keyed decodeObjectForKey:@"NSCells"]];
+    _cells=[[NSMutableArray alloc] initWithArray:[keyed decodeObjectForKey:@"NSCells"]];
     id selectedCell=[keyed decodeObjectForKey:@"NSSelectedCell"];
     if ((_selectedIndex=[_cells indexOfObjectIdenticalTo:selectedCell]) != NSNotFound)
       [self selectCell:selectedCell];
