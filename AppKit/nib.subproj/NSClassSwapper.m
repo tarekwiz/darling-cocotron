@@ -13,15 +13,34 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 @implementation NSClassSwapper
 
-// The simplest way to do the replacement accurately
-+allocWithKeyedUnarchiver:(NSKeyedUnarchiver *)keyed {
-   NSString *className=[keyed decodeObjectForKey:@"NSClassName"];
-   Class     class=NSClassFromString(className);
-   
-   if(class==Nil)
-    [NSException raise:NSInvalidArgumentException format:@"Unable to find class %@",className];
-    
-   return [class alloc];
+// TODO: replace the cell for the object too
+
+- (id) initWithCoder: (NSCoder *) coder {
+    _className = [[coder decodeObjectForKey: @"NSClassName"] retain];
+    _originalClassName = [[coder decodeObjectForKey: @"NSOriginalClassName"] retain];
+
+    Class class = NSClassFromString(_className);
+
+    if (class == Nil) {
+        [NSException raise: NSInvalidArgumentException
+                    format: @"NSClassSwapper is unable to find class %@", _className];
+    }
+
+    _object = [[class alloc] initWithCoder: coder];
+
+    // Retain the object before releasing self and save it to a variable, because
+    // self is likely getting deallocated here, and we have to return an owned reference.
+    id res = [_object retain];
+
+    [self release];
+    return res;
+}
+
+- (void) dealloc {
+    [_className release];
+    [_originalClassName release];
+    [_object release];
+    [super dealloc];
 }
 
 @end
