@@ -47,7 +47,7 @@ static inline void _clearCurrentContext(){
         // Cocoa's NSOpenGLContext can withstand a double init and I know of at least one app that does it
         // Maybe Cocoa just leaks, we don't
         [_pixelFormat release];
-        _pixelFormat==nil;
+        _pixelFormat=nil;
         CGLReleaseContext(_glContext);
         _glContext=NULL;
     }
