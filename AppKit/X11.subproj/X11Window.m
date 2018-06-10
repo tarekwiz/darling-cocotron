@@ -267,7 +267,7 @@ void CGNativeBorderFrameWidthsForStyle(unsigned styleMask,CGFloat *top,CGFloat *
    _mapped=NO;
 }
 
--(void)placeAboveWindow:(int)otherNumber {
+-(void)placeAboveWindow:(NSInteger)otherNumber {
    X11Window *other=[X11Window windowWithWindowNumber:otherNumber];
    [self ensureMapped];
 
@@ -280,7 +280,7 @@ void CGNativeBorderFrameWidthsForStyle(unsigned styleMask,CGFloat *top,CGFloat *
    }
 }
 
--(void)placeBelowWindow:(int)otherNumber {
+-(void)placeBelowWindow:(NSInteger)otherNumber {
    X11Window *other=[X11Window windowWithWindowNumber:otherNumber];
    [self ensureMapped];
 

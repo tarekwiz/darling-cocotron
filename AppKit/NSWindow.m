@@ -1346,7 +1346,7 @@ NSString * const NSWindowDidAnimateNotification=@"NSWindowDidAnimateNotification
     return _drawers;
 }
 
--(int)windowNumber {
+-(NSInteger)windowNumber {
    return [[self platformWindow] windowNumber];
 }
 

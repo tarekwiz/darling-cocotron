@@ -61,7 +61,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    return [[[NSEvent_keyboard alloc] initWithType:type location:location modifierFlags:modifierFlags window:window characters:characters charactersIgnoringModifiers:charactersIgnoringModifiers isARepeat:isARepeat keyCode:keyCode] autorelease];
 }
 
-+(NSEvent *)keyEventWithType:(NSEventType)type location:(NSPoint)location modifierFlags:(unsigned int)modifierFlags timestamp:(NSTimeInterval)timestamp windowNumber:(int)windowNumber context:(NSGraphicsContext *)context characters:(NSString *)characters charactersIgnoringModifiers:(NSString *)charactersIgnoringModifiers isARepeat:(BOOL)isARepeat keyCode:(unsigned short)keyCode {   
++(NSEvent *)keyEventWithType:(NSEventType)type location:(NSPoint)location modifierFlags:(unsigned int)modifierFlags timestamp:(NSTimeInterval)timestamp windowNumber:(NSInteger)windowNumber context:(NSGraphicsContext *)context characters:(NSString *)characters charactersIgnoringModifiers:(NSString *)charactersIgnoringModifiers isARepeat:(BOOL)isARepeat keyCode:(unsigned short)keyCode {   
    return [[[NSEvent_keyboard alloc] initWithType:type location:location modifierFlags:modifierFlags window:[NSApp windowWithWindowNumber:windowNumber] characters:characters charactersIgnoringModifiers:charactersIgnoringModifiers isARepeat:isARepeat keyCode:keyCode] autorelease];
 }
 
@@ -123,7 +123,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 
 -(NSString *)description {
-    return [NSString stringWithFormat:@"<NSEvent: type=%d loc=(%f,%f) time=%f flags=0x%X win=%p winNum=%d",[self type], [self locationInWindow].x, [self locationInWindow].y, [self timestamp], [self modifierFlags], [self window], [self windowNumber]];
+    return [NSString stringWithFormat:@"<NSEvent: type=%d loc=(%f,%f) time=%f flags=0x%X win=%p winNum=%ld",[self type], [self locationInWindow].x, [self locationInWindow].y, [self timestamp], [self modifierFlags], [self window], [self windowNumber]];
 }
 
 

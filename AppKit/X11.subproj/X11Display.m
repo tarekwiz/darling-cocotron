@@ -422,7 +422,7 @@ NSArray *CGSOrderedWindowNumbers() {
      id event=[NSEvent keyEventWithType:ev->type == KeyPress ? NSKeyDown : NSKeyUp location:pos
                               modifierFlags:modifierFlags
                                   timestamp:0.0 
-                               windowNumber:(NSInteger)delegate
+                               windowNumber:[delegate windowNumber]
                                     context:nil
                                  characters:str 
                 charactersIgnoringModifiers:strIg

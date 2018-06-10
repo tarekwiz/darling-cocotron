@@ -360,7 +360,7 @@ APPKIT_EXPORT NSString *const NSWindowDidEndLiveResizeNotification;
 - (id)windowController;
 - (NSArray *)drawers;
 
-- (int)windowNumber;
+- (NSInteger)windowNumber;
 - (int)gState;
 - (NSScreen *)screen;
 - (NSScreen *)deepestScreen;

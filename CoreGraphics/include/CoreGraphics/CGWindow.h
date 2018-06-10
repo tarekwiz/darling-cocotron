@@ -47,12 +47,12 @@ typedef enum {
 - (void)hideWindow;
 - (void)showWindowWithoutActivation;
 
-+ windowWithWindowNumber:(int)windowNumber;
++ windowWithWindowNumber:(NSInteger)windowNumber;
 
-- (int)windowNumber;
+- (NSInteger)windowNumber;
 
-- (void)placeAboveWindow:(int)otherNumber;
-- (void)placeBelowWindow:(int)otherNumber;
+- (void)placeAboveWindow:(NSInteger)otherNumber;
+- (void)placeBelowWindow:(NSInteger)otherNumber;
 
 - (void)makeKey;
 - (void)makeMain;

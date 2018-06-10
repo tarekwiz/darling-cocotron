@@ -87,19 +87,19 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 
 // these suck
-+windowWithWindowNumber:(int)windowNumber {
++windowWithWindowNumber:(NSInteger)windowNumber {
    return (id)windowNumber;
 }
 
--(int)windowNumber {
-   return (int)self;
+-(NSInteger)windowNumber {
+   return (NSInteger)self;
 }
 
--(void)placeAboveWindow:(int)other {
+-(void)placeAboveWindow:(NSInteger)other {
    O2InvalidAbstractInvocation();
 }
 
--(void)placeBelowWindow:(int)other {
+-(void)placeBelowWindow:(NSInteger)other {
    O2InvalidAbstractInvocation();
 }
 
