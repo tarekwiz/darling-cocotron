@@ -380,11 +380,30 @@ set_source_files_properties(${AppKit_sources} LANGUAGE C)
 set(DYLIB_COMPAT_VERSION "45.0.0")
 set(DYLIB_CURRENT_VERSION "1499.11.0")
 
+set(AppKit_resources
+	Info.plist Info.plist
+
+	StandardKeyBindings.keyBindings NSKeyboardBinding/StandardKeyBindings.keybindings
+
+	NSColorPickerSlidersIcon.png NSColorPicker.subproj/NSColorPickerSlidersIcon.png
+	NSColorWheel.png NSColorPicker.subproj/NSColorWheel.png
+	NSColorPickerListIcon.png NSColorPicker.subproj/NSColorPickerListIcon.png
+	NSColorPickerWheelIcon.png NSColorPicker.subproj/NSColorPickerWheelIcon.png
+
+	en.lproj/NSColorPickerWheel.nib NSColorPicker.subproj/en.lproj/NSColorPickerWheel.nib/keyedobjects.nib
+	en.lproj/NSColorPickerColorList.nib NSColorPicker.subproj/en.lproj/NSColorPickerColorList.nib/keyedobjects.nib
+	en.lproj/NSColorPickerSliders.nib NSColorPicker.subproj/en.lproj/NSColorPickerSliders.nib/keyedobjects.nib
+
+	en.lproj/NSColorPanel.nib en.lproj/NSColorPanel.nib/keyedobjects.nib
+)
+
 add_framework(AppKit
 	FAT
 	CURRENT_VERSION
 	SOURCES
 		${AppKit_sources}
+	RESOURCES
+		${AppKit_resources}
 	VERSION "C"
 	DEPENDENCIES
 		objc
