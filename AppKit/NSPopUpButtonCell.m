@@ -327,7 +327,14 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 -(NSRect)_arrowRectForRect:(NSRect)frame
 {
-	NSRect result = NSZeroRect;
+	NSRect result;
+	// For no arrow or no arrow image, return a zero-sized
+	// rect positioned on the right edge of the frame.
+	result.origin.x = NSMaxX(frame);
+	result.origin.y = NSMaxY(frame);
+	result.size.width = 0;
+	result.size.height = frame.size.height;
+
 	if( _arrowPosition != NSPopUpNoArrow ) {
 		NSImage * arrowImage = ( _arrowPosition != NSPopUpNoArrow ) ? [self arrowImage] : NULL;
 		
