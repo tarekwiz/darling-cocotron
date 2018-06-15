@@ -266,7 +266,6 @@ NSString *_NSColorWellDidBecomeExclusiveNotification=@"_NSColorWellDidBecomeExcl
 				[self deactivate];
 			else
 				[self activate: YES];
-			wasActive = !wasActive;
 		}
 		
 		BOOL shouldStartDrag = NO;
@@ -282,15 +281,15 @@ NSString *_NSColorWellDidBecomeExclusiveNotification=@"_NSColorWellDidBecomeExcl
 					// Toggle the state based on where the cursor is
 					if (mouseInBounds) {
 						if (wasActive) {
-							[self activate: YES];
-						} else {
 							[self deactivate];
+						} else {
+							[self activate: YES];
 						}
 					} else {
 						if (wasActive) {
-							[self deactivate];
-						} else {
 							[self activate: YES];
+						} else {
+							[self deactivate];
 						}
 					}
 				}
