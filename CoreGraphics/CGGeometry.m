@@ -42,8 +42,8 @@ CGRect CGRectIntersection(CGRect rect0, CGRect rect1) {
 
 CGRect CGRectIntegral(CGRect rect) {
 	if (!CGRectIsEmpty(rect)) {
-		float maxX = ceil(CGRectGetMaxX(rect));
-		float maxY = ceil(CGRectGetMaxY(rect));
+		CGFloat maxX = ceil(CGRectGetMaxX(rect));
+		CGFloat maxY = ceil(CGRectGetMaxY(rect));
 		rect.origin.x = floor(rect.origin.x); 
 		rect.origin.y = floor(rect.origin.y);
 		rect.size.width =  maxX - CGRectGetMinX(rect); 
@@ -63,9 +63,9 @@ CGRect CGRectUnion(CGRect a, CGRect b) {
 		return a;
 	}
 	
-	float minX = MIN(CGRectGetMinX(a), CGRectGetMinX(b));
-	float minY = MIN(CGRectGetMinY(a), CGRectGetMinY(b));
-	float maxX = MAX(CGRectGetMaxX(a), CGRectGetMaxX(b));
-	float maxY = MAX(CGRectGetMaxY(a), CGRectGetMaxY(b));
+	CGFloat minX = MIN(CGRectGetMinX(a), CGRectGetMinX(b));
+	CGFloat minY = MIN(CGRectGetMinY(a), CGRectGetMinY(b));
+	CGFloat maxX = MAX(CGRectGetMaxX(a), CGRectGetMaxX(b));
+	CGFloat maxY = MAX(CGRectGetMaxY(a), CGRectGetMaxY(b));
 	return CGRectMake(minX, minY, maxX - minX, maxY - minY);
 }

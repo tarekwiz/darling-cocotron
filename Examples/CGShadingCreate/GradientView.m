@@ -32,10 +32,10 @@
 }
 
 -(void)updatePointFields {
-   [_startXTextField setFloatValue:_startPoint.x];
-   [_startYTextField setFloatValue:_startPoint.y];
-   [_endXTextField setFloatValue:_endPoint.x];
-   [_endYTextField setFloatValue:_endPoint.y];
+   [_startXTextField setDoubleValue:_startPoint.x];
+   [_startYTextField setDoubleValue:_startPoint.y];
+   [_endXTextField setDoubleValue:_endPoint.x];
+   [_endYTextField setDoubleValue:_endPoint.y];
 }
 
 -(void)awakeFromNib {
@@ -43,8 +43,8 @@
    [self updateRadius];
 }
 
-void evaluate(void *info,const float *in, float *output) {
-   float         x=in[0];
+void evaluate(void *info,const CGFloat *in, CGFloat *output) {
+   CGFloat         x=in[0];
    GradientView *self=info;
    int           i;
    
@@ -56,8 +56,8 @@ void evaluate(void *info,const float *in, float *output) {
    CGContextRef  context=[[NSGraphicsContext currentContext] graphicsPort];
    CGFunctionRef function;
    CGShadingRef  shading;
-   float         domain[2]={0,1};
-   float         range[8]={0,1,0,1,0,1,0,1};
+   CGFloat         domain[2]={0,1};
+   CGFloat         range[8]={0,1,0,1,0,1,0,1};
    CGFunctionCallbacks callbacks={0,evaluate,NULL};
    
    [[NSColor whiteColor] set];

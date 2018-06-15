@@ -44,7 +44,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	
     switch ([[typeButton selectedItem] tag]) {
         case NSGrayModeColorPanel: {
-            float gray, alpha;
+            CGFloat gray, alpha;
 			
             color = [color colorUsingColorSpaceName:NSCalibratedWhiteColorSpace];
             [color getWhite:&gray alpha:&alpha];
@@ -55,7 +55,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         }
             
         case NSRGBModeColorPanel: {
-            float red, green, blue, alpha;
+            CGFloat red, green, blue, alpha;
 			
             color = [color colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
             [color getRed:&red green:&green blue:&blue alpha:&alpha];
@@ -71,7 +71,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         }
 			
         case NSCMYKModeColorPanel: {
-            float cyan, magenta, yellow, black, alpha;
+            CGFloat cyan, magenta, yellow, black, alpha;
 			
             color = [color colorUsingColorSpaceName:NSDeviceCMYKColorSpace];
             [color getCyan:&cyan magenta:&magenta yellow:&yellow black:&black alpha:&alpha];
@@ -89,7 +89,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         }
 			
         case NSHSBModeColorPanel: {
-            float hue, saturation, brightness, alpha;
+            CGFloat hue, saturation, brightness, alpha;
 			
             color = [color colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
             [color getHue:&hue saturation:&saturation brightness:&brightness alpha:&alpha];
@@ -175,7 +175,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 -(void)grayscaleConstant:sender {
    int      i=[sender selectedColumn];
-   float    value=i/6.0;
+   CGFloat    value=i/6.0;
    NSColor *color=[NSColor colorWithCalibratedWhite:value alpha:1];
 
     [greyscaleTextField setIntValue:value*100];
@@ -198,9 +198,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    [[rgbTextFieldMatrix cellAtRow:1 column:0] setIntValue:[green intValue]];
    [[rgbTextFieldMatrix cellAtRow:2 column:0] setIntValue:[blue intValue]];
 
-   [[self colorPanel] setColor:[NSColor colorWithCalibratedRed:[red floatValue]/255.0
-                                                                       green:[green floatValue]/255.0
-                                                                        blue:[blue floatValue]/255.0
+   [[self colorPanel] setColor:[NSColor colorWithCalibratedRed:[red doubleValue]/255.0
+                                                                       green:[green doubleValue]/255.0
+                                                                        blue:[blue doubleValue]/255.0
                                                                        alpha:[[self colorPanel] alpha]]];
 }
 
@@ -223,10 +223,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     [_yellowSlider setIntValue:[yellow intValue]];
     [_blackSlider setIntValue:[black intValue]];
 
-    [[self colorPanel] setColor:[NSColor colorWithDeviceCyan:[cyan floatValue]/100.0
-                                                                   magenta:[magenta floatValue]/100.0
-                                                                    yellow:[yellow floatValue]/100.0
-                                                                     black:[black floatValue]/100.0
+    [[self colorPanel] setColor:[NSColor colorWithDeviceCyan:[cyan doubleValue]/100.0
+                                                                   magenta:[magenta doubleValue]/100.0
+                                                                    yellow:[yellow doubleValue]/100.0
+                                                                     black:[black doubleValue]/100.0
                                                                      alpha:[[self colorPanel] alpha]]];
 }
 
@@ -247,9 +247,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     [_saturationSlider setIntValue:[saturation intValue]];
     [_brightnessSlider setIntValue:[brightness intValue]];
 
-    [[self colorPanel] setColor:[NSColor colorWithCalibratedHue:[hue floatValue]/359.0
-                                                                   saturation:[saturation floatValue]/100.0
-                                                                   brightness:[brightness floatValue]/100.0
+    [[self colorPanel] setColor:[NSColor colorWithCalibratedHue:[hue doubleValue]/359.0
+                                                                   saturation:[saturation doubleValue]/100.0
+                                                                   brightness:[brightness doubleValue]/100.0
                                                                         alpha:[[self colorPanel] alpha]]];
 }
 

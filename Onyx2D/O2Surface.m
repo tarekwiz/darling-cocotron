@@ -82,10 +82,10 @@ static O2Float lRGBtoL(O2Float r, O2Float g, O2Float b)
 	return 0.2126f*r + 0.7152f*g + 0.0722f*b;
 }
 
-static void colorToBytesLittle(O2Float color,uint8_t *scanline){
+static void colorToBytesLittle(O2Float32 color,uint8_t *scanline){
    union {
     unsigned char bytes[4];
-    float         f;
+    O2Float32         f;
    } u;
    
    u.f=color;
@@ -122,10 +122,10 @@ static void O2SurfaceWrite_argb32f_to_argb32fLittle(O2Surface *self,int x,int y,
    }
 }
 
-static void colorToBytesBig(O2Float color,uint8_t *scanline){
+static void colorToBytesBig(O2Float32 color,uint8_t *scanline){
    union {
     unsigned char bytes[4];
-    float         f;
+    O2Float32         f;
    } u;
    
    u.f=color;

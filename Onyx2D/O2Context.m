@@ -123,7 +123,7 @@ O2ColorRef O2ContextFillColor(O2ContextRef self) {
    O2ContextSetCMYKFillColor(self,c,m,y,k,alpha);
 }
 
--(void)setAlpha:(float)alpha
+-(void)setAlpha:(O2Float)alpha
 {
 	O2GStateSetAlpha(O2ContextCurrentGState(self), alpha);
 	if ([self supportsGlobalAlpha] == NO) {
