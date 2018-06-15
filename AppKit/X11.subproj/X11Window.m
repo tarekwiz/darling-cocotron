@@ -329,7 +329,6 @@ void CGNativeBorderFrameWidthsForStyle(unsigned styleMask,CGFloat *top,CGFloat *
    }
    if (_cglContext != nil && _caContext == nil){
     _caContext = [[CAWindowOpenGLContext alloc] initWithCGLContext:_cglContext];
-    NSLog(@"Create _caContext %p %@", _caContext, _caContext);
    }
 }
 
