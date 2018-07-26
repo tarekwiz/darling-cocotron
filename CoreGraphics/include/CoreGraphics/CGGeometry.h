@@ -8,6 +8,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 #import <CoreGraphics/CoreGraphicsExport.h>
 #import <CoreFoundation/CFBase.h>
+#import <CoreFoundation/CFDictionary.h>
 #include <stdbool.h>
 
 #include <CoreGraphics/CGBase.h>
@@ -161,3 +162,9 @@ static inline bool CGRectContainsRect(CGRect a, CGRect b) {
         CGRectGetMinY(b) >= CGRectGetMinY(a) &&
         CGRectGetMaxY(b) <= CGRectGetMaxY(a));
 }
+
+CFDictionaryRef CGPointCreateDictionaryRepresentation(CGPoint point);
+
+bool CGPointMakeWithDictionaryRepresentation(CFDictionaryRef dict, CGPoint *point);
+
+

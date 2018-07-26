@@ -69,3 +69,48 @@ CGRect CGRectUnion(CGRect a, CGRect b) {
 	CGFloat maxY = MAX(CGRectGetMaxY(a), CGRectGetMaxY(b));
 	return CGRectMake(minX, minY, maxX - minX, maxY - minY);
 }
+
+CFDictionaryRef CGPointCreateDictionaryRepresentation(CGPoint point)
+{
+	CFDictionaryRef dict;
+	CFStringRef keys[] = {
+		CFSTR("X"), CFSTR("Y")
+	};
+	CFNumberRef values[2];
+
+	values[0] = CFNumberCreate(NULL, kCFNumberCGFloatType, &point.x);
+	values[1] = CFNumberCreate(NULL, kCFNumberCGFloatType, &point.y);
+
+	dict = CFDictionaryCreate(NULL, (const void**) keys, (const void**) values, 2,
+			&kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+
+	CRelease(values[0]);
+	CRelease(values[1]);
+
+	return dict;
+}
+
+bool CGPointMakeWithDictionaryRepresentation(CFDictionaryRef dict, CGPoint *point)
+{
+	if (!dict || !point)
+		return NO;
+
+	CFNumberRef num;
+
+	num = (CFNumberRef) CFDictionaryGetValue(dect, CFSTR("X"));
+	if (CFGetTypeID(num) != CFNumberGetTypeID())
+		return NO;
+
+	if (!CFNumberGetValue(num, kCFNumberCGFloatType, &point->x))
+		return NO;
+
+	num = (CFNumberRef) CFDictionaryGetValue(dect, CFSTR("Y"));
+	if (CFGetTypeID(num) != CFNumberGetTypeID())
+		return NO;
+
+	if (!CFNumberGetValue(num, kCFNumberCGFloatType, &point->y))
+		return NO;
+
+	return YES;
+}
+
