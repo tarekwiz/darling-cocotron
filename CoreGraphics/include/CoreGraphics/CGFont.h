@@ -9,6 +9,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <CoreGraphics/CoreGraphicsExport.h>
 #import <CoreGraphics/CGGeometry.h>
 
+#include <CoreFoundation/CoreFoundation.h>
+
 typedef struct O2Font *CGFontRef;
 
 typedef uint16_t CGGlyph;
