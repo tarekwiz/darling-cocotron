@@ -10,6 +10,36 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <CoreFoundation/CFBase.h>
 #include <stdbool.h>
 
+struct CGPoint {
+    CGFloat x;
+    CGFloat y;
+};
+typedef struct CGPoint CGPoint;
+
+struct CGSize {
+    CGFloat width;
+    CGFloat height;
+};
+typedef struct CGSize CGSize;
+
+#define CGVECTOR_DEFINED 1
+
+struct CGVector {
+    CGFloat dx;
+    CGFloat dy;
+};
+typedef struct CGVector CGVector;
+
+struct CGRect {
+    CGPoint origin;
+    CGSize size;
+};
+typedef struct CGRect CGRect;
+
+typedef CF_ENUM(uint32_t, CGRectEdge) {
+    CGRectMinXEdge, CGRectMinYEdge, CGRectMaxXEdge, CGRectMaxYEdge
+};
+
 COREGRAPHICS_EXPORT const CGRect CGRectZero;
 COREGRAPHICS_EXPORT const CGRect CGRectNull;
 COREGRAPHICS_EXPORT const CGPoint CGPointZero;
