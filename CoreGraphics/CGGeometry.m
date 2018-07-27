@@ -84,8 +84,8 @@ CFDictionaryRef CGPointCreateDictionaryRepresentation(CGPoint point)
 	dict = CFDictionaryCreate(NULL, (const void**) keys, (const void**) values, 2,
 			&kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
 
-	CRelease(values[0]);
-	CRelease(values[1]);
+	CFRelease(values[0]);
+	CFRelease(values[1]);
 
 	return dict;
 }
