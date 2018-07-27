@@ -97,14 +97,14 @@ bool CGPointMakeWithDictionaryRepresentation(CFDictionaryRef dict, CGPoint *poin
 
 	CFNumberRef num;
 
-	num = (CFNumberRef) CFDictionaryGetValue(dect, CFSTR("X"));
+	num = (CFNumberRef) CFDictionaryGetValue(dict, CFSTR("X"));
 	if (CFGetTypeID(num) != CFNumberGetTypeID())
 		return NO;
 
 	if (!CFNumberGetValue(num, kCFNumberCGFloatType, &point->x))
 		return NO;
 
-	num = (CFNumberRef) CFDictionaryGetValue(dect, CFSTR("Y"));
+	num = (CFNumberRef) CFDictionaryGetValue(dict, CFSTR("Y"));
 	if (CFGetTypeID(num) != CFNumberGetTypeID())
 		return NO;
 
