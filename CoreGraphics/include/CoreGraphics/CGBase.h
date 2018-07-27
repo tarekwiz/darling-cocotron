@@ -3,19 +3,20 @@
 
 #include <float.h>
 
-#if defined(__LP64__) && __LP64__
-# define CGFLOAT_TYPE double
-# define CGFLOAT_IS_DOUBLE 1
-# define CGFLOAT_MIN DBL_MIN
-# define CGFLOAT_MAX DBL_MAX
+// Moved over from our CoreFoudnation
+
+#ifdef __LP64__
+typedef double CGFloat;
+#define CGFLOAT_MIN DBL_MIN
+#define CGFLOAT_MAX DBL_MAX
+#define CGFLOAT_SCAN "%lg"
 #else
-# define CGFLOAT_TYPE float
-# define CGFLOAT_IS_DOUBLE 0
-# define CGFLOAT_MIN FLT_MIN
-# define CGFLOAT_MAX FLT_MAX
+typedef float CGFloat;
+#define CGFLOAT_MIN FLT_MIN
+#define CGFLOAT_MAX FLT_MAX
+#define CGFLOAT_SCAN "%g"
 #endif
 
-typedef CGFLOAT_TYPE CGFloat;
 #define CGFLOAT_DEFINED 1
 
 #endif
