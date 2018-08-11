@@ -415,6 +415,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    return [NSColor_CGColor colorWithGray:white alpha:alpha spaceName:NSDeviceWhiteColorSpace];
 }
 
++(NSColor *)colorWithWhite:(CGFloat)white alpha:(CGFloat)alpha {
+    return [self colorWithDeviceWhite:white alpha: alpha];
+}
+
 +(NSColor *)colorWithDeviceRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha {
    return [NSColor_CGColor colorWithRed:red green:green blue:blue alpha:alpha spaceName:NSDeviceRGBColorSpace];
 }
