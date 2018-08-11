@@ -124,6 +124,31 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    [self setNeedsDisplay:YES];
 }
 
+- (NSString *) placeholderString {
+    return [_cell placeholderString];
+}
+
+- (void) setPlaceholderString: (NSString *) placeholderString {
+    [_cell setPlaceholderString: placeholderString];
+}
+
+- (NSAttributedString *) placeholderAttributedString {
+    return [_cell placeholderAttributedString];
+}
+
+- (void) setPlaceholderAttributedString: (NSAttributedString *) placeholderAttributedString {
+    [_cell setPlaceholderAttributedString: placeholderAttributedString];
+}
+
+- (NSInteger) maximumNumberOfLines {
+    // TODO
+    return 0;
+}
+
+- (void) setMaximumNumberOfLines: (NSInteger) maximumNumberOfLines {
+    // TODO
+}
+
 -(BOOL)acceptsFirstResponder {
     return YES;
 }

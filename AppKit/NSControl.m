@@ -169,6 +169,14 @@ static NSMutableDictionary *cellClassDictionary = nil;
    return [_cell formatter];
 }
 
+- (NSLineBreakMode) lineBreakMode {
+    return [_cell lineBreakMode];
+}
+
+- (BOOL) usesSingleLineMode {
+    return [_cell usesSignleLineMode];
+}
+
 -objectValue {
    return [[self selectedCell] objectValue];
 }
@@ -288,6 +296,14 @@ static NSMutableDictionary *cellClassDictionary = nil;
 -(void)setFormatter:(NSFormatter *)formatter {
    [_cell setFormatter:formatter];
    [self setNeedsDisplay:YES];
+}
+
+- (void) setLineBreakMode: (NSLineBreakMode) lineBreakMode {
+    [_cell setLineBreakMode: lineBreakMode];
+}
+
+- (void) setUsesSingleLineMode: (BOOL) flag {
+    [_cell setUsesSingleLineMode: flag];
 }
 
 -(void)setObjectValue:(id <NSCopying>)object {

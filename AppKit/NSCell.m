@@ -269,6 +269,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    return _lineBreakMode;
 }
 
+- (BOOL) usesSingleLineMode {
+    return _usesSingleLineMode;
+}
+
 -(NSWritingDirection)baseWritingDirection {
    return _writingDirection;
 }
@@ -560,6 +564,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 -(void)setLineBreakMode:(NSLineBreakMode)value {
    _lineBreakMode=value;
+}
+
+- (void) setUsesSingleLineMode: (BOOL) flag {
+    _usesSingleLineMode = flag;
 }
 
 -(void)setBaseWritingDirection:(NSWritingDirection)value {

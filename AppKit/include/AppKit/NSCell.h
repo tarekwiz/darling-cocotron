@@ -110,6 +110,7 @@ enum {
     BOOL _allowsMixedState;
     BOOL _sendsActionOnEndEditing;
     BOOL _hasValidObjectValue;
+    BOOL _usesSingleLineMode;
 }
 
 #pragma mark -
@@ -137,6 +138,7 @@ enum {
 - (NSImage *)image;
 - (NSTextAlignment)alignment;
 - (NSLineBreakMode)lineBreakMode;
+- (BOOL)usesSingleLineMode;
 - (NSWritingDirection)baseWritingDirection;
 - (BOOL)wraps;
 - (NSString *)title;
@@ -183,6 +185,7 @@ enum {
 - (void)setImage:(NSImage *)image;
 - (void)setAlignment:(NSTextAlignment)alignment;
 - (void)setLineBreakMode:(NSLineBreakMode)value;
+- (void)setUsesSingleLineMode:(BOOL)flag;
 - (void)setBaseWritingDirection:(NSWritingDirection)value;
 - (void)setWraps:(BOOL)wraps;
 - (void)setTitle:(NSString *)title;

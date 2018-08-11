@@ -43,6 +43,9 @@ APPKIT_EXPORT NSString *const NSControlTextDidEndEditingNotification;
 - (BOOL)isContinuous;
 - (BOOL)refusesFirstResponder;
 - (id)formatter;
+- (NSLineBreakMode)lineBreakMode;
+- (BOOL)usesSingleLineMode;
+
 
 - objectValue;
 - (NSString *)stringValue;
@@ -72,6 +75,8 @@ APPKIT_EXPORT NSString *const NSControlTextDidEndEditingNotification;
 - (void)setContinuous:(BOOL)flag;
 - (void)setRefusesFirstResponder:(BOOL)flag;
 - (void)setFormatter:(NSFormatter *)formatter;
+- (void)setLineBreakMode:(NSLineBreakMode)value;
+- (void)setUsesSingleLineMode:(BOOL)flag;
 
 - (void)setObjectValue:(id<NSCopying>)value;
 - (void)setStringValue:(NSString *)value;

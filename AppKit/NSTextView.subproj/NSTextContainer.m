@@ -28,6 +28,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
        int flags = [coder decodeIntForKey: @"NSTCFlags"];
        _widthTracksTextView = (flags & 1) != 0;
        _heightTracksTextView = (flags & 2) != 0;
+       // TODO: maximumNumberOfLines
    }
    else {
     [NSException raise:NSInvalidArgumentException format:@"-[%@ %s] is not implemented for coder %@",[self class],sel_getName(_cmd),coder];
@@ -40,6 +41,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    _textView=nil;
    _layoutManager=nil;
    _lineFragmentPadding=0;
+   _maximumNumberOfLines = 0;
    _widthTracksTextView=YES;
    _heightTracksTextView=YES;
    return self;
@@ -72,6 +74,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 -(float)lineFragmentPadding {
    return _lineFragmentPadding;
+}
+
+- (NSUInteger) maximumNumberOfLines {
+    return _maximumNumberOfLines;
 }
 
 -(void)setContainerSize:(NSSize)size {
@@ -179,6 +185,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 -(void)setLineFragmentPadding:(float)padding {
    _lineFragmentPadding=padding;
+}
+
+- (void) setMaximumNumberOfLines: (NSUInteger) maximumNumberOfLines {
+    _maximumNumberOfLines = maximumNumberOfLines;
 }
 
 -(BOOL)isSimpleRectangularTextContainer {

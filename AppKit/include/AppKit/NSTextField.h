@@ -24,6 +24,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 - (void)setTextColor:(NSColor *)color;
 - (void)setDrawsBackground:(BOOL)flag;
 
+- (NSInteger) maximumNumberOfLines;
+- (NSString *) placeholderString;
+- (NSAttributedString *) placeholderAttributedString;
+
 - (void)selectText:sender;
 
 - previousText;
