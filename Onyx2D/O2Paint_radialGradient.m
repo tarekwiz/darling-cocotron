@@ -39,26 +39,35 @@ void O2PaintRadialGradient(O2Paint_radialGradient *self,O2Float *g, O2Float *rho
 		return;
 	}
 
+	O2Point gx = O2PointMake(self->m_surfaceToPaintMatrix.a, self->m_surfaceToPaintMatrix.b);
+	O2Point gy = O2PointMake(self->m_surfaceToPaintMatrix.c, self->m_surfaceToPaintMatrix.d);
+
 	O2Float r = self->_endRadius;
-	O2Point c = self->_endPoint;
+	O2Float R = self->_startRadius;
+
+	O2Point O = self->_endPoint;
+
+	O2Point p = O2PointMake(x, y);
+	p = Vector2Subtract(O2PointApplyAffineTransform(p, self->m_surfaceToPaintMatrix), O);
+
 	O2Point f = self->_startPoint;
-	O2Point gx=O2PointMake(self->m_surfaceToPaintMatrix.a, self->m_surfaceToPaintMatrix.b);
-	O2Point gy=O2PointMake(self->m_surfaceToPaintMatrix.c,self->m_surfaceToPaintMatrix.d);
+	f = Vector2Subtract(f, O);
 
-	O2Point fp = Vector2Subtract(f,c);
+	O2Point d = Vector2Subtract(p, f);
+	O2Float dd = Vector2Dot(d, d);
+	O2Float df = Vector2Dot(d, f);
+	O2Float ff = Vector2Dot(f, f);
 
-	O2Float D = -1.0f / (Vector2Dot(fp,fp) - r*r);
-	O2Point p=O2PointMake(x, y);
-	p = Vector2Subtract(O2PointApplyAffineTransform(p,self->m_surfaceToPaintMatrix), c);
-	O2Point d = Vector2Subtract(p,fp);
-	O2Float s = (O2Float)sqrt(r*r*Vector2Dot(d,d) - RI_SQR(p.x*fp.y - p.y*fp.x));
-	*g = (Vector2Dot(fp,d) + s) * D;
-	if(RI_ISNAN(*g))
-		*g = 0.0f;
-        
-	O2Float dgdx = D*Vector2Dot(fp,gx) + (r*r*Vector2Dot(d,gx) - (gx.x*fp.y - gx.y*fp.x)*(p.x*fp.y - p.y*fp.x)) * (D / s);
-	O2Float dgdy = D*Vector2Dot(fp,gy) + (r*r*Vector2Dot(d,gy) - (gy.x*fp.y - gy.y*fp.x)*(p.x*fp.y - p.y*fp.x)) * (D / s);
-	*rho = (O2Float)sqrt(dgdx*dgdx + dgdy*dgdy);
+	O2Float D = -1.0f / (ff - r*r - R*R + 2*r*R);
+	O2Float sp = r*r*dd - 2*r*R*dd + dd*R*R - 2*df*r*R + 2*df*R*R + ff*R*R;
+	O2Float pf = p.x * f.y - p.y * f.x;
+	O2Float s = (O2Float) sqrt(sp - RI_SQR(pf));
+
+	*g = (Vector2Dot(f, d) + R*R - R*r + s) * D;
+
+	O2Float dgdx = D*Vector2Dot(f,gx) + (r*r*Vector2Dot(d,gx) - (gx.x*f.y - gx.y*f.x)*pf) * (D / s);
+	O2Float dgdy = D*Vector2Dot(f,gy) + (r*r*Vector2Dot(d,gy) - (gy.x*f.y - gy.y*f.x)*pf) * (D / s);
+	*rho = (O2Float) sqrt(dgdx*dgdx + dgdy*dgdy);
 	if(RI_ISNAN(*rho))
 		*rho = 0.0f;
 	RI_ASSERT(*rho >= 0.0f);
@@ -122,6 +131,7 @@ ONYX2D_STATIC int radial_span_largb32f_PRE(O2Paint *selfX,int x,int y,O2argb32f 
    [super initWithShading:shading deviceTransform:deviceTransform numberOfSamples:1024];
    _paint_largb8u_PRE=radial_span_largb8u_PRE;
    _paint_largb32f_PRE=radial_span_largb32f_PRE;
+   _startRadius=[shading startRadius];
    _endRadius=[shading endRadius];
 
    return self;

@@ -188,6 +188,25 @@ O2argb32f O2PaintColorRamp(O2Paint_ramp *self,O2Float gradient, O2Float rho,int 
 
 	O2argb32f c=O2argb32fInit(0,0,0,0);
 
+	if (RI_ISNAN(gradient)) {
+		*skip = 1;
+		return c;
+	}
+
+	O2Float gmin = gradient - rho*0.5f;			//filter starting from the gradient point (if starts earlier, radial gradient center will be an average of the first and the last stop, which doesn't look good)
+	O2Float gmax = gradient + rho*0.5f;
+
+	if (gmin < 0.0f && !self->_extendStart) {
+		*skip = 1;
+		return c;
+	}
+	if (gmax > 1.0f && !self->_extendEnd) {
+		*skip = 1;
+		return c;
+	}
+
+	*skip = 0;
+
 	if(rho == 0.0f) {	//filter size is zero or gradient is degenerate
 
 			gradient = RI_CLAMP(gradient, 0.0f, 1.0f);
@@ -209,15 +228,11 @@ O2argb32f O2PaintColorRamp(O2Paint_ramp *self,O2Float gradient, O2Float rho,int 
 		return readStopColor(self->_colorStops, self->_numberOfColorStops-1);
 	}
 
-	O2Float gmin = gradient - rho*0.5f;			//filter starting from the gradient point (if starts earlier, radial gradient center will be an average of the first and the last stop, which doesn't look good)
-	O2Float gmax = gradient + rho*0.5f;
 
     if(gmin<0.0f){
-     *skip=0;
     c=O2argb32fMultiplyByFloat(readStopColor(self->_colorStops, 0), (RI_MIN(gmax, 0.0f) - gmin));
     }
     if(gmax>1.0f){
-     *skip=0;
     c=O2argb32fMultiplyByFloat(readStopColor(self->_colorStops, self->_numberOfColorStops-1) , (gmax - RI_MAX(gmin, 1.0f)));
     }
 
