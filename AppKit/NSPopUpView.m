@@ -196,7 +196,7 @@ static const float kMenuInitialClickThreshold = .3f;
     _pullsDown=pullsDown;
 }
 
--(void)selectItemAtIndex:(int)index {
+-(void)selectItemAtIndex:(NSInteger)index {
     _selectedIndex=index;
     _initialSelectedIndex=index;
 }
@@ -436,7 +436,7 @@ partRect.size.width = __partSize.width;                              \
     // do nothing
 }
 
-- (void)updateSelectedIndex:(int)index
+- (void)updateSelectedIndex:(NSInteger)index
 {
     if(_selectedIndex!=index){
         NSInteger previous=_selectedIndex;
@@ -457,7 +457,7 @@ partRect.size.width = __partSize.width;                              \
  * This method may return NSNotFound when the view positioned outside the initial tracking area due to preferredEdge settings and the user clicks the mouse.
  * The NSPopUpButtonCell code deals with it. It might make sense for this to return the previous value.
  */
--(int)runTrackingWithEvent:(NSEvent *)event {
+-(NSInteger)runTrackingWithEvent:(NSEvent *)event {
 	enum {
         STATE_FIRSTMOUSEDOWN,
         STATE_MOUSEDOWN,
@@ -622,10 +622,10 @@ partRect.size.width = __partSize.width;                              \
 	do
 	{
 		_selectedIndex--;
-	} while( (int)_selectedIndex >= 0 && ( [[items objectAtIndex: _selectedIndex] isHidden] ||
+	} while(_selectedIndex >= 0 && ( [[items objectAtIndex: _selectedIndex] isHidden] ||
                                           [[items objectAtIndex: _selectedIndex] isSeparatorItem] ) );
 	
-    if ((int)_selectedIndex < 0)
+    if (_selectedIndex < 0)
         _selectedIndex = previous;
     
     [self setNeedsDisplay:YES];

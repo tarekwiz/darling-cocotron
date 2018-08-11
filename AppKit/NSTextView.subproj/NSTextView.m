@@ -48,7 +48,7 @@ NSString * const NSTextViewDidChangeSelectionNotification=@"NSTextViewDidChangeS
 NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
 
 @interface NSLayoutManager(NSLayoutManager_visualKeyboardMovement)
-- (NSRange)_softLineRangeForCharacterAtIndex:(unsigned)location;
+- (NSRange)_softLineRangeForCharacterAtIndex:(NSUInteger)location;
 @end
 
 @interface NSTextView(NSTextView_textCompletion)
@@ -1692,7 +1692,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
     [self scrollPoint:rect.origin];
 }
 
--(unsigned)glyphIndexForPoint:(NSPoint)point fractionOfDistanceThroughGlyph:(float *)fraction {
+-(NSUInteger)glyphIndexForPoint:(NSPoint)point fractionOfDistanceThroughGlyph:(float *)fraction {
     point.x-=_textContainerInset.width;
     point.y-=_textContainerInset.height;
     
@@ -2822,7 +2822,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
 -(NSDragOperation)draggingUpdated:(id <NSDraggingInfo>)sender {
     NSPoint   point=[self convertPoint:[sender draggingLocation] fromView:nil];
     float     fraction=0;
-    unsigned  location=[self glyphIndexForPoint:point fractionOfDistanceThroughGlyph:&fraction];
+    NSUInteger location=[self glyphIndexForPoint:point fractionOfDistanceThroughGlyph:&fraction];
     
     if(location==NSNotFound)
         return NO;
@@ -2855,7 +2855,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
     NSPoint   point=[self convertPoint:[sender draggingLocation] fromView:nil];
     NSString *string=[[sender draggingPasteboard] stringForType:NSStringPboardType];
     float     fraction=0;
-    unsigned  location=[self glyphIndexForPoint:point fractionOfDistanceThroughGlyph:&fraction];
+    NSUInteger location=[self glyphIndexForPoint:point fractionOfDistanceThroughGlyph:&fraction];
     
     if(location==NSNotFound)
         return NO;
