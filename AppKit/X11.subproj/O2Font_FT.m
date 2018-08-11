@@ -42,11 +42,35 @@ FT_Library O2FontSharedFreeTypeLibrary(){
    return library;
 }
 
+static void addAppFont(FcConfig *config, NSString *path) {
+    path = [[NSBundle mainBundle] pathForResource: path ofType: nil];
+    if (path == nil) {
+        NSLog(@"Cannot find font %@ in resources", path);
+        return;
+    }
+    BOOL isDirectory;
+    [[NSFileManager defaultManager] fileExistsAtPath: path isDirectory: &isDirectory];
+    if (isDirectory) {
+        FcConfigAppFontAddDir(config, [path UTF8String]);
+    } else {
+        FcConfigAppFontAddFile(config, [path UTF8String]);
+    }
+}
+
 FcConfig *O2FontSharedFontConfig() {
    static FcConfig *fontConfig=NULL;
    
    if(fontConfig==NULL){
     fontConfig=FcInitLoadConfigAndFonts();
+
+    id appFontsPath = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"ATSApplicationFontsPath"];
+    if ([appFontsPath isKindOfClass: [NSString class]]) {
+        addAppFont(fontConfig, appFontsPath);
+    } else if ([appFontsPath isKindOfClass: [NSArray class]]) {
+        for (NSString *path in appFontsPath) {
+            addAppFont(fontConfig, path);
+        }
+    }
    }
    
    return fontConfig;
