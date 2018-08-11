@@ -11,13 +11,14 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <AppKit/NSText.h>
 #import <AppKit/NSCell.h>
 
-@class NSCell, NSFont, NSText, NSTextView;
+@class NSCell, NSFont, NSText, NSTextView, NSControlAuxiliary;
 
 APPKIT_EXPORT NSString *const NSControlTextDidBeginEditingNotification;
 APPKIT_EXPORT NSString *const NSControlTextDidChangeNotification;
 APPKIT_EXPORT NSString *const NSControlTextDidEndEditingNotification;
 
 @interface NSControl : NSView {
+    NSControlAuxiliary *_aux;
     id _cell;
     NSText *_currentEditor;
 }

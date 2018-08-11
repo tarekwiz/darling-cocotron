@@ -7,6 +7,7 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. */
 
 #import <AppKit/NSControl.h>
+#import <AppKit/NSControlAuxiliary.h>
 #import <AppKit/NSFont.h>
 #import <AppKit/NSCell.h>
 #import <AppKit/NSEvent.h>
@@ -33,9 +34,6 @@ static NSMutableDictionary *cellClassDictionary = nil;
 }
 
 +(Class)cellClass {
-    if ([cellClassDictionary objectForKey:[[self class] description]] == nil)
-        [self setCellClass:[NSCell class]];
-
     return [cellClassDictionary objectForKey:[[self class] description]];
 }
 
@@ -53,8 +51,8 @@ static NSMutableDictionary *cellClassDictionary = nil;
 
    if([coder allowsKeyedCoding]){
     NSKeyedUnarchiver *keyed=(NSKeyedUnarchiver *)coder;
-    
-	[self setCell:[keyed decodeObjectForKey:@"NSCell"]];
+    [self setCell:[keyed decodeObjectForKey:@"NSCell"]];
+    _aux = [[NSControlAuxiliary alloc] init];
    }
    else {
     [NSException raise:NSInvalidArgumentException format:@"%@ can not initWithCoder:%@",[self class],[coder class]];
@@ -66,7 +64,12 @@ static NSMutableDictionary *cellClassDictionary = nil;
 -initWithFrame:(NSRect)frame {
    [super initWithFrame:frame];
 // FIX, verify in subclasses
-	[self setCell:[[[[[self class] cellClass] alloc] init] autorelease]];
+    _aux = [[NSControlAuxiliary alloc] init];
+    Class cellClass = [[self class] cellClass];
+    if (cellClass != nil) {
+        NSCell *cell = [[[cellClass alloc] init] autorelease];
+        [self setCell: cell];
+    }
    return self;
 }
 
@@ -74,7 +77,7 @@ static NSMutableDictionary *cellClassDictionary = nil;
 
 	// Don't do anything with the cell until we've cleared the bindings!
 	[self _unbindAllBindings];
-	
+   [_aux release];
    [_cell release];
    [super dealloc];
 }
@@ -83,12 +86,30 @@ static NSMutableDictionary *cellClassDictionary = nil;
    return _cell;
 }
 
+- (BOOL) _shouldDelegateTargetActionForSelector: (SEL) selector {
+    if (_cell == nil) {
+        return NO;
+    }
+    IMP baseImp = class_getMethodImplementation([NSCell class], selector);
+    IMP cellImp = class_getMethodImplementation([_cell class], selector);
+
+    return baseImp == nil || cellImp != baseImp;
+}
+
 -target {
-   return [_cell target];
+    if ([self _shouldDelegateTargetActionForSelector: _cmd]) {
+        return [_cell target];
+    } else {
+        return [_aux target];
+    }
 }
 
 -(SEL)action {
-   return [_cell action];
+    if ([self _shouldDelegateTargetActionForSelector: _cmd]) {
+        return [_cell action];
+    } else {
+        return [_aux action];
+    }
 }
 
 -(int)tag {
@@ -191,11 +212,19 @@ static NSMutableDictionary *cellClassDictionary = nil;
 }
 
 -(void)setTarget:target {
-   [_cell setTarget:target];
+    if ([self _shouldDelegateTargetActionForSelector: _cmd]) {
+        [_cell setTarget: target];
+    } else {
+        [_aux setTarget: target];
+    }
 }
 
 -(void)setAction:(SEL)action {
-   [_cell setAction:action];
+    if ([self _shouldDelegateTargetActionForSelector: _cmd]) {
+        [_cell setAction: action];
+    } else {
+        [_aux setAction: action];
+    }
 }
 
 -(void)setTag:(int)tag {

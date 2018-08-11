@@ -214,6 +214,7 @@ set(AppKit_sources
 	NSTokenFieldCell.m
 	NSBrowserCell.m
 	NSControl.m
+	NSControlAuxiliary.m
 	NSViewController.m
 
 	NSTextView.subproj/NSTextView.m
