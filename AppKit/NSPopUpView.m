@@ -464,7 +464,7 @@ partRect.size.width = __partSize.width;                              \
         STATE_MOUSEUP,
         STATE_EXIT
     } state=STATE_FIRSTMOUSEDOWN;
-    NSPoint firstLocation,point=[NSEvent mouseLocation];
+    NSPoint firstLocation,point=[event locationInWindow];
     NSInteger initialSelectedIndex = _selectedIndex;
     firstLocation = point;
     
