@@ -187,6 +187,11 @@ NSString * const NSWorkspaceRecycleOperation=@"NSWorkspaceRecycleOperation";
    return 0;
 }
 
+-(NSArray *)runningApplications {
+   // NSInvalidAbstractInvocation();
+   return @[];
+}
+
 -(BOOL)launchApplication:(NSString *)application {
    NSInvalidAbstractInvocation();
    return 0;

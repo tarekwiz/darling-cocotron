@@ -65,6 +65,7 @@ APPKIT_EXPORT NSString *const NSWorkspaceRecycleOperation;
 - (NSString *)absolutePathForAppBundleWithIdentifier:(NSString *)identifier;
 - (NSString *)pathForApplication:(NSString *)application;
 - (NSArray *)launchedApplications;
+- (NSArray *)runningApplications;
 - (BOOL)launchApplication:(NSString *)application;
 - (BOOL)launchApplication:(NSString *)application showIcon:(BOOL)showIcon autolaunch:(BOOL)autolaunch;
 
