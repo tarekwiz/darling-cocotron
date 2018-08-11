@@ -65,4 +65,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     [cell setColor:[_pickedColorList colorWithKey:[[_pickedColorList allKeys] objectAtIndex:row]]];
 }
 
+- (void) setColor: (NSColor *) color {
+}
+
 @end
