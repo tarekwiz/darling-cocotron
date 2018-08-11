@@ -43,8 +43,8 @@ const NSString *kO2PDFContextTitle;
 - (void)appendFormat:(NSString *)format, ...;
 - (void)appendPDFStringWithBytes:(const void *)bytes length:(unsigned)length;
 
-- (O2PDFObject *)referenceForFontWithName:(NSString *)name size:(float)size;
-- (void)setReference:(O2PDFObject *)reference forFontWithName:(NSString *)name size:(float)size;
+- (O2PDFObject *)referenceForFontWithName:(NSString *)name size:(O2Float)size;
+- (void)setReference:(O2PDFObject *)reference forFontWithName:(NSString *)name size:(O2Float)size;
 - (O2PDFObject *)referenceForObject:(O2PDFObject *)object;
 
 - (void)encodePDFObject:(O2PDFObject *)object;

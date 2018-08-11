@@ -75,7 +75,7 @@ typedef enum {
 
 - (NSCharacterSet *)coveredCharacterSet;
 
-- (float)nativeSizeForSize:(float)size;
+- (O2Float)nativeSizeForSize:(O2Float)size;
 
 - (void)fetchAdvances;
 

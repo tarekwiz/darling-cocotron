@@ -396,7 +396,7 @@ NSString *O2MacRomanGlyphNames[256]={
    return [[O2Encoding alloc] initWithGlyphs:glyphs unicode:unicode];
 }
 
--(float)nativeSizeForSize:(float)size
+-(O2Float)nativeSizeForSize:(O2Float)size
 {
     return size;
 }
