@@ -26,7 +26,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                     format: @"NSClassSwapper is unable to find class %@", _className];
     }
 
-    _object = [[class alloc] initWithCoder: coder];
+    _object = [class alloc];
+    if ([_object respondsToSelector: @selector(initWithCoder:)]) {
+        _object = [_object initWithCoder: coder];
+    } else {
+        _object = [_object init];
+    }
 
     // Retain the object before releasing self and save it to a variable, because
     // self is likely getting deallocated here, and we have to return an owned reference.
