@@ -1326,7 +1326,9 @@ standardAboutPanel] retain];
 
 
 int NSApplicationMain(int argc, const char *argv[]) {
+#ifndef DARLING
     __NSInitializeProcess(argc, argv);
+#endif
 
     NSAutoreleasePool *pool=[NSAutoreleasePool new];
     NSBundle *bundle=[NSBundle mainBundle];
