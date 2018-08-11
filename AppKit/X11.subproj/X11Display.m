@@ -338,8 +338,14 @@ static void socketCallback(
 }
 
 -(NSPoint)mouseLocation {
-   NSUnimplementedMethod();
-   return NSMakePoint(0,0);
+    Window child, root = DefaultRootWindow(_display);
+    int root_x, root_y;
+    int win_x, win_y;
+    unsigned int mask;
+
+    XQueryPointer(_display, root, &root, &child, &root_x, &root_y, &win_x, &win_y, &mask);
+    int height = DisplayHeight(_display, DefaultScreen(_display));
+    return NSMakePoint(root_x, height - root_y);
 }
 
 -(void)setWindow:(id)window forID:(XID)i
