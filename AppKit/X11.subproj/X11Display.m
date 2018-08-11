@@ -70,6 +70,7 @@ static void socketCallback(
     }
     
     if(_display==NULL) {
+     NSLog(@"Failed to connect to an X11 display");
      [self dealloc];
      return nil;
     }
