@@ -52,7 +52,6 @@ static void applyCoverageToSpan_lRGBA8888_PRE(O2argb8u *dst,unsigned char *cover
 
 
 static void drawFreeTypeBitmap(O2Context_builtin_FT *self,O2Surface *surface,FT_Bitmap *bitmap,int x,int y,O2Paint *paint){
-// FIXME: clipping
    int            width=bitmap->width;
    int            row,height=bitmap->rows;
    O2argb8u      *dstBuffer=__builtin_alloca(width*sizeof(O2argb8u));
@@ -63,7 +62,13 @@ static void drawFreeTypeBitmap(O2Context_builtin_FT *self,O2Surface *surface,FT_
    int        length=width;
     O2argb8u *dst=dstBuffer;
     O2argb8u *src=srcBuffer;
-    
+
+    // FIXME: apply horizontal clipping too
+    if (y < self->_vpy || y >= self->_vpy + self->_vpheight) {
+        coverage += length;
+        continue;
+    }
+
     O2argb8u *direct=surface->_read_argb8u(surface,x,y,dst,length);
 
     if(direct!=NULL)
