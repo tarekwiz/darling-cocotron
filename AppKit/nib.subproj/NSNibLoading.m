@@ -80,5 +80,12 @@
 	return result;
 }
 
+- (BOOL) loadNibNamed: (NSString *) name owner: (id) owner topLevelObjects: (NSArray **) topLevelObjects {
+    NSNib *nib = [[NSNib alloc] initWithNibNamed: name bundle: self];
+    BOOL res = [nib instantiateNibWithOwner: owner topLevelObjects: topLevelObjects];
+    [nib release];
+    return res;
+}
+
 @end
 
