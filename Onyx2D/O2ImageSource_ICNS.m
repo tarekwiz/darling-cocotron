@@ -604,10 +604,6 @@ static uint32_t nextUnsigned32(O2ImageSource_ICNS *self) {
    return [_images count];
 }
 
--(CFDictionaryRef)copyPropertiesAtIndex:(unsigned)index options:(CFDictionaryRef)options {
-   return nil;
-}
-
 -(O2Image *)createImageAtIndex:(unsigned)index options:(NSDictionary *)options {
    [self parseIfNeeded];
    
