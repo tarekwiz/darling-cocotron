@@ -385,6 +385,39 @@ set(AppKit_resources
 
 	StandardKeyBindings.keyBindings NSKeyboardBinding/StandardKeyBindings.keybindings
 
+	NSRulerMarkerTab.tiff NSRulerMarkerTab.tiff
+	NSSplitViewVDimple.tiff NSSplitViewVDimple.tiff
+	NSBrowserCellArrow.tiff NSBrowserCellArrow.tiff
+	NSPopUpButtonCellPopUp.tiff NSPopUpButtonCellPopUp.tiff
+	NSSplitViewHDimple.tiff NSSplitViewHDimple.tiff
+	NSHighlightedBrowserCellArrow.tiff NSHighlightedBrowserCellArrow.tiff
+	NSAlertPanelExclamation.tiff NSAlertPanelExclamation.tiff
+	NSSwitch.tiff NSSwitch.tiff
+	NSHighlightedRadioButton.tiff NSHighlightedRadioButton.tiff
+	NSComboBoxCellDown.tiff NSComboBoxCellDown.tiff
+	NSRadioButton.tiff NSRadioButton.tiff
+	NSHighlightedSwitch.tiff NSHighlightedSwitch.tiff
+	NSPopUpButtonCellPullDown.tiff NSPopUpButtonCellPullDown.tiff
+
+	NSApplicationIcon.tiff NSSystemInfoPanel/NSApplicationIcon.tiff
+
+	NSMenuArrow.tiff NSMenu.subproj/NSMenuArrow.tiff
+	NSMenuViewDoubleRightArrowGray.tiff NSMenu.subproj/NSMenuViewDoubleRightArrowGray.tiff
+	NSMenuViewDoubleRightArrow.tiff NSMenu.subproj/NSMenuViewDoubleRightArrow.tiff
+
+	NSToolbarOverflowArrow.tiff NSToolbar.subproj/NSToolbarOverflowArrow.tiff
+	NSToolbarPrintItem.tiff NSToolbar.subproj/NSToolbarPrintItem.tiff
+	NSToolbarMoreToolbarItems.tiff NSToolbar.subproj/NSToolbarMoreToolbarItems.tiff
+	NSToolbarShowColorsItem.tiff NSToolbar.subproj/NSToolbarShowColorsItem.tiff
+	NSToolbarShowFontsItem.tiff NSToolbar.subproj/NSToolbarShowFontsItem.tiff
+	NSToolbarCustomizeToolbarItem.tiff NSToolbar.subproj/NSToolbarCustomizeToolbarItem.tiff
+
+	NSColorPickerSlidersHSB.tiff NSColorPicker.subproj/NSColorPickerSlidersHSB.tiff
+	NSColorPickerColorList.tiff NSColorPicker.subproj/NSColorPickerColorList.tiff
+	NSColorPickerSlidersCMYK.tiff NSColorPicker.subproj/NSColorPickerSlidersCMYK.tiff
+	NSColorPickerSlidersGray.tiff NSColorPicker.subproj/NSColorPickerSlidersGray.tiff
+	NSColorPickerSlidersRGB.tiff NSColorPicker.subproj/NSColorPickerSlidersRGB.tiff
+
 	NSColorPickerSlidersIcon.png NSColorPicker.subproj/NSColorPickerSlidersIcon.png
 	NSColorWheel.png NSColorPicker.subproj/NSColorWheel.png
 	NSColorPickerListIcon.png NSColorPicker.subproj/NSColorPickerListIcon.png
