@@ -322,8 +322,12 @@ void CGNativeBorderFrameWidthsForStyle(unsigned styleMask,CGFloat *top,CGFloat *
    if (_cglContext==NULL) {
     CGLError error;
 
-    if ((error = CGLCreateContext(NULL, NULL, &_cglContext)) != kCGLNoError)
-     NSLog(@"CGLCreateContext failed at %s %d with error %d", __FILE__ , __LINE__, error);
+    if ((error = CGLCreateContext(NULL, NULL, &_cglContext)) != kCGLNoError) {
+       NSLog(@"CGLCreateContext failed at %s %d with error %d", __FILE__ , __LINE__, error);
+
+       [NSException raise: NSGenericException
+                   format: @"Failed to create GL context, CGL error %d", error];
+    }
     if ((error = CGLContextMakeCurrentAndAttachToWindow(_cglContext, _cglWindow)) != kCGLNoError)
      NSLog(@"CGLContextMakeCurrentAndAttachToWindow failed with error %d", error);
    }
