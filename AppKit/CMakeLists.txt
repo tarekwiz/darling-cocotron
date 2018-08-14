@@ -327,7 +327,7 @@ set(AppKit_sources
 	NSKeyValueBinding/NSCachingBinder.m
 
 	NSPredicateEditorRowTemplate.m
-	NSFileWrapper.m
+	NSFileWrapperExtensions.m
 
 	NSToolbar.subproj/NSToolbarItemGroup.m
 	NSToolbar.subproj/NSToolbarCustomizationView.m
