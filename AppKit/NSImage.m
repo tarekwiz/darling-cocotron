@@ -19,6 +19,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <Foundation/NSKeyedArchiver.h>
 #import <AppKit/NSRaise.h>
 
+NSImageName const NSImageNameApplicationIcon = @"NSApplicationIcon";
+
 // Private class used so the context knows the flipped status of a locked image
 // 10.4 does something like that - probably for more than just getting the flippiness - 10.6 uses some special NSSnapshotBitmapGraphicsContext
 @interface NSImageCacheView : NSView {

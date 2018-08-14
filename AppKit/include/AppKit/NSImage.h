@@ -123,3 +123,9 @@ typedef enum {
 @interface NSBundle (NSImage)
 - (NSString *)pathForImageResource:(NSString *)name;
 @end
+
+typedef NSString* NSImageName;
+
+APPKIT_EXPORT NSImageName const NSImageNameApplicationIcon;
+// TODO: A ton of other defined image names
+

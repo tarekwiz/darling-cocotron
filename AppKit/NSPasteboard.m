@@ -12,6 +12,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 NSString *const NSPasteboardTypeString = @"NSStringPboardType";
 NSString *const NSPasteboardTypePDF = @"NSPDFPboardType";
+NSString *const NSPasteboardTypePNG = @"NSPDFPboardType";
 NSString *const NSPasteboardTypeTIFF = @"NSTIFFPboardType";
 NSString *const NSPasteboardTypeRTF = @"NSRTFPboardType";
 NSString *const NSPasteboardTypeRTFD = @"NSRTFDPboardType";

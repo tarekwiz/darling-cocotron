@@ -49,6 +49,7 @@ NSString * const NSWindowWillCloseNotification=@"NSWindowWillCloseNotification";
 NSString * const NSWindowWillMoveNotification=@"NSWindowWillMoveNotification";
 NSString * const NSWindowWillStartLiveResizeNotification=@"NSWindowWillStartLiveResizeNotification";
 NSString * const NSWindowDidEndLiveResizeNotification=@"NSWindowDidEndLiveResizeNotification";
+NSString * const NSWindowWillBeginSheetNotification=@"NSWindowWillBeginSheetNotification";
 
 NSString * const NSWindowWillAnimateNotification=@"NSWindowWillAnimateNotification";
 NSString * const NSWindowAnimatingNotification=@"NSWindowAnimatingNotification";

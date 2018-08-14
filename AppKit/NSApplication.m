@@ -55,6 +55,8 @@ NSString * const NSApplicationWillTerminateNotification=@"NSApplicationWillTermi
 
 NSString * const NSApplicationDidChangeScreenParametersNotification=@"NSApplicationDidChangeScreenParametersNotification";
 
+const NSAppKitVersion NSAppKitVersionNumber = 1504; // macOS 10.12
+
 @interface NSDocumentController(forward) 
 -(void)_updateRecentDocumentsMenu; 
 @end 
@@ -352,7 +354,7 @@ id NSApp=nil;
    [_applicationIconImage release];
    _applicationIconImage=image;
    
-	[image setName: @"NSApplicationIcon"];
+	[image setName: NSImageNameApplicationIcon];
 }
 
 -(void)setWindowsMenu:(NSMenu *)menu {

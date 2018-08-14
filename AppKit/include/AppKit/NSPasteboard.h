@@ -12,6 +12,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 // New Pasteboard Types (added in 10.6) and interchangeable with the old pasteboard types in Cocotron
 APPKIT_EXPORT NSString *const NSPasteboardTypeString;
 APPKIT_EXPORT NSString *const NSPasteboardTypePDF;
+APPKIT_EXPORT NSString *const NSPasteboardTypePNG;
 APPKIT_EXPORT NSString *const NSPasteboardTypeTIFF;
 APPKIT_EXPORT NSString *const NSPasteboardTypeRTF;
 APPKIT_EXPORT NSString *const NSPasteboardTypeRTFD;

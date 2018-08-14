@@ -36,6 +36,8 @@ APPKIT_EXPORT NSString *const NSApplicationWillTerminateNotification;
 APPKIT_EXPORT NSString *const NSApplicationDidChangeScreenParametersNotification;
 
 APPKIT_EXPORT id NSApp;
+typedef double NSAppKitVersion;
+APPKIT_EXPORT const NSAppKitVersion NSAppKitVersionNumber;
 
 typedef id NSModalSession;
 

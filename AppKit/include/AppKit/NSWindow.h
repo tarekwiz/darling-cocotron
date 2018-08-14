@@ -100,6 +100,7 @@ APPKIT_EXPORT NSString *const NSWindowDidUpdateNotification;
 APPKIT_EXPORT NSString *const NSWindowWillCloseNotification;
 APPKIT_EXPORT NSString *const NSWindowWillStartLiveResizeNotification;
 APPKIT_EXPORT NSString *const NSWindowDidEndLiveResizeNotification;
+APPKIT_EXPORT NSString *const NSWindowWillBeginSheetNotification;
 
 @interface NSWindow : NSResponder {
     NSRect _frame;
