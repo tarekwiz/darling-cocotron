@@ -69,3 +69,19 @@ CGFloat CGColorGetAlpha(CGColorRef self) {
 CGPatternRef CGColorGetPattern(CGColorRef self) {
    return O2ColorGetPattern(self);
 }
+
+CGColorRef CGColorGetConstantColor(CFStringRef colorName) {
+  CGColorRef res = NULL;
+  if ([colorName isEqualToString: kCGColorWhite])
+    res = CGColorCreateGenericGray(1.0, 1.0);
+  if ([colorName isEqualToString: kCGColorBlack])
+    res = CGColorCreateGenericGray(0.0, 1.0);
+  if ([colorName isEqualToString: kCGColorClear])
+    res = CGColorCreateGenericGray(0.0, 0.0);
+
+  return CFAutorelease(res);
+}
+
+const CFStringRef kCGColorWhite = CFSTR("kCGColorWhite");
+const CFStringRef kCGColorBlack = CFSTR("kCGColorBlack");
+const CFStringRef kCGColorClear = CFSTR("kCGColorClear");

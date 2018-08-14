@@ -114,3 +114,83 @@ bool CGPointMakeWithDictionaryRepresentation(CFDictionaryRef dict, CGPoint *poin
 	return YES;
 }
 
+CFDictionaryRef CGSizeCreateDictionaryRepresentation(CGSize size)
+{
+        CFDictionaryRef dict;
+        CFStringRef keys[] = {
+                CFSTR("Width"), CFSTR("Height")
+        };
+	CFNumberRef values[2];
+
+        values[0] = CFNumberCreate(NULL, kCFNumberCGFloatType, &size.width);
+        values[1] = CFNumberCreate(NULL, kCFNumberCGFloatType, &size.height);
+
+        dict = CFDictionaryCreate(NULL, (const void**) keys, (const void**) values, 2,
+                        &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+
+        CFRelease(values[0]);
+        CFRelease(values[1]);
+
+        return dict;
+}
+
+bool CGSizeMakeWithDictionaryRepresentation(CFDictionaryRef dict, CGSize *size)
+{
+        if (!dict || !size)
+                return NO;
+
+        CFNumberRef num;
+
+        num = (CFNumberRef) CFDictionaryGetValue(dict, CFSTR("Width"));
+        if (CFGetTypeID(num) != CFNumberGetTypeID())
+                return NO;
+
+        if (!CFNumberGetValue(num, kCFNumberCGFloatType, &size->width))
+                return NO;
+
+        num = (CFNumberRef) CFDictionaryGetValue(dict, CFSTR("Height"));
+        if (CFGetTypeID(num) != CFNumberGetTypeID())
+                return NO;
+
+        if (!CFNumberGetValue(num, kCFNumberCGFloatType, &size->height))
+                return NO;
+
+        return YES;
+}
+
+CFDictionaryRef CGRectCreateDictionaryRepresentation(CGRect rect)
+{
+        CFDictionaryRef dict;
+        CFStringRef keys[] = {
+                CFSTR("X"), CFSTR("Y"), CFSTR("Width"), CFSTR("Height")
+        };
+	CFNumberRef values[4];
+
+        values[0] = CFNumberCreate(NULL, kCFNumberCGFloatType, &rect.origin.x);
+        values[1] = CFNumberCreate(NULL, kCFNumberCGFloatType, &rect.origin.y);
+        values[2] = CFNumberCreate(NULL, kCFNumberCGFloatType, &rect.size.width);
+        values[3] = CFNumberCreate(NULL, kCFNumberCGFloatType, &rect.size.height);
+
+        dict = CFDictionaryCreate(NULL, (const void**) keys, (const void**) values, 4,
+                        &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+
+        CFRelease(values[0]);
+        CFRelease(values[1]);
+        CFRelease(values[2]);
+        CFRelease(values[3]);
+
+        return dict;
+}
+
+bool CGRectMakeWithDictionaryRepresentation(CFDictionaryRef dict, CGRect *rect)
+{
+        if (!dict || !rect)
+                return NO;
+
+        if (!CGPointMakeWithDictionaryRepresentation(dict, &rect->origin))
+                return NO;
+        if (!CGSizeMakeWithDictionaryRepresentation(dict, &rect->size))
+                return NO;
+
+        return YES;
+}

@@ -164,7 +164,12 @@ static inline bool CGRectContainsRect(CGRect a, CGRect b) {
 }
 
 CFDictionaryRef CGPointCreateDictionaryRepresentation(CGPoint point);
-
 bool CGPointMakeWithDictionaryRepresentation(CFDictionaryRef dict, CGPoint *point);
+
+CFDictionaryRef CGSizeCreateDictionaryRepresentation(CGSize size);
+bool CGSizetMakeWithDictionaryRepresentation(CFDictionaryRef dict, CGSize *size);
+
+CFDictionaryRef CGRectCreateDictionaryRepresentation(CGRect rect);
+bool CGRectMakeWithDictionaryRepresentation(CFDictionaryRef dict, CGRect *rect);
 
 
