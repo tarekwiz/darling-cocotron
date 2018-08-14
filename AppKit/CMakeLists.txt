@@ -115,6 +115,7 @@ set(AppKit_sources
 	NSCursor.m
 	NSFontMetric.m
 	NSPoofAnimation.m
+	NSErrors.m
 
 	nib.subproj/NSButtonImageSource.m
 	nib.subproj/NSNibBindingConnector.m
