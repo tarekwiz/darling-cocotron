@@ -11,8 +11,9 @@
 
 - (void) setClassName: (NSString *)className
 {
+	[className retain];
 	[_menuClass release];
-	_menuClass = [className retain];
+	_menuClass = className;
 }
 
 - (NSString *)className
@@ -22,8 +23,9 @@
 
 - (void) setRealObject: (id)o
 {
+	[o retain];
 	[_realObject release];
-	_realObject = [o retain];
+	_realObject = o;
 }
 
 - (id) realObject
