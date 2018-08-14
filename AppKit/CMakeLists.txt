@@ -128,6 +128,7 @@ set(AppKit_sources
 	nib.subproj/NSNibOutletConnector.m
 	nib.subproj/NSNib.m
 	nib.subproj/NSWindowTemplate.m
+	nib.subproj/NSMenuTemplate.m
 	nib.subproj/NSIBObjectData.m
 	nib.subproj/NSNibLoading.m
 	nib.subproj/NSClassSwapper.m

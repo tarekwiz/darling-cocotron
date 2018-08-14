@@ -14,12 +14,13 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 APPKIT_EXPORT NSString *const NSNibOwner;
 APPKIT_EXPORT NSString *const NSNibTopLevelObjects;
 
-@interface NSNib : NSObject {
+@interface NSNib : NSObject <NSCoding> {
     NSData *_data;
     NSMutableArray *_allObjects;
     NSDictionary *_nameTable;
 }
 
+- initWithCoder:(NSCoder*)coder;
 - initWithContentsOfURL:(NSURL *)url;
 - initWithNibNamed:(NSString *)name bundle:(NSBundle *)bundle;
 

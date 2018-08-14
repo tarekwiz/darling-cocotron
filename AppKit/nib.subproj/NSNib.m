@@ -23,6 +23,36 @@ NSString * const NSNibTopLevelObjects=@"NSNibTopLevelObjects";
 
 @implementation NSNib
 
+-initWithCoder:(NSCoder*)coder
+{
+	if ([coder allowsKeyedCoding])
+	{
+		_data = [[coder decodeObjectForKey: @"NSNibFileData"] retain];
+
+		// TODO: NSNibFileIsKeyed
+		// NSNibFileUseParentBundle
+		// NSNibFileBundleName
+		// NSNibFileImages
+		// NSNibFileSounds
+	}
+	else
+	{
+		NSString* bundleIdentifier;
+		BOOL isKeyed;
+		NSArray *imageBlobs, *soundBlobs;
+		NSArray *images, *sounds;
+
+		[coder decodeValuesOfObjCTypes: "@s@@@@@",
+			&_data, &isKeyed, &bundleIdentifier, &images, &imageBlobs, &sounds, &soundBlobs];
+
+		// TODO
+		[imageBlobs release];
+		[images release];
+		[soundBlobs release];
+		[sounds release];
+	}
+}
+
 -initWithContentsOfFile:(NSString *)path {
 
     NIBDEBUG(@"initWithContentsOfFile: %@", path);

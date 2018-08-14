@@ -45,6 +45,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 - (void)setSupermenu:(NSMenu *)value;
 - (void)setTitle:(NSString *)title;
 - (void)setAutoenablesItems:(BOOL)flag;
+- (void)setMenuChangedMessagesEnabled:(BOOL)flag;
 
 - (void)addItem:(NSMenuItem *)item;
 - (NSMenuItem *)addItemWithTitle:(NSString *)title action:(SEL)action keyEquivalent:(NSString *)keyEquivalent;

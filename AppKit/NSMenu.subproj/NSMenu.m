@@ -46,6 +46,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    [coder encodeBool:!_autoenablesItems forKey:@"NSNoAutoenable"];
 }
 
+- (void)setMenuChangedMessagesEnabled:(BOOL)flag
+{
+	NSLog(@"-[NSMenu setMenuChangedMessagesEnabled not implemented]");
+}
+
 -initWithCoder:(NSCoder *)coder {
    if([coder allowsKeyedCoding]){
     NSKeyedUnarchiver *keyed=(NSKeyedUnarchiver *)coder;
@@ -58,7 +63,82 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     _autoenablesItems=![keyed decodeBoolForKey:@"NSNoAutoenable"];    
    }
    else {
-    [NSException raise:NSInvalidArgumentException format:@"%@ can not initWithCoder:%@",[self class],[coder class]];
+		int version;
+		version = [coder versionForClassName: @"NSMenu"];
+
+		if (version == NSNotFound)
+			version = [coder versionForClassName: @"NSMenuPanel"];
+
+		if (version <= 203)
+		{
+			NSString *title, *name;
+			id matrix;
+			if (version <= 16)
+			{
+				BOOL noAutoEnable;
+
+				[coder decodePoint];
+				[coder decodeValuesOfObjCTypes: "@@@s", &title,
+						&matrix, &name, &noAutoEnable];
+
+				_autoenablesItems = !noAutoEnable;
+			}
+			else if (version <= 40)
+			{
+				char bytes[6];
+
+				[coder decodePoint];
+				[coder decodeArrayOfObjCType: @encode(char) count: 6 at: bytes];
+				_autoenablesItems = !bytes[0];
+
+				[coder decodeValuesOfObjCTypes: "@@@", &title,
+						&matrix, &name];
+			}
+			else
+			{
+				int flag;
+
+				[coder decodePoint];
+				[coder decodeValueOfObjCType: @encode(int)
+																at: &flag];
+				_autoenablesItems = !(flag & 0x40000000);
+				[self setMenuChangedMessagesEnabled: flag & 0x200000];
+
+				[coder decodeValuesOfObjCTypes: "@@@", &title,
+						&matrix, &name];
+			}
+
+			if ([matrix isKindOfClass: [NSMatrix class]])
+			{
+				NSInteger numRows, numColumns;
+				[matrix getNumberOfRows: &numRows columns: &numColumns];
+
+				if (numRows != 0)
+				{
+					NSMenuItem* item = [matrix cellAtRow: 0 column: 0];
+					[self addItem: item];
+				}
+			}
+
+			_title = title;
+			_name = name;
+		}
+		else
+		{
+			int flags;
+
+			[coder decodeValueOfObjCType: @encode(int)
+															at: &flags];
+
+			[coder decodeValuesOfObjCTypes: "@@@", &_title,
+					&_itemArray, &_name];
+
+			_autoenablesItems = !(flags & 0x80000000);
+			// _excludeMarkColumn = flags & 0x80000;
+			// _cmPluginMode = (flags >> 21) & 3;
+			// _invertedCMPluginTypes = (flags >> 23) & 3;
+		}
+
    }
    return self;
 }

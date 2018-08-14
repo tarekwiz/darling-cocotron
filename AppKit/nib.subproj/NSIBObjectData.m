@@ -28,6 +28,7 @@
 #import <Foundation/NSKeyedArchiver.h>
 #import <Foundation/NSKeyedUnarchiver.h>
 #import "NSCustomObject.h"
+#import "NSMenuTemplate.h"
 #import <AppKit/NSNibConnector.h>
 #import <AppKit/NSFontManager.h>
 #import <AppKit/NSNib.h>
@@ -138,10 +139,236 @@
 				}
 			}
 		}
-		return self;
+	}
+	else
+	{
+		NSInteger version = [coder versionForClassName: @"NSIBObjectData"];
+		int count;
+
+		[coder decodeValueOfObjCType: @encode(id)
+				at: &_fileOwner];
+
+		// Decode objectTable key/value pairs
+		[coder decodeValueOfObjCType: @encode(int)
+				at: &count];
+
+		if (version < 16)
+		{
+			// Super legacy support
+			// read version 0
+
+			NSMutableArray* keys = [[NSMutableArray alloc] initWithCapacity: count];
+			NSMutableArray* values = [[NSMutableArray alloc] initWithCapacity: count];
+			NSMutableSet* keySet = [[NSMutableSet alloc] init];
+
+			for (int i = 0; i < count; i++)
+			{
+				NSMenuItem *key;
+				NSObject *value;
+
+				[coder decodeValuesOfObjCTypes: "@@", &key, &value];
+				[keys addObject: key];
+				[values addObject: value];
+				[keySet addObject: key];
+
+				if ([key isKindOfClass: [NSMenuItem class]])
+				{
+					id target = [key target];
+
+					if ([target isKindOfClass: [NSMenuTemplate class]] && ![keySet containsObject: target])
+					{
+						[keys addObject: target];
+						[values addObject: key];
+						[keySet addObject: target];
+					}
+				}
+				[key release];
+				[value release];
+			}
+
+			_objectsKeys = keys;
+			_objectsValues = values;
+			[keySet release];
+
+			// Decode nameTable key/value pairs
+			// Old format uses ordinary strings for values
+			[coder decodeValueOfObjCType: @encode(int) at: &count];
+			keys = [[NSMutableArray alloc] initWithCapacity: count];
+			values = [[NSMutableArray alloc] initWithCapacity: count];
+
+			for (int i = 0; i < count; i++)
+			{
+				NSObject *key;
+				char* string;
+				NSString* nss;
+
+				[coder decodeValuesOfObjCTypes: "@*", &key, &string];
+
+				// The string encoding is a guess
+				nss = [[NSString alloc] initWithBytes: string
+					length: strlen(string)
+					encoding: NSNEXTSTEPStringEncoding];
+
+				[keys addObject: key];
+				[values addObject: nss];
+
+				[nss release];
+				[key release];
+				free(string);
+			}
+			_namesKeys = keys;
+			_namesValues = values;
+
+			// Decode visibleWindows
+			[coder decodeValueOfObjCType: @encode(int) at: &count];
+			keySet = [[NSMutableSet alloc] initWithCapacity: count];
+
+			for (int i = 0; i < count; i++)
+			{
+				NSObject* key;
+
+				[coder decodeValueOfObjCType: @encode(id) at: &key];
+				[keySet addObject: key];
+				[key release];
+			}
+			_visibleWindows = keySet;
+
+			if ([coder versionForClassName: @"List"] == 0)
+			{
+				int unknown;
+				[coder decodeValueOfObjCType: @encode(int) at: &unknown];
+			}
+
+			[coder decodeValueOfObjCType: @encode(int) at: &count];
+
+			NSObject** connections = (NSObject**) malloc(sizeof(NSObject*) * count);
+
+			[coder decodeArrayOfObjCType: @encode(id) count: count at: connections];
+			_connections = [[NSArray alloc] initWithObjects: connections count: count];
+
+			free(connections);
+
+			[coder decodeValueOfObjCType: @encode(id) at: &_fontManager];
+		}
+		else
+		{
+			NSMutableArray* keys = [[NSMutableArray alloc] initWithCapacity: count];
+			NSMutableArray* values = [[NSMutableArray alloc] initWithCapacity: count];
+
+			for (int i = 0; i < count; i++)
+			{
+				NSMenuItem *key;
+				NSObject *value;
+
+				[coder decodeValuesOfObjCTypes: "@@", &key, &value];
+				[keys addObject: key];
+				[values addObject: value];
+
+				[key release];
+				[value release];
+			}
+
+			_objectsKeys = keys;
+			_objectsValues = values;
+
+			// Decode nameTable key/value pairs
+			[coder decodeValueOfObjCType: @encode(int)
+				at: &count];
+
+			keys = [[NSMutableArray alloc] initWithCapacity: count];
+			values = [[NSMutableArray alloc] initWithCapacity: count];
+
+			for (int i = 0; i < count; i++)
+			{
+				NSObject *key, *value;
+				[coder decodeValuesOfObjCTypes: "@@", &key, &value];
+
+				[keys addObject: key];
+				[values addObject: value];
+
+				[key release];
+				[value release];
+			}
+			_namesKeys = keys;
+			_namesValues = values;
+
+			[coder decodeValueOfObjCType: @encode(id)
+									  at:&_visibleWindows];
+			[coder decodeValueOfObjCType: @encode(id)
+									  at:&_connections];
+			[coder decodeValueOfObjCType: @encode(id)
+									  at:&_fontManager];
+
+			// Oid table since version 19
+			if (version > 18)
+			{
+				[coder decodeValueOfObjCType: @encode(int)
+					at: &count];
+
+				keys = [[NSMutableArray alloc] initWithCapacity: count];
+				values = [[NSMutableArray alloc] initWithCapacity: count];
+
+				for (int i = 0; i < count; i++)
+				{
+					NSObject *key;
+					int value;
+
+					[coder decodeValuesOfObjCTypes: "@i", &key, &value];
+					[keys addObject: key];
+					[values addObject: [NSNumber numberWithInt: value]];
+					[key release];
+				}
+
+				unsigned long long nextOid;
+				[coder decodeValueOfObjCType: @encode(unsigned long long)
+					at: &nextOid];
+				_nextOid = nextOid;
+
+				_oidKeys = keys;
+				_oidValues = values;
+			}
+		}
+
+		_classesKeys = [[NSArray alloc] init];
+		_classesValues = [[NSArray alloc] init];
+
+		if (!_oidKeys)
+		{
+			_oidKeys = [[NSMutableArray alloc] init];
+			_oidValues = [[NSMutableArray alloc] init];
+		}
+
+		if (![_oidKeys containsObject: _fileOwner])
+		{
+			[(NSMutableArray*) _oidKeys addObject: _fileOwner];
+			[(NSMutableArray*) _oidValues addObject: [NSNumber numberWithInt: _nextOid++]];
+		}
+
+		for (NSInteger i = 0; i < [_objectsKeys count]; i++)
+		{
+			NSObject *key;
+
+			key = [_objectsKeys objectAtIndex: i];
+			
+			if (![_oidKeys containsObject: key])
+			{
+				[(NSMutableArray*) _oidKeys addObject: key];
+				[(NSMutableArray*) _oidValues addObject: [NSNumber numberWithInt: _nextOid++]];
+			}
+		}
+
+		// enumerate connections
+		for (id conn in _connections)
+		{
+			if (![_oidKeys containsObject: conn])
+			{
+				[(NSMutableArray*) _oidKeys addObject: conn];
+				[(NSMutableArray*) _oidValues addObject: [NSNumber numberWithInt: _nextOid++]];
+			}
+		}
 	}
 	
-	return nil;
+	return self;
 }
 
 -(void)dealloc {
