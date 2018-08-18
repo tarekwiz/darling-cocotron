@@ -367,6 +367,7 @@ static void socketCallback(
 #ifndef DARLING
    [[NSRunLoop currentRunLoop] addInputSource:_inputSource forMode:mode];
 #else
+    [self processPendingEvents];
     CFRunLoopAddSource(CFRunLoopGetCurrent(), _source, (CFStringRef) mode);
 #endif
 
