@@ -30,6 +30,15 @@
 
 @implementation O2Paint_radialGradient
 
+ONYX2D_STATIC_INLINE void quadratic(O2Float a, O2Float hb, O2Float c, O2Float *x1, O2Float *x2) {
+	// Solve a*x*x + 2*hb*x + c = 0 numerically, trying not to lose precision
+	// for cases when a is close to 0.
+	O2Float qD = hb*hb - a * c;
+	O2Float d = (O2Float) sqrt(qD);
+	*x1 = c / (-hb + d);
+	*x2 = c / (-hb - d);
+}
+
 void O2PaintRadialGradient(O2Paint_radialGradient *self,O2Float *g, O2Float *rho, O2Float x, O2Float y) {
 	RI_ASSERT(self);
 	if( self->_endRadius <= 0.0f )
@@ -58,19 +67,24 @@ void O2PaintRadialGradient(O2Paint_radialGradient *self,O2Float *g, O2Float *rho
 	O2Float df = Vector2Dot(d, f);
 	O2Float ff = Vector2Dot(f, f);
 
-	O2Float D = -1.0f / (ff - r*r - R*R + 2*r*R);
-	O2Float sp = r*r*dd - 2*r*R*dd + dd*R*R - 2*df*r*R + 2*df*R*R + ff*R*R;
-	O2Float pf = p.x * f.y - p.y * f.x;
-	O2Float s = (O2Float) sqrt(sp - RI_SQR(pf));
+	O2Float a = ff - r*r - R*R + 2*r*R;
+	O2Float hb = df + R*R - R*r;
+	O2Float c = dd - R*R;
 
-	*g = (Vector2Dot(f, d) + R*R - R*r + s) * D;
+	*rho = 0.01; // TODO: something smarter
 
-	O2Float dgdx = D*Vector2Dot(f,gx) + (r*r*Vector2Dot(d,gx) - (gx.x*f.y - gx.y*f.x)*pf) * (D / s);
-	O2Float dgdy = D*Vector2Dot(f,gy) + (r*r*Vector2Dot(d,gy) - (gy.x*f.y - gy.y*f.x)*pf) * (D / s);
-	*rho = (O2Float) sqrt(dgdx*dgdx + dgdy*dgdy);
-	if(RI_ISNAN(*rho))
-		*rho = 0.0f;
-	RI_ASSERT(*rho >= 0.0f);
+	O2Float g_inside, g_outside;
+	quadratic(a, hb, c, &g_inside, &g_outside);
+
+	BOOL outsideVisible = (self->_extendStart || 0.0 <= g_outside - *rho)
+	                     && (self->_extendEnd || g_outside + *rho <= 1.0)
+                             && (a >= 0.0 || R > r);
+	*g = outsideVisible? g_outside : g_inside;
+
+	O2Float resultingRadius = (R * (1 - *g)) + (*g * r);
+	if (resultingRadius < 0.0) {
+		*g = NAN;
+	}
 }
 
 
