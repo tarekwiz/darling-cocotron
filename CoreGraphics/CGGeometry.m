@@ -194,3 +194,100 @@ bool CGRectMakeWithDictionaryRepresentation(CFDictionaryRef dict, CGRect *rect)
 
         return YES;
 }
+
+bool CGSizeEqualToSize(CGSize a, CGSize b) {
+    return a.width == b.width && a.height == b.height;
+}
+
+CGFloat CGRectGetMinX(CGRect rect) {
+    return rect.origin.x;
+}
+
+CGFloat CGRectGetMaxX(CGRect rect) {
+    return rect.origin.x + rect.size.width;
+}
+
+CGFloat CGRectGetMidX(CGRect rect) {
+    return CGRectGetMinX(rect) + ((CGRectGetMaxX(rect) - CGRectGetMinX(rect)) / 2.f);
+}
+
+CGFloat CGRectGetMinY(CGRect rect) {
+    return rect.origin.y;
+}
+
+CGFloat CGRectGetMaxY(CGRect rect) {
+    return rect.origin.y + rect.size.height;
+}
+
+CGFloat CGRectGetMidY(CGRect rect) {
+    return CGRectGetMinY(rect) + ((CGRectGetMaxY(rect) - CGRectGetMinY(rect)) / 2.f);
+}
+
+CGFloat CGRectGetWidth(CGRect rect) {
+    return rect.size.width;
+}
+
+CGFloat CGRectGetHeight(CGRect rect) {
+    return rect.size.height;
+}
+
+bool CGRectContainsPoint(CGRect rect, CGPoint point) {
+    return (point.x >= CGRectGetMinX(rect) && point.x <= CGRectGetMaxX(rect)) && (point.y >= CGRectGetMinY(rect) && point.y <= CGRectGetMaxY(rect));
+}
+
+bool CGPointEqualToPoint(CGPoint a, CGPoint b) {
+    return ((a.x == b.x) && (a.y == b.y)) ? TRUE : FALSE;
+}
+
+CGRect CGRectInset(CGRect rect, CGFloat dx, CGFloat dy) {
+    rect.origin.x += dx;
+    rect.origin.y += dy;
+    rect.size.width -= dx * 2;
+    rect.size.height -= dy * 2;
+    return rect;
+}
+
+CGRect CGRectOffset(CGRect rect, CGFloat dx, CGFloat dy) {
+    rect.origin.x += dx;
+    rect.origin.y += dy;
+    return rect;
+}
+
+bool CGRectIsEmpty(CGRect rect) {
+    return ((rect.size.width == 0) && (rect.size.height == 0)) ? TRUE : FALSE;
+}
+
+bool CGRectIntersectsRect(CGRect a, CGRect b) {
+    if(b.origin.x > a.origin.x + a.size.width)
+        return false;
+    if(b.origin.y > a.origin.y + a.size.height)
+        return false;
+    if(a.origin.x > b.origin.x + b.size.width)
+        return false;
+    if(a.origin.y > b.origin.y + b.size.height)
+        return false;
+    return true;
+}
+
+bool CGRectEqualToRect(CGRect a, CGRect b) {
+    return CGPointEqualToPoint(a.origin, b.origin) && CGSizeEqualToSize(a.size, b.size);
+}
+
+bool CGRectIsInfinite(CGRect rect) {
+    return (isinf(rect.origin.x) ||
+        isinf(rect.origin.y) ||
+        isinf(rect.size.width) ||
+        isinf(rect.size.height));
+}
+
+bool CGRectIsNull(CGRect rect) {
+    return CGRectEqualToRect(rect, CGRectNull);
+}
+
+bool CGRectContainsRect(CGRect a, CGRect b) {
+    return (CGRectGetMinX(b) >= CGRectGetMinX(a) &&
+        CGRectGetMaxX(b) <= CGRectGetMaxX(a) &&
+        CGRectGetMinY(b) >= CGRectGetMinY(a) &&
+        CGRectGetMaxY(b) <= CGRectGetMaxY(a));
+}
+
