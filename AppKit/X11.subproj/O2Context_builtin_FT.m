@@ -104,7 +104,7 @@ static void drawFreeTypeBitmap(O2Context_builtin_FT *self,O2Surface *surface,FT_
     
 }
 
--(void)showGlyphs:(const O2Glyph *)glyphs advances:(const O2Size *)advances count:(unsigned)count {
+-(void)showGlyphs:(const O2Glyph *)glyphs advances:(const O2Size *)advances count:(NSUInteger)count {
 // FIXME: use advances if not NULL
 
    O2SurfaceLock(_surface);
@@ -116,8 +116,8 @@ static void drawFreeTypeBitmap(O2Context_builtin_FT *self,O2Surface *surface,FT_
    NSPoint point = O2PointApplyAffineTransform(NSMakePoint(0, 0), Trm);
 
    // Only use the scaling part of the current transform to scale the font size
-   float scaleX = sqrt((Trm.a * Trm.a) + (Trm.c * Trm.c));
-   float scaleY = sqrt((Trm.b * Trm.b) + (Trm.d * Trm.d));
+   O2Float scaleX = sqrt((Trm.a * Trm.a) + (Trm.c * Trm.c));
+   O2Float scaleY = sqrt((Trm.b * Trm.b) + (Trm.d * Trm.d));
    O2AffineTransform scalingTransform = O2AffineTransformMakeScale(scaleX, scaleY);
    O2Size fontSize = O2SizeApplyAffineTransform(
       O2SizeMake(0, O2GStatePointSize(gState)),
@@ -161,7 +161,7 @@ static void drawFreeTypeBitmap(O2Context_builtin_FT *self,O2Surface *surface,FT_
    
    O2PaintRelease(paint);
    
-   int     glyphAdvances[count];
+   NSInteger glyphAdvances[count];
    O2Float unitsPerEm=O2FontGetUnitsPerEm(font);
    
    O2FontGetGlyphAdvances(font,glyphs,count,glyphAdvances);

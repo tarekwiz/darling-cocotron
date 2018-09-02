@@ -31,7 +31,7 @@ NSString * const NSComboBoxWillPopUpNotification=@"NSComboBoxWillPopUpNotificati
    return [[self cell] isButtonBordered];
 }
 
--(float)itemHeight {
+-(CGFloat)itemHeight {
    return [[self cell] itemHeight];
 }
 
@@ -47,7 +47,7 @@ NSString * const NSComboBoxWillPopUpNotification=@"NSComboBoxWillPopUpNotificati
    return [[self cell] completes];
 }
 
--(int)numberOfVisibleItems {
+-(NSInteger)numberOfVisibleItems {
    return [[self cell] numberOfVisibleItems];
 }
 
@@ -66,7 +66,7 @@ NSString * const NSComboBoxWillPopUpNotification=@"NSComboBoxWillPopUpNotificati
    [self setNeedsDisplay:YES];
 }
 
--(void)setItemHeight:(float)value {
+-(void)setItemHeight:(CGFloat)value {
    [[self cell] setItemHeight:value];
    [self setNeedsDisplay:YES];
 }
@@ -85,12 +85,12 @@ NSString * const NSComboBoxWillPopUpNotification=@"NSComboBoxWillPopUpNotificati
    [[self cell] setCompletes:completes];
 }
 
--(void)setNumberOfVisibleItems:(int)value {
+-(void)setNumberOfVisibleItems:(NSInteger)value {
    [[self cell] setNumberOfVisibleItems:value];
    [self setNeedsDisplay:YES];
 }
 
--(int)numberOfItems {
+-(NSInteger)numberOfItems {
    return [[self cell] numberOfItems];
 }
 
@@ -98,11 +98,11 @@ NSString * const NSComboBoxWillPopUpNotification=@"NSComboBoxWillPopUpNotificati
    return [[self cell] objectValues];
 }
 
--itemObjectValueAtIndex:(int)index {
+-itemObjectValueAtIndex:(NSInteger)index {
    return [[self cell] itemObjectValueAtIndex:index];
 }
 
--(int)indexOfItemWithObjectValue:(id)object {
+-(NSInteger)indexOfItemWithObjectValue:(id)object {
    return [[self cell] indexOfItemWithObjectValue:object];
 }
 
@@ -118,7 +118,7 @@ NSString * const NSComboBoxWillPopUpNotification=@"NSComboBoxWillPopUpNotificati
    [[self cell] removeAllItems];
 }
 
--(void)removeItemAtIndex:(int)index {
+-(void)removeItemAtIndex:(NSInteger)index {
    [[self cell] removeItemAtIndex:index];
 }
 
@@ -126,11 +126,11 @@ NSString * const NSComboBoxWillPopUpNotification=@"NSComboBoxWillPopUpNotificati
    [[self cell] removeItemWithObjectValue:value];
 }
 
--(void)insertItemWithObjectValue:value atIndex:(int)index {
+-(void)insertItemWithObjectValue:value atIndex:(NSInteger)index {
    [[self cell] insertItemWithObjectValue:value atIndex:index];
 }
 
--(int)indexOfSelectedItem {
+-(NSInteger)indexOfSelectedItem {
    return [[self cell] indexOfSelectedItem];
 }
 
@@ -138,7 +138,7 @@ NSString * const NSComboBoxWillPopUpNotification=@"NSComboBoxWillPopUpNotificati
    return [[self cell] objectValueOfSelectedItem];
 }
 
--(void)selectItemAtIndex:(int)index {
+-(void)selectItemAtIndex:(NSInteger)index {
    [[self cell] selectItemAtIndex:index];
 }
 
@@ -146,15 +146,15 @@ NSString * const NSComboBoxWillPopUpNotification=@"NSComboBoxWillPopUpNotificati
    [[self cell] selectItemWithObjectValue:value];
 }
 
--(void)deselectItemAtIndex:(int)index {
+-(void)deselectItemAtIndex:(NSInteger)index {
    [[self cell] deselectItemAtIndex:index];
 }
 
--(void)scrollItemAtIndexToTop:(int)index {
+-(void)scrollItemAtIndexToTop:(NSInteger)index {
    [[self cell] scrollItemAtIndexToTop:index];
 }
 
--(void)scrollItemAtIndexToVisible:(int)index {
+-(void)scrollItemAtIndexToVisible:(NSInteger)index {
    [[self cell] scrollItemAtIndexToVisible:index];
 }
 
@@ -175,7 +175,7 @@ NSString * const NSComboBoxWillPopUpNotification=@"NSComboBoxWillPopUpNotificati
 // navigation.
 // ...i also thought it might be fun to preserve the half-typed text in objectValue index 0...
 - (BOOL)textView:(NSTextView *)textView doCommandBySelector:(SEL)selector {
-    int index = [[self cell] indexOfItemWithObjectValue:[self objectValue]];
+    NSInteger index = [[self cell] indexOfItemWithObjectValue:[self objectValue]];
     id objectCache = nil;
 
     if ([textView rangeForUserCompletion].location != NSNotFound)
@@ -204,7 +204,7 @@ NSString * const NSComboBoxWillPopUpNotification=@"NSComboBoxWillPopUpNotificati
     return NO;
 }
 
-- (NSArray *)textView:(NSTextView *)textView completions:(NSArray *)words forPartialWordRange:(NSRange)range indexOfSelectedItem:(int *)index {
+- (NSArray *)textView:(NSTextView *)textView completions:(NSArray *)words forPartialWordRange:(NSRange)range indexOfSelectedItem:(NSInteger *)index {
     NSString *string = [[self cell] completedString:[[textView string] substringWithRange:range]];
 
 //    NSLog(@"NSComboBox delegate OK: %@", string);

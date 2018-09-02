@@ -34,13 +34,13 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #define LABEL_TEXT_SECONDARY_OFFSET 3.0
 
 @interface NSRulerView(PrivateMethods)
-- (float)_drawingOrigin;
-- (float)_drawingScale;
+- (CGFloat)_drawingOrigin;
+- (CGFloat)_drawingScale;
 @end
 
 @implementation NSRulerView
 
-+ (void)registerUnitWithName:(NSString *)name abbreviation:(NSString *)abbreviation unitToPointsConversionFactor:(float)conversionFactor stepUpCycle:(NSArray *)stepUpCycle stepDownCycle:(NSArray *)stepDownCycle
++ (void)registerUnitWithName:(NSString *)name abbreviation:(NSString *)abbreviation unitToPointsConversionFactor:(CGFloat)conversionFactor stepUpCycle:(NSArray *)stepUpCycle stepDownCycle:(NSArray *)stepDownCycle
 {
     [NSMeasurementUnit registerUnit:[NSMeasurementUnit measurementUnitWithName:name abbreviation:abbreviation pointsPerUnit:conversionFactor stepUpCycle:stepUpCycle stepDownCycle:stepDownCycle]];
 }
@@ -133,12 +133,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     return _orientation;
 }
 
-- (float)ruleThickness
+- (CGFloat)ruleThickness
 {
     return _ruleThickness;
 }
 
-- (float)reservedThicknessForMarkers
+- (CGFloat)reservedThicknessForMarkers
 {
     if (_thicknessForMarkers == 0.0) {
         int i, count = [_markers count];
@@ -151,25 +151,25 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     return _thicknessForMarkers;
 }
 
-- (float)reservedThicknessForAccessoryView
+- (CGFloat)reservedThicknessForAccessoryView
 {
     return _thicknessForAccessoryView;
 }
 
-- (float)originOffset
+- (CGFloat)originOffset
 {
     return _originOffset;
 }
 
-- (float)baselineLocation
+- (CGFloat)baselineLocation
 {
     // That should be something depending of the markers thickness, etc.
     return _ruleThickness;
 }
 
-- (float)requiredThickness
+- (CGFloat)requiredThickness
 {
-    float result = [self ruleThickness];
+    CGFloat result = [self ruleThickness];
     
     if ([_markers count] > 0)
         result += [self reservedThicknessForMarkers];
@@ -242,28 +242,28 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     _orientation = orientation;
 }
 
-- (void)setRuleThickness:(float)value
+- (void)setRuleThickness:(CGFloat)value
 {
     _ruleThickness = value;
     
     [[self enclosingScrollView] tile];
 }
 
-- (void)setReservedThicknessForMarkers:(float)value
+- (void)setReservedThicknessForMarkers:(CGFloat)value
 {
     _thicknessForMarkers = value;
 
     [[self enclosingScrollView] tile];
 }
 
-- (void)setReservedThicknessForAccessoryView:(float)value
+- (void)setReservedThicknessForAccessoryView:(CGFloat)value
 {
     _thicknessForAccessoryView = value;
 
     [[self enclosingScrollView] tile];
 }
 
-- (void)setOriginOffset:(float)value
+- (void)setOriginOffset:(CGFloat)value
 {
     _originOffset = value;
     
@@ -286,7 +286,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 {
     NSPoint point = [self convertPoint:[event locationInWindow] fromView:nil];
     int i, count = [_markers count];
-    float location;
+    CGFloat location;
     
     for (i = 0; i < count; ++i) {
         NSRulerMarker *marker = [_markers objectAtIndex:i];
@@ -302,7 +302,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     }
 }
 
-- (void)moveRulerlineFromLocation:(float)fromLocation toLocation:(float)toLocation
+- (void)moveRulerlineFromLocation:(CGFloat)fromLocation toLocation:(CGFloat)toLocation
 {    
     NSNumber *old = [NSNumber numberWithFloat:fromLocation];
     NSNumber *new = [NSNumber numberWithFloat:toLocation];
@@ -337,8 +337,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 {
     NSRect originalFrame = self.bounds; // The ruler area
 
-    float scale = [self _drawingScale];
-    float offset = [self _drawingOrigin];
+    CGFloat scale = [self _drawingScale];
+    CGFloat offset = [self _drawingOrigin];
 
     // Adjust originalFrame so it matches the ruler origin 
     if (_orientation == NSHorizontalRuler) {
@@ -363,11 +363,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     dirtyRect = NSIntersectionRect(dirtyRect, originalFrame);
 
     NSRect frame = originalFrame;
-    float pointsPerUnit = [_measurementUnit pointsPerUnit];
-    float length = (_orientation == NSHorizontalRuler ? frame.size.width : frame.size.height);
+    CGFloat pointsPerUnit = [_measurementUnit pointsPerUnit];
+    CGFloat length = (_orientation == NSHorizontalRuler ? frame.size.width : frame.size.height);
     int i, count = ceil(length / (pointsPerUnit * scale));
     NSMutableArray *cycles = [[[_measurementUnit stepDownCycle] mutableCopy] autorelease];
-    float extraThickness = 0;
+    CGFloat extraThickness = 0;
     BOOL scrollViewHasOtherRuler = (_orientation == NSHorizontalRuler ? [[self enclosingScrollView] hasVerticalRuler] : [[self enclosingScrollView] hasHorizontalRuler]);
 
     if ([_markers count] > 0)
@@ -431,8 +431,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     
     // Start minor hash mark processing. size.width still contains the width of major marks.
     do {
-        float thisCycle = [[cycles objectAtIndex:0] floatValue];
-        float pointsPerMark = pointsPerUnit * thisCycle;
+        CGFloat thisCycle = [[cycles objectAtIndex:0] doubleValue];
+        CGFloat pointsPerMark = pointsPerUnit * thisCycle;
         
         frame.origin = originalFrame.origin;
 
@@ -503,12 +503,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     [[NSColor controlShadowColor] setStroke];
     for (i = 0; i < count; ++i) {
         if (_orientation == NSHorizontalRuler) {
-            rect.origin.x = [[_rulerlineLocations objectAtIndex:i] floatValue] + 0.5;
+            rect.origin.x = [[_rulerlineLocations objectAtIndex:i] doubleValue] + 0.5;
             [NSBezierPath strokeLineFromPoint: NSMakePoint(NSMinX(rect), NSMinY(rect))
                                       toPoint: NSMakePoint(NSMinX(rect), NSMaxY(rect))];
         }
         else {
-            rect.origin.y = [[_rulerlineLocations objectAtIndex:i] floatValue] + 0.5;
+            rect.origin.y = [[_rulerlineLocations objectAtIndex:i] doubleValue] + 0.5;
             [NSBezierPath strokeLineFromPoint: NSMakePoint(NSMinX(rect), NSMinY(rect))
                                       toPoint: NSMakePoint(NSMaxX(rect), NSMinY(rect))];
         }
@@ -555,9 +555,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 @implementation NSRulerView(PrivateMethods)
 // The offset to use in the ruler view for the 0 location
-- (float)_drawingOrigin
+- (CGFloat)_drawingOrigin
 {
-    float origin = 0;
+    CGFloat origin = 0;
     NSView *trackedView = self.clientView;
     if (trackedView == nil) {
         trackedView = _scrollView.documentView;
@@ -573,9 +573,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 
 // The scale to use for drawing
-- (float)_drawingScale
+- (CGFloat)_drawingScale
 {
-    float scale = 1.;
+    CGFloat scale = 1.;
     NSView *documentView = [_scrollView documentView];
     if (documentView) {
         NSSize curDocFrameSize = documentView.frame.size;

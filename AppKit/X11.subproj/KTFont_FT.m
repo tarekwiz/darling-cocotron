@@ -45,7 +45,7 @@
    return self;
 }
 
--(void)getGlyphs:(CGGlyph *)glyphs forCharacters:(const unichar *)characters length:(unsigned)length {
+-(void)getGlyphs:(CGGlyph *)glyphs forCharacters:(const unichar *)characters length:(NSUInteger)length {
    O2Font_FT *o2Font=(O2Font_FT *)_font;
    FT_Face    face=[o2Font face];
    
@@ -56,7 +56,7 @@
    }
 }
 
--(void)getAdvancements:(CGSize *)advancements forGlyphs:(const CGGlyph *)glyphs count:(unsigned)count {
+-(void)getAdvancements:(CGSize *)advancements forGlyphs:(const CGGlyph *)glyphs count:(NSUInteger)count {
    O2Font_FT *o2Font=(O2Font_FT *)_font;
    FT_Face    face=[o2Font face];
 
@@ -82,7 +82,7 @@
    FT_Set_Pixel_Sizes(face, _size, _size);
 
    FT_Load_Glyph(face, current, FT_LOAD_DEFAULT);
-   return NSMakePoint(face->glyph->advance.x/(float)(2<<5),face->glyph->advance.y/(float)(2<<5));
+   return NSMakePoint(face->glyph->advance.x/(O2Float)(2<<5),face->glyph->advance.y/(O2Float)(2<<5));
 }
 
 

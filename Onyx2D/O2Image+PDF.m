@@ -92,7 +92,7 @@ const char *O2ImageNameWithIntent(O2ColorRenderingIntent intent){
         [dictionary setNameForKey:"Filter" value:"FlateDecode"];
         
         // allocate deflate state
-        unsigned have;
+        NSUInteger have;
         z_stream strm;
         strm.zalloc = Z_NULL;
         strm.zfree = Z_NULL;
@@ -202,7 +202,7 @@ const char *O2ImageNameWithIntent(O2ColorRenderingIntent intent){
    O2ColorSpaceRef colorSpace=NULL;
     int               componentsPerPixel;
    O2PDFArray     *decodeArray;
-   float            *decode=NULL;
+   O2Float            *decode=NULL;
    BOOL              interpolate;
    O2PDFStream *softMaskStream=nil;
    O2Image *softMask=NULL;
@@ -253,7 +253,7 @@ const char *O2ImageNameWithIntent(O2ColorRenderingIntent intent){
    if(![dictionary getArrayForKey:"Decode" value:&decodeArray])
     decode=NULL;
    else {
-    unsigned count;
+    NSUInteger count;
      
     if(![decodeArray getNumbers:&decode count:&count]){
      O2PDFError(__FILE__,__LINE__,@"Unable to read decode array %@",decodeArray);

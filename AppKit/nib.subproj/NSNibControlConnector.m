@@ -13,7 +13,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 -(void)establishConnection {
    NSString *selectorName=_label;
-   unsigned  length=[selectorName length];
+   NSUInteger length=[selectorName length];
    SEL selector;
    
    if(length>0 && [selectorName characterAtIndex:length-1]!=':')

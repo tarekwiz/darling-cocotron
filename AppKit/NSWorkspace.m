@@ -106,7 +106,7 @@ NSString * const NSWorkspaceRecycleOperation=@"NSWorkspaceRecycleOperation";
    NSInvalidAbstractInvocation();
 }
 
--(BOOL)performFileOperation:(NSString *)operation source:(NSString *)source destination:(NSString *)destination files:(NSArray *)files tag:(int *)tag {
+-(BOOL)performFileOperation:(NSString *)operation source:(NSString *)source destination:(NSString *)destination files:(NSArray *)files tag:(NSInteger *)tag {
    NSInvalidAbstractInvocation();
    return 0;
 }
@@ -215,7 +215,7 @@ NSString * const NSWorkspaceRecycleOperation=@"NSWorkspaceRecycleOperation";
    NSInvalidAbstractInvocation();
 }
 
--(int)extendPowerOffBy:(int)milliseconds {
+-(NSInteger)extendPowerOffBy:(NSInteger)milliseconds {
    NSInvalidAbstractInvocation();
    return 0;
 }

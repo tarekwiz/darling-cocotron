@@ -22,7 +22,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     NSString *_mnemonic;
     unsigned _mnemonicLocation;
     NSMenu *_submenu;
-    int _tag;
+    NSInteger _tag;
     NSInteger _indentationLevel;
     BOOL _enabled;
     BOOL _hidden;
@@ -46,7 +46,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 - target;
 - (SEL)action;
 - (NSInteger)indentationLevel;
-- (int)tag;
+- (NSInteger)tag;
 - (int)state;
 - (NSString *)keyEquivalent;
 - (unsigned)keyEquivalentModifierMask;
@@ -71,7 +71,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 - (void)setTarget:target;
 - (void)setAction:(SEL)action;
 - (void)setIndentationLevel:(NSInteger)indentationLevel;
-- (void)setTag:(int)tag;
+- (void)setTag:(NSInteger)tag;
 - (void)setState:(int)state;
 - (void)setKeyEquivalent:(NSString *)keyEquivalent;
 - (void)setKeyEquivalentModifierMask:(unsigned)mask;

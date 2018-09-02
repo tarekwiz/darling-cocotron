@@ -202,18 +202,18 @@ APPKIT_EXPORT NSString *const NSWindowWillBeginSheetNotification;
 
 + (NSWindowDepth)defaultDepthLimit;
 
-+ (NSRect)frameRectForContentRect:(NSRect)contentRect styleMask:(unsigned)styleMask;
-+ (NSRect)contentRectForFrameRect:(NSRect)frameRect styleMask:(unsigned)styleMask;
-+ (float)minFrameWidthWithTitle:(NSString *)title styleMask:(unsigned)styleMask;
++ (NSRect)frameRectForContentRect:(NSRect)contentRect styleMask:(NSUInteger)styleMask;
++ (NSRect)contentRectForFrameRect:(NSRect)frameRect styleMask:(NSUInteger)styleMask;
++ (float)minFrameWidthWithTitle:(NSString *)title styleMask:(NSUInteger)styleMask;
 + (NSInteger)windowNumberAtPoint:(NSPoint)point belowWindowWithWindowNumber:(NSInteger)window;
 + (NSArray *)windowNumbersWithOptions:(NSWindowNumberListOptions)options;
 + (void)removeFrameUsingName:(NSString *)name;
 
-+ (NSButton *)standardWindowButton:(NSWindowButton)button forStyleMask:(unsigned)styleMask;
++ (NSButton *)standardWindowButton:(NSWindowButton)button forStyleMask:(NSUInteger)styleMask;
 + (void)menuChanged:(NSMenu *)menu;
 
-- initWithContentRect:(NSRect)contentRect styleMask:(unsigned)styleMask backing:(unsigned)backing defer:(BOOL)defer;
-- initWithContentRect:(NSRect)contentRect styleMask:(unsigned)styleMask backing:(unsigned)backing defer:(BOOL)defer screen:(NSScreen *)screen;
+- initWithContentRect:(NSRect)contentRect styleMask:(NSUInteger)styleMask backing:(unsigned)backing defer:(BOOL)defer;
+- initWithContentRect:(NSRect)contentRect styleMask:(NSUInteger)styleMask backing:(unsigned)backing defer:(BOOL)defer screen:(NSScreen *)screen;
 - (NSWindow *)initWithWindowRef:(void *)carbonRef;
 
 - (NSGraphicsContext *)graphicsContext;
@@ -231,7 +231,7 @@ APPKIT_EXPORT NSString *const NSWindowWillBeginSheetNotification;
 
 - (NSInteger)level;
 - (NSRect)frame;
-- (unsigned)styleMask;
+- (NSUInteger)styleMask;
 - (NSBackingStoreType)backingType;
 - (NSWindowBackingLocation)preferredBackingLocation;
 - (void)setPreferredBackingLocation:(NSWindowBackingLocation)location;

@@ -9,20 +9,20 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <Foundation/NSObject.h>
 #import <AppKit/NSFont.h>
 
-typedef int NSCharacterCollection;
+typedef NSInteger NSCharacterCollection;
 
 @interface NSGlyphInfo : NSObject {
-    unsigned _identifier;
+    NSUInteger _identifier;
     NSCharacterCollection _collection;
     NSString *_glyphName;
 }
 
-+ (NSGlyphInfo *)glyphInfoWithCharacterIdentifier:(unsigned int)identifier collection:(NSCharacterCollection)collection baseString:(NSString *)baseString;
++ (NSGlyphInfo *)glyphInfoWithCharacterIdentifier:(NSUInteger)identifier collection:(NSCharacterCollection)collection baseString:(NSString *)baseString;
 
 + (NSGlyphInfo *)glyphInfoWithGlyph:(NSGlyph)glyph forFont:(NSFont *)font baseString:(NSString *)baseString;
 + (NSGlyphInfo *)glyphInfoWithGlyphName:(NSString *)glyphName forFont:(NSFont *)font baseString:(NSString *)baseString;
 
-- (unsigned int)characterIdentifier;
+- (NSUInteger)characterIdentifier;
 - (NSCharacterCollection)characterCollection;
 - (NSString *)glyphName;
 

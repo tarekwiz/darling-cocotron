@@ -56,6 +56,8 @@ typedef enum {
     NSOnState = 1,
 } NSCellState;
 
+typedef NSInteger NSControlStateValue;
+
 typedef enum {
     NSRegularControlSize,
     NSSmallControlSize,
@@ -80,14 +82,14 @@ enum {
 };
 
 @interface NSCell : NSObject <NSCopying, NSCoding> {
-    int _state;
+    NSControlStateValue _state;
     NSFont *_font;
-    int _entryType;
+    NSInteger _entryType;
     id _objectValue;
     NSImage *_image;
     int _textAlignment;
     NSWritingDirection _writingDirection;
-    int _cellType;
+    NSCellType _cellType;
     NSFormatter *_formatter;
     id _titleOrAttributedTitle;
     id _representedObject;
@@ -127,12 +129,12 @@ enum {
 
 - (NSView *)controlView;
 - (NSCellType)type;
-- (int)state;
+- (NSControlStateValue)state;
 
 - target;
 - (SEL)action;
-- (int)tag;
-- (int)entryType;
+- (NSInteger)tag;
+- (NSInteger)entryType;
 - (id)formatter;
 - (NSFont *)font;
 - (NSImage *)image;
@@ -170,16 +172,16 @@ enum {
 - (void)setControlView:(NSView *)view;
 - (void)setType:(NSCellType)type;
 
-- (void)setState:(int)value;
-- (int)nextState;
+- (void)setState:(NSControlStateValue)value;
+- (NSControlStateValue)nextState;
 - (void)setNextState;
 - (BOOL)allowsMixedState;
 - (void)setAllowsMixedState:(BOOL)allow;
 
 - (void)setTarget:target;
 - (void)setAction:(SEL)action;
-- (void)setTag:(int)tag;
-- (void)setEntryType:(int)type;
+- (void)setTag:(NSInteger)tag;
+- (void)setEntryType:(NSInteger)type;
 - (void)setFormatter:(NSFormatter *)formatter;
 - (void)setFont:(NSFont *)font;
 - (void)setImage:(NSImage *)image;
@@ -201,7 +203,7 @@ enum {
 - (void)setRefusesFirstResponder:(BOOL)flag;
 - (void)setHighlighted:(BOOL)flag;
 
-- (void)setFloatingPointFormat:(BOOL)fpp left:(unsigned)left right:(unsigned)right;
+- (void)setFloatingPointFormat:(BOOL)fpp left:(NSUInteger)left right:(NSUInteger)right;
 
 - (void)setObjectValue:(id<NSCopying>)value;
 - (void)setStringValue:(NSString *)value;
@@ -242,7 +244,7 @@ enum {
 - (NSText *)setUpFieldEditorAttributes:(NSText *)editor;
 
 - (void)editWithFrame:(NSRect)frame inView:(NSView *)view editor:(NSText *)editor delegate:(id)delegate event:(NSEvent *)event;
-- (void)selectWithFrame:(NSRect)frame inView:(NSView *)view editor:(NSText *)editor delegate:(id)delegate start:(int)location length:(int)length;
+- (void)selectWithFrame:(NSRect)frame inView:(NSView *)view editor:(NSText *)editor delegate:(id)delegate start:(NSInteger)location length:(NSInteger)length;
 - (void)endEditing:(NSText *)editor;
 
 - (void)resetCursorRect:(NSRect)rect inView:(NSView *)view;

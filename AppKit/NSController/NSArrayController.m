@@ -382,7 +382,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	id set=[NSMutableIndexSet indexSet];
 	int i, count=[objects count];
 	for(i=0; i<[objects count]; i++) {
-		unsigned idx=[[self arrangedObjects] indexOfObject:[objects objectAtIndex:i]];
+		NSUInteger idx=[[self arrangedObjects] indexOfObject:[objects objectAtIndex:i]];
 		if(idx!=NSNotFound) {
 			[set addIndex:idx];
 		}

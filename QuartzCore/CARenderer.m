@@ -57,18 +57,18 @@ static void startAnimationsInLayer(CALayer *layer,CFTimeInterval currentTime){
    startAnimationsInLayer(_rootLayer,currentTime);
 }
 
-static inline float cubed(float value){
+static inline CGFloat cubed(CGFloat value){
    return value*value*value;
 }
 
-static inline float squared(float value){
+static inline CGFloat squared(CGFloat value){
    return value*value;
 }
 
-static float applyMediaTimingFunction(CAMediaTimingFunction *function,float t){
-   float result;
-   float cp1[2];
-   float cp2[2];
+static CGFloat applyMediaTimingFunction(CAMediaTimingFunction *function,CGFloat t){
+   CGFloat result;
+   CGFloat cp1[2];
+   CGFloat cp2[2];
    
    [function getControlPointAtIndex:1 values:cp1];
    [function getControlPointAtIndex:2 values:cp2];
@@ -80,7 +80,7 @@ static float applyMediaTimingFunction(CAMediaTimingFunction *function,float t){
    return y;
 }
 
-static float mediaTimingScale(CAAnimation *animation,CFTimeInterval currentTime){
+static CGFloat mediaTimingScale(CAAnimation *animation,CFTimeInterval currentTime){
    CFTimeInterval begin=[animation beginTime];
    CFTimeInterval duration=[animation duration];
    CFTimeInterval delta=currentTime-begin;
@@ -93,7 +93,7 @@ static float mediaTimingScale(CAAnimation *animation,CFTimeInterval currentTime)
    return applyMediaTimingFunction(function,zeroToOne);
 }
 
-static float interpolateFloatInLayerKey(CALayer *layer,NSString *key,CFTimeInterval currentTime){
+static CGFloat interpolateFloatInLayerKey(CALayer *layer,NSString *key,CFTimeInterval currentTime){
    CAAnimation *animation=[layer animationForKey:key];
    
    if(animation==nil)
@@ -108,10 +108,10 @@ static float interpolateFloatInLayerKey(CALayer *layer,NSString *key,CFTimeInter
     if(toValue==nil)
      toValue=[layer valueForKey:key];
     
-    float fromFloat=[fromValue floatValue];
-    float toFloat=[toValue floatValue];
+    CGFloat fromFloat=[fromValue floatValue];
+    CGFloat toFloat=[toValue floatValue];
         
-    float        resultFloat;
+    CGFloat        resultFloat;
     double timingScale=mediaTimingScale(animation,currentTime);
     
     resultFloat=fromFloat+(toFloat-fromFloat)*timingScale;
@@ -254,7 +254,7 @@ void CATexImage2DCGImage(CGImageRef image){
 }
 
 
--(void)_renderLayer:(CALayer *)layer z:(float)z currentTime:(CFTimeInterval)currentTime {
+-(void)_renderLayer:(CALayer *)layer z:(CGFloat)z currentTime:(CFTimeInterval)currentTime {
    NSNumber *textureId=[layer _textureId];
    GLuint    texture=[textureId unsignedIntValue];
    GLboolean loadPixelData=GL_FALSE;
@@ -288,7 +288,7 @@ void CATexImage2DCGImage(CGImageRef image){
    CGPoint anchorPoint=interpolatePointInLayerKey(layer,@"anchorPoint",currentTime);
    CGPoint position=interpolatePointInLayerKey(layer,@"position",currentTime);
    CGRect  bounds=interpolateRectInLayerKey(layer,@"bounds",currentTime);
-   float   opacity=interpolateFloatInLayerKey(layer,@"opacity",currentTime);
+   CGFloat   opacity=interpolateFloatInLayerKey(layer,@"opacity",currentTime);
    
    GLfloat textureVertices[4*2];
    GLfloat vertices[4*3];

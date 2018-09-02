@@ -168,12 +168,12 @@ FcConfig *O2FontSharedFontConfig() {
 
    FT_Set_Char_Size(_face,0,_unitsPerEm*64,72,72);
 
-   _advances=NSZoneMalloc(NULL,sizeof(int)*_numberOfGlyphs);
+   _advances=NSZoneMalloc(NULL,sizeof(NSUInteger)*_numberOfGlyphs);
 
    for(glyph=0;glyph<_numberOfGlyphs;glyph++){
     FT_Load_Glyph(_face, glyph, FT_LOAD_DEFAULT);
     
-    _advances[glyph]=_face->glyph->advance.x/(float)(2<<5);
+    _advances[glyph]=_face->glyph->advance.x/(O2Float)(2<<5);
    }
 }
 

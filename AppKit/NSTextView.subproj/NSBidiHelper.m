@@ -88,7 +88,7 @@ static void buildUnicodeData();
 // Returns the mirror character for the given glyph [ "(" -> ")" ]
 static unichar mirror_character(unichar c)
 {
-    int i = 0;
+    NSInteger i = 0;
     while (sUnicharMirrorData[i].from != sUnicharMirrorData[i].to) {
         if (sUnicharMirrorData[i].from == c) {
             c = sUnicharMirrorData[i].to;
@@ -122,7 +122,7 @@ void buildUnicharData()
     
     NSArray * fileLines = [fileContents componentsSeparatedByString:@"\n"];
     // Get the number of elements in the file
-    int count = 0;
+    NSInteger count = 0;
     for (NSString *line in fileLines) {
         // Strip comments
         if ([line length] == 0 || [line characterAtIndex:0] == '#') {
@@ -203,8 +203,8 @@ void buildUnicharData()
             NSString *mirrored = [elements objectAtIndex:9];
 
             unichar character = (unichar)strtol([[elements objectAtIndex:0] UTF8String], NULL, 16);
-            int bidiTypeValue = [[bidiDictionary objectForKey:bidiType] intValue];
-            int mirrorValue = [[mirroredDictionary objectForKey:mirrored] intValue];
+            NSInteger bidiTypeValue = [[bidiDictionary objectForKey:bidiType] intValue];
+            NSInteger mirrorValue = [[mirroredDictionary objectForKey:mirrored] intValue];
             sUnicharData[character].bidiType = bidiTypeValue;
             sUnicharData[character].mirrored = mirrorValue;
         }
@@ -427,11 +427,11 @@ static int ClassFromChWS(unichar ch)
 // === HELPER FUNCTIONS ================================================
 
 // reverse cch characters
-static void reverse(uint32_t * psz, unsigned long cch)
+static void reverse(NSUInteger * psz, NSUInteger cch)
 {
-	uint32_t chTemp;
+	NSUInteger chTemp;
     
-	unsigned long ich;
+	NSUInteger ich;
     for (ich = 0; ich < --cch; ich++)
 	{
 		chTemp = psz[ich];
@@ -1332,7 +1332,7 @@ static void resolveWhitespace(int baselevel, const uint8_t *pcls, uint8_t *pleve
  
  Note: this should be applied a line at a time
  -------------------------------------------------------------------------*/
-static unsigned long reorderLevel(int level, uint32_t * pszText, const uint8_t * plevel, unsigned long cch,
+static unsigned long reorderLevel(int level, NSUInteger * pszText, const uint8_t * plevel, unsigned long cch,
                            bool fReverse)
 {
 	// true as soon as first odd level encountered
@@ -1358,7 +1358,7 @@ static unsigned long reorderLevel(int level, uint32_t * pszText, const uint8_t *
 	return ich;
 }
 
-static unsigned long reorder(int baselevel, uint32_t * pszText, const uint8_t * plevel, unsigned long cch)
+static unsigned long reorder(NSInteger baselevel, NSUInteger * pszText, const uint8_t * plevel, unsigned long cch)
 {
 	unsigned long ich = 0;
     
@@ -1410,7 +1410,7 @@ static void mirror(unichar * pszInput, const uint8_t * plevel, unsigned long cch
  
  Implements the Line-by-Line phases of the Unicode Bidi Algorithm
  ------------------------------------------------------------------------*/
-void NSBidiHelperProcessLine(int baselevel, uint32_t* pszLine, unichar *text, uint8_t * plevelLine, int fMirror, unsigned long length)
+void NSBidiHelperProcessLine(NSInteger baselevel, NSUInteger* pszLine, unichar *text, uint8_t * plevelLine, NSInteger fMirror, NSUInteger length)
 {
     buildUnicharData();
 
@@ -1457,9 +1457,9 @@ void NSBidiHelperProcessLine(int baselevel, uint32_t* pszLine, unichar *text, ui
  Returns: 1
  
  ------------------------------------------------------------------------*/
-unsigned long NSBidiHelperParagraph(int *baselevel, unichar *text, uint8_t * levels, unsigned long cch)
+NSUInteger NSBidiHelperParagraph(NSInteger *baselevel, unichar *text, uint8_t * levels, NSUInteger cch)
 {
-    unsigned long result = 0;
+    NSUInteger result = 0;
     
     if (cch == 0) {
         return 0;
@@ -1471,7 +1471,7 @@ unsigned long NSBidiHelperParagraph(int *baselevel, unichar *text, uint8_t * lev
         return 0;
     }
     
-    int initialBaseBaselevel = *baselevel;
+    NSInteger initialBaseBaselevel = *baselevel;
 
     // get the types for the glyphs
     uint8_t *types = malloc(cch * sizeof(uint8_t));
@@ -1483,13 +1483,13 @@ unsigned long NSBidiHelperParagraph(int *baselevel, unichar *text, uint8_t * lev
         
         while (cch > 0) {
             // set baselevel
-            int level =  initialBaseBaselevel;
+            NSInteger level =  initialBaseBaselevel;
             if (level < 0) {
                 level = baseLevel(currentTypes, cch);
                 *baselevel = level;
             }
             // change B into BN and return length including
-            unsigned long cchPara = resolveParagraphs(currentTypes, cch);
+            NSUInteger cchPara = resolveParagraphs(currentTypes, cch);
 
             // resolve explicit
             resolveExplicit(level, N, currentTypes, levels, cchPara, 0);

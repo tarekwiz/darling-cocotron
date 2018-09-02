@@ -18,7 +18,7 @@
 #import "X11SubWindow.h"
 #import <QuartzCore/CAWindowOpenGLContext.h>
 
-void CGNativeBorderFrameWidthsForStyle(unsigned styleMask,CGFloat *top,CGFloat *left,CGFloat *bottom,CGFloat *right) {
+void CGNativeBorderFrameWidthsForStyle(NSUInteger styleMask,CGFloat *top,CGFloat *left,CGFloat *bottom,CGFloat *right) {
    *top=0;
    *left=0;
    *bottom=0;
@@ -54,7 +54,7 @@ void CGNativeBorderFrameWidthsForStyle(unsigned styleMask,CGFloat *top,CGFloat *
 }
 
 
--initWithFrame:(O2Rect)frame styleMask:(unsigned)styleMask isPanel:(BOOL)isPanel backingType:(NSUInteger)backingType {
+-initWithFrame:(O2Rect)frame styleMask:(NSUInteger)styleMask isPanel:(BOOL)isPanel backingType:(NSUInteger)backingType {
    _level=kCGNormalWindowLevel;
    _styleMask = styleMask;
    _backingType=backingType;
@@ -125,11 +125,11 @@ void CGNativeBorderFrameWidthsForStyle(unsigned styleMask,CGFloat *top,CGFloat *
    [super dealloc];
 }
 
-- (unsigned) styleMask {
+- (NSUInteger) styleMask {
     return _styleMask;
 }
 
-- (void) setStyleMask: (unsigned) mask {
+- (void) setStyleMask: (NSUInteger) mask {
     _styleMask = mask;
 }
 
@@ -443,7 +443,7 @@ static int ignoreBadWindow(Display* display,
 
 @end
 
-CGRect CGInsetRectForNativeWindowBorder(CGRect frame,unsigned styleMask){
+CGRect CGInsetRectForNativeWindowBorder(CGRect frame,NSUInteger styleMask){
     CGFloat top,left,bottom,right;
     
     CGNativeBorderFrameWidthsForStyle(styleMask,&top,&left,&bottom,&right);
@@ -456,7 +456,7 @@ CGRect CGInsetRectForNativeWindowBorder(CGRect frame,unsigned styleMask){
     return frame;
 }
 
-CGRect CGOutsetRectForNativeWindowBorder(CGRect frame,unsigned styleMask){
+CGRect CGOutsetRectForNativeWindowBorder(CGRect frame,NSUInteger styleMask){
     CGFloat top,left,bottom,right;
     
     CGNativeBorderFrameWidthsForStyle(styleMask,&top,&left,&bottom,&right);

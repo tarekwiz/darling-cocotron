@@ -12,13 +12,13 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 @class NSArray;
 
 @interface O2PDFFunction_Type0 : O2Function {
-    unsigned _sizeCount;
+    NSUInteger _sizeCount;
     O2PDFInteger *_size;
     O2PDFInteger _bitsPerSample;
     O2PDFInteger _order;
-    unsigned _encodeCount;
+    NSUInteger _encodeCount;
     O2PDFReal *_encode;
-    unsigned _decodeCount;
+    NSUInteger _decodeCount;
     O2PDFReal *_decode;
     NSData *_data;
     NSUInteger _dataLength;

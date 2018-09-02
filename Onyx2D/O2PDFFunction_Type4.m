@@ -260,9 +260,9 @@ static void runBlock(NSMutableArray *stack,O2PDFBlock *block){
    }
 }
 
-static void evaluate(void *info,const float *input,float *output) {
+static void evaluate(void *info,const O2Float *input, O2Float *output) {
    O2PDFFunction_Type4 *self=info;
-   float                x=input[0];
+   O2Float                x=input[0];
    NSMutableArray      *stack=[NSMutableArray array];
    
    [stack addObject:[O2PDFObject_Real pdfObjectWithReal:x]];
@@ -270,7 +270,7 @@ static void evaluate(void *info,const float *input,float *output) {
    
    NSLog(@"stack=%@",stack);
 
-   int count=self->_rangeCount/2;
+   NSInteger count=self->_rangeCount/2;
    while(--count>=0){
     O2PDFReal value=0.0;
     
@@ -284,7 +284,7 @@ static void evaluate(void *info,const float *input,float *output) {
 #define FF 12
 #define CR 13
 
-static O2PDFIdentifier O2PostScriptClassifyIdentifier(const char *bytes,unsigned length) {
+static O2PDFIdentifier O2PostScriptClassifyIdentifier(const char *bytes, NSUInteger length) {
    char name[length+1];
    
    strncpy(name,bytes,length);
@@ -383,10 +383,10 @@ static O2PDFIdentifier O2PostScriptClassifyIdentifier(const char *bytes,unsigned
 }
 
 // Returns YES and *objectp==NULL on end of stream
-static BOOL O2PDFScanCalculator(const char *bytes,unsigned length,O2PDFInteger position,O2PDFInteger *lastPosition,O2PDFObject **objectp) {
+static BOOL O2PDFScanCalculator(const char *bytes, NSUInteger length,O2PDFInteger position,O2PDFInteger *lastPosition,O2PDFObject **objectp) {
    O2PDFInteger     currentSign=1,currentInt=0;
    O2PDFReal        currentReal=0,currentFraction=0;
-   int              inlineLocation=0;
+   NSInteger  inlineLocation=0;
    
    enum {
     STATE_SCANNING,
@@ -498,7 +498,7 @@ static BOOL O2PDFScanCalculator(const char *bytes,unsigned length,O2PDFInteger p
          code=='%' || code=='(' || code==')' || code=='<' || code=='>' || code==']' ||
          code=='[' || code=='{' || code=='}' || code=='/'){
        const char     *name=bytes+inlineLocation;
-       unsigned        length=position-inlineLocation;
+       NSUInteger length=position-inlineLocation;
        O2PDFIdentifier identifier=O2PostScriptClassifyIdentifier(name,length);
        
        if(identifier==O2PDFIdentifier_true)
@@ -520,7 +520,7 @@ static BOOL O2PDFScanCalculator(const char *bytes,unsigned length,O2PDFInteger p
    return (state==STATE_SCANNING)?YES:NO;
 }
 
-static O2PDFBlock *O2PDFParseCalculator(const char *bytes,unsigned length,O2PDFInteger position,O2PDFInteger *lastPosition) {
+static O2PDFBlock *O2PDFParseCalculator(const char *bytes, NSUInteger length,O2PDFInteger position,O2PDFInteger *lastPosition) {
    NSMutableArray *stack=[NSMutableArray array];
    O2PDFObject    *check;
          
@@ -596,7 +596,7 @@ NSLog(@"INITIALIZE TYPE 4");
    _info=self;
    _callbacks.evaluate=evaluate;
 
-   int lastPosition=0;
+   NSInteger lastPosition=0;
    _calculator=[O2PDFParseCalculator([data bytes],[data length],0,&lastPosition) retain];
    NSLog(@"calculator=%@",_calculator);
          
@@ -614,7 +614,7 @@ NSLog(@"INITIALIZE TYPE 4");
 
 -(O2PDFObject *)encodeReferenceWithContext:(O2PDFContext *)context {
    O2PDFDictionary *result=[O2PDFDictionary pdfDictionary];
-   int              i;
+   NSInteger        i;
    
    [result setIntegerForKey:"FunctionType" value:4];
    [result setObjectForKey:"Domain" value:[O2PDFArray pdfArrayWithNumbers:_domain count:_domainCount]];

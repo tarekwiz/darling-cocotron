@@ -155,7 +155,7 @@ NSString * const NSWindowDidAnimateNotification=@"NSWindowDidAnimateNotification
     return [[self class] hasMainMenuForStyleMask:_styleMask];
 }
 
-+(NSRect)frameRectForContentRect:(NSRect)contentRect styleMask:(unsigned)styleMask {
++(NSRect)frameRectForContentRect:(NSRect)contentRect styleMask:(NSUInteger)styleMask {
    NSRect result=CGOutsetRectForNativeWindowBorder(contentRect,styleMask);
    
     if([self hasMainMenuForStyleMask:styleMask])
@@ -164,7 +164,7 @@ NSString * const NSWindowDidAnimateNotification=@"NSWindowDidAnimateNotification
    return result;
 }
 
-+(NSRect)contentRectForFrameRect:(NSRect)frameRect styleMask:(unsigned)styleMask {
++(NSRect)contentRectForFrameRect:(NSRect)frameRect styleMask:(NSUInteger)styleMask {
    NSRect result=CGInsetRectForNativeWindowBorder(frameRect,styleMask);
    
     if([self hasMainMenuForStyleMask:styleMask])
@@ -173,7 +173,7 @@ NSString * const NSWindowDidAnimateNotification=@"NSWindowDidAnimateNotification
    return result;
 }
 
-+(float)minFrameWidthWithTitle:(NSString *)title styleMask:(unsigned)styleMask {
++(float)minFrameWidthWithTitle:(NSString *)title styleMask:(NSUInteger)styleMask {
    NSUnimplementedMethod();
    return 0;
 }
@@ -192,7 +192,7 @@ NSString * const NSWindowDidAnimateNotification=@"NSWindowDidAnimateNotification
    NSUnimplementedMethod();
 }
 
-+(NSButton *)standardWindowButton:(NSWindowButton)button forStyleMask:(unsigned)styleMask {
++(NSButton *)standardWindowButton:(NSWindowButton)button forStyleMask:(NSUInteger)styleMask {
    NSUnimplementedMethod();
    return nil;
 }
@@ -206,7 +206,7 @@ NSString * const NSWindowDidAnimateNotification=@"NSWindowDidAnimateNotification
 }
 
 // This is Apple private API
-+(Class)frameViewClassForStyleMask:(unsigned int)styleMask {
++(Class)frameViewClassForStyleMask:(NSUInteger)styleMask {
    return [NSThemeFrame class];
 }
 
@@ -219,7 +219,7 @@ NSString * const NSWindowDidAnimateNotification=@"NSWindowDidAnimateNotification
    return self;
 }
 
--initWithContentRect:(NSRect)contentRect styleMask:(unsigned)styleMask backing:(unsigned)backing defer:(BOOL)defer {
+-initWithContentRect:(NSRect)contentRect styleMask:(NSUInteger)styleMask backing:(unsigned)backing defer:(BOOL)defer {
    NSRect backgroundFrame;
    NSRect contentViewFrame;
 
@@ -312,7 +312,7 @@ NSString * const NSWindowDidAnimateNotification=@"NSWindowDidAnimateNotification
    return self;
 }
 
--initWithContentRect:(NSRect)contentRect styleMask:(unsigned int)styleMask backing:(unsigned)backing defer:(BOOL)defer screen:(NSScreen *)screen {
+-initWithContentRect:(NSRect)contentRect styleMask:(NSUInteger)styleMask backing:(unsigned)backing defer:(BOOL)defer screen:(NSScreen *)screen {
 // FIX, relocate contentRect
    return [self initWithContentRect:contentRect styleMask:styleMask backing:backing defer:defer];
 }
@@ -391,7 +391,7 @@ NSString * const NSWindowDidAnimateNotification=@"NSWindowDidAnimateNotification
    return [[self platformWindow] cgContext];
 }
 
--(void)setStyleMask:(unsigned)mask {
+-(void)setStyleMask:(NSUInteger)mask {
    _styleMask=mask;
    [_platformWindow setStyleMask:_styleMask];
    
@@ -470,7 +470,7 @@ NSString * const NSWindowDidAnimateNotification=@"NSWindowDidAnimateNotification
    return nil;
 }
 
--(int)level {
+-(NSInteger)level {
    return _level;
 }
 
@@ -478,7 +478,7 @@ NSString * const NSWindowDidAnimateNotification=@"NSWindowDidAnimateNotification
    return _frame;
 }
 
--(unsigned)styleMask {
+-(NSUInteger)styleMask {
    return _styleMask;
 }
 
@@ -1172,7 +1172,7 @@ NSString * const NSWindowDidAnimateNotification=@"NSWindowDidAnimateNotification
    NSUnimplementedMethod();
 }
 
--(void)setLevel:(int)value {
+-(void)setLevel:(NSInteger)value {
    _level=value;
    [[self platformWindow] setLevel:_level];
 }

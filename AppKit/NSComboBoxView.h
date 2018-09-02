@@ -13,17 +13,17 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     NSArray *_objects;
     NSFont *_font;
     NSInteger _selectedIndex;
-    int _keyboardUIState;
+    NSInteger _keyboardUIState;
 }
 
 - initWithFrame:(NSRect)frame;
 
 - (void)setObjectArray:(NSArray *)objects;
 - (void)setFont:(NSFont *)font;
-- (void)setSelectedIndex:(int)index;
+- (void)setSelectedIndex:(NSInteger)index;
 
 - (NSSize)sizeForContents;
 
-- (int)runTrackingWithEvent:(NSEvent *)event;
+- (NSInteger)runTrackingWithEvent:(NSEvent *)event;
 
 @end

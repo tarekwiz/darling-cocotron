@@ -31,9 +31,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    return result;
 }
 
-+(O2PDFArray *)pdfArrayWithNumbers:(O2PDFReal *)values count:(unsigned)count {
++(O2PDFArray *)pdfArrayWithNumbers:(O2PDFReal *)values count:(NSUInteger)count {
    O2PDFArray *result=[self pdfArray];
-   int         i;
+   NSInteger i;
    
    for(i=0;i<count;i++)
     [result addNumber:values[i]];
@@ -41,9 +41,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    return result;
 }
 
-+(O2PDFArray *)pdfArrayWithIntegers:(O2PDFInteger *)values count:(unsigned)count {
++(O2PDFArray *)pdfArrayWithIntegers:(O2PDFInteger *)values count:(NSUInteger)count {
    O2PDFArray *result=[self pdfArray];
-   int         i;
+   NSInteger i;
    
    for(i=0;i<count;i++)
     [result addInteger:values[i]];
@@ -74,7 +74,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    return YES;
 }
 
--(unsigned)count { return _count; }
+-(NSUInteger)count { return _count; }
 
 -(void)addObject:(O2PDFObject *)object {
    [object retain];
@@ -99,75 +99,75 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    [self addObject:[O2PDFObject_Boolean pdfObjectWithBoolean:value]];
 }
 
--(O2PDFObject *)objectAtIndex:(unsigned)index {
+-(O2PDFObject *)objectAtIndex:(NSUInteger)index {
    if(index<_count)
     return _objects[index];
    else 
     return nil;
 }
 
--(BOOL)getObjectAtIndex:(unsigned)index value:(O2PDFObject **)objectp {
+-(BOOL)getObjectAtIndex:(NSUInteger)index value:(O2PDFObject **)objectp {
    *objectp=[[self objectAtIndex:index] realObject];
    
    return YES;
 }
 
--(BOOL)getNullAtIndex:(unsigned)index {
+-(BOOL)getNullAtIndex:(NSUInteger)index {
    O2PDFObject *object=[self objectAtIndex:index];
    
    return ([object objectType]==kO2PDFObjectTypeNull)?YES:NO;
 }
 
--(BOOL)getBooleanAtIndex:(unsigned)index value:(O2PDFBoolean *)valuep {
+-(BOOL)getBooleanAtIndex:(NSUInteger)index value:(O2PDFBoolean *)valuep {
    O2PDFObject *object=[self objectAtIndex:index];
    
    return [object checkForType:kO2PDFObjectTypeBoolean value:valuep];
 }
 
--(BOOL)getIntegerAtIndex:(unsigned)index value:(O2PDFInteger *)valuep {
+-(BOOL)getIntegerAtIndex:(NSUInteger)index value:(O2PDFInteger *)valuep {
    O2PDFObject *object=[self objectAtIndex:index];
    
    return [object checkForType:kO2PDFObjectTypeInteger value:valuep];
 }
 
--(BOOL)getNumberAtIndex:(unsigned)index value:(O2PDFReal *)valuep {
+-(BOOL)getNumberAtIndex:(NSUInteger)index value:(O2PDFReal *)valuep {
    O2PDFObject *object=[self objectAtIndex:index];
    
    return [object checkForType:kO2PDFObjectTypeReal value:valuep];
 }
 
--(BOOL)getNameAtIndex:(unsigned)index value:(const char **)namep {
+-(BOOL)getNameAtIndex:(NSUInteger)index value:(const char **)namep {
    O2PDFObject *object=[self objectAtIndex:index];
    
    return [object checkForType:kO2PDFObjectTypeName value:namep];
 }
 
--(BOOL)getStringAtIndex:(unsigned)index value:(O2PDFString **)stringp {
+-(BOOL)getStringAtIndex:(NSUInteger)index value:(O2PDFString **)stringp {
    O2PDFObject *object=[self objectAtIndex:index];
    
    return [object checkForType:kO2PDFObjectTypeString value:stringp];
 }
 
--(BOOL)getArrayAtIndex:(unsigned)index value:(O2PDFArray **)arrayp {
+-(BOOL)getArrayAtIndex:(NSUInteger)index value:(O2PDFArray **)arrayp {
    O2PDFObject *object=[self objectAtIndex:index];
    
    return [object checkForType:kO2PDFObjectTypeArray value:arrayp];
 }
 
--(BOOL)getDictionaryAtIndex:(unsigned)index value:(O2PDFDictionary **)dictionaryp {
+-(BOOL)getDictionaryAtIndex:(NSUInteger)index value:(O2PDFDictionary **)dictionaryp {
    O2PDFObject *object=[self objectAtIndex:index];
    
    return [object checkForType:kO2PDFObjectTypeDictionary value:dictionaryp];
 }
 
--(BOOL)getStreamAtIndex:(unsigned)index value:(O2PDFStream **)streamp {
+-(BOOL)getStreamAtIndex:(NSUInteger)index value:(O2PDFStream **)streamp {
    O2PDFObject *object=[self objectAtIndex:index];
    
    return [object checkForType:kO2PDFObjectTypeStream value:streamp];
 }
 
--(BOOL)getNumbers:(O2PDFReal **)numbersp count:(unsigned *)countp {
-   unsigned   i,count=[self count];
+-(BOOL)getNumbers:(O2PDFReal **)numbersp count:(NSUInteger *)countp {
+   NSUInteger i,count=[self count];
    O2PDFReal *numbers;
    
    numbers=NSZoneMalloc(NULL,sizeof(O2PDFReal)*count);
@@ -185,8 +185,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    return YES;
 }
 
--(BOOL)getIntegers:(O2PDFInteger **)intsp count:(unsigned *)countp {
-   unsigned     i,count=[self count];
+-(BOOL)getIntegers:(O2PDFInteger **)intsp count:(NSUInteger *)countp {
+   NSUInteger i,count=[self count];
    O2PDFInteger *result;
 
    result=NSZoneMalloc(NULL,sizeof(O2PDFInteger)*count);
@@ -207,7 +207,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 -(NSString *)description {
    NSMutableString *result=[NSMutableString string];
-   int              i;
+   NSInteger i;
    
    [result appendString:@"[ \n"];
    for(i=0;i<_count;i++)
@@ -217,7 +217,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 
 -(void)encodeWithPDFContext:(O2PDFContext *)encoder {
-   int i;
+   NSInteger i;
    
    [encoder appendString:@"[ "];
    for(i=0;i<_count;i++)

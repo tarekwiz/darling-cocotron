@@ -11,11 +11,11 @@
 
 @property(copy) NSString *fillMode;
 
-@property float repeatCount;
+@property CGFloat repeatCount;
 
 @property CFTimeInterval repeatDuration;
 
-@property float speed;
+@property CGFloat speed;
 
 @property CFTimeInterval timeOffset;
 

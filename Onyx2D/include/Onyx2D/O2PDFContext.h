@@ -19,7 +19,7 @@ const NSString *kO2PDFContextTitle;
     NSMapTable *_objectToRef;
     NSMutableArray *_indirectObjects;
     NSMutableArray *_indirectEntries;
-    unsigned _nextNumber;
+    NSUInteger _nextNumber;
     O2PDFxref *_xref;
     O2PDFDictionary *_info;
     O2PDFDictionary *_catalog;
@@ -34,14 +34,14 @@ const NSString *kO2PDFContextTitle;
 
 - initWithConsumer:(O2DataConsumer *)consumer mediaBox:(const O2Rect *)mediaBox auxiliaryInfo:(NSDictionary *)auxiliaryInfo;
 
-- (unsigned)length;
+- (NSUInteger)length;
 
 - (void)appendData:(NSData *)data;
-- (void)appendBytes:(const void *)ptr length:(unsigned)length;
+- (void)appendBytes:(const void *)ptr length:(NSUInteger)length;
 - (void)appendCString:(const char *)cString;
 - (void)appendString:(NSString *)string;
 - (void)appendFormat:(NSString *)format, ...;
-- (void)appendPDFStringWithBytes:(const void *)bytes length:(unsigned)length;
+- (void)appendPDFStringWithBytes:(const void *)bytes length:(NSUInteger)length;
 
 - (O2PDFObject *)referenceForFontWithName:(NSString *)name size:(O2Float)size;
 - (void)setReference:(O2PDFObject *)reference forFontWithName:(NSString *)name size:(O2Float)size;

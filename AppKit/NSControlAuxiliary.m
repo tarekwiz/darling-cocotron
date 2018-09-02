@@ -2,11 +2,11 @@
 
 @implementation NSControlAuxiliary
 
-- (long long) tag {
+- (NSInteger) tag {
     return _tag;
 }
 
-- (void) setTag: (long long) tag {
+- (void) setTag: (NSInteger) tag {
     _tag = tag;
 }
 

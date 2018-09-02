@@ -425,7 +425,7 @@ static inline void buildTransformsIfNeeded(NSView *self) {
    return _focusRingType;
 }
 
--(int)tag {
+-(NSInteger)tag {
    return _tag;
 }
 
@@ -603,7 +603,7 @@ static inline void buildTransformsIfNeeded(NSView *self) {
    return toolTip;
 }
 
--viewWithTag:(int)tag {
+-viewWithTag:(NSInteger)tag {
    int i,count=[_subviews count];
 
    if(_tag==tag)
@@ -949,7 +949,7 @@ static inline void buildTransformsIfNeeded(NSView *self) {
    [self setNeedsDisplay:YES];
 }
 
--(void)setTag:(int)tag {
+-(void)setTag:(NSInteger)tag {
    _tag=tag;
 }
 
@@ -1836,7 +1836,7 @@ static NSGraphicsContext *graphicsContextForView(NSView *view){
 
 	if (NSIntersectsRect(rect, _visibleRect)) {
 		const NSRect *rects;
-		NSUInteger count;
+		NSInteger count;
 		[self getRectsBeingDrawn:&rects count:&count];
 		if (count) {
 			for(int i=0; i<count && needsToDrawRect == NO;i++) {
@@ -1881,11 +1881,11 @@ static NSGraphicsContext *graphicsContextForView(NSView *view){
 			if (view) {
 				NSView *opaqueAncestor = [view opaqueAncestor];
 				const NSRect *ancestorRects;
-				NSUInteger ancestorRectsCount;
+				NSInteger ancestorRectsCount;
 				[opaqueAncestor getRectsBeingDrawn:&ancestorRects count:&ancestorRectsCount];
 				if (ancestorRectsCount || _invalidRectCount) {
 					_rectsBeingRedrawn = NSZoneCalloc(NULL, _invalidRectCount + ancestorRectsCount, sizeof(NSRect));
-					int rectsCount = 0;
+					NSInteger rectsCount = 0;
 					for (int i = 0; i < ancestorRectsCount; ++i) {
 						NSRect r = [opaqueAncestor convertRect:ancestorRects[i] toView:self];
 						// No need for the rects that are outside of the visibleRect
@@ -2038,7 +2038,7 @@ static NSGraphicsContext *graphicsContextForView(NSView *view){
 	   CGContextClipToRect(graphicsPort,rect);
 	   
 	   const NSRect *rects;
-	   NSUInteger rectsCount;
+	   NSInteger rectsCount;
 	   [self getRectsBeingDrawn:&rects count:&rectsCount];
 	   // If there is only one rect, it's the visible rect - it's already clipped
 	   if (rectsCount > 1)

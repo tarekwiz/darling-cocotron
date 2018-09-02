@@ -18,8 +18,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 #import <Onyx2D/O2Font.h>
 
-FOUNDATION_EXPORT char *NSUnicodeToSymbol(const unichar *characters,unsigned length,
-  BOOL lossy,unsigned *resultLength,NSZone *zone);
+FOUNDATION_EXPORT char *NSUnicodeToSymbol(const unichar *characters,NSUInteger length,
+  BOOL lossy, NSUInteger *resultLength,NSZone *zone);
 
 #ifndef DARLING
 @implementation NSNibFontNameTranslator
@@ -92,8 +92,8 @@ FOUNDATION_EXPORT char *NSUnicodeToSymbol(const unichar *characters,unsigned len
 static NSNibFontNameTranslator* _nibFontTranslator = nil;
 #endif
 
-static unsigned _fontCacheCapacity=0;
-static unsigned _fontCacheSize=0;
+static NSUInteger _fontCacheCapacity=0;
+static NSUInteger _fontCacheSize=0;
 static NSFont **_fontCache=NULL;
 
 static NSLock *_cacheLock=nil;
@@ -111,7 +111,7 @@ static NSLock *_cacheLock=nil;
 }
 
 +(NSUInteger)_cacheIndexOfFontWithName:(NSString *)name size:(CGFloat)size {
-   unsigned i;
+   NSUInteger i;
 
    for(i=0;i<_fontCacheSize;i++){
     NSFont *check=_fontCache[i];
@@ -139,7 +139,7 @@ static NSLock *_cacheLock=nil;
 	if (font == nil) {
 		return;
 	}
-   unsigned i;
+   NSUInteger i;
 
     [_cacheLock lock];
    for(i=0;i<_fontCacheSize;i++){
@@ -401,7 +401,7 @@ static NSLock *_cacheLock=nil;
 			// Let's hope that we've got more to go on.
 			NSString* fontFace = [attributes objectForKey: NSFontFaceAttribute];
 			if (fontFace != nil) {
-				int i = 0;
+				NSInteger i = 0;
 				for (i = 0; i < [matchingFonts count]; i++) {
 					NSArray* members = [matchingFonts objectAtIndex: i];
 					NSString* candidateFace = [members objectAtIndex: 1];
@@ -558,7 +558,7 @@ arrayWithArray:[_name componentsSeparatedByString:blank]];
    return NSNativeShortGlyphPacking;
 }
 
--(unsigned)numberOfGlyphs {
+-(NSUInteger)numberOfGlyphs {
    return CTFontGetGlyphCount(_ctFont);
 }
 
@@ -582,7 +582,7 @@ arrayWithArray:[_name componentsSeparatedByString:blank]];
 
 -(NSSize)maximumAdvancement {
    CGSize  max=CGSizeZero;
-   int     glyph,glyphCount=CTFontGetGlyphCount(_ctFont);
+   NSInteger glyph,glyphCount=CTFontGetGlyphCount(_ctFont);
    CGGlyph glyphs[glyphCount];
    CGSize  advances[glyphCount];
    
@@ -626,7 +626,7 @@ arrayWithArray:[_name componentsSeparatedByString:blank]];
 
 -(BOOL)isFixedPitch {
    CGSize  current;
-   int     glyph,glyphCount=CTFontGetGlyphCount(_ctFont);
+   NSInteger glyph,glyphCount=CTFontGetGlyphCount(_ctFont);
    CGGlyph glyphs[glyphCount];
    CGSize  advances[glyphCount];
    
@@ -681,9 +681,9 @@ arrayWithArray:[_name componentsSeparatedByString:blank]];
    return [_ctFont positionOfGlyph:current precededByGlyph:previous isNominal:isNominalp];
 }
 
--(void)getAdvancements:(NSSize *)advancements forGlyphs:(const NSGlyph *)glyphs count:(unsigned)count {
+-(void)getAdvancements:(NSSize *)advancements forGlyphs:(const NSGlyph *)glyphs count:(NSUInteger)count {
    CGGlyph cgGlyphs[count];
-   int     i;
+   NSInteger i;
    
    for(i=0;i<count;i++)
     cgGlyphs[i]=glyphs[i];
@@ -691,17 +691,17 @@ arrayWithArray:[_name componentsSeparatedByString:blank]];
    CTFontGetAdvancesForGlyphs(_ctFont,0,cgGlyphs,advancements,count);
 }
 
--(void)getAdvancements:(NSSize *)advancements forPackedGlyphs:(const void *)packed length:(unsigned)length {
+-(void)getAdvancements:(NSSize *)advancements forPackedGlyphs:(const void *)packed length:(NSUInteger)length {
    CTFontGetAdvancesForGlyphs(_ctFont,0,packed,advancements,length);
 }
 
--(void)getBoundingRects:(NSRect *)rects forGlyphs:(const NSGlyph *)glyphs count:(unsigned)count {
+-(void)getBoundingRects:(NSRect *)rects forGlyphs:(const NSGlyph *)glyphs count:(NSUInteger)count {
    NSUnimplementedMethod();
 }
 
--(unsigned)getGlyphs:(NSGlyph *)glyphs forCharacters:(unichar *)characters length:(unsigned)length {
+-(NSUInteger)getGlyphs:(NSGlyph *)glyphs forCharacters:(unichar *)characters length:(NSUInteger)length {
    CGGlyph  cgGlyphs[length];
-   int      i;
+   NSInteger  i;
    
    CTFontGetGlyphsForCharacters(_ctFont,characters,cgGlyphs,length);
    
@@ -721,8 +721,8 @@ arrayWithArray:[_name componentsSeparatedByString:blank]];
    return [NSString stringWithFormat:@"<%@ %@ %f>",[self class],_name,_pointSize];
 }
 
-int NSConvertGlyphsToPackedGlyphs(NSGlyph *glyphs,int length,NSMultibyteGlyphPacking packing,char *outputX) {
-   int      i,result=0;
+NSInteger NSConvertGlyphsToPackedGlyphs(NSGlyph *glyphs,NSInteger length,NSMultibyteGlyphPacking packing,char *outputX) {
+   NSInteger i,result=0;
    CGGlyph *output=(CGGlyph *)outputX;
 
    for(i=0;i<length;i++){

@@ -107,7 +107,7 @@ static NSUInteger    _pickerMask=0;
                                      [NSColorPickerColorList class],
 #endif
 									nil];
-    unsigned i,count=[colorPickersClassArray count];
+    NSUInteger i,count=[colorPickersClassArray count];
 
     [colorWell setBordered:NO];
     

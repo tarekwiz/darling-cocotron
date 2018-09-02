@@ -112,7 +112,7 @@ static NSMutableDictionary *cellClassDictionary = nil;
     }
 }
 
--(int)tag {
+-(NSInteger)tag {
    return _tag;
 }
 
@@ -209,7 +209,7 @@ static NSMutableDictionary *cellClassDictionary = nil;
    return _cell;
 }
 
--(int)selectedTag {
+-(NSInteger)selectedTag {
    return [[self selectedCell] tag];
 }
 
@@ -235,7 +235,7 @@ static NSMutableDictionary *cellClassDictionary = nil;
     }
 }
 
--(void)setTag:(int)tag {
+-(void)setTag:(NSInteger)tag {
    _tag=tag;
 }
 
@@ -254,7 +254,7 @@ static NSMutableDictionary *cellClassDictionary = nil;
    [self setNeedsDisplay:YES];
 }
 
--(void)setFloatingPointFormat:(BOOL)fpp left:(unsigned)left right:(unsigned)right {
+-(void)setFloatingPointFormat:(BOOL)fpp left:(NSUInteger)left right:(NSUInteger)right {
    [_cell setFloatingPointFormat:fpp left:left right:right];
 }
 

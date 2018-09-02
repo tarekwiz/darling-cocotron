@@ -22,19 +22,19 @@
    _subtype=value;
 }
 
--(float)startProgress {
+-(CGFloat)startProgress {
   return _startProgress;
 }
 
--(void)setStartProgress:(float)value {
+-(void)setStartProgress:(CGFloat)value {
    _startProgress=value;
 }
 
--(float)endProgress {
+-(CGFloat)endProgress {
    return _endProgress;
 }
 
--(void)setEndProgress:(float)value {
+-(void)setEndProgress:(CGFloat)value {
    _endProgress=value;
 }
 

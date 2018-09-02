@@ -1,16 +1,16 @@
 #import <Foundation/Foundation.h>
 
 @interface NSControlAuxiliary : NSObject {
-    long long _tag;
+    NSInteger _tag;
     id _target;
     SEL _action;
 }
 
 - (id) target;
 - (SEL) action;
-- (long long) tag;
+- (NSInteger) tag;
 
-- (void) setTag: (long long) tag;
+- (void) setTag: (NSInteger) tag;
 - (void) setAction: (SEL) action;
 - (void) setTarget: (id) target;
 

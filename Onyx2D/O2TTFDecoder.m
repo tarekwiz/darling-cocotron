@@ -567,7 +567,7 @@ static void loadMacintoshNameMapping(NSMapTable *table){
     NSMapInsert(table,MacintoshNameMapping[i].name,(void *)i);
 }
 
-NSMapTable *O2TTFDecoderGetPostScriptNameMapTable(O2TTFDecoderRef self,int *numberOfGlyphs){
+NSMapTable *O2TTFDecoderGetPostScriptNameMapTable(O2TTFDecoderRef self,NSInteger *numberOfGlyphs){
    NSMapTable *result=NSCreateMapTable(NSObjectMapKeyCallBacks,NSIntegerMapValueCallBacks,258);
 
    if(!seekToTable(self,'post'))
@@ -595,7 +595,7 @@ NSMapTable *O2TTFDecoderGetPostScriptNameMapTable(O2TTFDecoderRef self,int *numb
      
     case 0x00020000:;
      uint16_t numberOfGlyphs=decode_uint16(self);
-     int      i;
+     NSUInteger i;
      uint16_t maxIndex=0;
      uint16_t glyphNameIndex[numberOfGlyphs];
      
@@ -611,7 +611,7 @@ NSMapTable *O2TTFDecoderGetPostScriptNameMapTable(O2TTFDecoderRef self,int *numb
      for(i=0;i<maxIndex;i++){
       uint8_t length=decode_uint8(self);
       uint8_t buffer[length];
-      int     count=0;
+      NSInteger count=0;
       
       for(count=0;count<length;count++)
        buffer[count]=decode_uint8(self);
@@ -639,7 +639,7 @@ NSMapTable *O2TTFDecoderGetPostScriptNameMapTable(O2TTFDecoderRef self,int *numb
    return result;
 }
 
-int O2TTFDecoderGetOffsetsAreLong(O2TTFDecoderRef self) {
+NSInteger O2TTFDecoderGetOffsetsAreLong(O2TTFDecoderRef self) {
    if(!seekToTable(self,'head'))
     return 0;
 
@@ -664,14 +664,14 @@ int O2TTFDecoderGetOffsetsAreLong(O2TTFDecoderRef self) {
    return indexToLocFormat;
 }
 
-int *O2TTFDecoderGetGlyphLocations(O2TTFDecoderRef self,int numberOfGlyphs) {
-   int *result=NSZoneMalloc(NULL,sizeof(int)*numberOfGlyphs);
+NSInteger *O2TTFDecoderGetGlyphLocations(O2TTFDecoderRef self, NSInteger numberOfGlyphs) {
+   NSInteger *result=NSZoneMalloc(NULL,sizeof(NSInteger)*numberOfGlyphs);
    
    if(O2TTFDecoderGetOffsetsAreLong(self)){
     if(!seekToTable(self,'loca'))
      return NULL;
      
-    int i;
+    NSInteger i;
     for(i=0;i<numberOfGlyphs;i++)
      result[i]=decode_uint32(self);
      
@@ -680,14 +680,14 @@ int *O2TTFDecoderGetGlyphLocations(O2TTFDecoderRef self,int numberOfGlyphs) {
     if(!seekToTable(self,'loca'))
      return NULL;
      
-    int i;
+    NSInteger i;
     for(i=0;i<numberOfGlyphs;i++)
      result[i]=decode_uint16(self);
    }
    return result;
 }
 
-O2PathRef O2TTFDecoderGetGlyphOutline(O2TTFDecoderRef self,int glyphLocation) {
+O2PathRef O2TTFDecoderGetGlyphOutline(O2TTFDecoderRef self, NSInteger glyphLocation) {
    O2PathRef result=O2PathCreateMutable();
    
     if(!seekToTable(self,'glyf'))
@@ -727,7 +727,7 @@ void O2TTFDecoderGetNameTable(O2TTFDecoderRef self) {
     return;
    }
 
-   int      stringTable=self->_position;
+   NSInteger stringTable=self->_position;
    
    uint16_t format=decode_uint16(self);
    uint16_t i,count=decode_uint16(self);

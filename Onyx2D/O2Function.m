@@ -89,7 +89,7 @@ void O2FunctionEvaluate(O2FunctionRef self,O2Float x,O2Float *output){
    [super dealloc];
 }
 
--(unsigned)domainCount {
+-(NSUInteger)domainCount {
    return _domainCount;
 }
 
@@ -97,7 +97,7 @@ void O2FunctionEvaluate(O2FunctionRef self,O2Float x,O2Float *output){
    return _domain;
 }
 
--(unsigned)rangeCount {
+-(NSUInteger)rangeCount {
    return _rangeCount;
 }
 

@@ -477,7 +477,7 @@ void O2PDF_render_gs(O2PDFScanner *scanner,void *info) {
     O2PDFInteger phase;
     
     if([array getArrayAtIndex:0 value:&dashesArray] && [array getIntegerAtIndex:1 value:&phase]){
-     unsigned   count;
+     NSUInteger count;
      O2PDFReal *lengths;
      
      if([dashesArray getNumbers:&lengths count:&count]){
@@ -927,9 +927,9 @@ void O2PDF_render_SC(O2PDFScanner *scanner,void *info) {
    O2Context    *context=kgContextFromInfo(info);
    O2ColorRef color=O2ContextStrokeColor(context);
    O2ColorSpaceRef colorSpace=O2ColorGetColorSpace(color);
-   unsigned      numberOfComponents=O2ColorSpaceGetNumberOfComponents(colorSpace);
-   int           count=numberOfComponents;
-   float         components[count+1];
+   NSUInteger    numberOfComponents=O2ColorSpaceGetNumberOfComponents(colorSpace);
+   NSInteger     count=numberOfComponents;
+   O2Float       components[count+1];
    
    components[count]=O2ColorGetAlpha(color);
    while(--count>=0)
@@ -946,9 +946,9 @@ void O2PDF_render_sc(O2PDFScanner *scanner,void *info) {
    O2Context    *context=kgContextFromInfo(info);
    O2ColorRef color=O2ContextFillColor(context);
    O2ColorSpaceRef colorSpace=O2ColorGetColorSpace(color);
-   unsigned      numberOfComponents=O2ColorSpaceGetNumberOfComponents(colorSpace);
-   int           count=numberOfComponents;
-   float         components[count+1];
+   NSUInteger    numberOfComponents=O2ColorSpaceGetNumberOfComponents(colorSpace);
+   NSInteger     count=numberOfComponents;
+   O2Float       components[count+1];
    
    components[count]=O2ColorGetAlpha(color);
    while(--count>=0)
@@ -965,9 +965,9 @@ void O2PDF_render_SCN(O2PDFScanner *scanner,void *info) {
    O2Context    *context=kgContextFromInfo(info);
    O2ColorRef color=O2ContextStrokeColor(context);
    O2ColorSpaceRef colorSpace=O2ColorGetColorSpace(color);
-   unsigned      numberOfComponents=O2ColorSpaceGetNumberOfComponents(colorSpace);
-   int           count=numberOfComponents;
-   float         components[count+1];
+   NSUInteger    numberOfComponents=O2ColorSpaceGetNumberOfComponents(colorSpace);
+   NSInteger     count=numberOfComponents;
+   O2Float       components[count+1];
    
    components[count]=O2ColorGetAlpha(color);
    while(--count>=0)
@@ -984,8 +984,8 @@ void O2PDF_render_scn(O2PDFScanner *scanner,void *info) {
    O2Context    *context=kgContextFromInfo(info);
    O2ColorRef color=O2ContextFillColor(context);
    O2ColorSpaceRef colorSpace=O2ColorGetColorSpace(color);
-   unsigned      numberOfComponents=O2ColorSpaceGetNumberOfComponents(colorSpace);
-   int           count=numberOfComponents;
+   NSUInteger    numberOfComponents=O2ColorSpaceGetNumberOfComponents(colorSpace);
+   NSInteger     count=numberOfComponents;
    O2PDFReal     components[count+1];
    
    components[count]=O2ColorGetAlpha(color);

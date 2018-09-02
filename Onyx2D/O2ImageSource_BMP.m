@@ -427,11 +427,11 @@ stbi_uc *stbi_bmp_load_from_memory (const stbi_uc *buffer, int len, int *x, int 
     return (CFStringRef)@"com.microsoft.bmp";
 }
 
--(unsigned)count {
+-(NSUInteger)count {
    return 1;
 }
 
--(O2Image *)createImageAtIndex:(unsigned)index options:(NSDictionary *)options {
+-(O2Image *)createImageAtIndex:(NSUInteger)index options:(NSDictionary *)options {
    int            width,height;
    int            comp;
    unsigned char *pixels=stbi_bmp_load_from_memory([_bmp bytes],[_bmp length],&width,&height,&comp,STBI_rgb_alpha);

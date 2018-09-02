@@ -19,14 +19,14 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <stddef.h>
 #import <string.h>
 
-unsigned O2PDFHashCString(NSMapTable *table,const void *data){
+NSUInteger O2PDFHashCString(NSMapTable *table,const void *data){
    const char *s=data;
 
    if(s!=NULL){
-    unsigned i,result=5381;
+    NSUInteger i,result=5381;
 
     for(i=0;s[i]!='\0';i++)
-     result=((result<<5)+result)+(unsigned)(s[i]); // hash*33+c
+     result=((result<<5)+result)+(NSUInteger)(s[i]); // hash*33+c
 
     return result;
    }

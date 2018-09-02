@@ -109,7 +109,7 @@ const NSString *kO2PDFContextTitle=@"kO2PDFContextTitle";
    [super dealloc];
 }
 
--(unsigned)length {
+-(NSUInteger)length {
     return _length;
 }
 
@@ -118,7 +118,7 @@ const NSString *kO2PDFContextTitle=@"kO2PDFContextTitle";
     return NO;
 }
 
--(void)appendBytes:(const void *)ptr length:(unsigned)length {
+-(void)appendBytes:(const void *)ptr length:(NSUInteger)length {
     _length += length;
     O2DataConsumerPutBytes(_dataConsumer, ptr, length);
 }
@@ -149,7 +149,7 @@ const NSString *kO2PDFContextTitle=@"kO2PDFContextTitle";
    va_end(arguments);
 }
 
--(void)appendPDFStringWithBytes:(const void *)bytesV length:(unsigned)length toObject:(id)data {
+-(void)appendPDFStringWithBytes:(const void *)bytesV length:(NSUInteger)length toObject:(id)data {
    const unsigned char *bytes=bytesV;
    BOOL hex=NO;
    int  i;
@@ -162,7 +162,7 @@ const NSString *kO2PDFContextTitle=@"kO2PDFContextTitle";
 
    if(hex){
     const char *hex="0123456789ABCDEF";
-    int         i,bufCount,bufSize=256;
+    NSInteger   i,bufCount,bufSize=256;
     char        buf[bufSize];
 
     [data appendBytes:"<" length:1];
@@ -186,7 +186,7 @@ const NSString *kO2PDFContextTitle=@"kO2PDFContextTitle";
    }
 }
 
--(void)appendPDFStringWithBytes:(const void *)bytes length:(unsigned)length {
+-(void)appendPDFStringWithBytes:(const void *)bytes length:(NSUInteger)length {
    [self appendPDFStringWithBytes:bytes length:length toObject:self];
 }
 
@@ -250,7 +250,7 @@ const NSString *kO2PDFContextTitle=@"kO2PDFContextTitle";
    va_end(arguments);
 }
 
--(void)contentPDFStringWithBytes:(const void *)bytes length:(unsigned)length {
+-(void)contentPDFStringWithBytes:(const void *)bytes length:(NSUInteger)length {
    [self appendPDFStringWithBytes:bytes length:length toObject:[[_contentStreamStack lastObject] mutableData]];
 }
 
@@ -296,10 +296,10 @@ const NSString *kO2PDFContextTitle=@"kO2PDFContextTitle";
 }
 
 -(void)emitPath:(O2PathRef)path {
-   int                  i,numberOfElements=O2PathNumberOfElements(path);
+   NSInteger            i,numberOfElements=O2PathNumberOfElements(path);
    const unsigned char *elements=O2PathElements(path);
    const O2Point       *points=O2PathPoints(path);
-   int                  pi=0;
+   NSInteger            pi=0;
    O2AffineTransform    invertUserSpaceTransform=O2AffineTransformInvert(O2GStateUserSpaceTransform(O2ContextCurrentGState(self)));
 
    for(i=0;i<numberOfElements;i++){
@@ -520,7 +520,7 @@ const NSString *kO2PDFContextTitle=@"kO2PDFContextTitle";
    [self emitRestoreGState];
 }
 
--(void)showGlyphs:(const O2Glyph *)glyphs advances:(const O2Size *)advances count:(unsigned)count {
+-(void)showGlyphs:(const O2Glyph *)glyphs advances:(const O2Size *)advances count:(NSUInteger)count {
 // FIXME: use advances if not null
 
    [self emitSaveGState];
@@ -594,13 +594,13 @@ const NSString *kO2PDFContextTitle=@"kO2PDFContextTitle";
 }
 
 -(void)internIndirectObjects {
-    int i;
+    NSInteger i;
 
     for(i=0;i<[_indirectObjects count];i++){ // do not cache 'count', can grow during encoding
         O2PDFObject    *object=[_indirectObjects objectAtIndex:i];
         O2PDFxrefEntry *entry=[_indirectEntries objectAtIndex:i];
         if (![object isKindOfClass:[NSNull class]]) {
-            unsigned        position=[self length];
+            NSUInteger position=[self length];
             [entry setPosition:position];
 
             [self appendFormat:@"%d %d obj\n",[entry number],[entry generation]];
@@ -613,7 +613,7 @@ const NSString *kO2PDFContextTitle=@"kO2PDFContextTitle";
 }
 
 -(void)internIndirectObjectsExcluding:(NSArray *)array {
-    int i;
+    NSInteger i;
 
     for(i=0;i<[_indirectObjects count];i++){ // do not cache 'count', can grow during encoding
         O2PDFObject    *object=[[[_indirectObjects objectAtIndex:i] retain] autorelease];
@@ -621,7 +621,7 @@ const NSString *kO2PDFContextTitle=@"kO2PDFContextTitle";
             O2PDFxrefEntry *entry=[_indirectEntries objectAtIndex:i];
             [_indirectObjects replaceObjectAtIndex:i withObject:[NSNull null]];
             if (![object isKindOfClass:[NSNull class]]) {
-                unsigned        position=[self length];
+                NSUInteger position=[self length];
                 [entry setPosition:position];
 
                 [self appendFormat:@"%d %d obj\n",[entry number],[entry generation]];

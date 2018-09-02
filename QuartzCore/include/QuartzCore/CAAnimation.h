@@ -23,9 +23,9 @@ CA_EXPORT NSString *const kCATransitionFromBottom;
     CFTimeInterval _beginTime;
     CFTimeInterval _duration;
     NSString *_fillMode;
-    float _repeatCount;
+    CGFloat _repeatCount;
     CFTimeInterval _repeatDuration;
-    float _speed;
+    CGFloat _speed;
     CFTimeInterval _timeOffset;
 }
 

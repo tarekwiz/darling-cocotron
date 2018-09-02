@@ -104,7 +104,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
     
     if([coder allowsKeyedCoding]){
         NSKeyedUnarchiver *keyed=(NSKeyedUnarchiver *)coder;
-        unsigned              flags=[keyed decodeIntForKey:@"NSTVFlags"];
+        unsigned flags=[keyed decodeIntForKey:@"NSTVFlags"];
         NSTextViewSharedData *sharedData=[keyed decodeObjectForKey:@"NSSharedData"];
         
         _textContainer=[[keyed decodeObjectForKey:@"NSTextContainer"] retain];
@@ -495,7 +495,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
 
 - (NSRange)rangeForUserCompletion {
     NSRange range = [self selectedRange];
-    unsigned index = [_textStorage nextWordFromIndex:range.location forward:NO];
+    NSUInteger index = [_textStorage nextWordFromIndex:range.location forward:NO];
     
     if (range.length != 0)
         return NSMakeRange(NSNotFound, 0);
@@ -506,14 +506,14 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
     return range;
 }
 
-- (NSArray *)completionsForPartialWordRange:(NSRange)range indexOfSelectedItem:(int *)index {
+- (NSArray *)completionsForPartialWordRange:(NSRange)range indexOfSelectedItem:(NSInteger *)index {
     NSArray *result;
     // replace this with a real completion list source...
     NSArray *source = [NSArray arrayWithObjects:
                        @"selector", @"Class", @"Classic", @"object", @"objects d'art", @"objection", @"objectivism", @"objective-c", @"NSString", nil];
     NSMutableArray *completions = [NSMutableArray new];
     NSString *string = [[_textStorage string] substringWithRange:range];
-    int i, count = [source count];
+    NSInteger i, count = [source count];
     
     *index = NSNotFound;
     
@@ -534,7 +534,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
     return result;
 }
 
-- (void)insertCompletion:(NSString *)string forPartialWordRange:(NSRange)range movement:(int)movement isFinal:(BOOL)isFinal {
+- (void)insertCompletion:(NSString *)string forPartialWordRange:(NSRange)range movement:(NSInteger)movement isFinal:(BOOL)isFinal {
     [self _replaceCharactersInRange:range withString:string];
     
     // is this proper behavior? i dunno
@@ -680,7 +680,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
 		if(range.location>=[_textStorage length]) {
 			result=[[self layoutManager] extraLineFragmentRect];
 			if (NSIsEmptyRect(result) && [_textStorage length]) {
-				unsigned    rectCount=0;
+				NSUInteger rectCount=0;
 				// Get the last used fragment rect
 				range = NSMakeRange([_textStorage length]-1, 1);
                 range = [[self layoutManager] glyphRangeForCharacterRange:range actualCharacterRange:NULL];
@@ -699,7 +699,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
 			}
 			result.size.width=1;
 		} else {
-			unsigned    rectCount=0;
+			NSUInteger rectCount=0;
 			NSRect * rectArray=[[self layoutManager] rectArrayForCharacterRange:range withinSelectedCharacterRange:range inTextContainer:[self textContainer] rectCount:&rectCount];
 			result=rectArray[0];
 		}
@@ -743,7 +743,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
         _insertionPointRect=[self _viewRectForCharacterRange:[self selectedRange]];
     
     if(restartFlag){
-        float interval=[[NSDisplay currentDisplay] textCaretBlinkInterval];
+        CGFloat interval=[[NSDisplay currentDisplay] textCaretBlinkInterval];
         
         _insertionPointOn=[self shouldDrawInsertionPoint];
         [_insertionPointTimer invalidate];
@@ -920,7 +920,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
         range.length=0;
     }
     else {
-        unsigned length=[[self string] length];
+        NSUInteger length=[[self string] length];
         
         range.location++;
         if(range.location>length)
@@ -932,7 +932,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
 
 - (void)moveForwardAndModifySelection:sender {
     NSString *string = [_textStorage string];
-    unsigned length = [string length];
+    NSUInteger length = [string length];
     NSRange range = [self selectedRange];
     BOOL downstream = (range.location >= _selectionOrigin);
     
@@ -965,14 +965,14 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
     BOOL downstream = (range.location >= _selectionOrigin);
     
     if (downstream) {
-        unsigned location = [_textStorage nextWordFromIndex:NSMaxRange(range) forward:YES];
-        unsigned delta = location - NSMaxRange(range);
+        NSUInteger location = [_textStorage nextWordFromIndex:NSMaxRange(range) forward:YES];
+        NSUInteger delta = location - NSMaxRange(range);
         
         range.length += delta;
     }
     else {
-        unsigned location = [_textStorage nextWordFromIndex:range.location forward:YES];
-        unsigned delta = location - range.location;
+        NSUInteger location = [_textStorage nextWordFromIndex:range.location forward:YES];
+        NSUInteger delta = location - range.location;
         
         range.location += delta;
         range.length -= delta;
@@ -987,7 +987,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
 
 -(void)moveDown:sender {
     NSString *string=[_textStorage string];
-    unsigned  length=[string length];
+    NSUInteger  length=[string length];
     NSRange   range=[self selectedRange];
     
     if (_rangeForUserCompletion.location != NSNotFound) {
@@ -1005,13 +1005,13 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
     range.length=0;
     if(range.location<length){
         NSRange  line=[[self layoutManager] _softLineRangeForCharacterAtIndex:range.location];
-        unsigned max=NSMaxRange(line);
+        NSUInteger max=NSMaxRange(line);
         
         if(max>=length)
             range.location=length;
         else {
             NSRange  nextLine=[[self layoutManager] _softLineRangeForCharacterAtIndex:max+1];
-            unsigned offset=range.location-line.location;
+            NSUInteger offset=range.location-line.location;
             
             range.location=nextLine.location+offset;
             if(range.location>=NSMaxRange(nextLine))
@@ -1023,22 +1023,22 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
 }
 
 - (void)moveDownAndModifySelection:sender {
-    unsigned  length=[[_textStorage string] length];
+    NSUInteger length=[[_textStorage string] length];
     NSRange   range=[self selectedRange];
-    unsigned  delta;
+    NSUInteger delta;
     BOOL downstream = (range.location >= _selectionOrigin);
     
     delta = (downstream ? NSMaxRange(range) : range.location);
     
     if(delta<length){
         NSRange  line=[[self layoutManager] _softLineRangeForCharacterAtIndex:delta];
-        unsigned max=NSMaxRange(line);
+        NSUInteger max=NSMaxRange(line);
         
         if(max>=length)
             delta=length;
         else {
             NSRange  nextLine=[[self layoutManager] _softLineRangeForCharacterAtIndex:max+1];
-            unsigned offset=delta-line.location;
+            NSUInteger offset=delta-line.location;
             
             delta=nextLine.location+offset;
             if(delta>=NSMaxRange(nextLine))
@@ -1065,7 +1065,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
 }
 
 -(void)moveUp:sender {
-    unsigned  length=[[_textStorage string] length];
+    NSUInteger length=[[_textStorage string] length];
     NSRange   range=[self selectedRange];
     
     if (_rangeForUserCompletion.location != NSNotFound) {
@@ -1086,7 +1086,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
         
         if(line.location>0){
             NSRange  prevLine=[[self layoutManager] _softLineRangeForCharacterAtIndex:line.location-1];
-            unsigned offset=range.location-line.location;
+            NSUInteger offset=range.location-line.location;
             
             range.location=prevLine.location+offset;
             if(range.location>=NSMaxRange(prevLine)){
@@ -1102,9 +1102,9 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
 }
 
 - (void)moveUpAndModifySelection:sender {
-    unsigned  length=[[_textStorage string] length];
+    NSUInteger length=[[_textStorage string] length];
     NSRange   range=[self selectedRange];
-    int       delta;
+    NSInteger delta;
     BOOL upstream = (NSMaxRange(range) <= _selectionOrigin);
     
     delta = (upstream ? range.location : NSMaxRange(range));
@@ -1114,7 +1114,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
         
         if(line.location>0){
             NSRange  prevLine=[[self layoutManager] _softLineRangeForCharacterAtIndex:line.location-1];
-            unsigned offset=delta-line.location;
+            NSUInteger offset=delta-line.location;
             
             
             delta=prevLine.location+offset;
@@ -1196,7 +1196,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
     if(range.length>0)
         range.length=0;
     else {
-        unsigned length=[[self string] length];
+        NSUInteger length=[[self string] length];
         
         range.location--;
         if(range.location>length)
@@ -1241,15 +1241,15 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
     BOOL upstream = (NSMaxRange(range) <= _selectionOrigin);
     
     if (upstream) {
-        unsigned location = [_textStorage nextWordFromIndex:range.location forward:NO];
-        unsigned delta = range.location - location;
+        NSUInteger location = [_textStorage nextWordFromIndex:range.location forward:NO];
+        NSUInteger delta = range.location - location;
         
         range.location -= delta;
         range.length += delta;
     }
     else {
-        unsigned location = [_textStorage nextWordFromIndex:NSMaxRange(range) forward:NO];
-        unsigned delta = NSMaxRange(range) - location;
+        NSUInteger location = [_textStorage nextWordFromIndex:NSMaxRange(range) forward:NO];
+        NSUInteger delta = NSMaxRange(range) - location;
         
         if (delta < range.length)
             range.length -= delta;
@@ -1283,7 +1283,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
 
 - (void)moveToEndOfDocumentAndModifySelection:sender {
     NSRange range = [self selectedRange];
-    unsigned length = [[_textStorage string] length];
+    NSUInteger length = [[_textStorage string] length];
     
     if (range.length == 0)
         _selectionAffinity = NSSelectionAffinityDownstream;
@@ -1387,7 +1387,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
 - (void)deleteToBeginningOfLine:sender {
     NSRange   range=[self selectedRange];
     NSRange   lineRange=[[self layoutManager] _softLineRangeForCharacterAtIndex:NSMaxRange(range)];
-    unsigned delta = range.location - lineRange.location;
+    NSUInteger delta = range.location - lineRange.location;
     
     if (range.length == 0) {
         range.location -= delta;
@@ -1406,7 +1406,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
 - (void)deleteToEndOfLine:sender {
     NSRange   range=[self selectedRange];
     NSRange   lineRange=[[self layoutManager] _softLineRangeForCharacterAtIndex:NSMaxRange(range)];
-    unsigned delta = NSMaxRange(lineRange) - NSMaxRange(range);
+    NSUInteger delta = NSMaxRange(lineRange) - NSMaxRange(range);
     
     if (range.length == 0)		// "implemented to delete the selection, if there is one, *OR*
         range.length += delta;		// all text to the end of a line...
@@ -1423,7 +1423,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
 - (void)deleteToBeginningOfParagraph:sender {
     NSRange   range=[self selectedRange];
     NSRange   lineRange=[[_textStorage string] lineRangeForRange:range];
-    unsigned  delta = range.location - lineRange.location;
+    NSUInteger delta = range.location - lineRange.location;
     
     // i'm not killing the newline here, not sure how this should work.
     if (range.length == 0) {
@@ -1443,7 +1443,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
 - (void)deleteToEndOfParagraph:sender {
     NSRange   range=[self selectedRange];
     NSRange   lineRange=[[_textStorage string] lineRangeForRange:range];
-    unsigned  max=NSMaxRange(lineRange);
+    NSUInteger max=NSMaxRange(lineRange);
     
     if(max!=lineRange.location && max!=[[_textStorage string] length])
         max--;
@@ -1477,10 +1477,10 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
 
 - (void)deleteWordBackward:sender {
     NSRange range = [self selectedRange];
-    unsigned nextWord = [_textStorage nextWordFromIndex:range.location forward:NO];
+    NSUInteger nextWord = [_textStorage nextWordFromIndex:range.location forward:NO];
     
     if (range.length == 0) {
-        unsigned delta = range.location - nextWord;
+        NSUInteger delta = range.location - nextWord;
         
         range.location -= delta;
         range.length += delta;
@@ -1496,10 +1496,10 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
 
 - (void)deleteWordForward:sender {
     NSRange range = [self selectedRange];
-    unsigned nextWord = [_textStorage nextWordFromIndex:range.location forward:YES];
+    NSUInteger nextWord = [_textStorage nextWordFromIndex:range.location forward:YES];
     
     if (range.length == 0 && nextWord <= [[_textStorage string] length]) {
-        unsigned delta = nextWord - range.location;
+        NSUInteger delta = nextWord - range.location;
         
         range.length += delta;
     }
@@ -1526,7 +1526,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
 - (void)moveToBeginningOfLineAndModifySelection:sender {
     NSRange selectedRange = [self selectedRange];
     NSRange lineRange;
-    unsigned index;
+    NSUInteger index;
     BOOL upstream = NO;
     
     if (NSMaxRange(selectedRange) <= _selectionOrigin) {
@@ -1539,7 +1539,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
     lineRange = [[self layoutManager] _softLineRangeForCharacterAtIndex:index];
     
     if (upstream) {
-        unsigned delta = selectedRange.location - lineRange.location;
+        NSUInteger delta = selectedRange.location - lineRange.location;
         
         selectedRange.location -= delta;
         selectedRange.length += delta;
@@ -1566,7 +1566,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
 - (void)moveToEndOfLineAndModifySelection:sender {
     NSRange selectedRange = [self selectedRange];
     NSRange lineRange;
-    unsigned index;
+    NSUInteger index;
     BOOL downstream = NO;
     
     if (selectedRange.location >= _selectionOrigin) {
@@ -1579,7 +1579,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
     lineRange = [[self layoutManager] _softLineRangeForCharacterAtIndex:index];
     
     if (downstream) {
-        unsigned delta = NSMaxRange(lineRange) - NSMaxRange(selectedRange);
+        NSUInteger delta = NSMaxRange(lineRange) - NSMaxRange(selectedRange);
         
         selectedRange.length += delta;
     }
@@ -1614,7 +1614,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
     
     if (upstream) {
         NSRange lineRange;
-        unsigned delta = 0;
+        NSUInteger delta = 0;
         
         lineRange = [[_textStorage string] lineRangeForRange:NSMakeRange(range.location, 0)];
         
@@ -1629,7 +1629,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
     }
     else {
         NSRange lineRange = [[_textStorage string] lineRangeForRange:NSMakeRange(NSMaxRange(range)-1, 0)];
-        unsigned delta = NSMaxRange(range) - lineRange.location;
+        NSUInteger delta = NSMaxRange(range) - lineRange.location;
         
         if (delta < range.length)
             range.length -= delta;
@@ -1645,7 +1645,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
     NSString *string=[_textStorage string];
     NSRange   range=[self selectedRange];
     NSRange   lineRange=[string lineRangeForRange:range];
-    unsigned  max=NSMaxRange(lineRange);
+    NSUInteger  max=NSMaxRange(lineRange);
     
     if(max!=lineRange.location && max!=[string length])
         max--;
@@ -1659,13 +1659,13 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
     
     if (downstream) {
         NSRange lineRange = [[_textStorage string] lineRangeForRange:NSMakeRange(NSMaxRange(range), 0)];
-        unsigned delta = NSMaxRange(lineRange) - NSMaxRange(range);
+        NSUInteger delta = NSMaxRange(lineRange) - NSMaxRange(range);
         
         range.length += delta;
     }
     else {
         NSRange lineRange = [[_textStorage string] lineRangeForRange:NSMakeRange(range.location, 0)];
-        unsigned delta = NSMaxRange(lineRange) - range.location;
+        NSUInteger delta = NSMaxRange(lineRange) - range.location;
         
         if (delta < range.length) {
             range.location += delta;
@@ -1692,7 +1692,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
     [self scrollPoint:rect.origin];
 }
 
--(NSUInteger)glyphIndexForPoint:(NSPoint)point fractionOfDistanceThroughGlyph:(float *)fraction {
+-(NSUInteger)glyphIndexForPoint:(NSPoint)point fractionOfDistanceThroughGlyph:(CGFloat *)fraction {
     point.x-=_textContainerInset.width;
     point.y-=_textContainerInset.height;
     
@@ -1702,7 +1702,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
 - (void)pageUp:sender {
     NSRect rect;
     NSRange range;
-    float fraction;
+    CGFloat fraction;
     
     [self scrollPageUp:sender];
     
@@ -1717,8 +1717,8 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
 - (void)pageUpAndModifySelection:sender {
     NSRect rect;
     NSRange range = [self selectedRange];
-    unsigned location;
-    float fraction;
+    NSUInteger location;
+    CGFloat fraction;
     BOOL upstream;
     
     [self scrollPageUp:sender];
@@ -1728,7 +1728,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
     
     upstream = (NSMaxRange(range) <= _selectionOrigin);
     if (upstream) {
-        unsigned delta = range.location - location;
+        NSUInteger delta = range.location - location;
         
         range.location -= delta;
         range.length += delta;
@@ -1758,7 +1758,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
     NSString *string = [_textStorage string];
     NSRect rect;
     NSRange range;
-    float fraction;
+    CGFloat fraction;
     
     [self scrollPageDown:sender];
     
@@ -1775,8 +1775,8 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
 - (void)pageDownAndModifySelection:sender {
     NSRect rect;
     NSRange range = [self selectedRange];
-    unsigned location;
-    float fraction;
+    NSUInteger location;
+    CGFloat fraction;
     BOOL downstream;
     
     [self scrollPageDown:sender];
@@ -1787,7 +1787,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
     
     downstream = (range.location >= _selectionOrigin);
     if (downstream) {
-        unsigned delta = location - NSMaxRange(range);
+        NSUInteger delta = location - NSMaxRange(range);
         
         range.length += delta;
     }
@@ -1837,7 +1837,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
 - (void)transposeWords:sender {
     NSString *string = [_textStorage string];
     NSRange range = [self selectedRange];
-    unsigned nextWord, previousWord;
+    NSUInteger nextWord, previousWord;
     NSString *a, *b, *space;
     
     if (range.length > 0 || range.location == [string length])
@@ -2732,7 +2732,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
 -(void)mouseDown:(NSEvent *)event {
     NSEvent *lastDrag=event;
     NSPoint  point=[self convertPoint:[event locationInWindow] fromView:nil];
-    float    fraction=0;
+    CGFloat    fraction=0;
     NSRange  firstRange,lastRange,selection;
     NSSelectionAffinity affinity=NSSelectionAffinityUpstream;
     NSSelectionGranularity granularity = [event clickCount]-1;
@@ -2821,7 +2821,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
 
 -(NSDragOperation)draggingUpdated:(id <NSDraggingInfo>)sender {
     NSPoint   point=[self convertPoint:[sender draggingLocation] fromView:nil];
-    float     fraction=0;
+    CGFloat     fraction=0;
     NSUInteger location=[self glyphIndexForPoint:point fractionOfDistanceThroughGlyph:&fraction];
     
     if(location==NSNotFound)
@@ -2843,7 +2843,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
     return NSDragOperationNone;
 }
 
--(unsigned)draggingEntered:(id <NSDraggingInfo>)sender {
+-(NSUInteger)draggingEntered:(id <NSDraggingInfo>)sender {
     return [self draggingUpdated:sender];
 }
 
@@ -2854,7 +2854,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
 -(BOOL)performDragOperation:(id <NSDraggingInfo>)sender {
     NSPoint   point=[self convertPoint:[sender draggingLocation] fromView:nil];
     NSString *string=[[sender draggingPasteboard] stringForType:NSStringPboardType];
-    float     fraction=0;
+    CGFloat     fraction=0;
     NSUInteger location=[self glyphIndexForPoint:point fractionOfDistanceThroughGlyph:&fraction];
     
     if(location==NSNotFound)
@@ -3055,7 +3055,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
     NSRange glyphRange;
     
     NSPoint point=[self convertPoint:[event locationInWindow] fromView:nil];
-    float fraction;
+    CGFloat fraction;
 
     NSMenu *menu=[[[NSMenu alloc] initWithTitle:@""] autorelease];
 
@@ -3152,7 +3152,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
 }
 
 -(void)setSpellingState:(NSInteger)value range:(NSRange)characterRange {
-    [[self layoutManager] addTemporaryAttribute:NSSpellingStateAttributeName value:[NSNumber numberWithUnsignedInt:value] forCharacterRange:characterRange];
+    [[self layoutManager] addTemporaryAttribute:NSSpellingStateAttributeName value:[NSNumber numberWithLong:value] forCharacterRange:characterRange];
 }
 
 #pragma mark Ruler client view
@@ -3164,7 +3164,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
 {
     // Add a new tab stop
     NSPoint point = [self convertPoint: event.locationInWindow fromView: nil];
-    float delta = rulerView.originOffset;
+    CGFloat delta = rulerView.originOffset;
     NSRulerMarker *marker = [NSRulerMarker leftTabMarkerWithRulerView:rulerView
                                                              location:point.x + delta];
     NSTextTab *tabstop = [[[NSTextTab alloc] initWithType: NSLeftTabStopType location: point.x] autorelease];
@@ -3177,7 +3177,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
     return YES;
 }
 
--(float)rulerView:(NSRulerView *)rulerView willMoveMarker:(NSRulerMarker *)marker toLocation:(float)location
+-(CGFloat)rulerView:(NSRulerView *)rulerView willMoveMarker:(NSRulerMarker *)marker toLocation:(CGFloat)location
 {
     if (location < rulerView.originOffset) {
         location = rulerView.originOffset;
@@ -3190,8 +3190,8 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
 
 -(void)rulerView:(NSRulerView *)rulerView didMoveMarker:(NSRulerMarker *)marker
 {
-    float delta = rulerView.originOffset;
-    float location = marker.markerLocation - delta;
+    CGFloat delta = rulerView.originOffset;
+    CGFloat location = marker.markerLocation - delta;
     
     id representedObject = marker.representedObject;
     if ([representedObject isKindOfClass:[NSTextTab class]]) {
@@ -3202,7 +3202,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
         NSRange range = [self rangeForUserParagraphAttributeChange];
         
         // Change the tab stop value for all of the selection
-        unsigned  location = range.location;
+        NSUInteger location = range.location;
         [_textStorage beginEditing];
         while (location < NSMaxRange(range)) {
             NSRange effectiveRange;
@@ -3261,7 +3261,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
     return YES;
 }
 
--(float)rulerView:(NSRulerView *)rulerView willAddMarker:(NSRulerMarker *)marker atLocation:(float)location
+-(CGFloat)rulerView:(NSRulerView *)rulerView willAddMarker:(NSRulerMarker *)marker atLocation:(CGFloat)location
 {
     if (location < rulerView.originOffset) {
         location = rulerView.originOffset;
@@ -3274,9 +3274,9 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
 
 -(void)rulerView:(NSRulerView *)rulerView didAddMarker:(NSRulerMarker *)marker
 {
-    float delta = rulerView.originOffset;
+    CGFloat delta = rulerView.originOffset;
     
-    float location = marker.markerLocation - delta;
+    CGFloat location = marker.markerLocation - delta;
     
     id representedObject = marker.representedObject;
     if ([representedObject isKindOfClass:[NSTextTab class]]) {
@@ -3285,7 +3285,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
         
         // Change the tab stop value for all of the selection
         NSRange range = [self rangeForUserParagraphAttributeChange];
-        unsigned  location = range.location;
+        NSUInteger location = range.location;
         [_textStorage beginEditing];
         while (location < NSMaxRange(range)) {
             NSRange effectiveRange;
@@ -3345,7 +3345,7 @@ NSString * const NSOldSelectedCharacterRange=@"NSOldSelectedCharacterRange";
         
         // Change the tab stop value for all of the selection
         NSRange range = [self rangeForUserParagraphAttributeChange];
-        unsigned  location = range.location;
+        NSUInteger location = range.location;
         
         [_textStorage beginEditing];
         while (location < NSMaxRange(range)) {

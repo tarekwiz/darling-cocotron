@@ -27,20 +27,20 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 - (NSMenu *)supermenu;
 - (NSString *)title;
-- (int)numberOfItems;
+- (NSInteger)numberOfItems;
 - (NSArray *)itemArray;
 - (BOOL)autoenablesItems;
 
-- (NSMenuItem *)itemAtIndex:(int)index;
-- (NSMenuItem *)itemWithTag:(int)tag;
+- (NSMenuItem *)itemAtIndex:(NSInteger)index;
+- (NSMenuItem *)itemWithTag:(NSInteger)tag;
 - (NSMenuItem *)itemWithTitle:(NSString *)title;
 
-- (int)indexOfItem:(NSMenuItem *)item;
-- (int)indexOfItemWithTag:(int)tag;
-- (int)indexOfItemWithTitle:(NSString *)title;
-- (int)indexOfItemWithRepresentedObject:object;
-- (int)indexOfItemWithTarget:(id)target andAction:(SEL)action;
-- (int)indexOfItemWithSubmenu:(NSMenu *)menu;
+- (NSInteger)indexOfItem:(NSMenuItem *)item;
+- (NSInteger)indexOfItemWithTag:(NSInteger)tag;
+- (NSInteger)indexOfItemWithTitle:(NSString *)title;
+- (NSInteger)indexOfItemWithRepresentedObject:object;
+- (NSInteger)indexOfItemWithTarget:(id)target andAction:(SEL)action;
+- (NSInteger)indexOfItemWithSubmenu:(NSMenu *)menu;
 
 - (void)setSupermenu:(NSMenu *)value;
 - (void)setTitle:(NSString *)title;
@@ -52,10 +52,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 - (void)removeAllItems; // private, don't use outside framework
 - (void)removeItem:(NSMenuItem *)item;
-- (void)removeItemAtIndex:(int)index;
+- (void)removeItemAtIndex:(NSInteger)index;
 
-- (void)insertItem:(NSMenuItem *)item atIndex:(int)index;
-- (NSMenuItem *)insertItemWithTitle:(NSString *)title action:(SEL)action keyEquivalent:(NSString *)keyEquivalent atIndex:(int)index;
+- (void)insertItem:(NSMenuItem *)item atIndex:(NSInteger)index;
+- (NSMenuItem *)insertItemWithTitle:(NSString *)title action:(SEL)action keyEquivalent:(NSString *)keyEquivalent atIndex:(NSInteger)index;
 
 - (void)setSubmenu:(NSMenu *)submenu forItem:(NSMenuItem *)item;
 

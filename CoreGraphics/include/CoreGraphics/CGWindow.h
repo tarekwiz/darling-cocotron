@@ -28,10 +28,10 @@ typedef enum {
 
 - (O2Context *)cgContext;
 
-- (unsigned)styleMask;
+- (NSUInteger)styleMask;
 
 - (void)setLevel:(int)value;
-- (void)setStyleMask:(unsigned)mask;
+- (void)setStyleMask:(NSUInteger)mask;
 - (void)setTitle:(NSString *)title;
 - (void)setFrame:(CGRect)frame;
 - (void)setOpaque:(BOOL)value;
@@ -111,5 +111,5 @@ typedef enum {
 
 @end
 
-CGRect CGInsetRectForNativeWindowBorder(CGRect frame, unsigned styleMask);
-CGRect CGOutsetRectForNativeWindowBorder(CGRect frame, unsigned styleMask);
+CGRect CGInsetRectForNativeWindowBorder(CGRect frame, NSUInteger styleMask);
+CGRect CGOutsetRectForNativeWindowBorder(CGRect frame, NSUInteger styleMask);

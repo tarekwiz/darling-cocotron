@@ -10,11 +10,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <Onyx2D/O2PDFObject.h>
 
 @interface O2PDFFunction_Type2 : O2Function {
-    unsigned _C0Count;
-    float *_C0;
-    unsigned _C1Count;
-    float *_C1;
-    float _N;
+    NSUInteger _C0Count;
+    O2Float *_C0;
+    NSUInteger _C1Count;
+    O2Float *_C1;
+    O2Float _N;
 }
 
 - initWithDomain:(O2PDFArray *)domain range:(O2PDFArray *)range C0:(O2PDFArray *)C0 C1:(O2PDFArray *)C1 N:(O2PDFReal)N;

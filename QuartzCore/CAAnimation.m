@@ -86,11 +86,11 @@
    _fillMode=value;
 }
 
--(float)repeatCount {
+-(CGFloat)repeatCount {
    return _repeatCount;
 }
 
--(void)setRepeatCount:(float)value {
+-(void)setRepeatCount:(CGFloat)value {
    _repeatCount=value;
 }
 
@@ -102,11 +102,11 @@
    _repeatDuration=value;
 }
 
--(float)speed {
+-(CGFloat)speed {
    return _speed;
 }
 
--(void)setSpeed:(float)value {
+-(void)setSpeed:(CGFloat)value {
    _speed=value;
 }
 

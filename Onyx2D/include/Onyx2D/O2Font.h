@@ -38,17 +38,17 @@ typedef enum {
     NSString *_name;
     NSCharacterSet *_coveredCharSet;
     O2DataProviderRef _provider;
-    int _unitsPerEm;
-    int _ascent;
-    int _descent;
-    int _leading;
-    int _capHeight;
-    int _xHeight;
+    NSInteger _unitsPerEm;
+    NSInteger _ascent;
+    NSInteger _descent;
+    NSInteger _leading;
+    NSInteger _capHeight;
+    NSInteger _xHeight;
     O2Float _italicAngle;
     O2Float _stemV;
     O2Rect _bbox;
-    int _numberOfGlyphs;
-    int *_advances;
+    NSInteger _numberOfGlyphs;
+    NSInteger *_advances;
     O2Glyph *_MacRomanEncoding;
 }
 
@@ -101,7 +101,7 @@ O2Rect O2FontGetFontBBox(O2FontRef self);
 NSCharacterSet *O2FontGetCoveredCharacterSet(O2FontRef self);
 
 size_t O2FontGetNumberOfGlyphs(O2FontRef self);
-BOOL O2FontGetGlyphAdvances(O2FontRef self, const O2Glyph *glyphs, size_t count, int *advances);
+BOOL O2FontGetGlyphAdvances(O2FontRef self, const O2Glyph *glyphs, size_t count, NSInteger *advances);
 
 O2Glyph O2FontGetGlyphWithGlyphName(O2FontRef self, CFStringRef name);
 NSString *O2FontCopyGlyphNameForGlyph(O2FontRef self, O2Glyph glyph);

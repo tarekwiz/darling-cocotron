@@ -68,7 +68,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    return _isButtonBordered;
 }
 
--(float)itemHeight {
+-(CGFloat)itemHeight {
    return _itemHeight;
 }
 
@@ -84,7 +84,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    return _completes;
 }
 
--(int)numberOfVisibleItems {
+-(NSInteger)numberOfVisibleItems {
    return _numberOfVisibleItems;
 }
 
@@ -100,7 +100,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    _isButtonBordered=value;
 }
 
--(void)setItemHeight:(float)value {
+-(void)setItemHeight:(CGFloat)value {
    _itemHeight=value;
 }
 
@@ -116,11 +116,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    _completes=flag;
 }
 
--(void)setNumberOfVisibleItems:(int)value {
+-(void)setNumberOfVisibleItems:(NSInteger)value {
    _numberOfVisibleItems=value;
 }
 
--(int)numberOfItems {
+-(NSInteger)numberOfItems {
    return [_objectValues count];
 }
 
@@ -128,11 +128,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    return _objectValues;
 }
 
--itemObjectValueAtIndex:(int)index {
+-itemObjectValueAtIndex:(NSInteger)index {
    return [_objectValues objectAtIndex:index];
 }
 
--(int)indexOfItemWithObjectValue:(id)object {
+-(NSInteger)indexOfItemWithObjectValue:(id)object {
    return [_objectValues indexOfObjectIdenticalTo:object];
 }
 
@@ -151,7 +151,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    _buttonEnabled=([_objectValues count]>0)?YES:NO;
 }
 
--(void)removeItemAtIndex:(int)index {
+-(void)removeItemAtIndex:(NSInteger)index {
    [_objectValues removeObjectAtIndex:index];
    _buttonEnabled=([_objectValues count]>0)?YES:NO;
 }
@@ -161,13 +161,13 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    _buttonEnabled=([_objectValues count]>0)?YES:NO;
 }
 
--(void)insertItemWithObjectValue:(id)object atIndex:(int)index {
+-(void)insertItemWithObjectValue:(id)object atIndex:(NSInteger)index {
    [_objectValues insertObject:object atIndex:index];
    _buttonEnabled=([_objectValues count]>0)?YES:NO;
 }
 
--(int)indexOfSelectedItem {
-   int index = [_objectValues indexOfObject:[self objectValue]];
+-(NSInteger)indexOfSelectedItem {
+   NSInteger index = [_objectValues indexOfObject:[self objectValue]];
    return (index != NSNotFound)?index:-1;
 }
 
@@ -181,7 +181,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    }
 }
 
--(void)selectItemAtIndex:(int)index {
+-(void)selectItemAtIndex:(NSInteger)index {
     if (index < 0 || index >= [_objectValues count])
         return;
 
@@ -191,22 +191,22 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 -(void)selectItemWithObjectValue:value {
    if (!_usesDataSource)
    {
-      int index = [_objectValues indexOfObject:value];
+      NSInteger index = [_objectValues indexOfObject:value];
       [self selectItemAtIndex:(index != NSNotFound)?index:-1];
    }
    else
       NSLog(@"*** -[%@ %s] should not be called when usesDataSource is set to YES",[self class],sel_getName(_cmd));
 }
 
--(void)deselectItemAtIndex:(int)index {
+-(void)deselectItemAtIndex:(NSInteger)index {
    NSUnimplementedMethod();
 }
 
--(void)scrollItemAtIndexToTop:(int)index {
+-(void)scrollItemAtIndexToTop:(NSInteger)index {
    NSUnimplementedMethod();
 }
 
--(void)scrollItemAtIndexToVisible:(int)index {
+-(void)scrollItemAtIndexToVisible:(NSInteger)index {
    NSUnimplementedMethod();
 }
 
@@ -219,7 +219,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 
 - (NSString *)completedString:(NSString *)string {
-    int i, count = [_objectValues count];
+    NSInteger i, count = [_objectValues count];
     
     if (_usesDataSource == YES)		// not supported yet, well...
         if ([_dataSource respondsToSelector:@selector(comboBoxCell:completedString:)] == YES)
@@ -259,7 +259,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    NSPoint           origin=[controlView bounds].origin;
    NSSize            size=[self cellSize];
    NSPoint           check=[controlView convertPoint:[event locationInWindow] fromView:nil];
-   unsigned          selectedIndex = [_objectValues indexOfObject:[self objectValue]];
+   NSUInteger        selectedIndex = [_objectValues indexOfObject:[self objectValue]];
 
    if([_objectValues count]==0)
     return NO;

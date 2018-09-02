@@ -109,8 +109,8 @@ typedef enum {
 #import <Onyx2D/O2Shading.h>
 #import <Onyx2D/O2PDFPage.h>
 
-typedef void (*O2ContextShowTextFunction)(O2ContextRef, const char *, unsigned);
-typedef void (*O2ContextShowGlyphsFunction)(O2ContextRef, SEL, const O2Glyph *, const O2Size *, unsigned);
+typedef void (*O2ContextShowTextFunction)(O2ContextRef, const char *, NSUInteger);
+typedef void (*O2ContextShowGlyphsFunction)(O2ContextRef, SEL, const O2Glyph *, const O2Size *, NSUInteger);
 
 @interface O2Context : NSObject {
     O2AffineTransform _userToDeviceTransform;
@@ -152,7 +152,7 @@ O2ColorRef O2ContextFillColor(O2ContextRef self);
 
 - (void)drawPath:(O2PathDrawingMode)pathMode;
 
-- (void)showGlyphs:(const O2Glyph *)glyphs advances:(const O2Size *)advances count:(unsigned)count;
+- (void)showGlyphs:(const O2Glyph *)glyphs advances:(const O2Size *)advances count:(NSUInteger)count;
 
 - (void)drawShading:(O2Shading *)shading;
 - (void)drawImage:(O2Image *)image inRect:(O2Rect)rect;
@@ -205,9 +205,9 @@ void O2ContextAddLineToPoint(O2ContextRef self, O2Float x, O2Float y);
 void O2ContextAddCurveToPoint(O2ContextRef self, O2Float cx1, O2Float cy1, O2Float cx2, O2Float cy2, O2Float x, O2Float y);
 void O2ContextAddQuadCurveToPoint(O2ContextRef self, O2Float cx1, O2Float cy1, O2Float x, O2Float y);
 
-void O2ContextAddLines(O2ContextRef self, const O2Point *points, unsigned count);
+void O2ContextAddLines(O2ContextRef self, const O2Point *points, NSUInteger count);
 void O2ContextAddRect(O2ContextRef self, O2Rect rect);
-void O2ContextAddRects(O2ContextRef self, const O2Rect *rects, unsigned count);
+void O2ContextAddRects(O2ContextRef self, const O2Rect *rects, NSUInteger count);
 
 void O2ContextAddArc(O2ContextRef self, O2Float x, O2Float y, O2Float radius, O2Float startRadian, O2Float endRadian, BOOL clockwise);
 void O2ContextAddArcToPoint(O2ContextRef self, O2Float x1, O2Float y1, O2Float x2, O2Float y2, O2Float radius);
@@ -246,7 +246,7 @@ void O2ContextClip(O2ContextRef self);
 void O2ContextEOClip(O2ContextRef self);
 void O2ContextClipToMask(O2ContextRef self, O2Rect rect, O2ImageRef image);
 void O2ContextClipToRect(O2ContextRef self, O2Rect rect);
-void O2ContextClipToRects(O2ContextRef self, const O2Rect *rects, unsigned count);
+void O2ContextClipToRects(O2ContextRef self, const O2Rect *rects, NSUInteger count);
 
 void O2ContextSetStrokeColorSpace(O2ContextRef self, O2ColorSpaceRef colorSpace);
 void O2ContextSetFillColorSpace(O2ContextRef self, O2ColorSpaceRef colorSpace);
@@ -286,7 +286,7 @@ void O2ContextSetLineWidth(O2ContextRef self, O2Float width);
 void O2ContextSetLineCap(O2ContextRef self, O2LineCap lineCap);
 void O2ContextSetLineJoin(O2ContextRef self, O2LineJoin lineJoin);
 void O2ContextSetMiterLimit(O2ContextRef self, O2Float miterLimit);
-void O2ContextSetLineDash(O2ContextRef self, O2Float phase, const O2Float *lengths, unsigned count);
+void O2ContextSetLineDash(O2ContextRef self, O2Float phase, const O2Float *lengths, NSUInteger count);
 
 void O2ContextSetRenderingIntent(O2ContextRef self, O2ColorRenderingIntent renderingIntent);
 void O2ContextSetBlendMode(O2ContextRef self, O2BlendMode blendMode);
@@ -301,14 +301,14 @@ void O2ContextSetShadow(O2ContextRef self, O2Size offset, O2Float blur);
 void O2ContextSetShouldAntialias(O2ContextRef self, BOOL yesOrNo);
 
 // drawing
-void O2ContextStrokeLineSegments(O2ContextRef self, const O2Point *points, unsigned count);
+void O2ContextStrokeLineSegments(O2ContextRef self, const O2Point *points, NSUInteger count);
 
 void O2ContextStrokeRect(O2ContextRef self, O2Rect rect);
 void O2ContextStrokeRectWithWidth(O2ContextRef self, O2Rect rect, O2Float width);
 void O2ContextStrokeEllipseInRect(O2ContextRef self, O2Rect rect);
 
 void O2ContextFillRect(O2ContextRef self, O2Rect rect);
-void O2ContextFillRects(O2ContextRef self, const O2Rect *rects, unsigned count);
+void O2ContextFillRects(O2ContextRef self, const O2Rect *rects, NSUInteger count);
 void O2ContextFillEllipseInRect(O2ContextRef self, O2Rect rect);
 
 void O2ContextDrawPath(O2ContextRef self, O2PathDrawingMode pathMode);
@@ -318,12 +318,12 @@ void O2ContextEOFillPath(O2ContextRef self);
 
 void O2ContextClearRect(O2ContextRef self, O2Rect rect);
 
-void O2ContextShowGlyphs(O2ContextRef self, const O2Glyph *glyphs, unsigned count);
-void O2ContextShowGlyphsAtPoint(O2ContextRef self, O2Float x, O2Float y, const O2Glyph *glyphs, unsigned count);
-void O2ContextShowGlyphsWithAdvances(O2ContextRef self, const O2Glyph *glyphs, const O2Size *advances, unsigned count);
+void O2ContextShowGlyphs(O2ContextRef self, const O2Glyph *glyphs, NSUInteger count);
+void O2ContextShowGlyphsAtPoint(O2ContextRef self, O2Float x, O2Float y, const O2Glyph *glyphs, NSUInteger count);
+void O2ContextShowGlyphsWithAdvances(O2ContextRef self, const O2Glyph *glyphs, const O2Size *advances, NSUInteger count);
 
-void O2ContextShowText(O2ContextRef self, const char *text, unsigned count);
-void O2ContextShowTextAtPoint(O2ContextRef self, O2Float x, O2Float y, const char *text, unsigned count);
+void O2ContextShowText(O2ContextRef self, const char *text, NSUInteger count);
+void O2ContextShowTextAtPoint(O2ContextRef self, O2Float x, O2Float y, const char *text, NSUInteger count);
 
 void O2ContextDrawShading(O2ContextRef self, O2ShadingRef shading);
 void O2ContextDrawImage(O2ContextRef self, O2Rect rect, O2ImageRef image);

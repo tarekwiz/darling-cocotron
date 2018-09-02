@@ -79,11 +79,11 @@ NSData *O2DCTDecode(NSData *data) {
     return (CFStringRef)@"public.jpeg";
 }
 
--(unsigned)count {
+-(NSUInteger)count {
    return 1;
 }
 
--(CFDictionaryRef)copyPropertiesAtIndex:(unsigned)idx options:(CFDictionaryRef)options {
+-(CFDictionaryRef)copyPropertiesAtIndex:(NSUInteger)idx options:(CFDictionaryRef)options {
     if (_jpg == NULL) {
         _jpg=O2DataProviderCopyData(_provider);
     }
@@ -93,7 +93,7 @@ NSData *O2DCTDecode(NSData *data) {
     return (CFDictionaryRef)[[exif tags] copy];
 }
 
--(O2ImageRef)createImageAtIndex:(unsigned)index options:(CFDictionaryRef)options {
+-(O2ImageRef)createImageAtIndex:(NSUInteger)index options:(CFDictionaryRef)options {
     O2ImageDecoderRef decoder=createImageDecoderWithDataProvider(_provider);
     O2DataProviderRef provider=O2ImageDecoderCreatePixelDataProvider(decoder);
         

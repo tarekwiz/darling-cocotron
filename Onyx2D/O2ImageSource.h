@@ -42,11 +42,11 @@ extern NSString *kO2ImagePropertyTIFFOrientation;
 
 - initWithDataProvider:(O2DataProvider *)provider options:(NSDictionary *)options;
 
-- (unsigned)count;
+- (NSUInteger)count;
 - (CFStringRef)type;
 
-- (CFDictionaryRef)copyPropertiesAtIndex:(unsigned)index options:(CFDictionaryRef)options;
-- (O2ImageRef)createImageAtIndex:(unsigned)index options:(CFDictionaryRef)options;
+- (CFDictionaryRef)copyPropertiesAtIndex:(NSUInteger)index options:(CFDictionaryRef)options;
+- (O2ImageRef)createImageAtIndex:(NSUInteger)index options:(CFDictionaryRef)options;
 
 O2ImageRef O2ImageSourceCreateImageAtIndex(O2ImageSourceRef self, size_t index, CFDictionaryRef options);
 

@@ -115,7 +115,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         case NSBottomTabsBezelBorder:
         case NSRightTabsBezelBorder: {
             NSSize finalSize;
-            int i, count=[_items count];
+            NSInteger i, count=[_items count];
 
             if (count == 0)
                 break;
@@ -219,7 +219,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     [self setNeedsDisplay:YES];
 }
 
--(int)numberOfTabViewItems {
+-(NSInteger)numberOfTabViewItems {
     return [_items count];
 }
 
@@ -227,12 +227,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     return _items;
 }
 	
--(NSTabViewItem *)tabViewItemAtIndex:(int)index {
+-(NSTabViewItem *)tabViewItemAtIndex:(NSInteger)index {
     return [_items objectAtIndex:index];
 }
 
--(NSRect)rectForItemLabelAtIndex:(unsigned)index {
-   int            i,count=[_items count];
+-(NSRect)rectForItemLabelAtIndex:(NSUInteger)index {
+   NSInteger            i,count=[_items count];
     NSPoint        base=NSMakePoint(0,[self bounds].size.height-22);
    NSSize         size;
 
@@ -250,7 +250,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 
 -(NSTabViewItem *)tabViewItemAtPoint:(NSPoint)point {
-   int i,count=[_items count];
+   NSInteger i,count=[_items count];
 
    for(i=0;i<count;i++){
     NSTabViewItem *item=[_items objectAtIndex:i];
@@ -263,12 +263,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    return nil;
 }
 
--(int)indexOfTabViewItem:(NSTabViewItem *)item {
+-(NSInteger)indexOfTabViewItem:(NSTabViewItem *)item {
     return [_items indexOfObject:item];
 }
 
 -(NSInteger)indexOfTabViewItemWithIdentifier:identifier {
-    int i, count=[_items count];
+    NSInteger i, count=[_items count];
 
     for (i = 0; i < count; ++i)
         if ([[(NSTabViewItem *)[_items objectAtIndex:i] identifier] isEqual:identifier])
@@ -388,7 +388,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     }
 }
 
--(void)selectTabViewItemAtIndex:(int)index {
+-(void)selectTabViewItemAtIndex:(NSInteger)index {
     [self selectTabViewItem:[_items objectAtIndex:index]];
 }
 
@@ -510,10 +510,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 @implementation NSTabView (Bindings)
 
--(int)_selectedIndex {
+-(NSInteger)_selectedIndex {
     return [self indexOfTabViewItem:_selectedItem];
 }
--(void)_setSelectedIndex:(int)selectedIndex {
+-(void)_setSelectedIndex:(NSInteger)selectedIndex {
     [self selectTabViewItemAtIndex:selectedIndex];
 }
 

@@ -38,11 +38,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    [_view setPullsDown:pullsDown];
 }
 
--(void)selectItemAtIndex:(int)index {
+-(void)selectItemAtIndex:(NSInteger)index {
    [_view selectItemAtIndex:index];
 }
 
--(int)runTrackingWithEvent:(NSEvent *)event {
+-(NSInteger)runTrackingWithEvent:(NSEvent *)event {
    NSSize  size=[_view sizeForContents];
    NSRect  selectedRect=[_view rectForSelectedItem];
    NSRect  frame;

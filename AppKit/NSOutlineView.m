@@ -36,17 +36,17 @@ NSString * const NSOutlineViewSelectionIsChangingNotification=@"NSOutlineViewSel
 @interface NSTableView(NSTableView_notifications)
 
 -(BOOL)delegateShouldSelectTableColumn:(NSTableColumn *)tableColumn ;
--(BOOL)delegateShouldSelectRow:(int)row;
--(BOOL)delegateShouldEditTableColumn:(NSTableColumn *)tableColumn row:(int)row;
+-(BOOL)delegateShouldSelectRow:(NSInteger)row;
+-(BOOL)delegateShouldEditTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row;
 -(BOOL)delegateSelectionShouldChange;
 -(void)noteSelectionIsChanging;
 -(void)noteSelectionDidChange;
--(void)noteColumnDidResizeWithOldWidth:(float)oldWidth;
--(id)dataSourceObjectValueForTableColumn:(NSTableColumn *)tableColumn row:(int)row;
+-(void)noteColumnDidResizeWithOldWidth:(CGFloat)oldWidth;
+-(id)dataSourceObjectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row;
 -(BOOL)dataSourceCanSetObjectValue;
--(void)dataSourceSetObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn row:(int)row;
+-(void)dataSourceSetObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row;
 
--(void)drawHighlightedSelectionForColumn:(int)column row:(int)row inRect:(NSRect)rect;
+-(void)drawHighlightedSelectionForColumn:(NSInteger)column row:(NSInteger)row inRect:(NSRect)rect;
 
 @end
 
@@ -60,7 +60,7 @@ static inline NSInteger numberOfChildrenOfItemAndReload(NSOutlineView *self,id i
    NSInteger result;
    
    if(!reload)
-    result=(int)NSMapGet(self->_itemToNumberOfChildren,item);
+    result=(NSInteger)NSMapGet(self->_itemToNumberOfChildren,item);
    else {
     result=[self->_dataSource outlineView:self numberOfChildrenOfItem:item];
     
@@ -70,7 +70,7 @@ static inline NSInteger numberOfChildrenOfItemAndReload(NSOutlineView *self,id i
    return result;
 }
 
-static inline id childOfItemAtIndex(NSOutlineView *self,id item,int index){
+static inline id childOfItemAtIndex(NSOutlineView *self,id item,NSInteger index){
 #if 1
    //NSLog(@"%s %d",__FILE__,__LINE__);
    id result=[self->_dataSource outlineView:self child:index ofItem:item];
@@ -82,7 +82,7 @@ static inline id childOfItemAtIndex(NSOutlineView *self,id item,int index){
    if(item==nil)
     return [self->_dataSource outlineView:self child:index ofItem:item];
    else {
-    int row=(int)NSMapGet(self->_itemToRow,item);
+    NSInteger row=(NSInteger)NSMapGet(self->_itemToRow,item);
 
     return (id)NSMapGet(self->_rowToItem,(void *)(row+1+index));
    }
@@ -175,12 +175,12 @@ static inline id childOfItemAtIndex(NSOutlineView *self,id item,int index){
     return _outlineTableColumn;
 }
 
--itemAtRow:(int)row {
+-itemAtRow:(NSInteger)row {
     return (id)NSMapGet(_rowToItem, (void *)row);
 }
 
--(int)rowForItem:(id)item {
-    return (int)NSMapGet(_itemToRow, item);
+-(NSInteger)rowForItem:(id)item {
+    return (NSInteger)NSMapGet(_itemToRow, item);
 }
 
 -parentForItem:item {
@@ -192,12 +192,12 @@ static inline id childOfItemAtIndex(NSOutlineView *self,id item,int index){
     return [_dataSource outlineView:self isItemExpandable:item];
 }
 
--(int)levelForItem:(id)item {
-    unsigned level = (unsigned)NSMapGet(_itemToLevel, item);
+-(NSInteger)levelForItem:(id)item {
+    NSInteger level = (NSInteger)NSMapGet(_itemToLevel, item);
     return level;
 }
 
--(int)levelForRow:(int)row {
+-(NSInteger)levelForRow:(NSInteger)row {
     return [self levelForItem:[self itemAtRow:row]];
 }
 
@@ -206,7 +206,7 @@ static inline id childOfItemAtIndex(NSOutlineView *self,id item,int index){
     return isItemExpanded(self,item);
 }
 
--(float)indentationPerLevel {
+-(CGFloat)indentationPerLevel {
     return _indentationPerLevel;
 }
 
@@ -230,7 +230,7 @@ static inline id childOfItemAtIndex(NSOutlineView *self,id item,int index){
     _outlineTableColumn = [tableColumn retain];
 }
 
--(void)setIndentationPerLevel:(float)value {
+-(void)setIndentationPerLevel:(CGFloat)value {
     _indentationPerLevel = value;
 }
 
@@ -301,14 +301,14 @@ static inline id childOfItemAtIndex(NSOutlineView *self,id item,int index){
 }
 
 -(void)_tightenUpColumn:(NSTableColumn *)column forItem:(id)item {
-   float minWidth=[column width],width;
-   int   rootLevel=[self levelForItem:item];
+   CGFloat minWidth=[column width],width;
+   NSInteger rootLevel=[self levelForItem:item];
    NSInteger   i=[self rowForItem:item]+1,numberOfRows=[self numberOfRows];
 
    for(;i<numberOfRows;i++) {
     NSCell *dataCell=[column dataCellForRow:i];
     id      item=[self itemAtRow:i];
-    int     level=[self levelForItem:item];
+    NSInteger level=[self levelForItem:item];
 
     if(level<=rootLevel)
      break;
@@ -377,7 +377,7 @@ static inline id childOfItemAtIndex(NSOutlineView *self,id item,int index){
     }
 
     if (collapseChildren) {
-        int i,numberOfChildren=numberOfChildrenOfItemAndReload(self,item,YES);
+        NSInteger i,numberOfChildren=numberOfChildrenOfItemAndReload(self,item,YES);
 
         for (i = 0; i < numberOfChildren; ++i) {
             id child = [_dataSource outlineView:self child:i ofItem:item];
@@ -422,7 +422,7 @@ static inline id childOfItemAtIndex(NSOutlineView *self,id item,int index){
     [self reloadItem:item reloadChildren:NO];
 }
 
--(void)setDropItem:(id)item dropChildIndex:(int)index {
+-(void)setDropItem:(id)item dropChildIndex:(NSInteger)index {
     NSUnimplementedMethod();
 }
 
@@ -443,7 +443,7 @@ static inline id childOfItemAtIndex(NSOutlineView *self,id item,int index){
         @selector(outlineView:numberOfChildrenOfItem:),
         @selector(outlineView:objectValueForTableColumn:byItem:),
         NULL};
-    int i;
+    NSInteger i;
 
     for (i = 0; requiredSelectors[i] != NULL; ++i)
         if (dataSource!=nil && ![dataSource respondsToSelector:requiredSelectors[i]])
@@ -468,7 +468,7 @@ static inline id childOfItemAtIndex(NSOutlineView *self,id item,int index){
       { NSOutlineViewSelectionDidChangeNotification, @selector(outlineViewSelectionDidChange:) },
       { nil, NULL }
     };
-    int i;
+    NSInteger i;
 
     if (_delegate != nil)
         for (i = 0; notes[i].name != nil; ++i)
@@ -484,8 +484,8 @@ static inline id childOfItemAtIndex(NSOutlineView *self,id item,int index){
                                                        object:self];
 }
 
-static void loadItemIntoMapTables(NSOutlineView *self,id item,unsigned *rowCountPtr,unsigned recursionLevel,NSHashTable *removeItems){
-    int i,numberOfChildren=numberOfChildrenOfItemAndReload(self,item,YES);
+static void loadItemIntoMapTables(NSOutlineView *self,id item, NSUInteger *rowCountPtr, NSUInteger recursionLevel,NSHashTable *removeItems){
+    NSInteger i,numberOfChildren=numberOfChildrenOfItemAndReload(self,item,YES);
 
     for (i = 0; i < numberOfChildren; ++i) {
         id child = [self->_dataSource outlineView:self child:i ofItem:item];
@@ -541,7 +541,7 @@ static void loadItemIntoMapTables(NSOutlineView *self,id item,unsigned *rowCount
    NSInteger column=[_tableColumns indexOfObjectIdenticalTo:_outlineTableColumn];
    NSRect    result=[super frameOfCellAtColumn:column row:row];
    NSInteger level=[self levelForRow:row];
-    float indentPixels = level * _indentationPerLevel;
+   CGFloat indentPixels = level * _indentationPerLevel;
     
    result.size.width = indentPixels;
 
@@ -553,14 +553,14 @@ static void loadItemIntoMapTables(NSOutlineView *self,id item,unsigned *rowCount
    return result;
 }
 
-- (NSRect)_adjustedFrameOfCellAtColumn:(int)column row:(int)row objectValue:(id)objectValue {
+- (NSRect)_adjustedFrameOfCellAtColumn:(NSInteger)column row:(NSInteger)row objectValue:(id)objectValue {
     NSRect cellRect = [super frameOfCellAtColumn:column row:row];
     NSTableColumn *tableColumn = [_tableColumns objectAtIndex:column];
 
     if (tableColumn == _outlineTableColumn) {
         NSCell *dataCell = [tableColumn dataCellForRow:row];
-        float indentPixels = [self levelForRow:row] * _indentationPerLevel;
-        float cellWidth;
+        CGFloat indentPixels = [self levelForRow:row] * _indentationPerLevel;
+        CGFloat cellWidth;
         
         cellRect.origin.x += (indentPixels + _standardRowHeight) + _intercellSpacing.width;
 
@@ -594,7 +594,7 @@ static void loadItemIntoMapTables(NSOutlineView *self,id item,unsigned *rowCount
     return cellRect;
 }
 
--(NSRect)frameOfCellAtColumn:(int)column row:(int)row {
+-(NSRect)frameOfCellAtColumn:(NSInteger)column row:(NSInteger)row {
    NSTableColumn *tableColumn=[_tableColumns objectAtIndex:column];
 
    if(tableColumn ==_outlineTableColumn){
@@ -607,7 +607,7 @@ static void loadItemIntoMapTables(NSOutlineView *self,id item,unsigned *rowCount
    return [super frameOfCellAtColumn:column row:row];
 }
 
--(void)drawHighlightedSelectionForColumn:(int)column row:(int)row inRect:(NSRect)rect
+-(void)drawHighlightedSelectionForColumn:(NSInteger)column row:(NSInteger)row inRect:(NSRect)rect
 {
     if ([_tableColumns objectAtIndex:column] == _outlineTableColumn) {
         NSRect newRect = NSInsetRect(rect,1,0);
@@ -621,9 +621,9 @@ static void loadItemIntoMapTables(NSOutlineView *self,id item,unsigned *rowCount
         [super drawHighlightedSelectionForColumn:column row:row inRect:rect];
 }
 
--(void)_drawGridForItem:(id)item style:(NSGraphicsStyle *)style level:(int)level {
-    int column = [_tableColumns indexOfObject:_outlineTableColumn];
-    int row = [self rowForItem:item];
+-(void)_drawGridForItem:(id)item style:(NSGraphicsStyle *)style level:(NSInteger)level {
+    NSInteger column = [_tableColumns indexOfObject:_outlineTableColumn];
+    NSInteger row = [self rowForItem:item];
     NSRect myFrame = [self frameOfCellAtColumn:column row:row];
 
     if (level > 0) {
@@ -639,7 +639,7 @@ static void loadItemIntoMapTables(NSOutlineView *self,id item,unsigned *rowCount
     }
     
    if (isItemExpanded(self,item)) {
-    int i,numberOfChildren=numberOfChildrenOfItemAndReload(self,item,NO);
+    NSInteger i,numberOfChildren=numberOfChildrenOfItemAndReload(self,item,NO);
     id  lastChild=nil;
 
     for(i=0;i<numberOfChildren;i++){
@@ -650,7 +650,7 @@ static void loadItemIntoMapTables(NSOutlineView *self,id item,unsigned *rowCount
     if(lastChild!=nil){
      NSRect rect=myFrame;
      NSRect lastChildRect=[self frameOfCellAtColumn:column row:[self rowForItem:lastChild]];
-     float  delta=lastChildRect.origin.y - myFrame.origin.y;
+     CGFloat  delta=lastChildRect.origin.y - myFrame.origin.y;
 
          // it is safe to assume that all rows are the same height.
      rect.origin.x += (rect.size.width/2)-1;
@@ -667,7 +667,7 @@ static void loadItemIntoMapTables(NSOutlineView *self,id item,unsigned *rowCount
     // this doesn't look right at all when the indentation marker isn't set to follow the cell
     NSGraphicsStyle *style=[self graphicsStyle];
     BOOL temp = _indentationMarkerFollowsCell;
-    int  i,count=numberOfChildrenOfItemAndReload(self,nil,NO);
+    NSInteger i,count=numberOfChildrenOfItemAndReload(self,nil,NO);
 
     [[NSColor grayColor] setStroke];
 
@@ -689,7 +689,7 @@ static void loadItemIntoMapTables(NSOutlineView *self,id item,unsigned *rowCount
    return result;
 }
 
--(void)drawRow:(int)row clipRect:(NSRect)rect {
+-(void)drawRow:(NSInteger)row clipRect:(NSRect)rect {
 // FIXME: This should be changed to just call super, then draw the markers
 // But there are some fine differences with _adjustedFrame in NSTableView
     NSRange visibleColumns = [self columnsInRect:rect];
@@ -779,7 +779,7 @@ static void loadItemIntoMapTables(NSOutlineView *self,id item,unsigned *rowCount
     return YES;
 }
 
--(BOOL)delegateShouldSelectRow:(int)row
+-(BOOL)delegateShouldSelectRow:(NSInteger)row
 {
     if ([_delegate respondsToSelector:@selector(outlineView:shouldSelectItem:)])
         return [_delegate outlineView:self shouldSelectItem:[self itemAtRow:row]];
@@ -787,7 +787,7 @@ static void loadItemIntoMapTables(NSOutlineView *self,id item,unsigned *rowCount
     return YES;
 }
 
-- (BOOL)delegateShouldEditTableColumn:(NSTableColumn *)tableColumn row:(int)row
+- (BOOL)delegateShouldEditTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
     if ([_delegate respondsToSelector:@selector(outlineView:shouldEditTableColumn:item:)])
         return [_delegate outlineView:self shouldEditTableColumn:tableColumn item:[self itemAtRow:row]];
@@ -813,7 +813,7 @@ static void loadItemIntoMapTables(NSOutlineView *self,id item,unsigned *rowCount
                                                         object:self];
 }
 
--(void)noteColumnDidResizeWithOldWidth:(float)oldWidth
+-(void)noteColumnDidResizeWithOldWidth:(CGFloat)oldWidth
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:NSOutlineViewColumnDidResizeNotification
             object:self
@@ -826,17 +826,17 @@ static void loadItemIntoMapTables(NSOutlineView *self,id item,unsigned *rowCount
     return [_dataSource respondsToSelector:@selector(outlineView:setObjectValue:forTableColumn:byItem:)];
 }
 
--(void)dataSourceSetObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn row:(int)row
+-(void)dataSourceSetObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
     [_dataSource outlineView:self setObjectValue:object forTableColumn:tableColumn byItem:[self itemAtRow:row]];
 }
 
--(id)dataSourceObjectValueForTableColumn:(NSTableColumn *)tableColumn row:(int)row
+-(id)dataSourceObjectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
     return [_dataSource outlineView:self objectValueForTableColumn:tableColumn byItem:[self itemAtRow:row]];
 }
 
--(void)_willDisplayCell:(NSCell *)cell forTableColumn:(NSTableColumn *)column row:(int)row {
+-(void)_willDisplayCell:(NSCell *)cell forTableColumn:(NSTableColumn *)column row:(NSInteger)row {
    if([_delegate respondsToSelector:@selector(outlineView:willDisplayCell:forTableColumn:item:)])
     [_delegate outlineView:self willDisplayCell:cell forTableColumn:column item:[self itemAtRow:row]];
 }

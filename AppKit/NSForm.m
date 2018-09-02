@@ -23,13 +23,13 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 -(void)calcSize {
    NSArray *cells=[self cells];
-   int      i,count=[cells count];
-   float    maxTitleWidth=0;
+   NSInteger i,count=[cells count];
+   CGFloat  maxTitleWidth=0;
 
    for(i=0;i<count;i++){
     NSFormCell         *cell=[cells objectAtIndex:i];
     NSAttributedString *title=[cell attributedTitle];
-    float               width=[title size].width;
+    CGFloat             width=[title size].width;
 
     if(width>maxTitleWidth)
      maxTitleWidth=width;
@@ -44,13 +44,13 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    }
 }
 
--cellAtIndex:(int)index {
+-cellAtIndex:(NSInteger)index {
    return [[self cells] objectAtIndex:index];
 }
 
--(int)indexOfCellWithTag:(int)tag {
+-(NSInteger)indexOfCellWithTag:(NSInteger)tag {
    NSArray *cells=[self cells];
-   int      i,count=[cells count];
+   NSInteger i,count=[cells count];
    
    for(i=0;i<count;i++)
     if([[cells objectAtIndex:i] tag]==tag)
@@ -59,14 +59,14 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    return -1;
 }
 
--(int)indexOfSelectedItem {
+-(NSInteger)indexOfSelectedItem {
    return [self selectedRow];
 }
 
 
 -(void)setBordered:(BOOL)value {
    NSArray *cells=[self cells];
-   int      i,count=[cells count];
+   NSInteger i,count=[cells count];
    
    for(i=0;i<count;i++)
     [[cells objectAtIndex:i] setBordered:value];
@@ -76,7 +76,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 -(void)setBezeled:(BOOL)value {
    NSArray *cells=[self cells];
-   int      i,count=[cells count];
+   NSInteger i,count=[cells count];
    
    for(i=0;i<count;i++)
     [[cells objectAtIndex:i] setBezeled:value];
@@ -84,20 +84,20 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    [self setNeedsDisplay:YES];
 }
 
--(void)setEntryWidth:(float)value {
+-(void)setEntryWidth:(CGFloat)value {
    NSSize size=[self cellSize];
    
    size.width=value;
    [self setCellSize:size];
 }
 
--(void)setInterlineSpacing:(float)value {
+-(void)setInterlineSpacing:(CGFloat)value {
    [self setIntercellSpacing:NSMakeSize(0,value)];
 }
 
 -(void)setTitleAlignment:(NSTextAlignment)value {
    NSArray *cells=[self cells];
-   int      i,count=[cells count];
+   NSInteger i,count=[cells count];
    
    for(i=0;i<count;i++)
     [[cells objectAtIndex:i] setTitleAlignment:value];
@@ -107,7 +107,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 -(void)setTitleFont:(NSFont *)value {
    NSArray *cells=[self cells];
-   int      i,count=[cells count];
+   NSInteger i,count=[cells count];
    
    for(i=0;i<count;i++)
     [[cells objectAtIndex:i] setTitleFont:value];
@@ -117,7 +117,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 -(void)setTitleBaseWritingDirection:(NSWritingDirection)value {
    NSArray *cells=[self cells];
-   int      i,count=[cells count];
+   NSInteger i,count=[cells count];
    
    for(i=0;i<count;i++)
     [[cells objectAtIndex:i] setTitleBaseWritingDirection:value];
@@ -127,7 +127,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 -(void)setTextAlignment:(NSTextAlignment)value {
    NSArray *cells=[self cells];
-   int      i,count=[cells count];
+   NSInteger i,count=[cells count];
    
    for(i=0;i<count;i++)
     [[cells objectAtIndex:i] setAlignment:value];
@@ -137,7 +137,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 -(void)setTextFont:(NSFont *)value {
    NSArray *cells=[self cells];
-   int      i,count=[cells count];
+   NSInteger i,count=[cells count];
    
    for(i=0;i<count;i++)
     [[cells objectAtIndex:i] setFont:value];
@@ -147,7 +147,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 -(void)setTextBaseWritingDirection:(NSWritingDirection)value {
    NSArray *cells=[self cells];
-   int      i,count=[cells count];
+   NSInteger i,count=[cells count];
    
    for(i=0;i<count;i++)
     [[cells objectAtIndex:i] setBaseWritingDirection:value];
@@ -162,22 +162,22 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    return [[self cells] lastObject];
 }
 
--(NSFormCell *)insertEntry:(NSString *)title atIndex:(int)index {
+-(NSFormCell *)insertEntry:(NSString *)title atIndex:(NSInteger)index {
    [self insertRow:index];
    [[self cellAtRow:index column:0] setTitle:title];
    
    return [self cellAtRow:index column:0];
 }
 
--(void)removeEntryAtIndex:(int)index {
+-(void)removeEntryAtIndex:(NSInteger)index {
    [self removeRow:index];
 }
 
--(void)selectTextAtIndex:(int)index {
+-(void)selectTextAtIndex:(NSInteger)index {
    NSUnimplementedMethod();
 }
 
--(void)drawCellAtIndex:(int)index {
+-(void)drawCellAtIndex:(NSInteger)index {
    [self drawCellAtRow:index column:0];
 }
 

@@ -74,7 +74,7 @@ BOOL O2PDFGetPageArrayForKey(O2PDFPage *page,const char *key,O2PDFArray **arrayp
    const char *string=NULL;
    O2PDFArray *array;
    O2PDFReal  *numbers;
-   unsigned    count;
+   NSUInteger  count;
    
    switch(box){
     case kO2PDFMediaBox: string="MediaBox"; break;

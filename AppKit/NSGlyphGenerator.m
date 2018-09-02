@@ -20,19 +20,19 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    return shared;
 }
 
--(void)generateGlyphsForGlyphStorage:(id <NSGlyphStorage>)glyphStorage desiredNumberOfCharacters:(unsigned int)numberOfCharacters glyphIndex:(unsigned *)glyphIndexp characterIndex:(unsigned *)characterIndexp {
+-(void)generateGlyphsForGlyphStorage:(id <NSGlyphStorage>)glyphStorage desiredNumberOfCharacters:(NSUInteger)numberOfCharacters glyphIndex:(NSUInteger *)glyphIndexp characterIndex:(NSUInteger *)characterIndexp {
    NSAttributedString *text=[glyphStorage attributedString];
    NSString           *string=[text string];
-   unsigned            length=[string length];
-   unsigned            characterIndex=*characterIndexp;
-   unsigned            glyphIndex=*glyphIndexp;
+   NSUInteger          length=[string length];
+   NSUInteger          characterIndex=*characterIndexp;
+   NSUInteger          glyphIndex=*glyphIndexp;
    NSRange             effectiveRange=NSMakeRange(0,0);
    NSDictionary       *attributes=nil;
    NSFont             *font=nil;
-   int                 i;
+   NSInteger           i;
    
    for(i=0;i<numberOfCharacters && characterIndex<length;){
-    unsigned chunkSize=MIN(1024,numberOfCharacters-i);
+    NSUInteger chunkSize=MIN(1024,numberOfCharacters-i);
     unichar  characterChunk[chunkSize];
     NSGlyph  glyphChunk[chunkSize];
     

@@ -19,8 +19,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 - (void)setMenu:(NSMenu *)menu;
 - (void)setFont:(NSFont *)font;
 - (void)setPullsDown:(BOOL)pullsDown;
-- (void)selectItemAtIndex:(int)index;
+- (void)selectItemAtIndex:(NSInteger)index;
 
-- (int)runTrackingWithEvent:(NSEvent *)event;
+- (NSInteger)runTrackingWithEvent:(NSEvent *)event;
 
 @end

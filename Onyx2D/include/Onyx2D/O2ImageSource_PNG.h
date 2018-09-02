@@ -12,8 +12,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     NSData *_png;
 }
 
-- (unsigned)count;
+- (NSUInteger)count;
 
-- (O2Image *)createImageAtIndex:(unsigned)index options:(NSDictionary *)options;
+- (O2Image *)createImageAtIndex:(NSUInteger)index options:(NSDictionary *)options;
 
 @end

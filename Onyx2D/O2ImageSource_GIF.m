@@ -54,15 +54,15 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     return (CFStringRef)@"com.compuserve.gif";
 }
 
--(unsigned)count {
+-(NSUInteger)count {
    return _gif->ImageCount;
 }
 
--(CFDictionaryRef)copyPropertiesAtIndex:(unsigned)index options:(CFDictionaryRef)options {
+-(CFDictionaryRef)copyPropertiesAtIndex:(NSUInteger)index options:(CFDictionaryRef)options {
    return nil;
 }
 
--(O2Image *)createImageAtIndex:(unsigned)index options:(NSDictionary *)options {
+-(O2Image *)createImageAtIndex:(NSUInteger)index options:(NSDictionary *)options {
 
    if(index>=_gif->ImageCount)
     return nil;

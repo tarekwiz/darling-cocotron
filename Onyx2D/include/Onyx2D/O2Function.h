@@ -20,9 +20,9 @@ typedef struct {
 
 @interface O2Function : NSObject {
     void *_info;
-    unsigned _domainCount;
+    NSUInteger _domainCount;
     O2Float *_domain;
-    unsigned _rangeCount;
+    NSUInteger _rangeCount;
     O2Float *_range;
     O2FunctionCallbacks _callbacks;
 }
@@ -35,9 +35,9 @@ void O2FunctionRelease(O2FunctionRef self);
 // FIX, only works for one input value
 void O2FunctionEvaluate(O2FunctionRef self, O2Float in, O2Float *out);
 
-- (unsigned)domainCount;
+- (NSUInteger)domainCount;
 - (const O2Float *)domain;
-- (unsigned)rangeCount;
+- (NSUInteger)rangeCount;
 - (const O2Float *)range;
 
 - (BOOL)isLinear;

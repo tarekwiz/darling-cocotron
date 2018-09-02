@@ -29,11 +29,11 @@
 
     NSMutableDictionary *_deviceDictionary;
     O2Rect _frame;
-    unsigned _styleMask;
+    NSUInteger _styleMask;
     BOOL _mapped;
 }
 + (void)removeDecorationForWindow:(Window)w onDisplay:(Display *)dpy;
-- initWithFrame:(NSRect)frame styleMask:(unsigned)styleMask isPanel:(BOOL)isPanel backingType:(NSUInteger)backingType;
+- initWithFrame:(NSRect)frame styleMask:(NSUInteger)styleMask isPanel:(BOOL)isPanel backingType:(NSUInteger)backingType;
 - (O2Rect)frame;
 - (Visual *)visual;
 - (Drawable)drawable;
@@ -46,4 +46,4 @@
 
 @end
 
-void CGNativeBorderFrameWidthsForStyle(unsigned styleMask, CGFloat *top, CGFloat *left, CGFloat *bottom, CGFloat *right);
+void CGNativeBorderFrameWidthsForStyle(NSUInteger styleMask, CGFloat *top, CGFloat *left, CGFloat *bottom, CGFloat *right);

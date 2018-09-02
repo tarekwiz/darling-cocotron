@@ -122,11 +122,11 @@ NSString * const kCAFilterTrilinear=@"trilinear";
    [self setBounds:bounds];
 }
 
--(float)opacity {
+-(CGFloat)opacity {
    return _opacity;
 }
 
--(void)setOpacity:(float)value {
+-(void)setOpacity:(CGFloat)value {
    CAAnimation *animation=[self animationForKey:@"opacity"];
    
    if(animation==nil && ![CATransaction disableActions]){

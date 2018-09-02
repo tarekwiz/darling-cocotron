@@ -29,7 +29,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    return nil;
 }
 
--(unsigned)styleMask {
+-(NSUInteger)styleMask {
    O2InvalidAbstractInvocation();
    return 0;
 }
@@ -38,7 +38,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    O2InvalidAbstractInvocation();
 }
 
--(void)setStyleMask:(unsigned)mask {
+-(void)setStyleMask:(NSUInteger)mask {
    O2InvalidAbstractInvocation();
 }
 

@@ -263,7 +263,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 - (void)removeObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath
 {
    _NSObservationProxy *proxy=[[_NSObservationProxy alloc] initWithKeyPath:keyPath observer:observer object:self];
-   int idx=[_observationProxies indexOfObject:proxy];
+   NSInteger idx=[_observationProxies indexOfObject:proxy];
    if(idx==NSNotFound) {
    }
 

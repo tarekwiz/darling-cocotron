@@ -12,37 +12,37 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 @class O2PDFString, O2PDFArray, O2PDFDictionary, O2PDFStream;
 
 @interface O2PDFArray : O2PDFObject {
-    unsigned _capacity;
-    unsigned _count;
+    NSUInteger _capacity;
+    NSUInteger _count;
     O2PDFObject **_objects;
 }
 
 + (O2PDFArray *)pdfArray;
 + (O2PDFArray *)pdfArrayWithRect:(O2Rect)rect;
-+ (O2PDFArray *)pdfArrayWithNumbers:(O2PDFReal *)values count:(unsigned)count;
-+ (O2PDFArray *)pdfArrayWithIntegers:(O2PDFInteger *)values count:(unsigned)count;
++ (O2PDFArray *)pdfArrayWithNumbers:(O2PDFReal *)values count:(NSUInteger)count;
++ (O2PDFArray *)pdfArrayWithIntegers:(O2PDFInteger *)values count:(NSUInteger)count;
 
-- (unsigned)count;
+- (NSUInteger)count;
 
 - (void)addObject:(O2PDFObject *)anObject;
 - (void)addNumber:(O2PDFReal)value;
 - (void)addInteger:(O2PDFInteger)value;
 - (void)addBoolean:(O2PDFBoolean)value;
 
-- (O2PDFObject *)objectAtIndex:(unsigned)index;
+- (O2PDFObject *)objectAtIndex:(NSUInteger)index;
 
-- (BOOL)getObjectAtIndex:(unsigned)index value:(O2PDFObject **)objectp;
-- (BOOL)getNullAtIndex:(unsigned)index;
-- (BOOL)getBooleanAtIndex:(unsigned)index value:(O2PDFBoolean *)valuep;
-- (BOOL)getIntegerAtIndex:(unsigned)index value:(O2PDFInteger *)valuep;
-- (BOOL)getNumberAtIndex:(unsigned)index value:(O2PDFReal *)valuep;
-- (BOOL)getNameAtIndex:(unsigned)index value:(const char **)namep;
-- (BOOL)getStringAtIndex:(unsigned)index value:(O2PDFString **)stringp;
-- (BOOL)getArrayAtIndex:(unsigned)index value:(O2PDFArray **)arrayp;
-- (BOOL)getDictionaryAtIndex:(unsigned)index value:(O2PDFDictionary **)dictionaryp;
-- (BOOL)getStreamAtIndex:(unsigned)index value:(O2PDFStream **)streamp;
+- (BOOL)getObjectAtIndex:(NSUInteger)index value:(O2PDFObject **)objectp;
+- (BOOL)getNullAtIndex:(NSUInteger)index;
+- (BOOL)getBooleanAtIndex:(NSUInteger)index value:(O2PDFBoolean *)valuep;
+- (BOOL)getIntegerAtIndex:(NSUInteger)index value:(O2PDFInteger *)valuep;
+- (BOOL)getNumberAtIndex:(NSUInteger)index value:(O2PDFReal *)valuep;
+- (BOOL)getNameAtIndex:(NSUInteger)index value:(const char **)namep;
+- (BOOL)getStringAtIndex:(NSUInteger)index value:(O2PDFString **)stringp;
+- (BOOL)getArrayAtIndex:(NSUInteger)index value:(O2PDFArray **)arrayp;
+- (BOOL)getDictionaryAtIndex:(NSUInteger)index value:(O2PDFDictionary **)dictionaryp;
+- (BOOL)getStreamAtIndex:(NSUInteger)index value:(O2PDFStream **)streamp;
 
-- (BOOL)getNumbers:(O2PDFReal **)numbersp count:(unsigned *)count;
-- (BOOL)getIntegers:(O2PDFInteger **)intsp count:(unsigned *)count;
+- (BOOL)getNumbers:(O2PDFReal **)numbersp count:(NSUInteger *)count;
+- (BOOL)getIntegers:(O2PDFInteger **)intsp count:(NSUInteger *)count;
 
 @end

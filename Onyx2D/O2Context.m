@@ -21,7 +21,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import "O2Encoding.h"
 #import "O2PDFCharWidths.h"
 
-void O2ContextDefaultShowText(O2ContextRef self,const char *text,unsigned length);
+void O2ContextDefaultShowText(O2ContextRef self,const char *text, NSUInteger length);
 
 @implementation O2Context
 
@@ -342,7 +342,7 @@ void O2ContextAddQuadCurveToPoint(O2ContextRef self,O2Float cx1,O2Float cy1,O2Fl
    O2PathAddQuadCurveToPoint(self->_path,&ctm,cx1,cy1,x,y);
 }
 
-void O2ContextAddLines(O2ContextRef self,const O2Point *points,unsigned count) {
+void O2ContextAddLines(O2ContextRef self,const O2Point *points, NSUInteger count) {
    if(self==nil)
     return;
 
@@ -360,7 +360,7 @@ void O2ContextAddRect(O2ContextRef self,O2Rect rect) {
    O2PathAddRect(self->_path,&ctm,rect);
 }
 
-void O2ContextAddRects(O2ContextRef self,const O2Rect *rects,unsigned count) {
+void O2ContextAddRects(O2ContextRef self,const O2Rect *rects, NSUInteger count) {
    if(self==nil)
     return;
 
@@ -624,7 +624,7 @@ void O2ContextClipToRect(O2ContextRef self,O2Rect rect) {
    O2ContextClip(self);
 }
 
-void O2ContextClipToRects(O2ContextRef self,const O2Rect *rects,unsigned count) {
+void O2ContextClipToRects(O2ContextRef self,const O2Rect *rects, NSUInteger count) {
    if(self==nil)
     return;
 
@@ -907,7 +907,7 @@ void O2ContextSetMiterLimit(O2ContextRef self,O2Float miterLimit) {
    O2GStateSetMiterLimit(O2ContextCurrentGState(self),miterLimit);
 }
 
-void O2ContextSetLineDash(O2ContextRef self,O2Float phase,const O2Float *lengths,unsigned count) {
+void O2ContextSetLineDash(O2ContextRef self,O2Float phase,const O2Float *lengths, NSUInteger count) {
    if(self==nil)
     return;
 
@@ -964,7 +964,7 @@ void O2ContextSetShouldAntialias(O2ContextRef self,BOOL yesOrNo) {
 }
 
 // drawing
-void O2ContextStrokeLineSegments(O2ContextRef self,const O2Point *points,unsigned count) {
+void O2ContextStrokeLineSegments(O2ContextRef self,const O2Point *points, NSUInteger count) {
    if(self==nil)
     return;
 
@@ -1015,7 +1015,7 @@ void O2ContextFillRect(O2ContextRef self,O2Rect rect) {
    O2ContextFillRects(self,&rect,1);
 }
 
-void O2ContextFillRects(O2ContextRef self,const O2Rect *rects,unsigned count) {
+void O2ContextFillRects(O2ContextRef self,const O2Rect *rects, NSUInteger count) {
    if(self==nil)
     return;
 
@@ -1073,19 +1073,19 @@ void O2ContextClearRect(O2ContextRef self,O2Rect rect) {
    O2ContextRestoreGState(self);
 }
 
-void O2ContextShowGlyphs(O2ContextRef self,const O2Glyph *glyphs,unsigned count) {
+void O2ContextShowGlyphs(O2ContextRef self,const O2Glyph *glyphs, NSUInteger count) {
    if(self==nil)
     return;
 
    self->_showGlyphsFunction(self,NULL,glyphs,NULL,count);
 }
 
-void O2ContextShowGlyphsAtPoint(O2ContextRef self,O2Float x,O2Float y,const O2Glyph *glyphs,unsigned count) {
+void O2ContextShowGlyphsAtPoint(O2ContextRef self,O2Float x,O2Float y,const O2Glyph *glyphs, NSUInteger count) {
    O2ContextSetTextPosition(self,x,y);
    O2ContextShowGlyphs(self,glyphs,count);
 }
 
--(void)showGlyphs:(const O2Glyph *)glyphs advances:(const O2Size *)advances count:(unsigned)count {
+-(void)showGlyphs:(const O2Glyph *)glyphs advances:(const O2Size *)advances count:(NSUInteger)count {
 #if 1
    O2InvalidAbstractInvocation();
 #else
@@ -1106,14 +1106,14 @@ void O2ContextShowGlyphsAtPoint(O2ContextRef self,O2Float x,O2Float y,const O2Gl
 #endif
 }
 
-void O2ContextShowGlyphsWithAdvances(O2ContextRef self,const O2Glyph *glyphs,const O2Size *advances,unsigned count) {
+void O2ContextShowGlyphsWithAdvances(O2ContextRef self,const O2Glyph *glyphs,const O2Size *advances, NSUInteger count) {
    if(self==nil)
     return;
 
    self->_showGlyphsFunction(self,NULL,glyphs,advances,count);
 }
 
-void O2ContextDefaultShowText(O2ContextRef self,const char *text,unsigned length) {
+void O2ContextDefaultShowText(O2ContextRef self,const char *text, NSUInteger length) {
    O2GState        *gState=O2ContextCurrentGState(self);
    O2Encoding      *encoding=O2GStateEncoding(gState);
    O2PDFCharWidths *widths=O2GStateCharWidths(gState);
@@ -1140,14 +1140,14 @@ void O2ContextDefaultShowText(O2ContextRef self,const char *text,unsigned length
 }
 
 
-void O2ContextShowText(O2ContextRef self,const char *text,unsigned length) {
+void O2ContextShowText(O2ContextRef self,const char *text, NSUInteger length) {
    if(self==nil)
     return;
 
    self->_showTextFunction(self,text,length);
 }
 
-void O2ContextShowTextAtPoint(O2ContextRef self,O2Float x,O2Float y,const char *text,unsigned count) {
+void O2ContextShowTextAtPoint(O2ContextRef self,O2Float x,O2Float y,const char *text, NSUInteger count) {
    if(self==nil)
     return;
 
@@ -1309,14 +1309,14 @@ O2AffineTransform O2ContextGetTextRenderingMatrix(O2ContextRef self) {
 void O2ContextGetDefaultAdvances(O2ContextRef self,const O2Glyph *glyphs,O2Size *advances,size_t count) {
    O2GState         *gState=O2ContextCurrentGState(self);
    O2Font           *font=O2GStateFont(gState);
-   int               intAdvances[count];
+   NSInteger         intAdvances[count];
    O2Float           unitsPerEm=O2FontGetUnitsPerEm(font);
    O2Float           pointSize=O2GStatePointSize(gState);
    size_t            i;
    
    O2FontGetGlyphAdvances(font,glyphs,count,intAdvances);
     
-    float scale = [font nativeSizeForSize:pointSize]/unitsPerEm;
+    O2Float scale = [font nativeSizeForSize:pointSize]/unitsPerEm;
     for(i=0;i<count;i++){
     advances[i].width=intAdvances[i]*scale;
     advances[i].height=0;

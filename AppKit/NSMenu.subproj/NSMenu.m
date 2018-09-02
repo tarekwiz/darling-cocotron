@@ -63,7 +63,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     _autoenablesItems=![keyed decodeBoolForKey:@"NSNoAutoenable"];    
    }
    else {
-		int version;
+		NSInteger version;
 		version = [coder versionForClassName: @"NSMenu"];
 
 		if (version == NSNotFound)
@@ -183,7 +183,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    return _title;
 }
 
--(int)numberOfItems {
+-(NSInteger)numberOfItems {
    return [_itemArray count];
 }
 
@@ -203,12 +203,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    return _autoenablesItems;
 }
 
--(NSMenuItem *)itemAtIndex:(int)index {
+-(NSMenuItem *)itemAtIndex:(NSInteger)index {
    return [_itemArray objectAtIndex:index];
 }
 
--(NSMenuItem *)itemWithTag:(int)tag {
-    int i,count=[_itemArray count];
+-(NSMenuItem *)itemWithTag:(NSInteger)tag {
+    NSInteger i,count=[_itemArray count];
 
     for(i=0;i<count;i++){
         NSMenuItem *item=[_itemArray objectAtIndex:i];
@@ -221,7 +221,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 
 -(NSMenuItem *)itemWithTitle:(NSString *)title {
-   int i,count=[_itemArray count];
+   NSInteger i,count=[_itemArray count];
 
    for(i=0;i<count;i++){
     NSMenuItem *item=[_itemArray objectAtIndex:i];
@@ -233,12 +233,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    return nil;
 }
 
--(int)indexOfItem:(NSMenuItem *)item {
+-(NSInteger)indexOfItem:(NSMenuItem *)item {
     return [_itemArray indexOfObjectIdenticalTo:item];
 }
 
--(int)indexOfItemWithTag:(int)tag {
-    int i,count=[_itemArray count];
+-(NSInteger)indexOfItemWithTag:(NSInteger)tag {
+    NSInteger i,count=[_itemArray count];
 
     for (i=0; i<count; ++i)
         if ([[_itemArray objectAtIndex:i] tag] == tag)
@@ -247,8 +247,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     return -1;
 }
 
--(int)indexOfItemWithTitle:(NSString *)title {
-    int i,count=[_itemArray count];
+-(NSInteger)indexOfItemWithTitle:(NSString *)title {
+    NSInteger i,count=[_itemArray count];
 
     for (i=0;i<count;i++)
         if ([[[_itemArray objectAtIndex:i] title] isEqualToString:title])
@@ -257,8 +257,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     return -1;
 }
 
--(int)indexOfItemWithRepresentedObject:object {
-   int i,count=[_itemArray count];
+-(NSInteger)indexOfItemWithRepresentedObject:object {
+   NSInteger i,count=[_itemArray count];
    
    for(i=0;i<count;i++)
     if([[(NSMenuItem *)[_itemArray objectAtIndex:i] representedObject] isEqual:object])
@@ -268,8 +268,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 
 // needed this for NSApplication windowsMenu stuff, so i did 'em all..
--(int)indexOfItemWithTarget:(id)target andAction:(SEL)action {
-    int i,count=[_itemArray count];
+-(NSInteger)indexOfItemWithTarget:(id)target andAction:(SEL)action {
+    NSInteger i,count=[_itemArray count];
 
     for (i=0; i<count; ++i) {
         NSMenuItem *item = [_itemArray objectAtIndex:i];
@@ -285,8 +285,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     return -1;
 }
 
--(int)indexOfItemWithSubmenu:(NSMenu *)submenu {
-    int i, count=[_itemArray count];
+-(NSInteger)indexOfItemWithSubmenu:(NSMenu *)submenu {
+    NSInteger i, count=[_itemArray count];
 
     for (i = 0; i < count; ++i) 
         if ([[_itemArray objectAtIndex:i] submenu] == submenu)
@@ -332,16 +332,16 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    [_itemArray removeObjectIdenticalTo:item];
 }
 
--(void)removeItemAtIndex:(int)index {
+-(void)removeItemAtIndex:(NSInteger)index {
    [self removeItem:[_itemArray objectAtIndex:index]];
 }
 
--(void)insertItem:(NSMenuItem *)item atIndex:(int)index {
+-(void)insertItem:(NSMenuItem *)item atIndex:(NSInteger)index {
    [item performSelector:@selector(_setMenu:) withObject:self];
    [_itemArray insertObject:item atIndex:index];
 }
 
--(NSMenuItem *)insertItemWithTitle:(NSString *)title action:(SEL)action keyEquivalent:(NSString *)keyEquivalent atIndex:(int)index {
+-(NSMenuItem *)insertItemWithTitle:(NSString *)title action:(SEL)action keyEquivalent:(NSString *)keyEquivalent atIndex:(NSInteger)index {
    NSMenuItem *item=[[[NSMenuItem alloc] initWithTitle:title action:action keyEquivalent:keyEquivalent] autorelease];
 
    [self insertItem:item atIndex:index];
@@ -380,7 +380,7 @@ BOOL itemIsEnabled(NSMenuItem *item) {
         [_delegate menuNeedsUpdate:self];
     }
 
-    int i,count=[_itemArray count];
+    NSInteger i,count=[_itemArray count];
     
     for(i=0;i<count;i++){
         NSMenuItem *item=[_itemArray objectAtIndex:i];
@@ -403,7 +403,7 @@ BOOL itemIsEnabled(NSMenuItem *item) {
 }
 
 -(BOOL)performKeyEquivalent:(NSEvent *)event {
-    int       i,count=[_itemArray count];
+    NSInteger i,count=[_itemArray count];
     NSString *characters=[event charactersIgnoringModifiers];
     unsigned  modifiers=[event modifierFlags];
     
@@ -452,7 +452,7 @@ BOOL itemIsEnabled(NSMenuItem *item) {
    if([_name isEqual:name])
     return self;
    else {
-    int i,count=[_itemArray count];
+    NSInteger i,count=[_itemArray count];
     
     for(i=0;i<count;i++){
      NSMenu *check=[[[_itemArray objectAtIndex:i] submenu] _menuWithName:name];

@@ -19,7 +19,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <AppKit/NSRaise.h>
 
 @interface NSTableView(NSTableView_private)
--(void)noteColumnDidResizeWithOldWidth:(float)oldWidth;
+-(void)noteColumnDidResizeWithOldWidth:(CGFloat)oldWidth;
 @end
 
 @implementation NSTableHeaderView
@@ -38,16 +38,16 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     return _tableView;
 }
 
--(int)resizedColumn {
+-(NSInteger)resizedColumn {
     return _resizedColumn;
 }
 
--(int)draggedColumn {
+-(NSInteger)draggedColumn {
     NSUnimplementedMethod();
     return -1;
 }
 
--(float)draggedDistance {
+-(CGFloat)draggedDistance {
     NSUnimplementedMethod();
     return -1;
 }
@@ -56,7 +56,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     _tableView = tableView;
 }
 
--(NSRect)headerRectOfColumn:(int)column {
+-(NSRect)headerRectOfColumn:(NSInteger)column {
     NSArray *tableColumns = [_tableView tableColumns];
     NSRect headerRect = _bounds;
     NSSize spacing = [_tableView intercellSpacing];
@@ -74,8 +74,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     return headerRect;
 }
 
--(NSUInteger)columnAtPoint:(NSPoint)point {
-    int i, count = [[_tableView tableColumns] count];
+-(NSInteger)columnAtPoint:(NSPoint)point {
+    NSInteger i, count = [[_tableView tableColumns] count];
 
     for (i = 0; i < count; ++i) {
         if (NSMouseInRect(point, [self headerRectOfColumn:i],[self isFlipped]))
@@ -87,7 +87,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 -(void)drawRect:(NSRect)rect {
     NSArray *tableColumns = [_tableView tableColumns];
-    int i, count = [tableColumns count];
+    NSInteger i, count = [tableColumns count];
     NSRect columnRect = _bounds;
     NSSize spacing = [_tableView intercellSpacing];
 
@@ -118,14 +118,14 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 -(void)mouseDown:(NSEvent *)theEvent {
     NSPoint location = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-    int clickedColumn = [self columnAtPoint:location];
+    NSInteger clickedColumn = [self columnAtPoint:location];
 
     if ([[_tableView delegate] respondsToSelector:@selector(tableView:mouseDownInHeaderOfTableColumn:)])
         [[_tableView delegate] tableView:_tableView
           mouseDownInHeaderOfTableColumn:[[_tableView tableColumns] objectAtIndex:clickedColumn]];
 
     if ([_tableView allowsColumnResizing]) {
-        int i, count=[[_tableView tableColumns] count];
+        NSInteger i, count=[[_tableView tableColumns] count];
 
         // if there is any editing going on, we have to end it. Apple ends editing, sends the
         // setObjectValue, but does NOT select any following cells. sending nil to textDidEndEditing
@@ -136,7 +136,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         for (i = 1; i < count; ++i) {
             if (NSMouseInRect(location, [self _resizeRectBeforeColumn:i],[self isFlipped])) {
                 NSTableColumn *resizingColumn = [[_tableView tableColumns] objectAtIndex:i-1];
-                float resizedColumnWidth = [resizingColumn width];
+                CGFloat resizedColumnWidth = [resizingColumn width];
 
                 if (![resizingColumn isResizable])
                     return;
@@ -146,8 +146,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                 do { // greatly simplified code...
                     NSPoint newPoint;
                     NSRect newRect;
-                    int q;
-                    float newWidth=newPoint.x;
+                    NSInteger q;
+                    CGFloat newWidth=newPoint.x;
                     
                     theEvent=[[self window] nextEventMatchingMask:NSLeftMouseUpMask|NSLeftMouseDraggedMask];
                     newPoint=[self convertPoint:[theEvent locationInWindow] fromView:nil];
@@ -187,8 +187,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
             }
         }
         else if ([theEvent modifierFlags] & NSShiftKeyMask) {
-            int startColumn = [_tableView selectedColumn];
-            int endColumn = clickedColumn;
+            NSInteger startColumn = [_tableView selectedColumn];
+            NSInteger endColumn = clickedColumn;
 
             if (startColumn == -1)
                 startColumn = 0;
@@ -209,7 +209,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 
 -(void)resetCursorRects {
-    int i;
+    NSInteger i;
 
     for (i = 1; i < [[_tableView tableColumns] count]; ++i)
         [self addCursorRect:[self _resizeRectBeforeColumn:i] cursor:[NSCursor resizeLeftRightCursor]];

@@ -97,14 +97,14 @@ APPKIT_EXPORT NSString *const NSOldSelectedCharacterRange;
     NSParagraphStyle *_defaultParagraphStyle;
 
     BOOL _didSendTextDidEndNotification;
-    unsigned _selectionOrigin; // for keyboard selection sanity.
+    NSUInteger _selectionOrigin; // for keyboard selection sanity.
     id _killBuffer; // NSString for Emacs-style, NSMutableString for additive
     BOOL _killBufferIsAdditive; // .. additive == pine/pico style, but possible memory hog
 
     NSRange _rangeForUserCompletion; // range of original user completion text.
     NSString *_userCompletionHint; // original "hint" text which started completion
     NSArray *_userCompletions; // current list of completions. shouldn't change while modal
-    int _userCompletionSelectedItem; // index within completion array
+    NSInteger _userCompletionSelectedItem; // index within completion array
 
     NSUndoManager *_fieldEditorUndoManager;
     BOOL _processingKeyEvent;
@@ -160,8 +160,8 @@ APPKIT_EXPORT NSString *const NSOldSelectedCharacterRange;
 - (void)setSelectedRanges:(NSArray *)value;
 
 - (NSRange)rangeForUserCompletion;
-- (NSArray *)completionsForPartialWordRange:(NSRange)range indexOfSelectedItem:(int *)index;
-- (void)insertCompletion:(NSString *)string forPartialWordRange:(NSRange)range movement:(int)movement isFinal:(BOOL)isFinal;
+- (NSArray *)completionsForPartialWordRange:(NSRange)range indexOfSelectedItem:(NSInteger *)index;
+- (void)insertCompletion:(NSString *)string forPartialWordRange:(NSRange)range movement:(NSInteger)movement isFinal:(BOOL)isFinal;
 
 - (NSArray *)writablePasteboardTypes;
 - (BOOL)writeSelectionToPasteboard:(NSPasteboard *)pasteboard type:(NSString *)type;
@@ -230,7 +230,7 @@ APPKIT_EXPORT NSString *const NSOldSelectedCharacterRange;
 @interface NSObject (NSTextView_delegate)
 
 - (BOOL)textView:(NSTextView *)textView doCommandBySelector:(SEL)selector;
-- (NSArray *)textView:(NSTextView *)textView completions:(NSArray *)words forPartialWordRange:(NSRange)range indexOfSelectedItem:(int *)index;
+- (NSArray *)textView:(NSTextView *)textView completions:(NSArray *)words forPartialWordRange:(NSRange)range indexOfSelectedItem:(NSInteger *)index;
 
 - (void)textViewDidChangeSelection:(NSNotification *)note;
 

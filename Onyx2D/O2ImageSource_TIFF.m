@@ -64,11 +64,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     return (CFStringRef)@"public.tiff";
 }
 
--(unsigned)count {
+-(NSUInteger)count {
    return [[_reader imageFileDirectory] count];
 }
 
--(CFDictionaryRef)copyPropertiesAtIndex:(unsigned)index options:(CFDictionaryRef)options {
+-(CFDictionaryRef)copyPropertiesAtIndex:(NSUInteger)index options:(CFDictionaryRef)options {
    NSArray *entries=[_reader imageFileDirectory];
    
    if([entries count]<=index)
@@ -80,7 +80,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 
 
--(O2ImageRef)createImageAtIndex:(unsigned)index options:(CFDictionaryRef)options {
+-(O2ImageRef)createImageAtIndex:(NSUInteger)index options:(CFDictionaryRef)options {
    NSArray *entries=[_reader imageFileDirectory];
    
    if([entries count]<=index)

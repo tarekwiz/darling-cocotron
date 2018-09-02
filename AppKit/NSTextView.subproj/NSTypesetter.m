@@ -20,7 +20,7 @@
    return NSTypesetterLatestBehavior;
 }
 
-+(NSSize)printingAdjustmentInLayoutManager:(NSLayoutManager *)layoutManager forNominallySpacedGlyphRange:(NSRange)glyphRange packedGlyphs:(const unsigned char *)packedGlyphs count:(unsigned)count {
++(NSSize)printingAdjustmentInLayoutManager:(NSLayoutManager *)layoutManager forNominallySpacedGlyphRange:(NSRange)glyphRange packedGlyphs:(const unsigned char *)packedGlyphs count:(NSUInteger)count {
    return NSMakeSize(0,0);
 }
 
@@ -44,11 +44,11 @@
    return _behavior;
 }
 
--(float)hyphenationFactor {
+-(CGFloat)hyphenationFactor {
    return _hyphenationFactor;
 }
 
--(float)lineFragmentPadding {
+-(CGFloat)lineFragmentPadding {
    return _lineFragmentPadding;
 }
 
@@ -64,11 +64,11 @@
    _behavior=behavior;
 }
 
--(void)setHyphenationFactor:(float)factor {
+-(void)setHyphenationFactor:(CGFloat)factor {
    _hyphenationFactor=factor;
 }
 
--(void)setLineFragmentPadding:(float)padding {
+-(void)setLineFragmentPadding:(CGFloat)padding {
    _lineFragmentPadding=padding;
 }
 
@@ -88,16 +88,16 @@
    return [_layoutManager glyphRangeForCharacterRange:characterRange actualCharacterRange:actualCharacterRange];
 }
 
--(unsigned)getGlyphsInRange:(NSRange)glyphRange glyphs:(NSGlyph *)glyphs characterIndexes:(unsigned *)characterIndexes glyphInscriptions:(NSGlyphInscription *)glyphInscriptions elasticBits:(BOOL *)elasticBits bidiLevels:(unsigned char *)bidiLevels {
+-(NSUInteger)getGlyphsInRange:(NSRange)glyphRange glyphs:(NSGlyph *)glyphs characterIndexes:(NSUInteger *)characterIndexes glyphInscriptions:(NSGlyphInscription *)glyphInscriptions elasticBits:(BOOL *)elasticBits bidiLevels:(unsigned char *)bidiLevels {
     NSInvalidAbstractInvocation();
     return 0;
 }
 
--(void)getLineFragmentRect:(NSRect *)fragmentRect usedRect:(NSRect *)usedRect remainingRect:(NSRect *)remainingRect forStartingGlyphAtIndex:(unsigned)startingGlyphIndex proposedRect:(NSRect)proposedRect lineSpacing:(float)lineSpacing paragraphSpacingBefore:(float)paragraphSpacingBefore paragraphSpacingAfter:(float)paragraphSpacingAfter {
+-(void)getLineFragmentRect:(NSRect *)fragmentRect usedRect:(NSRect *)usedRect remainingRect:(NSRect *)remainingRect forStartingGlyphAtIndex:(NSUInteger)startingGlyphIndex proposedRect:(NSRect)proposedRect lineSpacing:(CGFloat)lineSpacing paragraphSpacingBefore:(CGFloat)paragraphSpacingBefore paragraphSpacingAfter:(CGFloat)paragraphSpacingAfter {
    NSInvalidAbstractInvocation();
 }
 
--(void)setLineFragmentRect:(NSRect)fragmentRect forGlyphRange:(NSRange)glyphRange usedRect:(NSRect)usedRect baselineOffset:(float)baselineOffset {
+-(void)setLineFragmentRect:(NSRect)fragmentRect forGlyphRange:(NSRange)glyphRange usedRect:(NSRect)usedRect baselineOffset:(CGFloat)baselineOffset {
    [_layoutManager setLineFragmentRect:fragmentRect forGlyphRange:glyphRange usedRect:usedRect];
 }
 
@@ -105,7 +105,7 @@
    // do nothing
 }
 
--(void)insertGlyph:(NSGlyph)glyph atGlyphIndex:(unsigned)glyphIndex characterIndex:(unsigned)characterIndex {
+-(void)insertGlyph:(NSGlyph)glyph atGlyphIndex:(NSUInteger)glyphIndex characterIndex:(NSUInteger)characterIndex {
    [_layoutManager insertGlyph:glyph atGlyphIndex:glyphIndex characterIndex:characterIndex];
 }
 
@@ -114,7 +114,7 @@
 }
 
 -(void)setNotShownAttribute:(BOOL)flag forGlyphRange:(NSRange)range {
-   int i,max=NSMaxRange(range);
+   NSInteger i,max=NSMaxRange(range);
    
    for(i=range.location;i<max;i++)
     [_layoutManager setNotShownAttribute:flag forGlyphAtIndex:i];
@@ -127,7 +127,7 @@
     [_layoutManager setDrawsOutsideLineFragment:flag forGlyphAtIndex:i];
 }
 
--(void)setLocation:(NSPoint)location withAdvancements:(const float *)nominalAdvancements forStartOfGlyphRange:(NSRange)glyphRange {
+-(void)setLocation:(NSPoint)location withAdvancements:(const CGFloat *)nominalAdvancements forStartOfGlyphRange:(NSRange)glyphRange {
    [_layoutManager setLocation:location forStartOfGlyphRange:glyphRange];
 }
 
@@ -140,29 +140,29 @@
    // do nothing
 }
 
--(void)willSetLineFragmentRect:(NSRect *)fragmentRect forGlyphRange:(NSRange)glyphRange usedRect:(NSRect *)usedRect baselineOffset:(float *)baselineOffset {
+-(void)willSetLineFragmentRect:(NSRect *)fragmentRect forGlyphRange:(NSRange)glyphRange usedRect:(NSRect *)usedRect baselineOffset:(CGFloat *)baselineOffset {
    // do nothing
 }
 
--(BOOL)shouldBreakLineByHyphenatingBeforeCharacterAtIndex:(unsigned)characterIndex {
+-(BOOL)shouldBreakLineByHyphenatingBeforeCharacterAtIndex:(NSUInteger)characterIndex {
    NSInvalidAbstractInvocation();
    return NO;
 }
 
--(BOOL)shouldBreakLineByWordBeforeCharacterAtIndex:(unsigned)characterIndex {
+-(BOOL)shouldBreakLineByWordBeforeCharacterAtIndex:(NSUInteger)characterIndex {
    NSInvalidAbstractInvocation();
    return NO;
 }
 
--(float)hyphenationFactorForGlyphAtIndex:(unsigned)glyphIndex {
+-(CGFloat)hyphenationFactorForGlyphAtIndex:(NSUInteger)glyphIndex {
    return 0.0;
 }
 
--(unichar)hyphenCharacterForGlyphAtIndex:(unsigned)glyphIndex {
+-(unichar)hyphenCharacterForGlyphAtIndex:(NSUInteger)glyphIndex {
    return '-';
 }
 
--(NSRect)boundingBoxForControlGlyphAtIndex:(unsigned)glyphIndex forTextContainer:(NSTextContainer *)textContainer proposedLineFragment:(NSRect)proposedRect glyphPosition:(NSPoint)glyphPosition characterIndex:(unsigned)characterIndex {
+-(NSRect)boundingBoxForControlGlyphAtIndex:(NSUInteger)glyphIndex forTextContainer:(NSTextContainer *)textContainer proposedLineFragment:(NSRect)proposedRect glyphPosition:(NSPoint)glyphPosition characterIndex:(NSUInteger)characterIndex {
    NSInvalidAbstractInvocation();
    return NSMakeRect(0,0,0,0);
 }
@@ -212,7 +212,7 @@
    return NSMakeRange(0,0);
 }
 
--(NSTypesetterControlCharacterAction)actionForControlCharacterAtIndex:(unsigned)characterIndex {
+-(NSTypesetterControlCharacterAction)actionForControlCharacterAtIndex:(NSUInteger)characterIndex {
     unichar c = [[_attributedString string] characterAtIndex:characterIndex];
     if ([[NSCharacterSet newlineCharacterSet] characterIsMember:c]) {
         return NSTypesetterParagraphBreakAction;
@@ -251,7 +251,7 @@
    NSInvalidAbstractInvocation();
 }
 
--(void)beginLineWithGlyphAtIndex:(unsigned)glyphIndex {
+-(void)beginLineWithGlyphAtIndex:(NSUInteger)glyphIndex {
    NSInvalidAbstractInvocation();
 }
 
@@ -267,18 +267,18 @@
    NSInvalidAbstractInvocation();
 }
 
--(float)baselineOffsetInLayoutManager:(NSLayoutManager *)layoutManager glyphIndex:(unsigned)glyphIndex {
+-(CGFloat)baselineOffsetInLayoutManager:(NSLayoutManager *)layoutManager glyphIndex:(NSUInteger)glyphIndex {
    NSInvalidAbstractInvocation();
    return 0;
 }
 
--(NSTextTab *)textTabForGlyphLocation:(float)location writingDirection:(NSWritingDirection)direction maxLocation:(float)maxLocation {
+-(NSTextTab *)textTabForGlyphLocation:(CGFloat)location writingDirection:(NSWritingDirection)direction maxLocation:(CGFloat)maxLocation {
    NSArray *stops=[_currentParagraphStyle tabStops];
-   int      i,count=[stops count];
+   NSInteger i,count=[stops count];
 
    for(i=0;i<count;i++){
     NSTextTab *tab=[stops objectAtIndex:i];
-    float      check=[tab location];
+    CGFloat check=[tab location];
 
     if(check>maxLocation)
      break;
@@ -294,29 +294,29 @@
    NSInvalidAbstractInvocation();
 }
 
--(NSParagraphStyle *)_paragraphStyleAfterGlyphIndex:(unsigned)glyphIndex {
+-(NSParagraphStyle *)_paragraphStyleAfterGlyphIndex:(NSUInteger)glyphIndex {
    NSInvalidAbstractInvocation();
    return nil;
 }
 
--(NSParagraphStyle *)_paragraphStyleBeforeGlyphIndex:(unsigned)glyphIndex {
+-(NSParagraphStyle *)_paragraphStyleBeforeGlyphIndex:(NSUInteger)glyphIndex {
    NSInvalidAbstractInvocation();
    return nil;
 }
 
--(float)lineSpacingAfterGlyphAtIndex:(unsigned)glyphIndex withProposedLineFragmentRect:(NSRect)rect {
+-(CGFloat)lineSpacingAfterGlyphAtIndex:(NSUInteger)glyphIndex withProposedLineFragmentRect:(NSRect)rect {
    return [[self _paragraphStyleAfterGlyphIndex:glyphIndex] lineSpacing];
 }
 
--(float)paragraphSpacingAfterGlyphAtIndex:(unsigned)glyphIndex withProposedLineFragmentRect:(NSRect)rect {
+-(CGFloat)paragraphSpacingAfterGlyphAtIndex:(NSUInteger)glyphIndex withProposedLineFragmentRect:(NSRect)rect {
    return [[self _paragraphStyleAfterGlyphIndex:glyphIndex] paragraphSpacing];
 }
 
--(float)paragraphSpacingBeforeGlyphAtIndex:(unsigned)glyphIndex withProposedLineFragmentRect:(NSRect)rect {
+-(CGFloat)paragraphSpacingBeforeGlyphAtIndex:(NSUInteger)glyphIndex withProposedLineFragmentRect:(NSRect)rect {
    return [[self _paragraphStyleBeforeGlyphIndex:glyphIndex] paragraphSpacingBefore];
 }
 
--(unsigned)layoutParagraphAtPoint:(NSPoint *)point {
+-(NSUInteger)layoutParagraphAtPoint:(NSPoint *)point {
    [self beginParagraph];
 
    NSInvalidAbstractInvocation();
@@ -325,22 +325,22 @@
    return 0;
 }
 
--(void)layoutGlyphsInLayoutManager:(NSLayoutManager *)layoutManager startingAtGlyphIndex:(unsigned)startGlyphIndex maxNumberOfLineFragments:(unsigned)maxNumLines nextGlyphIndex:(unsigned *)nextGlyph {
+-(void)layoutGlyphsInLayoutManager:(NSLayoutManager *)layoutManager startingAtGlyphIndex:(NSUInteger)startGlyphIndex maxNumberOfLineFragments:(NSUInteger)maxNumLines nextGlyphIndex:(NSUInteger *)nextGlyph {
    NSInvalidAbstractInvocation();
 }
 
 #pragma mark NSGlyphStorage Protocol
--(unsigned)layoutOptions
+-(NSUInteger)layoutOptions
 {
     return 0;
 }
 
--(void)insertGlyphs:(const NSGlyph *)glyphs length:(unsigned)length forStartingGlyphAtIndex:(unsigned)glyphIndex characterIndex:(unsigned int)characterIndex
+-(void)insertGlyphs:(const NSGlyph *)glyphs length:(NSUInteger)length forStartingGlyphAtIndex:(NSUInteger)glyphIndex characterIndex:(NSUInteger)characterIndex
 {
     NSInvalidAbstractInvocation();
 }
 
--(void)setIntAttribute:(int)intAttribute value:(int)value forGlyphAtIndex:(unsigned)glyphIndex;
+-(void)setIntAttribute:(NSInteger)intAttribute value:(NSInteger)value forGlyphAtIndex:(NSUInteger)glyphIndex;
 {
     NSInvalidAbstractInvocation();    
 }

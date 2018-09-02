@@ -24,7 +24,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 @end
 #endif
 
-typedef unsigned NSGlyph;
+typedef NSUInteger NSGlyph;
 
 enum {
     NSNullGlyph = 0,
@@ -102,7 +102,7 @@ typedef enum {
 - (NSRect)boundingRectForGlyph:(NSGlyph)glyph;
 
 - (NSMultibyteGlyphPacking)glyphPacking;
-- (unsigned)numberOfGlyphs;
+- (NSUInteger)numberOfGlyphs;
 - (NSGlyph)glyphWithName:(NSString *)name;
 - (BOOL)glyphIsEncoded:(NSGlyph)glyph;
 - (NSSize)advancementForGlyph:(NSGlyph)glyph;
@@ -125,13 +125,13 @@ typedef enum {
 
 - (NSPoint)positionOfGlyph:(NSGlyph)current precededByGlyph:(NSGlyph)previous isNominal:(BOOL *)isNominalp;
 
-- (void)getAdvancements:(NSSize *)advancements forGlyphs:(const NSGlyph *)glyphs count:(unsigned)count;
-- (void)getAdvancements:(NSSize *)advancements forPackedGlyphs:(const void *)packed length:(unsigned)length;
-- (void)getBoundingRects:(NSRect *)rects forGlyphs:(const NSGlyph *)glyphs count:(unsigned)count;
+- (void)getAdvancements:(NSSize *)advancements forGlyphs:(const NSGlyph *)glyphs count:(NSUInteger)count;
+- (void)getAdvancements:(NSSize *)advancements forPackedGlyphs:(const void *)packed length:(NSUInteger)length;
+- (void)getBoundingRects:(NSRect *)rects forGlyphs:(const NSGlyph *)glyphs count:(NSUInteger)count;
 
 // private
 
-- (unsigned)getGlyphs:(NSGlyph *)glyphs forCharacters:(unichar *)characters length:(unsigned)length;
+- (NSUInteger)getGlyphs:(NSGlyph *)glyphs forCharacters:(unichar *)characters length:(NSUInteger)length;
 
 @end
 
@@ -144,4 +144,4 @@ typedef enum {
 @end
 #endif
 
-int NSConvertGlyphsToPackedGlyphs(NSGlyph *glyphs, int length, NSMultibyteGlyphPacking packing, char *output);
+NSInteger NSConvertGlyphsToPackedGlyphs(NSGlyph *glyphs, NSInteger length, NSMultibyteGlyphPacking packing, char *output);

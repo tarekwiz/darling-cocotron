@@ -89,12 +89,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    return (capHeight/_unitsPerEm)*_size;
 }
 
--(unsigned)numberOfGlyphs {
+-(NSUInteger)numberOfGlyphs {
    return CGFontGetNumberOfGlyphs(_font);
 }
 
 -(CGPoint)positionOfGlyph:(CGGlyph)current precededByGlyph:(CGGlyph)previous isNominal:(BOOL *)isNominalp {
-   int advancement;
+   NSInteger advancement;
    
    if(previous==0)
     return CGPointMake(0,0);
@@ -105,7 +105,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    return CGPointMake(((CGFloat)advancement/_unitsPerEm)*_size,0);
 }
 
--(void)getGlyphs:(CGGlyph *)glyphs forCharacters:(const unichar *)characters length:(unsigned)length {
+-(void)getGlyphs:(CGGlyph *)glyphs forCharacters:(const unichar *)characters length:(NSUInteger)length {
    int i;
    
    for(i=0;i<length;i++){
@@ -120,8 +120,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    }
 }
 
--(void)getAdvancements:(CGSize *)advancements forGlyphs:(const CGGlyph *)glyphs count:(unsigned)count {
-   int advances[count];
+-(void)getAdvancements:(CGSize *)advancements forGlyphs:(const CGGlyph *)glyphs count:(NSUInteger)count {
+   NSInteger advances[count];
    
    CGFontGetGlyphAdvances(_font,glyphs,count,advances);
    for(int i=0;i<count;i++){

@@ -8,18 +8,18 @@ CA_EXPORT NSString *const kCAMediaTimingFunctionEaseInEaseOut;
 CA_EXPORT NSString *const kCAMediaTimingFunctionDefault;
 
 @interface CAMediaTimingFunction : NSObject {
-    float _c1x;
-    float _c1y;
-    float _c2x;
-    float _c2y;
+    CGFloat _c1x;
+    CGFloat _c1y;
+    CGFloat _c2x;
+    CGFloat _c2y;
 }
 
-- (id)initWithControlPoints:(float)c1x:(float)c1y:(float)c2x:(float)c2y;
+- (id)initWithControlPoints:(CGFloat)c1x:(CGFloat)c1y:(CGFloat)c2x:(CGFloat)c2y;
 
-+ functionWithControlPoints:(float)c1x:(float)c1y:(float)c2x:(float)c2y;
++ functionWithControlPoints:(CGFloat)c1x:(CGFloat)c1y:(CGFloat)c2x:(CGFloat)c2y;
 
 + functionWithName:(NSString *)name;
 
-- (void)getControlPointAtIndex:(size_t)index values:(float[2])ptr;
+- (void)getControlPointAtIndex:(size_t)index values:(CGFloat[2])ptr;
 
 @end

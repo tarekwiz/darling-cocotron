@@ -599,12 +599,12 @@ static uint32_t nextUnsigned32(O2ImageSource_ICNS *self) {
 }
 
 
--(unsigned)count {
+-(NSUInteger)count {
    [self parseIfNeeded];
    return [_images count];
 }
 
--(O2Image *)createImageAtIndex:(unsigned)index options:(NSDictionary *)options {
+-(O2Image *)createImageAtIndex:(NSUInteger)index options:(NSDictionary *)options {
    [self parseIfNeeded];
    
    if(index>=[self count])

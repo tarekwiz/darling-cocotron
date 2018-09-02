@@ -38,13 +38,13 @@ enum {
 - (CGFloat)xHeight;
 - (CGFloat)capHeight;
 
-- (unsigned)numberOfGlyphs;
+- (NSUInteger)numberOfGlyphs;
 
 - (CGPoint)positionOfGlyph:(CGGlyph)current precededByGlyph:(CGGlyph)previous isNominal:(BOOL *)isNominalp;
 
-- (void)getGlyphs:(CGGlyph *)glyphs forCharacters:(const unichar *)characters length:(unsigned)length;
+- (void)getGlyphs:(CGGlyph *)glyphs forCharacters:(const unichar *)characters length:(NSUInteger)length;
 
-- (void)getAdvancements:(CGSize *)advancements forGlyphs:(const CGGlyph *)glyphs count:(unsigned)count;
+- (void)getAdvancements:(CGSize *)advancements forGlyphs:(const CGGlyph *)glyphs count:(NSUInteger)count;
 
 - (CGPathRef)createPathForGlyph:(CGGlyph)glyph transform:(CGAffineTransform *)xform;
 

@@ -401,7 +401,7 @@
 }
 
 
--(void)showGlyphs:(const O2Glyph *)glyphs advances:(const O2Size *)advancesIn count:(unsigned)count {
+-(void)showGlyphs:(const O2Glyph *)glyphs advances:(const O2Size *)advancesIn count:(NSUInteger)count {
 // FIXME: use advancesIn if not NULL
 
    [self establishFontStateInDeviceIfDirty];
@@ -411,12 +411,12 @@
    O2FontState_cairo *fontState=[gState fontState];
    cairo_font_face_t *face=[fontState cairo_font_face];
    cairo_glyph_t     *cg=alloca(sizeof(cairo_glyph_t)*count);
-   int                i,advances[count];
+   NSInteger          i,advances[count];
    O2Float            unitsPerEm=O2FontGetUnitsPerEm(font);
    
    O2FontGetGlyphAdvances(font,glyphs,count,advances);
 
-   float x=0, y=0;
+   O2Float x=0, y=0;
    for(i=0; i<count; i++){      
     cg[i].x=x;
     cg[i].y=y;

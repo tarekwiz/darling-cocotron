@@ -37,7 +37,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     _subview = [subview retain];
 }
 
--(void)setMode:(int)mode
+-(void)setMode:(NSColorPanelMode)mode
 {
     NSInvalidAbstractInvocation();
 }

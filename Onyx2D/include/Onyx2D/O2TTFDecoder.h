@@ -14,7 +14,7 @@ typedef O2TTFDecoder *O2TTFDecoderRef;
     CFIndex _length;
     CFIndex _position;
 
-    int _dump;
+    NSInteger _dump;
 }
 
 O2TTFDecoderRef O2TTFDecoderCreate(O2DataProviderRef dataProvider);
@@ -22,11 +22,11 @@ O2TTFDecoderRef O2TTFDecoderCreate(O2DataProviderRef dataProvider);
 O2TTFDecoderRef O2TTFDecoderRetain(O2TTFDecoderRef self);
 void O2TTFDecoderRelease(O2TTFDecoderRef self);
 
-NSMapTable *O2TTFDecoderGetPostScriptNameMapTable(O2TTFDecoderRef self, int *numberOfGlyphs);
+NSMapTable *O2TTFDecoderGetPostScriptNameMapTable(O2TTFDecoderRef self, NSInteger *numberOfGlyphs);
 
-int *O2TTFDecoderGetGlyphLocations(O2TTFDecoderRef self, int numberOfGlyphs);
+NSInteger *O2TTFDecoderGetGlyphLocations(O2TTFDecoderRef self, NSInteger numberOfGlyphs);
 
-O2PathRef O2TTFDecoderGetGlyphOutline(O2TTFDecoderRef self, int glyphLocation);
+O2PathRef O2TTFDecoderGetGlyphOutline(O2TTFDecoderRef self, NSInteger glyphLocation);
 
 void O2TTFDecoderGetNameTable(O2TTFDecoderRef self);
 
