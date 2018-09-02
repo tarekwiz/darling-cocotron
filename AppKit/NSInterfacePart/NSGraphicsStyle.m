@@ -378,7 +378,12 @@ static NSDictionary *sDimmedMenuTextShadowAttributes = nil;
 }
 
 -(void)drawPushButtonPressedInRect:(NSRect)rect {
-   NSInterfaceDrawDepressedButton(rect,rect);
+   [[NSColor colorWithCalibratedWhite: 0.78 alpha: 1.0] set];
+   [[NSBezierPath bezierPathWithRoundedRect: rect xRadius: 4 yRadius: 4] fill];
+   rect = NSInsetRect(rect, 1, 1);
+   [[NSColor colorWithCalibratedRed: 0.0 green: 0.58 blue: 0.97 alpha: 1.0] set];
+   [[NSBezierPath bezierPathWithRoundedRect: rect xRadius: 4 yRadius: 4] fill];
+
 }
 
 -(void)drawPushButtonHighlightedInRect:(NSRect)rect {
