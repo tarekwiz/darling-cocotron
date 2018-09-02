@@ -314,7 +314,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	if (!_isIndeterminate)
 		return;
 
-	if (_usesThreadedAnimation) {
+	if (NO && _usesThreadedAnimation) {
 		[NSThread detachNewThreadSelector: @selector(_runThreadedAnimation:) toTarget: self withObject: nil];
 	} else {
 		[self _buildTimer];
@@ -327,7 +327,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	if (!_isIndeterminate)
 		return;
 
-	if (_usesThreadedAnimation) {
+	if (NO && _usesThreadedAnimation) {
 		[self _stopThreadedAnimation];
 	} else {
 
