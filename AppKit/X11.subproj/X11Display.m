@@ -174,10 +174,15 @@ static void socketCallback(
       return [NSColor whiteColor];
    if([colorName isEqual:@"controlLightHighlightColor"])
       return [NSColor lightGrayColor];
-
+   if([colorName isEqual:@"headerColor"])
+      return [NSColor greenColor];
    if([colorName isEqual:@"textBackgroundColor"])
       return [NSColor whiteColor];
    if([colorName isEqual:@"textColor"])
+      return [NSColor blackColor];
+   if([colorName isEqual:@"selectedTextColor"])
+      return [NSColor whiteColor];
+   if([colorName isEqual:@"headerTextColor"])
       return [NSColor blackColor];
    if([colorName isEqual:@"menuItemTextColor"])
       return [NSColor blackColor];
