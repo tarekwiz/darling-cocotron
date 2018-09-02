@@ -555,7 +555,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    image=[image retain];
    [_image release];
    _image=image;
-   [(NSControl *)[self controlView] updateCell:self];
+   if ([[self controlView] respondsToSelector: @selector(updateCell:)]) {
+       [[self controlView] performSelector: @selector(updateCell:) withObject: self];
+   } else {
+       [[self controlView] setNeedsDisplay: YES];
+   }
 }
 
 -(void)setAlignment:(NSTextAlignment)alignment {
@@ -662,7 +666,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     _hasValidObjectValue = YES;
     [[self controlView] didChangeValueForKey:@"objectValue"];
 
-    [(NSControl *)[self controlView] updateCell:self];
+    if ([[self controlView] respondsToSelector: @selector(updateCell:)]) {
+        [[self controlView] performSelector: @selector(updateCell:) withObject: self];
+    } else {
+        [[self controlView] setNeedsDisplay: YES];
+    }
 }
 
 -(void)setStringValue:(NSString *)value {
@@ -704,9 +712,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 
 -(void)setAttributedStringValue:(NSAttributedString *)value {
-   value=[value copy];
-   [_objectValue release];
-   _objectValue=value;
+    [self setObjectValue: value];
 }
 
 -(void)setRepresentedObject:(id)object {
@@ -719,7 +725,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    _controlSize = size;
    [_font release];
    _font = [[NSFont userFontOfSize:13 - _controlSize*2] retain];
-   [(NSControl *)[self controlView] updateCell:self];
+   if ([[self controlView] respondsToSelector: @selector(updateCell:)]) {
+       [[self controlView] performSelector: @selector(updateCell:) withObject: self];
+   } else {
+       [[self controlView] setNeedsDisplay: YES];
+   }
 }
 
 -(void)setFocusRingType:(NSFocusRingType)focusRingType {
