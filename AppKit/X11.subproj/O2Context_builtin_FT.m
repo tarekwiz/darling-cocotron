@@ -51,57 +51,78 @@ static void applyCoverageToSpan_lRGBA8888_PRE(O2argb8u *dst,unsigned char *cover
 }
 
 
-static void drawFreeTypeBitmap(O2Context_builtin_FT *self,O2Surface *surface,FT_Bitmap *bitmap,int x,int y,O2Paint *paint){
-   int            width=bitmap->width;
-   int            row,height=bitmap->rows;
-   O2argb8u      *dstBuffer=__builtin_alloca(width*sizeof(O2argb8u));
-   O2argb8u      *srcBuffer=__builtin_alloca(width*sizeof(O2argb8u));
-   unsigned char *coverage=bitmap->buffer;
-   
-   for(row=0;row<height;row++,y++){
-   int        length=width;
-    O2argb8u *dst=dstBuffer;
-    O2argb8u *src=srcBuffer;
+static void renderFreeTypeBitmap(
+    O2Context_builtin_FT *self,
+    O2Surface *surface,
+    FT_Bitmap *bitmap,
+    NSInteger x,
+    NSInteger y,
+    O2Paint *paint
+) {
+    // Size of the bitmap.
+    NSInteger fullWidth = bitmap->width;
+    NSInteger fullHeight = bitmap->rows;
 
-    // FIXME: apply horizontal clipping too
-    if (y < self->_vpy || y >= self->_vpy + self->_vpheight) {
-        coverage += length;
-        continue;
+    // What we're going to render, taking clippig into account.
+    NSInteger minX = MAX(x, self->_vpx);
+    NSInteger maxX = MIN(x + fullWidth, self->_vpx + self->_vpwidth);
+    NSInteger minY = MAX(y, self->_vpy);
+    NSInteger maxY = MIN(y + fullHeight, self->_vpy + self->_vpheight);
+
+    NSInteger renderWidth = maxX - minX;
+    NSInteger renderHeight = maxY - minY;
+
+    if (renderWidth <= 0 || renderHeight <= 0) {
+        // Fully clipped.
+        return;
     }
 
-    O2argb8u *direct=surface->_read_argb8u(surface,x,y,dst,length);
+    O2argb8u *dstBuffer = __builtin_alloca(renderWidth * sizeof(O2argb8u));
+    O2argb8u *srcBuffer = __builtin_alloca(renderWidth * sizeof(O2argb8u));
 
-    if(direct!=NULL)
-     dst=direct;
+    for (NSInteger row = 0; row < renderHeight; row++) {
+        // Geometry of this row.
+        // We're going to change curX & remainingLength as we move along this row.
+        NSInteger curX = minX;
+        NSInteger curY = minY + row;
+        NSInteger remainingLength = renderWidth;
 
-    while(YES){
-     int chunk=O2PaintReadSpan_argb8u_PRE(paint,x,y,src,length);
-      
-     if(chunk<0)
-      chunk=-chunk;
-     else {
+        // We're going to advance these pointers as we move along this row.
+        unsigned char *coverage = bitmap->buffer + (curY - y) * fullWidth + (curX - x);
+        O2argb8u *src = srcBuffer;
+        O2argb8u *dst = dstBuffer;
 
-      self->_blend_argb8u_PRE(src,dst,chunk);
-      
-      applyCoverageToSpan_lRGBA8888_PRE(dst,coverage,src,chunk);
+        // Try to get direct access to the surface data.
+        O2argb8u *direct = surface->_read_argb8u(surface, curX, curY, dst, remainingLength);
+        // If that succeeded, write there directly with no temporary buffer.
+        if (direct != NULL) dst = direct;
 
-      if(direct==NULL)
-       O2SurfaceWriteSpan_argb8u_PRE(surface,x,y,dst,chunk);
-     }
-     coverage+=chunk;
+        while (remainingLength > 0) {
+            // Read next chunk into src.
+            int chunk = O2PaintReadSpan_argb8u_PRE(paint, curX, curY, src, remainingLength);
 
-     length-=chunk;     
-     x+=chunk;
-     src+=chunk;
-     dst+=chunk;
+            if (chunk < 0) {
+                chunk = -chunk;
+                // Skip this much pixels.
+            } else {
+                self->_blend_argb8u_PRE(src, dst, chunk);
 
-     if(length==0)
-      break;
+                applyCoverageToSpan_lRGBA8888_PRE(dst, coverage, src, chunk);
 
+                if (direct == NULL) {
+                    // When direct is NULL, dst is a temporary buffer, not the surface
+                    // itself, so we have to write it out to the surface explicitly.
+                    O2SurfaceWriteSpan_argb8u_PRE(surface, curX, curY, dst, chunk);
+                }
+            }
+
+            coverage += chunk;
+            remainingLength -= chunk;
+            curX += chunk;
+            src += chunk;
+            dst += chunk;
+        }
     }
-    x-=width;
-   }
-    
 }
 
 -(void)showGlyphs:(const O2Glyph *)glyphs advances:(const O2Size *)advances count:(NSUInteger)count {
@@ -154,7 +175,14 @@ static void drawFreeTypeBitmap(O2Context_builtin_FT *self,O2Surface *surface,FT_
     if(ftError)
      continue;
       
-    drawFreeTypeBitmap(self,_surface,&slot->bitmap,point.x+slot->bitmap_left,point.y-slot->bitmap_top,paint);
+    renderFreeTypeBitmap(
+        self,
+        _surface,
+        &slot->bitmap,
+        point.x + slot->bitmap_left,
+        point.y - slot->bitmap_top,
+        paint
+     );
 
     point.x += slot->advance.x >> 6;
    }
