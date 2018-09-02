@@ -134,18 +134,13 @@ static NSDocumentController *shared=nil;
 }
 
 -(NSString *)typeFromFileExtension:(NSString *)extension {
-   int i,count=[_fileTypes count];
+    extension = [extension lowercaseString];
 
-   extension=[extension lowercaseString];
-   for(i=0;i<count;i++){
-    NSDictionary *check=[_fileTypes objectAtIndex:i];
-    NSArray      *names=[check objectForKey:@"CFBundleTypeExtensions"];
-    int           count=[names count];
-    
-    while(--count>=0)
-     if([[[names objectAtIndex:count] lowercaseString] isEqual:extension])
-      return [check objectForKey:@"CFBundleTypeName"];
-   }
+    for (NSDictionary *fileType in _fileTypes)
+        for (NSString *name in [fileType objectForKey:@"CFBundleTypeExtensions"])
+            if ([[name lowercaseString] isEqual:extension] || [name isEqual: @"*"])
+                return [fileType objectForKey:@"CFBundleTypeName"];
+
    return nil;
 }
 
