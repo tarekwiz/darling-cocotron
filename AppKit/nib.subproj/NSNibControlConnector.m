@@ -26,7 +26,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
          format:@"-[%@ %s] selector %@ does not exist:",[self class],sel_getName(_cmd),selectorName];
 
    if([_source respondsToSelector:@selector(setAction:)])
-    [_source performSelector:@selector(setAction:) withObject:(id)selector];
+    [_source setAction: selector];
    else {
     [NSException raise:NSInvalidArgumentException
          format:@"-[%@ %s] _source does not respond to setAction:",[self class],sel_getName(_cmd)];
