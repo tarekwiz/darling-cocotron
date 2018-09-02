@@ -15,6 +15,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <AppKit/NSApplication.h>
 #import <AppKit/NSWindowController.h>
 #import <AppKit/NSRaise.h>
+#import <objc/runtime.h>
 
 @interface NSDocument(private)
 -(void)_setUntitledNumber:(int)number;
