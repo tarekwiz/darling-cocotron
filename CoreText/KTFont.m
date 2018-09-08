@@ -94,7 +94,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 
 -(CGPoint)positionOfGlyph:(CGGlyph)current precededByGlyph:(CGGlyph)previous isNominal:(BOOL *)isNominalp {
-   NSInteger advancement;
+   int advancement;
    
    if(previous==0)
     return CGPointMake(0,0);
@@ -121,7 +121,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 
 -(void)getAdvancements:(CGSize *)advancements forGlyphs:(const CGGlyph *)glyphs count:(NSUInteger)count {
-   NSInteger advances[count];
+   int advances[count];
    
    CGFontGetGlyphAdvances(_font,glyphs,count,advances);
    for(int i=0;i<count;i++){

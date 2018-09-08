@@ -189,7 +189,7 @@ static void renderFreeTypeBitmap(
    
    O2PaintRelease(paint);
    
-   NSInteger glyphAdvances[count];
+   int glyphAdvances[count];
    O2Float unitsPerEm=O2FontGetUnitsPerEm(font);
    
    O2FontGetGlyphAdvances(font,glyphs,count,glyphAdvances);

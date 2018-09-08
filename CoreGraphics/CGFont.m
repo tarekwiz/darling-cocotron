@@ -65,7 +65,7 @@ size_t    CGFontGetNumberOfGlyphs(CGFontRef self) {
    return O2FontGetNumberOfGlyphs(self);
 }
 
-bool      CGFontGetGlyphAdvances(CGFontRef self,const CGGlyph *glyphs,size_t count,NSInteger *advances) {
+bool      CGFontGetGlyphAdvances(CGFontRef self,const CGGlyph *glyphs,size_t count,int *advances) {
    return O2FontGetGlyphAdvances(self,glyphs,count,advances);
 }
 

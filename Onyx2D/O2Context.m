@@ -1309,7 +1309,7 @@ O2AffineTransform O2ContextGetTextRenderingMatrix(O2ContextRef self) {
 void O2ContextGetDefaultAdvances(O2ContextRef self,const O2Glyph *glyphs,O2Size *advances,size_t count) {
    O2GState         *gState=O2ContextCurrentGState(self);
    O2Font           *font=O2GStateFont(gState);
-   NSInteger         intAdvances[count];
+   int               intAdvances[count];
    O2Float           unitsPerEm=O2FontGetUnitsPerEm(font);
    O2Float           pointSize=O2GStatePointSize(gState);
    size_t            i;

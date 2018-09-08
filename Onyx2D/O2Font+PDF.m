@@ -27,7 +27,7 @@ O2PDFArray *O2FontCreatePDFWidthsWithEncoding(O2FontRef self,O2Encoding *encodin
    CGFloat       unitsPerEm=O2FontGetUnitsPerEm(self);
    O2PDFArray   *result=[[O2PDFArray alloc] init];
    O2Glyph       glyphs[256];
-   NSInteger     widths[256];
+   int           widths[256];
    int           i;
    
    [encoding getGlyphs:glyphs];
