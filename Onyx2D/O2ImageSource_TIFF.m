@@ -72,7 +72,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    NSArray *entries=[_reader imageFileDirectory];
    
    if([entries count]<=index)
-    return nil;
+    return [[NSDictionary alloc] init];
    
    O2TIFFImageDirectory *directory=[entries objectAtIndex:index];
    
