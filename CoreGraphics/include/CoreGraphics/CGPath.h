@@ -25,8 +25,9 @@ typedef struct {
 
 typedef void (*CGPathApplierFunction)(void *info, const CGPathElement *element);
 
-typedef struct O2MutablePath *CGPathRef;
-typedef struct O2MutablePath *CGMutablePathRef;
+@class O2MutablePath;
+typedef O2MutablePath *CGPathRef;
+typedef O2MutablePath *CGMutablePathRef;
 
 COREGRAPHICS_EXPORT void CGPathRelease(CGPathRef self);
 COREGRAPHICS_EXPORT CGPathRef CGPathRetain(CGPathRef self);

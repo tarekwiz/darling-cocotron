@@ -8,7 +8,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <CoreGraphics/CGGeometry.h>
 #import <CoreGraphics/CGAffineTransform.h>
 
-typedef struct O2PDFPage *CGPDFPageRef;
+@class O2PDFPage;
+typedef O2PDFPage *CGPDFPageRef;
 
 typedef enum {
     kCGPDFMediaBox = 0,

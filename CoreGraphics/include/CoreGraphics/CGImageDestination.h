@@ -1,5 +1,5 @@
-
-typedef struct O2ImageDestination *CGImageDestinationRef;
+@class O2ImageDestination;
+typedef O2ImageDestination *CGImageDestinationRef;
 
 #import <CoreGraphics/CGImage.h>
 #import <CoreGraphics/CGImageSource.h>

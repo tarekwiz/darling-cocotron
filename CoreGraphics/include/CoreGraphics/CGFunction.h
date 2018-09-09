@@ -8,7 +8,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 #import <CoreGraphics/CGGeometry.h>
 
-typedef struct O2Function *CGFunctionRef;
+@class O2Function;
+typedef O2Function *CGFunctionRef;
 
 typedef struct {
     unsigned version;

@@ -50,7 +50,8 @@ enum {
 
 typedef unsigned CGBitmapInfo;
 
-typedef struct O2Image *CGImageRef;
+@class O2Image;
+typedef O2Image *CGImageRef;
 
 COREGRAPHICS_EXPORT CGImageRef CGImageRetain(CGImageRef image);
 COREGRAPHICS_EXPORT void CGImageRelease(CGImageRef image);

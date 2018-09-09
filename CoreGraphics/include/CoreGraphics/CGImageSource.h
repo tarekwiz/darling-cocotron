@@ -10,7 +10,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <CoreFoundation/CFDictionary.h>
 #import <CoreFoundation/CFURL.h>
 
-typedef struct _O2ImageSource *CGImageSourceRef;
+@class O2ImageSource;
+typedef O2ImageSource *CGImageSourceRef;
 
 #import "CGImage.h"
 

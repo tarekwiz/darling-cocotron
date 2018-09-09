@@ -11,7 +11,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <CoreGraphics/CGColorSpace.h>
 #import <CoreGraphics/CGFunction.h>
 
-typedef struct O2Shading *CGShadingRef;
+@class O2Shading;
+typedef O2Shading *CGShadingRef;
 
 COREGRAPHICS_EXPORT CGShadingRef CGShadingRetain(CGShadingRef self);
 COREGRAPHICS_EXPORT void CGShadingRelease(CGShadingRef self);

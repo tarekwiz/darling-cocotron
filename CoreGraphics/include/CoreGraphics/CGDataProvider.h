@@ -9,7 +9,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <CoreGraphics/CoreGraphicsExport.h>
 #import <CoreFoundation/CFData.h>
 
-typedef struct O2DataProvider *CGDataProviderRef;
+@class O2DataProvider;
+typedef O2DataProvider *CGDataProviderRef;
 
 typedef void (*CGDataProviderReleaseDataCallback)(void *info, const void *data, size_t size);
 

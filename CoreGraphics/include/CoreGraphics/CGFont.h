@@ -11,7 +11,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 #include <CoreFoundation/CoreFoundation.h>
 
-typedef struct O2Font *CGFontRef;
+@class O2Font;
+typedef O2Font *CGFontRef;
 
 typedef uint16_t CGGlyph;
 

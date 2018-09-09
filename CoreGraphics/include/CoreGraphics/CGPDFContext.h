@@ -9,7 +9,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <CoreGraphics/CGContext.h>
 #import <CoreGraphics/CGDataConsumer.h>
 
-typedef struct O2PDFContext *CGPDFContextRef;
+@class O2PDFContext;
+typedef O2PDFContext *CGPDFContextRef;
 
 COREGRAPHICS_EXPORT const CFStringRef kCGPDFContextTitle;
 

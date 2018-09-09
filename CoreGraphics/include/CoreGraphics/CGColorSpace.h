@@ -8,7 +8,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 #import <CoreGraphics/CGGeometry.h>
 
-typedef struct O2ColorSpace *CGColorSpaceRef;
+@class O2ColorSpace;
+typedef O2ColorSpace *CGColorSpaceRef;
 
 typedef enum {
     kCGRenderingIntentDefault,

@@ -8,7 +8,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 #import <CoreGraphics/CoreGraphicsExport.h>
 
-typedef struct O2Color *CGColorRef;
+@class O2Color;
+
+typedef O2Color *CGColorRef;
 
 #import "CGGeometry.h"
 #import "CGColorSpace.h"
