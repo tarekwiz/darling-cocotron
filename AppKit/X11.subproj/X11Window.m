@@ -173,10 +173,11 @@ void CGNativeBorderFrameWidthsForStyle(NSUInteger styleMask,CGFloat *top,CGFloat
     // This is essentially dealloc; we release our contexts
     // and windows, but unlike dealloc, this method can be called
     // several times, so set everything to nil/NULL/0.
-    _delegate = nil;
-
     [_context release];
     _context = nil;
+
+    [_delegate platformWindowDidInvalidateCGContext: self];
+    _delegate = nil;
 
     [_caContext release];
     _caContext = nil;
@@ -228,6 +229,7 @@ void CGNativeBorderFrameWidthsForStyle(NSUInteger styleMask,CGFloat *top,CGFloat
     if(![_context resizeWithNewSize: size]){
      [_context release];
      _context=nil;
+     [_delegate platformWindowDidInvalidateCGContext: self];
     }
    }
 }
