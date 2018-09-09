@@ -404,6 +404,10 @@ set(AppKit_resources
 	NSHighlightedSwitch.tiff NSHighlightedSwitch.tiff
 	NSPopUpButtonCellPullDown.tiff NSPopUpButtonCellPullDown.tiff
 
+	NSButtonCell_disclosure_highlighted.tif NSButtonCell_disclosure_highlighted.tif
+	NSButtonCell_disclosure_normal.tif NSButtonCell_disclosure_normal.tif
+	NSButtonCell_disclosure_selected.tif NSButtonCell_disclosure_selected.tif
+
 	NSApplicationIcon.tiff NSSystemInfoPanel/NSApplicationIcon.tiff
 
 	NSMenuArrow.tiff NSMenu.subproj/NSMenuArrow.tiff
