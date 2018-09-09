@@ -191,7 +191,7 @@ static inline RECT transformToRECT(O2AffineTransform matrix,NSRect rect) {
    NSPoint point2=O2PointApplyAffineTransform(NSMakePoint(NSMaxX(rect),NSMaxY(rect)),matrix);
 
    if(point2.y<point1.y){
-    float temp=point2.y;
+    CGFloat temp=point2.y;
     point2.y=point1.y;
     point1.y=temp;
    }
@@ -511,16 +511,16 @@ static inline RECT transformToRECT(O2AffineTransform matrix,NSRect rect) {
 	return result;
 }
 
--(float)menuBarHeight
+-(CGFloat)menuBarHeight
 {
 	int result = 0;
     if(![self valueForPartId:/*MENU_BARBACKGROUND*/7 stateId:0 propId:/*TMT_MENUBARHEIGHT*/1209 uxthClassId:uxthMENU value:&result])
 		return [super menuBarHeight];
 	else
-		return (float)result;
+		return (CGFloat)result;
 }
 
--(float)menuItemGutterGap
+-(CGFloat)menuItemGutterGap
 {
 	return 11;
 }

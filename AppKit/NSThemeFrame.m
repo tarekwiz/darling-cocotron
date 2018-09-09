@@ -37,7 +37,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 -(void)drawRect:(NSRect)rect {
    NSRect bounds=[self bounds];
-   float cheatSheet = 0;
+   CGFloat cheatSheet = 0;
 
    [[[self window] backgroundColor] setFill];
    NSRectFill(bounds);

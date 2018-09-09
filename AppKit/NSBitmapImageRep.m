@@ -516,7 +516,7 @@ NSString* NSImageCompressionFactor = @"NSImageCompressionFactor";
 	
 	if(_bitmapFormat&NSFloatingPointSamplesBitmapFormat){
 		for(i=0;i<numberOfComponents;i++) {
-			((float *)pixels)[i]=MAX(0.0f,MIN(1.0f,components[i])); // clamp just in case
+			((CGFloat *)pixels)[i]=MAX(0.0f,MIN(1.0f,components[i])); // clamp just in case
 		}
 	} else {
 		int maxValue=(1<<[self bitsPerSample])-1;
@@ -541,7 +541,7 @@ NSString* NSImageCompressionFactor = @"NSImageCompressionFactor";
    [_properties setObject:value forKey:property];
 }
 
--(void)colorizeByMappingGray:(float)gray toColor:(NSColor *)color blackMapping:(NSColor *)blackMapping whiteMapping:(NSColor *)whiteMapping {
+-(void)colorizeByMappingGray:(CGFloat)gray toColor:(NSColor *)color blackMapping:(NSColor *)blackMapping whiteMapping:(NSColor *)whiteMapping {
    NSUnimplementedMethod();
 }
 

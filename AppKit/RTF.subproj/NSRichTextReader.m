@@ -312,9 +312,9 @@ static inline void flushPreviousString(NSRichTextReader *self) {
     id key=[NSNumber numberWithUnsignedInteger:index];
     
     NSDictionary *color = [_colorTable objectForKey:key];
-    float r = [[color objectForKey:@"red"] floatValue]/255.;
-    float g = [[color objectForKey:@"green"] floatValue]/255.;
-    float b = [[color objectForKey:@"blue"] floatValue]/255.;
+    CGFloat r = [[color objectForKey:@"red"] doubleValue]/255.;
+    CGFloat g = [[color objectForKey:@"green"] doubleValue]/255.;
+    CGFloat b = [[color objectForKey:@"blue"] doubleValue]/255.;
     NSColor *c = [NSColor colorWithCalibratedRed:r green:g blue:b alpha:1.];
     return c;
 }

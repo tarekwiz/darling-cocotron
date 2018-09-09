@@ -51,7 +51,7 @@ static inline CGGlyphMetrics *glyphInfoForGlyph(KTFont_gdi *self,CGGlyph glyph){
    return NULL;
 }
 
--(float)pointSize {
+-(CGFloat)pointSize {
     return [_font nativeSizeForSize: _size];
 }
 
@@ -179,7 +179,7 @@ static inline CGGlyphMetrics *glyphInfoForGlyph(KTFont_gdi *self,CGGlyph glyph){
 
    GetKerningPairsW(_dc,numberOfPairs,pairs);
    
-    float  scale = [self pointSize]/_unitsPerEm;
+    CGFloat scale = [self pointSize]/_unitsPerEm;
 
     for(i=0;i<numberOfPairs;i++){
     if(pairs[i].iKernAmount==0)
@@ -187,7 +187,7 @@ static inline CGGlyphMetrics *glyphInfoForGlyph(KTFont_gdi *self,CGGlyph glyph){
 
        unichar previousCharacter=pairs[i].wFirst;
        unichar currentCharacter=pairs[i].wSecond;
-       float   xoffset=pairs[i].iKernAmount;
+       CGFloat xoffset=pairs[i].iKernAmount;
        NSGlyph previous=glyphForCharacter(self,previousCharacter);
        NSGlyph current=glyphForCharacter(self,currentCharacter);
        
@@ -277,7 +277,7 @@ static inline CGGlyphMetrics *fetchGlyphInfoIfNeeded(KTFont_gdi *self,CGGlyph gl
    if(!GetCharABCWidthsFloatW(_dc,0,max-1,abc))
     NSLog(@"GetCharABCWidthsFloat failed");
    else {
-       float  scale = _size/_unitsPerEm;
+       CGFloat scale = _size/_unitsPerEm;
        scale *= (FONT_DPI(_dc)/96.);
 
        for(i=0;i<max;i++){
@@ -556,24 +556,24 @@ static inline CGGlyphMetrics *fetchGlyphAdvancementIfNeeded(KTFont_gdi *self,CGG
 }
 
 #if 1
--(float)ascender {
+-(CGFloat)ascender {
    return _metrics.ascender/_metrics.emsquare*_metrics.scale;
 }
 
--(float)descender {
+-(CGFloat)descender {
    return -_metrics.descender/_metrics.emsquare*_metrics.scale;
 }
 
--(float)leading {
+-(CGFloat)leading {
    return _metrics.leading/_metrics.emsquare*_metrics.scale;
 }
 #endif
 
--(float)underlineThickness {
+-(CGFloat)underlineThickness {
    return _metrics.underlineThickness/_metrics.emsquare*_metrics.scale;
 }
 
--(float)underlinePosition {
+-(CGFloat)underlinePosition {
    return _metrics.underlinePosition/_metrics.emsquare*_metrics.scale;
 }
 
@@ -596,7 +596,7 @@ static inline CGGlyphMetrics *fetchGlyphAdvancementIfNeeded(KTFont_gdi *self,CGG
    }
    else {
        if(previousInfo!=NULL) {
-           float delta = previousInfo->advanceA+previousInfo->advanceB+previousInfo->advanceC;
+           CGFloat delta = previousInfo->advanceA+previousInfo->advanceB+previousInfo->advanceC;
            if (_useMacMetrics == NO) {
                delta = roundf(delta);
            }
@@ -648,7 +648,7 @@ static inline CGGlyphMetrics *fetchGlyphAdvancementIfNeeded(KTFont_gdi *self,CGG
      advancements[i].height=0;
     }
     else {
-        float delta = info->advanceA+info->advanceB+info->advanceC;
+        CGFloat delta = info->advanceA+info->advanceB+info->advanceC;
         if (_useMacMetrics == NO) {
             delta = roundf(delta);
         }
@@ -668,7 +668,7 @@ static inline CGGlyphMetrics *fetchGlyphAdvancementIfNeeded(KTFont_gdi *self,CGG
     if(info==NULL)
      NSLog(@"no info for glyph %d",glyphs[i]);
     else {
-        float delta = info->advanceA+info->advanceB+info->advanceC;
+        CGFloat delta = info->advanceA+info->advanceB+info->advanceC;
         if (_useMacMetrics == NO) {
             delta = roundf(delta);
         }
@@ -691,7 +691,7 @@ static FIXED fxDiv2(FIXED fxVal1, FIXED fxVal2)
     return(*(FIXED volatile *)&l);
 }
 
-static FIXED FloatToFIXED(const float d)
+static FIXED FloatToFIXED(const CGFloat d)
 {
 	FIXED f;
 	int32_t v = d * 65536.;
@@ -702,7 +702,7 @@ static FIXED FloatToFIXED(const float d)
 	return f;
 }
 
-static float FIXEDToFloat(FIXED f)
+static CGFloat FIXEDToFloat(FIXED f)
 {
 	return (f.value<<16 | f.fract )  / 65536.0;
 }
@@ -971,7 +971,7 @@ static void ConvertTTPolygonToPath(LPTTPOLYGONHEADER lpHeader, DWORD size, O2Mut
 
 	// _metrics.scale seems to be the configured font size
 	// ttMetrics->otmEMSquare defines the size of the glyph box
-	float scale = _size / (float)ttMetrics->otmEMSquare;
+	CGFloat scale = _size / (CGFloat)ttMetrics->otmEMSquare;
 //    scale *= (FONT_DPI(_dc)/96.);
 
 	// Scale the glyph box down to fit our font size

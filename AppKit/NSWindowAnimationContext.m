@@ -15,7 +15,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 + (NSWindowAnimationContext *)contextToTransformWindow:(id)window startRect:(NSRect)startRect targetRect:(NSRect)targetRect resizeTime:(NSTimeInterval)resizeTime display:(BOOL)display
 {
     NSRect deltaRect, stepRect;
-    float totalPixels = 0;
+    CGFloat totalPixels = 0;
     int stepCount = 0;
     
     deltaRect.origin.x = targetRect.origin.x - startRect.origin.x;

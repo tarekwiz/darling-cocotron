@@ -341,7 +341,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 		if (arrowImage != nil) {
 			
 			// Scale down the arrows so they look proportional to the control size
-			float sizeFactor = 0;
+			CGFloat sizeFactor = 0;
 			
 			switch ([self controlSize]) {
 				case NSRegularControlSize:

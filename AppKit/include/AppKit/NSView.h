@@ -356,10 +356,10 @@ APPKIT_EXPORT NSString *const NSViewFocusDidChangeNotification;
 - (void)drawSheetBorderWithSize:(NSSize)size;
 - (void)drawPageBorderWithSize:(NSSize)size;
 
-- (float)widthAdjustLimit;
-- (float)heightAdjustLimit;
-- (void)adjustPageWidthNew:(float *)adjustedRight left:(float)left right:(float)right limit:(float)limit;
-- (void)adjustPageHeightNew:(float *)adjustedBottom top:(float)top bottom:(float)bottom limit:(float)limit;
+- (CGFloat)widthAdjustLimit;
+- (CGFloat)heightAdjustLimit;
+- (void)adjustPageWidthNew:(CGFloat *)adjustedRight left:(CGFloat)left right:(CGFloat)right limit:(CGFloat)limit;
+- (void)adjustPageHeightNew:(CGFloat *)adjustedBottom top:(CGFloat)top bottom:(CGFloat)bottom limit:(CGFloat)limit;
 
 - (BOOL)knowsPageRange:(NSRange *)range;
 - (NSPoint)locationOfPrintRect:(NSRect)rect;

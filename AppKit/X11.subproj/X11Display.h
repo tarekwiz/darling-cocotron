@@ -37,6 +37,6 @@
 
 - (void)setWindow:(id)window forID:(XID)i;
 
-- (float)doubleClickInterval;
+- (CGFloat)doubleClickInterval;
 - (int)handleError:(XErrorEvent *)errorEvent;
 @end

@@ -107,16 +107,16 @@ typedef enum {
 - (BOOL)drawRepresentation:(NSImageRep *)representation inRect:(NSRect)rect;
 
 - (void)compositeToPoint:(NSPoint)point fromRect:(NSRect)rect operation:(NSCompositingOperation)operation;
-- (void)compositeToPoint:(NSPoint)point fromRect:(NSRect)rect operation:(NSCompositingOperation)operation fraction:(float)fraction;
+- (void)compositeToPoint:(NSPoint)point fromRect:(NSRect)rect operation:(NSCompositingOperation)operation fraction:(CGFloat)fraction;
 
 - (void)compositeToPoint:(NSPoint)point operation:(NSCompositingOperation)operation;
-- (void)compositeToPoint:(NSPoint)point operation:(NSCompositingOperation)operation fraction:(float)fraction;
+- (void)compositeToPoint:(NSPoint)point operation:(NSCompositingOperation)operation fraction:(CGFloat)fraction;
 
-- (void)dissolveToPoint:(NSPoint)point fraction:(float)fraction;
-- (void)dissolveToPoint:(NSPoint)point fromRect:(NSRect)rect fraction:(float)fraction;
+- (void)dissolveToPoint:(NSPoint)point fraction:(CGFloat)fraction;
+- (void)dissolveToPoint:(NSPoint)point fromRect:(NSRect)rect fraction:(CGFloat)fraction;
 
-- (void)drawAtPoint:(NSPoint)point fromRect:(NSRect)source operation:(NSCompositingOperation)operation fraction:(float)fraction;
-- (void)drawInRect:(NSRect)rect fromRect:(NSRect)source operation:(NSCompositingOperation)operation fraction:(float)fraction;
+- (void)drawAtPoint:(NSPoint)point fromRect:(NSRect)source operation:(NSCompositingOperation)operation fraction:(CGFloat)fraction;
+- (void)drawInRect:(NSRect)rect fromRect:(NSRect)source operation:(NSCompositingOperation)operation fraction:(CGFloat)fraction;
 
 @end
 

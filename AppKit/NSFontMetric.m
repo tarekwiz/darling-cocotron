@@ -12,8 +12,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 @implementation NSFontMetric
 
 -initWithSize:(NSSize)size
-   ascender:(float)ascender
-   descender:(float)descender {
+   ascender:(CGFloat)ascender
+   descender:(CGFloat)descender {
    _size=size;
    _ascender=ascender;
    _descender=descender;

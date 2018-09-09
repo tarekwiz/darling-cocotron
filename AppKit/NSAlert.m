@@ -245,12 +245,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    NSSize messageSize=NSZeroSize;
    NSDictionary *informativeAttributes=[NSDictionary dictionaryWithObjectsAndKeys:[NSFont systemFontOfSize:0],NSFontAttributeName,nil];
    NSSize informativeSize=NSZeroSize;
-   float messageInformativeGap=0.;
+   CGFloat messageInformativeGap=0.;
    NSDictionary *suppressionAttributes=[NSDictionary dictionaryWithObjectsAndKeys:[NSFont systemFontOfSize:0],NSFontAttributeName,nil];
    NSSize supressionSize=NSZeroSize;
-   float informativeSuppressionGap=0.;
+   CGFloat informativeSuppressionGap=0.;
    NSSize accessorySize=(_accessoryView!=nil)?[_accessoryView frame].size:NSZeroSize;
-   float suppressionAccessoryGap=0.;
+   CGFloat suppressionAccessoryGap=0.;
    NSSize mainSize=NSZeroSize;
    NSSize panelSize=NSZeroSize;
    int i,count=[_buttons count];

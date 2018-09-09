@@ -12,10 +12,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <math.h>
 
 // ellipse to 4 spline bezier, http://www.tinaja.com/glib/ellipse4.pdf
-void O2MutablePathEllipseToBezier(O2Point *cp,float x,float y,float xrad,float yrad){
-   float magic=0.551784;
-   float xmag=xrad*magic;
-   float ymag=yrad*magic;
+void O2MutablePathEllipseToBezier(O2Point *cp,O2Float x,O2Float y,O2Float xrad,O2Float yrad){
+   O2Float magic=0.551784;
+   O2Float xmag=xrad*magic;
+   O2Float ymag=yrad*magic;
    int   i=0;
 
 	cp[i++]=O2PointMake(-xrad,0);
@@ -218,7 +218,7 @@ void O2PathAddArc(O2MutablePathRef self,const O2AffineTransform *matrix,O2Float 
    endRadian=fmod(endRadian,M_PI*2);
 
    if(clockwise){
-    float tmp=startRadian;
+    O2Float tmp=startRadian;
     startRadian=endRadian;
     endRadian=tmp;
    }
@@ -227,7 +227,7 @@ void O2PathAddArc(O2MutablePathRef self,const O2AffineTransform *matrix,O2Float 
     endRadian+=M_PI*2;
    }
    
-   float   radiusx=radius,radiusy=radius;
+   O2Float radiusx=radius,radiusy=radius;
    double  remainder=ABS(endRadian-startRadian);
    double  delta=M_PI_2; // 90 degrees
    int     i;
@@ -315,17 +315,17 @@ void O2PathAddArcToPoint(O2MutablePathRef self,const O2AffineTransform *matrix,O
    double n1=sqrt(x1*x1+y1*y1);
    double n2=sqrt(x2*x2+y2*y2);
    
-   float startAngle=acos(x1/n1);
+   O2Float startAngle=acos(x1/n1);
    if(y1<0)
     startAngle=M_PI*2-startAngle;
     
-   float endAngle=acos(x2/n2);
+   O2Float endAngle=acos(x2/n2);
    if(y2<0) 
     endAngle=M_PI*2-endAngle;
     
-   float angleBetweenLines = (endAngle-startAngle);
+   O2Float angleBetweenLines = (endAngle-startAngle);
    int clockwise=1;
-   float clockwiseRotate=0;
+   O2Float clockwiseRotate=0;
    
    if(angleBetweenLines<0)
     angleBetweenLines=M_PI*2+angleBetweenLines;
@@ -375,10 +375,10 @@ void O2PathAddArcToPoint(O2MutablePathRef self,const O2AffineTransform *matrix,O
 }
 
 void O2PathAddEllipseInRect(O2MutablePathRef self,const O2AffineTransform *matrix,O2Rect rect) {
-   float             xradius=rect.size.width/2;
-   float             yradius=rect.size.height/2;
-   float             x=rect.origin.x+xradius;
-   float             y=rect.origin.y+yradius;
+   O2Float           xradius=rect.size.width/2;
+   O2Float           yradius=rect.size.height/2;
+   O2Float           x=rect.origin.x+xradius;
+   O2Float           y=rect.origin.y+yradius;
    O2Point           cp[13];
    int               i;
     

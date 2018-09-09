@@ -271,17 +271,17 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    return [[self matrixInColumn:column] selectedRow];
 }
 
--(float)seperatorWidth {
+-(CGFloat)seperatorWidth {
    return 2;
 }
 
--(float)titleHeight {
+-(CGFloat)titleHeight {
    return 20;
 }
 
 -(NSRect)titleFrameOfColumn:(NSInteger)column {
    NSRect result;
-   float  columnGap=_separatesColumns?[self seperatorWidth]:0;
+   CGFloat  columnGap=_separatesColumns?[self seperatorWidth]:0;
 
    column-=[self firstVisibleColumn];
 
@@ -749,8 +749,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         [_horizontalScroller setEnabled:NO];
     }
     else {
-        float val = (float)_firstVisibleColumn/(float)([_matrices count]-_numberOfVisibleColumns);
-        float knobP = (float)_numberOfVisibleColumns/(float)[_matrices count];
+        CGFloat val = (CGFloat)_firstVisibleColumn/(CGFloat)([_matrices count]-_numberOfVisibleColumns);
+        CGFloat knobP = (CGFloat)_numberOfVisibleColumns/(CGFloat)[_matrices count];
 
         [_horizontalScroller setFloatValue:val knobProportion:knobP];
         [_horizontalScroller setEnabled:YES];

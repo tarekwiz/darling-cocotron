@@ -154,15 +154,15 @@ BOOL O2PathIsRect(O2PathRef self,O2Rect *rect) {
 //            <0 for point right of the line
 //    See: the January 2001 Algorithm "Area of 2D and 3D Triangles and Polygons"
 
-static float _positionOfPointToLine(O2Point point, O2Point lineStart, O2Point lineEnd)
+static O2Float _positionOfPointToLine(O2Point point, O2Point lineStart, O2Point lineEnd)
 {
-	float position = ((lineEnd.x - lineStart.x) * (point.y - lineStart.y) - 
+	O2Float position = ((lineEnd.x - lineStart.x) * (point.y - lineStart.y) -
 					(point.x - lineStart.x) * (lineEnd.y - lineStart.y));
 	
 	return position;
 }
 
-static BOOL _curveIsFlat(float desiredFlatness, O2Point start, O2Point cp1, O2Point cp2, O2Point end)
+static BOOL _curveIsFlat(O2Float desiredFlatness, O2Point start, O2Point cp1, O2Point cp2, O2Point end)
 {
 	// Roughly compute the furthest distance of the curved path from the line connecting start to end
 	double ux = 3.0*cp1.x - 2.0*start.x - end.x; ux *= ux;
@@ -180,7 +180,7 @@ int _countEvenOddCrossingOfPointAndLine(O2Point point, O2Point lineStart, O2Poin
 		((lineStart.y > point.y) && (lineEnd.y <= point.y))) {	// a downward crossing
 
 		// compute the actual edge-ray intersect x-coordinate
-		float vt = (float)(point.y - lineStart.y) / (lineEnd.y - lineStart.y);
+		O2Float vt = (O2Float)(point.y - lineStart.y) / (lineEnd.y - lineStart.y);
 
 		if (point.x < lineStart.x + vt * (lineEnd.x - lineStart.x)) { // point.x < intersect
 			return 1;   // a valid crossing of y=point.y right of point.x
@@ -216,8 +216,8 @@ int _countYCrossingFromPointToCurve(O2Point point, O2Point curveFromPoint, O2Poi
 	int count = 0;
 	
 	// No need to test if there no chance of any crossing
-	float minY = MIN(MIN(curveFromPoint.y, curveToPoint.y), MIN(tan1.y, tan2.y));
-	float maxY = MAX(MAX(curveFromPoint.y, curveToPoint.y), MAX(tan1.y, tan2.y));
+	O2Float minY = MIN(MIN(curveFromPoint.y, curveToPoint.y), MIN(tan1.y, tan2.y));
+	O2Float maxY = MAX(MAX(curveFromPoint.y, curveToPoint.y), MAX(tan1.y, tan2.y));
 	if (minY > point.y ||  maxY < point.y) {
 		return 0;
 	}

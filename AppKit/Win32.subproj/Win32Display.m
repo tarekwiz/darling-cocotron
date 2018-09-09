@@ -333,7 +333,7 @@ static BOOL CALLBACK monitorEnumerator(HMONITOR hMonitor,HDC hdcMonitor,LPRECT r
 }
 
 -(NSTimeInterval)textCaretBlinkInterval {
-   return ((float)GetCaretBlinkTime())/1000.0;
+   return ((CGFloat)GetCaretBlinkTime())/1000.0;
 }
 
 -(void)hideCursor {
@@ -1005,13 +1005,13 @@ The values should be upgraded to something which is more generic to implement, p
 -(BOOL)postScrollWheelMSG:(MSG)msg type:(NSEventType)type location:(NSPoint)location modifierFlags:(unsigned)modifierFlags window:(NSWindow *)window {
    NSEvent *event;
     
-    float deltaX=0;
-    float deltaY=0;
+    CGFloat deltaX=0;
+    CGFloat deltaY=0;
     if(msg.message==WM_MOUSEWHEEL) {
-        deltaY = ((float)GET_WHEEL_DELTA_WPARAM(msg.wParam));
+        deltaY = ((CGFloat)GET_WHEEL_DELTA_WPARAM(msg.wParam));
         deltaY /= 120.f; // deltaY comes in units of 120 (for fractional rotations - when all you have is an int..)
     } else if(msg.message==WM_MOUSEHWHEEL) {
-        deltaX = ((float)GET_WHEEL_DELTA_WPARAM(msg.wParam));
+        deltaX = ((CGFloat)GET_WHEEL_DELTA_WPARAM(msg.wParam));
         deltaX /= 120.f; // deltaX comes in units of 120 (for fractional rotations - when all you have is an int..)
     }
 
@@ -1356,8 +1356,8 @@ static int CALLBACK buildFamily(const const EXTLOGFONTW* logFont,const TEXTMETRI
 static NSFontMetric *fontMetricWithLogicalAndMetric(const ENUMLOGFONTEX *logFont,
    const NEWTEXTMETRICEX *textMetric) {
    NSSize size=NSMakeSize(logFont->elfLogFont.lfWidth,logFont->elfLogFont.lfHeight);
-   float  ascender=textMetric->ntmTm.tmAscent;
-   float  descender=-((float)textMetric->ntmTm.tmDescent);
+   CGFloat  ascender=textMetric->ntmTm.tmAscent;
+   CGFloat  descender=-((CGFloat)textMetric->ntmTm.tmDescent);
 
    return [[[NSFontMetric alloc]
        initWithSize:size 
@@ -1416,7 +1416,7 @@ static int CALLBACK buildTypeface(const LOGFONTA *lofFont_old,
    return [result allValues];
 }
 
--(float)scrollerWidth {
+-(CGFloat)scrollerWidth {
    return GetSystemMetrics(SM_CXHTHUMB);
 }
 
@@ -1560,7 +1560,7 @@ static int CALLBACK buildTypeface(const LOGFONTA *lofFont_old,
     return [openPanel _GetOpenFileNameForTypes:types];
 }
 
--(float)primaryScreenHeight {
+-(CGFloat)primaryScreenHeight {
    return GetSystemMetrics(SM_CYSCREEN);
 }
 

@@ -184,7 +184,7 @@ static NSUInteger    _pickerMask=0;
 	if ([picker respondsToSelector: @selector(setColor:)]) {
 		[picker setColor: color];
 	}
-    float alpha = [color alphaComponent];
+    CGFloat alpha = [color alphaComponent];
     [opacitySlider setFloatValue: alpha * 100.f];
     [opacityTextField setFloatValue: alpha * 100.f];
     
@@ -205,7 +205,7 @@ static NSUInteger    _pickerMask=0;
 	if (_showsAlpha) {
 		// Update the controls!
 		NSColor* color = [self color];
-		float alpha = [color alphaComponent];
+		CGFloat alpha = [color alphaComponent];
 		[opacitySlider setFloatValue: alpha * 100.f];
 		[opacityTextField setFloatValue: alpha * 100.f];
 	}

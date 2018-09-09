@@ -35,7 +35,7 @@ void O2PathAddEllipseInRect(O2MutablePathRef self, const O2AffineTransform *matr
 void O2PathAddPath(O2MutablePathRef self, const O2AffineTransform *matrix, O2PathRef other);
 
 void O2PathApplyTransform(O2MutablePathRef self, const O2AffineTransform matrix);
-void O2MutablePathEllipseToBezier(O2Point *cp, float x, float y, float xrad, float yrad);
+void O2MutablePathEllipseToBezier(O2Point *cp, O2Float x, O2Float y, O2Float xrad, O2Float yrad);
 
 @end
 

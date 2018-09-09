@@ -114,8 +114,8 @@ enum {
 // visible. If a user clicks and holds for a period and then releases
 // the current item should be reselected. This threshold is the dividing
 // line between those two behaviours.
-const float kMenuInitialClickThreshold = .3f;
-const float kMouseMovementThreshold = .001f;
+const NSTimeInterval kMenuInitialClickThreshold = .3f;
+const NSTimeInterval kMouseMovementThreshold = .001f;
 
 -(NSMenuItem *)trackForEvent:(NSEvent *)event {
 	NSMenuItem *item=nil;

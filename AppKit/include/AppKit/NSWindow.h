@@ -204,7 +204,7 @@ APPKIT_EXPORT NSString *const NSWindowWillBeginSheetNotification;
 
 + (NSRect)frameRectForContentRect:(NSRect)contentRect styleMask:(NSUInteger)styleMask;
 + (NSRect)contentRectForFrameRect:(NSRect)frameRect styleMask:(NSUInteger)styleMask;
-+ (float)minFrameWidthWithTitle:(NSString *)title styleMask:(NSUInteger)styleMask;
++ (CGFloat)minFrameWidthWithTitle:(NSString *)title styleMask:(NSUInteger)styleMask;
 + (NSInteger)windowNumberAtPoint:(NSPoint)point belowWindowWithWindowNumber:(NSInteger)window;
 + (NSArray *)windowNumbersWithOptions:(NSWindowNumberListOptions)options;
 + (void)removeFrameUsingName:(NSString *)name;
@@ -351,7 +351,7 @@ APPKIT_EXPORT NSString *const NSWindowWillBeginSheetNotification;
 - (NSString *)stringWithSavedFrame;
 
 - (int)resizeFlags;
-- (float)userSpaceScaleFactor;
+- (CGFloat)userSpaceScaleFactor;
 - (NSResponder *)firstResponder;
 
 - (NSButton *)standardWindowButton:(NSWindowButton)value;

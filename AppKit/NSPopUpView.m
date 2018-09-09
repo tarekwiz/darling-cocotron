@@ -29,7 +29,7 @@ enum {
 // the app should just dismiss the popup and reselect the current value.
 // If the user clicks and immediately releases the popup menu should remain
 // on screen. This threshold is the dividing line between those two behaviours.
-static const float kMenuInitialClickThreshold = .3f;
+static const NSTimeInterval kMenuInitialClickThreshold = .3f;
 
 #define MIN_TITLE_KEY_GAP 8
 #define WINDOW_BORDER_THICKNESS 3
@@ -68,10 +68,10 @@ static const float kMenuInitialClickThreshold = .3f;
 
 -(NSSize)sizeForMenuItems:(NSArray *)items {
 	NSSize   result=NSZeroSize;
-	float    maxTitleWidth = 0.0f;
+	CGFloat  maxTitleWidth = 0.0f;
 	BOOL     anItemHasAnImage = NO;
-	float    maxKeyWidth = 0.0f;
-	float    totalHeight = WINDOW_BORDER_THICKNESS; // border. Magic constants that may not be right for Win7 vs XP
+	CGFloat  maxKeyWidth = 0.0f;
+	CGFloat  totalHeight = WINDOW_BORDER_THICKNESS; // border. Magic constants that may not be right for Win7 vs XP
 	NSSize   gutterSize = [[self graphicsStyle] menuItemGutterSize];
 	NSSize   rightArrowSize = [[self graphicsStyle] menuItemBranchArrowSize];
 	unsigned i,count=[items count];
@@ -88,8 +88,8 @@ static const float kMenuInitialClickThreshold = .3f;
 	for (i = 0;i<count;i++)
 	{
 		NSMenuItem *item = [items objectAtIndex:i];
-        float height =  0.;
-        float      titleAndIconWidth = self.bounds.size.width;
+        CGFloat height =  0.;
+        CGFloat    titleAndIconWidth = self.bounds.size.width;
 		if ([item isSeparatorItem])
 		{
             height = [[self graphicsStyle] menuItemSeparatorSize].height;
@@ -289,7 +289,7 @@ partRect.size.width = __partSize.width;                              \
 }
 			NSImage      *image = [item image];
 			BOOL         selected = (i ==_selectedIndex) ? YES : NO;
-			float        itemHeight = itemRect.size.height;
+			CGFloat      itemHeight = itemRect.size.height;
 			NSRect       partRect;
 			NSSize       partSize;
 			BOOL         showsEnabled = ([item isEnabled] || [item hasSubmenu]);

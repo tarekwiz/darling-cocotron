@@ -183,7 +183,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    return nil;
 }
 
--(float)scrollerWidth {
+-(CGFloat)scrollerWidth {
    NSInvalidAbstractInvocation();
    return 0;
 }

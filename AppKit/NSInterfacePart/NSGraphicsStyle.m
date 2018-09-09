@@ -168,11 +168,11 @@ static NSDictionary *sDimmedMenuTextShadowAttributes = nil;
 	return result;
 }
 
--(float)menuBarHeight
+-(CGFloat)menuBarHeight
 {
 	NSDictionary *attributes=[NSDictionary dictionaryWithObjectsAndKeys:
 							  [NSFont menuFontOfSize:0],NSFontAttributeName,nil];
-	float         result=[@"Menu" sizeWithAttributes:attributes].height;
+	CGFloat       result=[@"Menu" sizeWithAttributes:attributes].height;
 	
 	result+=2; // border top/bottom margin
 	result+=4; // border
@@ -181,7 +181,7 @@ static NSDictionary *sDimmedMenuTextShadowAttributes = nil;
 	return result;
 }
 
--(float)menuItemGutterGap
+-(CGFloat)menuItemGutterGap
 {
 	return 0;
 }
@@ -189,7 +189,7 @@ static NSDictionary *sDimmedMenuTextShadowAttributes = nil;
 -(void)drawMenuSeparatorInRect:(NSRect)rect 
 {
 	NSPoint point = NSMakePoint(rect.origin.x + 1, rect.origin.y + 3);
-	float   width = rect.size.width - 2;
+	CGFloat width = rect.size.width - 2;
 	
 	[[NSColor grayColor] setFill];
 	NSRectFill(NSMakeRect(point.x,point.y,width,1));
@@ -395,7 +395,7 @@ static NSDictionary *sDimmedMenuTextShadowAttributes = nil;
 }
 
 -(void)drawButtonImage:(NSImage *)image inRect:(NSRect)rect enabled:(BOOL)enabled mixed:(BOOL)mixed {
-   float fraction=enabled?1.0:0.5;
+   CGFloat fraction=enabled?1.0:0.5;
    
    [image drawInRect:rect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:fraction];
 }

@@ -75,7 +75,7 @@
 
 -(void)setCurrentColor:(O2Color*)color
 {
-   const float *c=O2ColorGetComponents(color);
+   const CGFloat *c=O2ColorGetComponents(color);
    int count=O2ColorGetNumberOfComponents(color);
 
 	switch(count)

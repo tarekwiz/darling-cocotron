@@ -16,7 +16,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <AppKit/NSGraphicsContextFunctions.h>
 #import <ApplicationServices/ApplicationServices.h>
 
-const float NSStringDrawerLargeDimension=1000000.;
+const CGFloat NSStringDrawerLargeDimension=1000000.;
 
 @implementation NSStringDrawer
 

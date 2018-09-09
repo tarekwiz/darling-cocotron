@@ -540,27 +540,27 @@ static Class _rulerViewClass = nil;
     return _rulersVisible;
 }
 
--(float)verticalLineScroll {
+-(CGFloat)verticalLineScroll {
     return _verticalLineScroll;
 }
 
--(float)horizontalLineScroll {
+-(CGFloat)horizontalLineScroll {
     return _horizontalLineScroll;
 }
 
--(float)verticalPageScroll {
+-(CGFloat)verticalPageScroll {
     return _verticalPageScroll;
 }
 
--(float)horizontalPageScroll {
+-(CGFloat)horizontalPageScroll {
     return _horizontalPageScroll;
 }
 
--(float)lineScroll {
+-(CGFloat)lineScroll {
     return [self verticalLineScroll];
 }
 
--(float)pageScroll {
+-(CGFloat)pageScroll {
     return [self verticalPageScroll];
 }
 
@@ -699,32 +699,32 @@ static Class _rulerViewClass = nil;
     }
 }
 
--(void)setVerticalLineScroll:(float)value {
+-(void)setVerticalLineScroll:(CGFloat)value {
     if (value > 0.0)
         _verticalLineScroll = value;
 }
 
--(void)setHorizontalLineScroll:(float)value {
+-(void)setHorizontalLineScroll:(CGFloat)value {
     if (value > 0.0)
         _horizontalLineScroll = value;
 }
 
--(void)setVerticalPageScroll:(float)value {
+-(void)setVerticalPageScroll:(CGFloat)value {
     if (value > 0.0)
         _verticalPageScroll = value;
 }
 
--(void)setHorizontalPageScroll:(float)value {
+-(void)setHorizontalPageScroll:(CGFloat)value {
     if (value > 0.0)
         _horizontalPageScroll = value;
 }
 
--(void)setLineScroll:(float)value {
+-(void)setLineScroll:(CGFloat)value {
     [self setHorizontalLineScroll:value];
     [self setVerticalLineScroll:value];
 }
 
--(void)setPageScroll:(float)value {
+-(void)setPageScroll:(CGFloat)value {
     [self setHorizontalPageScroll:value];
     [self setVerticalPageScroll:value];
 }
@@ -801,15 +801,15 @@ static Class _rulerViewClass = nil;
     else {
      NSRect docRect=[docView frame];
      NSRect clipRect=[_clipView bounds];
-     float  heightDiff=docRect.size.height-clipRect.size.height;
-     float  widthDiff=docRect.size.width-clipRect.size.width;
+     CGFloat heightDiff=docRect.size.height-clipRect.size.height;
+     CGFloat widthDiff=docRect.size.width-clipRect.size.width;
 
      if(heightDiff<=0){
       [_verticalScroller setEnabled:NO];
       [_verticalScroller setHidden:_autohidesScrollers];
      }
      else {
-      float  value=(heightDiff<=0)?0:(clipRect.origin.y-docRect.origin.y)/heightDiff;
+      CGFloat value=(heightDiff<=0)?0:(clipRect.origin.y-docRect.origin.y)/heightDiff;
 
       if(![docView isFlipped])
        value=1.0-value;
@@ -824,7 +824,7 @@ static Class _rulerViewClass = nil;
       [_horizontalScroller setHidden:_autohidesScrollers];
      }
      else {
-      float value=(widthDiff<=0)?0:(clipRect.origin.x-docRect.origin.x)/widthDiff;
+      CGFloat value=(widthDiff<=0)?0:(clipRect.origin.x-docRect.origin.x)/widthDiff;
 
       [_horizontalScroller setEnabled:YES];
       [_horizontalScroller setHidden:NO];
@@ -874,12 +874,12 @@ static Class _rulerViewClass = nil;
 }
 
 -(void)_verticalScroll:(NSScroller *)scroller {
-   float   value=[scroller floatValue];
+   CGFloat value=[scroller floatValue];
    NSView *docView=[self documentView];
    NSRect  docRect=[docView frame];
    NSRect  clipRect=[_clipView bounds];
-   float lineScroll=_verticalLineScroll;
-   float pageScroll=_verticalPageScroll;
+   CGFloat lineScroll=_verticalLineScroll;
+   CGFloat pageScroll=_verticalPageScroll;
 
    if (![docView isFlipped]) {
        lineScroll=0.0-lineScroll;
@@ -918,7 +918,7 @@ static Class _rulerViewClass = nil;
 }
 
 -(void)_horizontalScroll:(NSScroller *)scroller {
-   float   value=[scroller floatValue];
+   CGFloat value=[scroller doubleValue];
    NSView *docView=[self documentView];
    NSRect  docRect=[docView frame];
    NSRect  clipRect=[_clipView bounds];

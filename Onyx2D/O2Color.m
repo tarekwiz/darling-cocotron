@@ -175,17 +175,17 @@ int O2ColorConvertComponentsToDeviceRGB(O2ColorSpaceRef inputSpace,const O2Float
     case kO2ColorSpaceModelCMYK:;
 #if 1
 // CMYK to CMY to RGB
-     float K=components[3];
-     float C=(components[0]*(1-K)+K);
-     float M=(components[1]*(1-K)+K);
-     float Y=(components[2]*(1-K)+K);
+     O2Float K=components[3];
+     O2Float C=(components[0]*(1-K)+K);
+     O2Float M=(components[1]*(1-K)+K);
+     O2Float Y=(components[2]*(1-K)+K);
    
      rgbComponents[0]=(1-C);
      rgbComponents[1]=(1-M);
      rgbComponents[2]=(1-Y);
      rgbComponents[3]=components[4];
 #else
-     float white=1-input[3];
+     O2Float white=1-input[3];
    
      output[0]=(input[0]>white)?0:white-input[0];
      output[1]=(input[1]>white)?0:white-input[1];

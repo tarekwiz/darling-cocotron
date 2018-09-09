@@ -17,10 +17,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 #import "NSPoofAnimation.h"
 
-const float NSBlack=0;
-const float NSDarkGray=0.333;
-const float NSLightGray=0.667;
-const float NSWhite=1.0;
+const CGFloat NSBlack=0;
+const CGFloat NSDarkGray=0.333;
+const CGFloat NSLightGray=0.667;
+const CGFloat NSWhite=1.0;
 
 NSString * const NSDeviceBlackColorSpace=@"NSDeviceBlackColorSpace";
 NSString * const NSDeviceWhiteColorSpace=@"NSDeviceWhiteColorSpace";
@@ -92,7 +92,7 @@ void NSRectFillListWithColors(const NSRect *rects,NSColor **colors,int count) {
    CGContextRestoreGState(context);
 }
 
-void NSRectFillListWithGrays(const NSRect *rects,const float *grays,int count) {
+void NSRectFillListWithGrays(const NSRect *rects,const CGFloat *grays,int count) {
    CGContextRef context=NSCurrentGraphicsPort();
    int        i;
 
@@ -489,7 +489,7 @@ void NSDrawWindowBackground(NSRect rect) {
    NSRectFill(rect);
 }
 
-NSRect NSDrawTiledRects(NSRect bounds,NSRect clip,const NSRectEdge *sides,const float *grays,int count) {
+NSRect NSDrawTiledRects(NSRect bounds,NSRect clip,const NSRectEdge *sides,const CGFloat *grays,int count) {
    return bounds;
 }
 

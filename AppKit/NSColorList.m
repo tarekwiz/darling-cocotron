@@ -172,9 +172,9 @@ static NSMutableDictionary *_namedColorLists = nil;
 
    for(i=0;webColors[i].name!=nil;i++){
     unsigned value=webColors[i].value;
-    float red=((value>>16)&0xFF)/255.0;
-    float green=((value>>8)&0xFF)/255.0;
-    float blue=(value&0xFF)/255.0;
+    CGFloat red=((value>>16)&0xFF)/255.0;
+    CGFloat green=((value>>8)&0xFF)/255.0;
+    CGFloat blue=(value&0xFF)/255.0;
     NSColor *color=[NSColor colorWithCalibratedRed:red green:green blue:blue alpha:1.0];
 
     [webColorList setColor:color forKey: webColors[i].name];

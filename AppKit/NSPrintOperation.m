@@ -135,17 +135,17 @@ static NSPrintOperation *_currentOperation=nil;
    NSRect  bounds=[_view bounds];
    NSRect  imageableRect=[_printInfo imageablePageBounds];
    BOOL    isFlipped=[_view isFlipped];
-   float   top=isFlipped?NSMinY(bounds):NSMaxY(bounds);
+   CGFloat top=isFlipped?NSMinY(bounds):NSMaxY(bounds);
    NSPrintingOrientation orientation=[_printInfo orientation];
    
    while(YES) {
-    float heightAdjustLimit=[_view heightAdjustLimit];
-    float widthAdjustLimit=[_view widthAdjustLimit];
-    float left=NSMinX(bounds);
-    float right=left+imageableRect.size.width;
-    float rightLimit=left+imageableRect.size.width*widthAdjustLimit;
-    float bottom=isFlipped?top+imageableRect.size.height:top-imageableRect.size.height;
-    float bottomLimit=isFlipped?top+imageableRect.size.height*heightAdjustLimit:top-imageableRect.size.height*heightAdjustLimit;
+    CGFloat heightAdjustLimit=[_view heightAdjustLimit];
+    CGFloat widthAdjustLimit=[_view widthAdjustLimit];
+    CGFloat left=NSMinX(bounds);
+    CGFloat right=left+imageableRect.size.width;
+    CGFloat rightLimit=left+imageableRect.size.width*widthAdjustLimit;
+    CGFloat bottom=isFlipped?top+imageableRect.size.height:top-imageableRect.size.height;
+    CGFloat bottomLimit=isFlipped?top+imageableRect.size.height*heightAdjustLimit:top-imageableRect.size.height*heightAdjustLimit;
     
     if(orientation==NSLandscapeOrientation){
      // FIX

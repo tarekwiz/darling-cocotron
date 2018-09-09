@@ -97,7 +97,7 @@ APPKIT_EXPORT NSString *NSImageCompressionFactor;
 - valueForProperty:(NSString *)property;
 - (void)setProperty:(NSString *)property withValue:value;
 
-- (void)colorizeByMappingGray:(float)gray toColor:(NSColor *)color blackMapping:(NSColor *)blackMapping whiteMapping:(NSColor *)whiteMapping;
+- (void)colorizeByMappingGray:(CGFloat)gray toColor:(NSColor *)color blackMapping:(NSColor *)blackMapping whiteMapping:(NSColor *)whiteMapping;
 
 - (void)getCompression:(NSTIFFCompression *)compression factor:(float *)factor;
 - (void)setCompression:(NSTIFFCompression)compression factor:(float)factor;

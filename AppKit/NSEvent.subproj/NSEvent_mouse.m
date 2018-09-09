@@ -10,7 +10,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 @implementation NSEvent_mouse
 
--initWithType:(NSEventType)type location:(NSPoint)location modifierFlags:(unsigned)modifierFlags window:(NSWindow *)window clickCount:(int)clickCount deltaX:(float)deltaX deltaY:(float)deltaY {
+-initWithType:(NSEventType)type location:(NSPoint)location modifierFlags:(unsigned)modifierFlags window:(NSWindow *)window clickCount:(int)clickCount deltaX:(CGFloat)deltaX deltaY:(CGFloat)deltaY {
 	[super initWithType:type location:location modifierFlags:modifierFlags window:window];
 	
 	_clickCount = clickCount;
@@ -24,7 +24,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	return _clickCount;
 }
 
--initWithType:(NSEventType)type location:(NSPoint)location modifierFlags:(unsigned)modifierFlags window:(NSWindow *)window deltaY:(float)deltaY {
+-initWithType:(NSEventType)type location:(NSPoint)location modifierFlags:(unsigned)modifierFlags window:(NSWindow *)window deltaY:(CGFloat)deltaY {
 	[super initWithType:type location:location modifierFlags:modifierFlags window:window];
 	
 	_deltaY = deltaY;
@@ -47,15 +47,15 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    return self;
 }
 
-- (float)deltaX {
+- (CGFloat)deltaX {
 	return _deltaX;
 }
 
-- (float)deltaY {
+- (CGFloat)deltaY {
 	return _deltaY;
 }
 
--(float)deltaZ {
+-(CGFloat)deltaZ {
 	return 0.0;
 }
 

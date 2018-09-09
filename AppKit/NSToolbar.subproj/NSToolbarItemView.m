@@ -85,8 +85,8 @@ typedef struct {
  CGFloat _C1[4];
 } gradientColors;
 
-static void evaluate(void *info,const float *in, float *output) {
-   float         x=in[0];
+static void evaluate(void *info,const CGFloat *in, CGFloat *output) {
+   CGFloat       x=in[0];
    gradientColors *colors=info;
    int           i;
    
@@ -94,9 +94,9 @@ static void evaluate(void *info,const float *in, float *output) {
      output[i]=colors->_C0[i]+x*(colors->_C1[i]-colors->_C0[i]);
 }
 
-const float kFillGrayLevel = 0.75;
-const float kEdgeGrayLevel = 0.5;
-const float kEdgeThickness = 2.f;
+const CGFloat kFillGrayLevel = 0.75;
+const CGFloat kEdgeGrayLevel = 0.5;
+const CGFloat kEdgeThickness = 2.f;
 
 -(void)drawRect:(NSRect)rect {
    if([[_toolbarItem itemIdentifier] isEqual:[[_toolbarItem toolbar] selectedItemIdentifier]]){

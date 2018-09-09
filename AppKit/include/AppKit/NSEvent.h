@@ -164,10 +164,10 @@ enum {
 - initWithType:(NSEventType)type location:(NSPoint)location modifierFlags:(unsigned)modifierFlags window:(NSWindow *)window;
 
 // FIXME: get rid of
-+ (NSEvent *)mouseEventWithType:(NSEventType)type location:(NSPoint)location modifierFlags:(unsigned int)modifierFlags window:(NSWindow *)window clickCount:(int)clickCount deltaX:(float)deltaX deltaY:(float)deltaY;
++ (NSEvent *)mouseEventWithType:(NSEventType)type location:(NSPoint)location modifierFlags:(unsigned int)modifierFlags window:(NSWindow *)window clickCount:(int)clickCount deltaX:(CGFloat)deltaX deltaY:(CGFloat)deltaY;
 
 // FIXME: get rid of
-+ (NSEvent *)mouseEventWithType:(NSEventType)type location:(NSPoint)location modifierFlags:(unsigned)modifierFlags window:(NSWindow *)window deltaY:(float)deltaY;
++ (NSEvent *)mouseEventWithType:(NSEventType)type location:(NSPoint)location modifierFlags:(unsigned)modifierFlags window:(NSWindow *)window deltaY:(CGFloat)deltaY;
 
 + (NSEvent *)enterExitEventWithType:(NSEventType)type location:(NSPoint)location modifierFlags:(NSUInteger)flags timestamp:(NSTimeInterval)timestamp windowNumber:(NSInteger)windowNumber context:(NSGraphicsContext *)context eventNumber:(NSInteger)eventNumber trackingNumber:(NSInteger)tracking userData:(void *)userData;
 
@@ -185,9 +185,9 @@ enum {
 - (NSInteger)windowNumber;
 
 - (int)clickCount;
-- (float)deltaX;
-- (float)deltaY;
-- (float)deltaZ;
+- (CGFloat)deltaX;
+- (CGFloat)deltaY;
+- (CGFloat)deltaZ;
 
 - (NSString *)characters;
 - (NSString *)charactersIgnoringModifiers;

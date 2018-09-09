@@ -52,7 +52,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 - (NSSet *)allFontFamilyNames;
 - (NSArray *)fontTypefacesForFamilyName:(NSString *)name;
 
-- (float)scrollerWidth;
+- (CGFloat)scrollerWidth;
 
 - (int)runModalPageLayoutWithPrintInfo:(NSPrintInfo *)printInfo;
 - (int)runModalPrintPanelWithPrintInfoDictionary:(NSMutableDictionary *)attributes;

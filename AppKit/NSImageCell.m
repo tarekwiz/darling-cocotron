@@ -85,9 +85,9 @@ static NSSize scaledImageSizeInFrameSize(NSSize imageSize,NSSize frameSize,NSIma
       
    switch(scaling){
     case NSImageScaleProportionallyDown:{
-     float xscale=frameSize.width/imageSize.width;
-     float yscale=frameSize.height/imageSize.height;
-     float scale=MIN(1.0,MIN(xscale,yscale));
+     CGFloat xscale=frameSize.width/imageSize.width;
+     CGFloat yscale=frameSize.height/imageSize.height;
+     CGFloat scale=MIN(1.0,MIN(xscale,yscale));
       
      imageSize.width*=scale;
      imageSize.height*=scale;
@@ -99,9 +99,9 @@ static NSSize scaledImageSizeInFrameSize(NSSize imageSize,NSSize frameSize,NSIma
      return frameSize;
      
     case NSImageScaleProportionallyUpOrDown:{
-     float xscale=frameSize.width/imageSize.width;
-     float yscale=frameSize.height/imageSize.height;
-     float scale=MIN(xscale,yscale);
+     CGFloat xscale=frameSize.width/imageSize.width;
+     CGFloat yscale=frameSize.height/imageSize.height;
+     CGFloat scale=MIN(xscale,yscale);
       
      imageSize.width*=scale;
      imageSize.height*=scale;

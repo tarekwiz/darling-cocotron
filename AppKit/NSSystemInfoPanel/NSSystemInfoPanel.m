@@ -56,7 +56,7 @@ static NSSystemInfoPanel *_sharedInfoPanel = nil;
 
 
    NSRect frame = [infoPanel frame];
-   static float resetFrameSize = 0;
+   static CGFloat resetFrameSize = 0;
    if(resetFrameSize == 0)
       resetFrameSize = frame.size.height;
    frame.size.height = resetFrameSize;

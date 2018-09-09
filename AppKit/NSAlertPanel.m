@@ -32,7 +32,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    NSSize          messageSize=[drawer sizeOfString:message withAttributes:nil inSize:size];
    NSSize          defaultSize,alternateSize,otherSize;
    NSSize          imageMessageSize=NSZeroSize;
-   float           buttonWidth,buttonHeight,buttonTotalWidth,buttonTotalHeight;
+   CGFloat         buttonWidth,buttonHeight,buttonTotalWidth,buttonTotalHeight;
    NSSize          panelSize=NSZeroSize;
    NSRect          contentRect,viewFrame;
    NSImageView    *imageView;

@@ -162,7 +162,7 @@ NSString *NSAnimationRunLoopMode=@"NSAnimationRunLoopMode";
 -(void)timer:(NSTimer *)timer {
    NSTimeInterval currentTime=[NSDate timeIntervalSinceReferenceDate];
    NSTimeInterval elapsedTime=currentTime-_startTime;
-   float          progress=elapsedTime/_duration;
+   CGFloat        progress=elapsedTime/_duration;
 
    [self _setCurrentProgressAndEndIfNeeded:progress];
 }

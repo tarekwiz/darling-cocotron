@@ -10,12 +10,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 @interface NSFontMetric : NSObject {
     NSSize _size;
-    float _ascender;
-    float _descender;
+    CGFloat _ascender;
+    CGFloat _descender;
 }
 
 - initWithSize:(NSSize)size
-        ascender:(float)ascender
-       descender:(float)descender;
+        ascender:(CGFloat)ascender
+       descender:(CGFloat)descender;
 
 @end

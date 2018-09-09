@@ -19,7 +19,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 @implementation NSScroller
 
-+(float)scrollerWidth {
++(CGFloat)scrollerWidth {
    return [[NSDisplay currentDisplay] scrollerWidth];
 }
 
@@ -116,7 +116,7 @@ static NSAppleScrollBarVariant appleScrollBarVariant(NSScroller *self){
    return _floatValue;
 }
 
--(float)knobProportion {
+-(CGFloat)knobProportion {
    return _knobProportion;
 }
 
@@ -127,7 +127,7 @@ static NSAppleScrollBarVariant appleScrollBarVariant(NSScroller *self){
 - (NSControlSize)controlSize {
     return _controlSize; }
 
--(void)setFloatValue:(float)zeroToOneValue knobProportion:(float)zeroToOneKnob {
+-(void)setFloatValue:(float)zeroToOneValue knobProportion:(CGFloat)zeroToOneKnob {
     if(zeroToOneValue>1)
         zeroToOneValue=1;
     if(zeroToOneValue<0)
@@ -217,7 +217,7 @@ static NSAppleScrollBarVariant appleScrollBarVariant(NSScroller *self){
    return result;
 }
 
-static inline float roundFloat(float value){
+static inline CGFloat roundFloat(CGFloat value){
    value+=0.5;
 
    return (int)value;
@@ -418,8 +418,8 @@ static inline float roundFloat(float value){
    NSPoint firstPoint=[self convertPoint:[event locationInWindow] fromView:nil];
    NSRect  slotRect=[self rectForPart:NSScrollerKnobSlot];
    NSRect  knobRect=[self rectForPart:NSScrollerKnob];
-   float   totalSize;
-   float   startFloatValue=_floatValue;
+   CGFloat totalSize;
+   CGFloat startFloatValue=_floatValue;
 
    if([self isVertical])
     totalSize=slotRect.size.height-knobRect.size.height;
@@ -428,7 +428,7 @@ static inline float roundFloat(float value){
 
    do{
     NSPoint point;
-    float   delta;
+    CGFloat delta;
 
     event=[[self window] nextEventMatchingMask:NSLeftMouseUpMask|NSLeftMouseDraggedMask];
 
@@ -489,7 +489,7 @@ static inline float roundFloat(float value){
     NSPoint point=[self convertPoint:[event locationInWindow] fromView:nil];
     NSRect  knobRect=[self rectForPart:NSScrollerKnob];
     NSRect knobSlotRect=[self rectForPart:NSScrollerKnobSlot];
-    float   roundingThreshold;
+    CGFloat roundingThreshold;
 
     // rounding to edges when distance from edge < size of knob
     if ([self isVertical])
@@ -563,8 +563,8 @@ static inline float roundFloat(float value){
     NSRect  knobRect=[self rectForPart:NSScrollerKnob];
         
     if([self isVertical]) {
-        float delta=[event deltaY];
-        float totalSize=slotRect.size.height-knobRect.size.height;
+        CGFloat delta=[event deltaY];
+        CGFloat totalSize=slotRect.size.height-knobRect.size.height;
         
         if(totalSize==0)
             _floatValue=0;

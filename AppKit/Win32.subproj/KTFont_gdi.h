@@ -4,17 +4,17 @@
 @class Win32Font;
 
 typedef struct CGFontMetrics {
-    float emsquare;
-    float scale;
+    CGFloat emsquare;
+    CGFloat scale;
     CGRect boundingRect;
-    float ascender;
-    float descender;
-    float leading;
-    float italicAngle;
-    float capHeight;
-    float xHeight;
-    float underlineThickness;
-    float underlinePosition;
+    CGFloat ascender;
+    CGFloat descender;
+    CGFloat leading;
+    CGFloat italicAngle;
+    CGFloat capHeight;
+    CGFloat xHeight;
+    CGFloat underlineThickness;
+    CGFloat underlinePosition;
 } CGFontMetrics;
 
 typedef struct CGGlyphRange {
@@ -29,14 +29,14 @@ typedef struct CGGlyphRangeTable {
 
 typedef struct {
     CGGlyph previous;
-    float xoffset;
+    CGFloat xoffset;
 } CGKerningOffset;
 
 typedef struct CGGlyphMetrics {
     BOOL hasAdvancement;
-    float advanceA;
-    float advanceB;
-    float advanceC;
+    CGFloat advanceA;
+    CGFloat advanceB;
+    CGFloat advanceC;
     unsigned numberOfKerningOffsets;
     CGKerningOffset *kerningOffsets;
 } CGGlyphMetrics;

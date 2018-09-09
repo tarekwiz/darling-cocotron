@@ -13,10 +13,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 @class NSImage, NSColor;
 
 typedef struct _Margins {
-    float left;
-    float right;
-    float top;
-    float bottom;
+    CGFloat left;
+    CGFloat right;
+    CGFloat top;
+    CGFloat bottom;
 } Margins;
 
 @interface NSGraphicsStyle : NSObject {
@@ -32,8 +32,8 @@ typedef struct _Margins {
 - (NSSize)menuItemGutterSize;
 - (NSSize)menuItemTextSize:(NSString *)title;
 - (NSSize)menuItemAttributedTextSize:(NSAttributedString *)title;
-- (float)menuBarHeight;
-- (float)menuItemGutterGap;
+- (CGFloat)menuBarHeight;
+- (CGFloat)menuItemGutterGap;
 
 - (Margins)menuItemBranchArrowMargins;
 - (Margins)menuItemGutterMargins;

@@ -7,7 +7,7 @@
 
 #import "NSPoofAnimation.h"
 
-static const float kAnimationDuration = .3;
+static const NSTimeInterval kAnimationDuration = .3;
 
 // The animation is defined by the NSPoof.png image, which is made from individual square frame, stacked either
 // horizontally or vertically

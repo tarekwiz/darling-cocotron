@@ -24,10 +24,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    return [NSFont menuFontOfSize:0];
 }
 
-+(float)menuHeight {
++(CGFloat)menuHeight {
    NSDictionary *attributes=[NSDictionary dictionaryWithObjectsAndKeys:
      [self menuFont],NSFontAttributeName,nil];
-   float         result=[@"Menu" sizeWithAttributes:attributes].height;
+   CGFloat       result=[@"Menu" sizeWithAttributes:attributes].height;
 
    result+=3; // border top/bottom margin
    result+=4; // border
@@ -96,7 +96,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #else
    NSArray      *items=[[self menu] itemArray];
    int           i,count=[items count];
-   float         height=0;
+   CGFloat       height=0;
 
    if(count==0){
     [self setFrameSize:NSMakeSize([self frame].size.width,0)];

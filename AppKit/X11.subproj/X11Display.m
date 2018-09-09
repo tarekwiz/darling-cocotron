@@ -308,11 +308,11 @@ static void socketCallback(
    return ret;
 }
 
--(float)scrollerWidth {
+-(CGFloat)scrollerWidth {
    return 15.0;
 }
 
--(float)doubleClickInterval {
+-(CGFloat)doubleClickInterval {
    return 1.0;
 }
 

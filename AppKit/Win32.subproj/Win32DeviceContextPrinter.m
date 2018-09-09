@@ -58,16 +58,16 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 
 -(NSSize)pixelsPerInch {
-   float dpix=GetDeviceCaps(_dc,LOGPIXELSX);
-   float dpiy=GetDeviceCaps(_dc,LOGPIXELSY);
+   CGFloat dpix=GetDeviceCaps(_dc,LOGPIXELSX);
+   CGFloat dpiy=GetDeviceCaps(_dc,LOGPIXELSY);
    
    return NSMakeSize(dpix,dpiy);
 }
 
 -(NSRect)paperRect {
    NSSize dpi=[self pixelsPerInch];
-   float width=GetDeviceCaps(_dc,PHYSICALWIDTH);
-   float height=GetDeviceCaps(_dc,PHYSICALHEIGHT);
+   CGFloat width=GetDeviceCaps(_dc,PHYSICALWIDTH);
+   CGFloat height=GetDeviceCaps(_dc,PHYSICALHEIGHT);
       
    return NSMakeRect(0,0,(width/dpi.width)*72,(height/dpi.height)*72);
 }
@@ -75,8 +75,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 -(NSRect)imageableRect {
    NSSize dpi=[self pixelsPerInch];
    NSRect result=NSZeroRect;
-   float  offsetx=GetDeviceCaps(_dc,PHYSICALOFFSETX);
-   float  offsety=GetDeviceCaps(_dc,PHYSICALOFFSETY);
+   CGFloat  offsetx=GetDeviceCaps(_dc,PHYSICALOFFSETX);
+   CGFloat  offsety=GetDeviceCaps(_dc,PHYSICALOFFSETY);
 
    offsetx/=dpi.width;
    offsety/=dpi.height;
@@ -84,8 +84,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    offsetx*=72;
    offsety*=72;
 
-	float width = GetDeviceCaps(_dc,HORZRES);
-	float height = GetDeviceCaps(_dc,VERTRES);
+	CGFloat width = GetDeviceCaps(_dc,HORZRES);
+	CGFloat height = GetDeviceCaps(_dc,VERTRES);
 
 	width/=dpi.width;
 	height/=dpi.height;
@@ -102,7 +102,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 
 #if 0
--(void)scalePage:(float)scalex:(float)scaley {
+-(void)scalePage:(CGFloat)scalex:(CGFloat)scaley {
    HDC colorDC=_dc;
    int xmul=scalex*1000;
    int xdiv=1000;

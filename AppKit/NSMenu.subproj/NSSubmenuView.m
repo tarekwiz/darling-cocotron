@@ -32,8 +32,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	}
 	else {
 #define ITEM_MAX(size) height = MAX(height,size.height); width += size.width;
-		float width = [[self graphicsStyle] menuItemGutterGap];
-		float height = 0.0f;
+		CGFloat width = [[self graphicsStyle] menuItemGutterGap];
+		CGFloat height = 0.0f;
 		NSSize size;
 		
 		size = [[self graphicsStyle] menuItemGutterSize];
@@ -63,10 +63,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 -(NSSize)sizeForMenuItems:(NSArray *)items {
 	NSSize   result=NSZeroSize;
-	float    maxTitleWidth = 0.0f;
+	CGFloat  maxTitleWidth = 0.0f;
 	BOOL     anItemHasAnImage = NO;
-	float    maxKeyWidth = 0.0f; 
-	float    totalHeight = 0.0f;
+	CGFloat  maxKeyWidth = 0.0f;
+	CGFloat  totalHeight = 0.0f;
 	NSSize   gutterSize = [[self graphicsStyle] menuItemGutterSize];
 	NSSize   rightArrowSize = [[self graphicsStyle] menuItemBranchArrowSize];
 	unsigned i,count=[items count];
@@ -81,8 +81,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 		else
 		{
 			NSSize     size = NSZeroSize;
-			float      height = 0.0f;
-			float      titleAndIconWidth = 0.0f;
+			CGFloat    height = 0.0f;
+			CGFloat    titleAndIconWidth = 0.0f;
 			
 			size = [self sizeForMenuItemImage:item];
 			height = MAX(height,size.height);
@@ -149,7 +149,7 @@ static NSRect boundsToTitleAreaRect(NSRect rect){
    return NSInsetRect(rect, WINDOW_BORDER_THICKNESS, WINDOW_BORDER_THICKNESS);
 }
 
--(float)heightOfMenuItem:(NSMenuItem *)item {
+-(CGFloat)heightOfMenuItem:(NSMenuItem *)item {
 	NSSize titleSize=[self contentSizeForItem:item];
 	
 	return titleSize.height;
@@ -188,7 +188,7 @@ static NSRect boundsToTitleAreaRect(NSRect rect){
 }
 			NSImage      *image = [item image];
 			BOOL         selected = (i ==_selectedItemIndex) ? YES : NO;
-			float        itemHeight = [self heightOfMenuItem:item];
+			CGFloat      itemHeight = [self heightOfMenuItem:item];
 			NSRect       partRect;
 			NSSize       partSize;
 			BOOL         showsEnabled = ([item isEnabled] || [item hasSubmenu]);
@@ -421,17 +421,17 @@ static NSRect boundsToTitleAreaRect(NSRect rect){
 	return separatorSize;
 }
 
--(float)minTitleKeyEquivalentWidth
+-(CGFloat)minTitleKeyEquivalentWidth
 {
 	return minTitleKeyEquivalentWidth;
 }
 
--(float)extraTitleGutterMargin
+-(CGFloat)extraTitleGutterMargin
 {
 	return extraTitleGutterMargin;
 }
 
--(float)extraCheckMarkHeight
+-(CGFloat)extraCheckMarkHeight
 {
 	return extraCheckMarkHeight;
 }

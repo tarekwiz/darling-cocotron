@@ -74,10 +74,10 @@ static inline O2Rect O2RectIntersection(O2Rect rect0, O2Rect rect1) {
 }
 
 static inline O2Rect O2RectIntegral(O2Rect rect) {
-    float minx = floor(rect.origin.x);
-    float miny = floor(rect.origin.y);
-    float maxx = ceil(O2RectGetMaxX(rect));
-    float maxy = ceil(O2RectGetMaxY(rect));
+    O2Float minx = floor(rect.origin.x);
+    O2Float miny = floor(rect.origin.y);
+    O2Float maxx = ceil(O2RectGetMaxX(rect));
+    O2Float maxy = ceil(O2RectGetMaxY(rect));
 
     rect.origin.x = minx;
     rect.origin.y = miny;

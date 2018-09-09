@@ -15,7 +15,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 @interface NSMeasurementUnit : NSObject {
     NSString *_name;
     NSString *_abbreviation;
-    float _pointsPerUnit;
+    CGFloat _pointsPerUnit;
     NSArray *_stepUpCycle;
     NSArray *_stepDownCycle;
 }
@@ -25,13 +25,13 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 + (NSMeasurementUnit *)pointsMeasurementUnit;
 + (NSMeasurementUnit *)picasMeasurementUnit;
 
-+ (NSMeasurementUnit *)measurementUnitWithName:(NSString *)name abbreviation:(NSString *)abbreviation pointsPerUnit:(float)points stepUpCycle:(NSArray *)upCycle stepDownCycle:(NSArray *)downCycle;
++ (NSMeasurementUnit *)measurementUnitWithName:(NSString *)name abbreviation:(NSString *)abbreviation pointsPerUnit:(CGFloat)points stepUpCycle:(NSArray *)upCycle stepDownCycle:(NSArray *)downCycle;
 
-- (id)initWithName:(NSString *)name abbreviation:(NSString *)abbreviation pointsPerUnit:(float)points stepUpCycle:(NSArray *)upCycle stepDownCycle:(NSArray *)downCycle;
+- (id)initWithName:(NSString *)name abbreviation:(NSString *)abbreviation pointsPerUnit:(CGFloat)points stepUpCycle:(NSArray *)upCycle stepDownCycle:(NSArray *)downCycle;
 
 - (NSString *)name;
 - (NSString *)abbreviation;
-- (float)pointsPerUnit;
+- (CGFloat)pointsPerUnit;
 - (NSArray *)stepUpCycle;
 - (NSArray *)stepDownCycle;
 

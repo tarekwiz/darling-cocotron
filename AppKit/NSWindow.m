@@ -173,7 +173,7 @@ NSString * const NSWindowDidAnimateNotification=@"NSWindowDidAnimateNotification
    return result;
 }
 
-+(float)minFrameWidthWithTitle:(NSString *)title styleMask:(NSUInteger)styleMask {
++(CGFloat)minFrameWidthWithTitle:(NSString *)title styleMask:(NSUInteger)styleMask {
    NSUnimplementedMethod();
    return 0;
 }
@@ -723,7 +723,7 @@ NSString * const NSWindowDidAnimateNotification=@"NSWindowDidAnimateNotification
     BOOL     changed=NO;
 
     BOOL     tooFarLeft=YES,tooFarRight=YES,tooFarUp=YES,tooFarDown=YES;
-    float    leastX=0,maxX=0,leastY=0,maxY=0;
+    CGFloat  leastX=0,maxX=0,leastY=0,maxY=0;
 
     for(i=0;i<count;i++){
      NSRect check=[[screens objectAtIndex:i] frame];
@@ -1315,7 +1315,7 @@ NSString * const NSWindowDidAnimateNotification=@"NSWindowDidAnimateNotification
    return 0;
 }
 
--(float)userSpaceScaleFactor {
+-(CGFloat)userSpaceScaleFactor {
    return 1.0;
 }
 

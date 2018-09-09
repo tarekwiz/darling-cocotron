@@ -29,7 +29,7 @@ typedef enum {
     NSSize _size;
     NSTextView *_textView;
     NSLayoutManager *_layoutManager;
-    float _lineFragmentPadding;
+    CGFloat _lineFragmentPadding;
     NSUInteger _maximumNumberOfLines;
     BOOL _widthTracksTextView;
     BOOL _heightTracksTextView;
@@ -45,7 +45,7 @@ typedef enum {
 
 - (NSLayoutManager *)layoutManager;
 
-- (float)lineFragmentPadding;
+- (CGFloat)lineFragmentPadding;
 - (NSUInteger) maximumNumberOfLines;
 
 - (void)setContainerSize:(NSSize)size;
@@ -59,7 +59,7 @@ typedef enum {
 - (void)setLayoutManager:(NSLayoutManager *)layoutManager;
 - (void)replaceLayoutManager:(NSLayoutManager *)layoutManager;
 
-- (void)setLineFragmentPadding:(float)padding;
+- (void)setLineFragmentPadding:(CGFloat)padding;
 - (void) setMaximumNumberOfLines: (NSUInteger) maximumNumberOfLines;
 
 - (BOOL)isSimpleRectangularTextContainer;

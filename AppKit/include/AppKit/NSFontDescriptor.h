@@ -35,13 +35,13 @@ APPKIT_EXPORT NSString *const NSFontSlantTrait;
 
 + fontDescriptorWithFontAttributes:(NSDictionary *)attributes;
 + fontDescriptorWithName:(NSString *)name matrix:(NSAffineTransform *)matrix;
-+ fontDescriptorWithName:(NSString *)name size:(float)pointSize;
++ fontDescriptorWithName:(NSString *)name size:(CGFloat)pointSize;
 
 - (NSDictionary *)fontAttributes;
 
 - objectForKey:(NSString *)attributeKey;
 
-- (float)pointSize;
+- (CGFloat)pointSize;
 - (NSAffineTransform *)matrix;
 - (NSFontSymbolicTraits)symbolicTraits;
 
@@ -49,7 +49,7 @@ APPKIT_EXPORT NSString *const NSFontSlantTrait;
 - (NSFontDescriptor *)fontDescriptorWithFace:(NSString *)face;
 - (NSFontDescriptor *)fontDescriptorWithFamily:(NSString *)family;
 - (NSFontDescriptor *)fontDescriptorWithMatrix:(NSAffineTransform *)matrix;
-- (NSFontDescriptor *)fontDescriptorWithSize:(float)pointSize;
+- (NSFontDescriptor *)fontDescriptorWithSize:(CGFloat)pointSize;
 - (NSFontDescriptor *)fontDescriptorWithSymbolicTraits:(NSFontSymbolicTraits)traits;
 
 - (NSArray *)matchingFontDescriptorsWithMandatoryKeys:(NSSet *)keys;

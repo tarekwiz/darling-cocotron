@@ -125,8 +125,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    return [[members objectAtIndex:row] objectAtIndex:0];
 }
 
--(float)selectedPointSize {
-   float result=[_sizeTextField floatValue];
+-(CGFloat)selectedPointSize {
+   CGFloat result=[_sizeTextField doubleValue];
 
    if(result==0)
     return 12.0;
@@ -175,7 +175,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 -(void)buildSampleTextField {
    NSFont *font=[self selectedFont];
-   float     pointSize=[self selectedPointSize];
+   CGFloat   pointSize=[self selectedPointSize];
 
    [_sampleTextField setStringValue:[[font displayName] stringByAppendingFormat:@" %g pt",pointSize]];
    [_sampleTextField setFont:font];

@@ -689,7 +689,7 @@ static inline void buildTransformsIfNeeded(NSView *self) {
    point1= CGPointApplyAffineTransform(CGPointApplyAffineTransform(point1,toWindow),fromWindow);
    point2= CGPointApplyAffineTransform(CGPointApplyAffineTransform(point2,toWindow),fromWindow);
    if(point2.y<point1.y){
-    float temp=point2.y;
+    CGFloat temp=point2.y;
     point2.y=point1.y;
     point1.y=temp;
    }
@@ -707,7 +707,7 @@ static inline void buildTransformsIfNeeded(NSView *self) {
    point1= CGPointApplyAffineTransform(CGPointApplyAffineTransform(point1,toWindow),fromWindow);
    point2= CGPointApplyAffineTransform(CGPointApplyAffineTransform(point2,toWindow),fromWindow);
    if(point2.y<point1.y){
-    float temp=point2.y;
+    CGFloat temp=point2.y;
     point2.y=point1.y;
     point1.y=temp;
    }
@@ -716,10 +716,10 @@ static inline void buildTransformsIfNeeded(NSView *self) {
 }
 
 -(NSRect)centerScanRect:(NSRect)rect {
-   float minx=floor(NSMinX(rect)+0.5);
-   float miny=floor(NSMinY(rect)+0.5);
-   float maxx=floor(NSMaxX(rect)+0.5);
-   float maxy=floor(NSMaxY(rect)+0.5);
+   CGFloat minx=floor(NSMinX(rect)+0.5);
+   CGFloat miny=floor(NSMinY(rect)+0.5);
+   CGFloat maxx=floor(NSMaxX(rect)+0.5);
+   CGFloat maxy=floor(NSMaxY(rect)+0.5);
 
    return NSMakeRect(minx,miny,maxx-minx,maxy-miny);
 }
@@ -1367,14 +1367,14 @@ static inline void buildTransformsIfNeeded(NSView *self) {
     // Do the minimal amount of scrolling to show the rect
     
     // Missing amount on the four directions
-    float missingLeft = NSMinX(vRect) - NSMinX(rect);
-    float missingRight = NSMaxX(rect) - NSMaxX(vRect);
+    CGFloat missingLeft = NSMinX(vRect) - NSMinX(rect);
+    CGFloat missingRight = NSMaxX(rect) - NSMaxX(vRect);
 
-    float missingTop = NSMinY(vRect) - NSMinY(rect);
-    float missingBottom = NSMaxY(rect) - NSMaxY(vRect);
+    CGFloat missingTop = NSMinY(vRect) - NSMinY(rect);
+    CGFloat missingBottom = NSMaxY(rect) - NSMaxY(vRect);
     
-    float dx = 0.;
-    float dy = 0.;
+    CGFloat dx = 0.;
+    CGFloat dy = 0.;
     
     if (missingLeft * missingRight < 0) {
         // We need to scroll in one direction - no need to scroll if we're missing bits both ways or
@@ -2178,19 +2178,19 @@ static NSGraphicsContext *graphicsContextForView(NSView *view){
 }
 
 
--(float)widthAdjustLimit {
+-(CGFloat)widthAdjustLimit {
    return 0.5;
 }
 
--(float)heightAdjustLimit {
+-(CGFloat)heightAdjustLimit {
    return 0.5;
 }
 
--(void)adjustPageWidthNew:(float *)adjusted left:(float)left right:(float)right limit:(float)limit {
+-(void)adjustPageWidthNew:(CGFloat *)adjusted left:(CGFloat)left right:(CGFloat)right limit:(CGFloat)limit {
 // FIX, give subviews a chance
 }
 
--(void)adjustPageHeightNew:(float *)adjust top:(float)top bottom:(float)bottom limit:(float)limit {
+-(void)adjustPageHeightNew:(CGFloat *)adjust top:(CGFloat)top bottom:(CGFloat)bottom limit:(CGFloat)limit {
 // FIX, give subviews a chance
 }
 
@@ -2263,7 +2263,7 @@ static NSGraphicsContext *graphicsContextForView(NSView *view){
         NSView *documentView=[scrollView documentView];
         NSRect bounds=[documentView bounds];
         NSRect visible=[documentView visibleRect];
-        float  direction=[documentView isFlipped]?-1:1;
+        CGFloat direction=[documentView isFlipped]?-1:1;
         
         visible.origin.x+=[event deltaX]*[scrollView horizontalLineScroll]*3;
         visible.origin.y+=[event deltaY]*direction*[scrollView verticalLineScroll]*3;

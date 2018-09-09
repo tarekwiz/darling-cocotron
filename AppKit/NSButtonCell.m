@@ -31,7 +31,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 @implementation NSButtonCell
 
 // Margin between an image and the Button interior borders
-static const float kImageMargin = 2.;
+static const CGFloat kImageMargin = 2.;
 
 -(void)encodeWithCoder:(NSCoder *)coder {
    [super encodeWithCoder:coder];
@@ -807,8 +807,8 @@ static void drawRoundedBezel(CGContextRef context,CGRect frame){
     case NSRegularSquareBezelStyle:
      if([self isBordered]){
       BOOL  highlighted=(([self highlightsBy]&NSPushInCellMask) && [self isHighlighted]);
-      float topGray=highlighted?0.8:0.9;
-      float bottomGray=highlighted?0.7:0.8;
+      CGFloat topGray=highlighted?0.8:0.9;
+      CGFloat bottomGray=highlighted?0.7:0.8;
       
       NSRect top=frame,bottom=frame;
       top.size.height=floor(frame.size.height/2);
@@ -920,9 +920,9 @@ static NSSize scaledImageSizeInFrameSize(NSSize imageSize,NSSize frameSize,NSIma
       
    switch(scaling){
     case NSImageScaleProportionallyDown:{
-     float xscale=frameSize.width/imageSize.width;
-     float yscale=frameSize.height/imageSize.height;
-     float scale=MIN(1.0,MIN(xscale,yscale));
+     CGFloat xscale=frameSize.width/imageSize.width;
+     CGFloat yscale=frameSize.height/imageSize.height;
+     CGFloat scale=MIN(1.0,MIN(xscale,yscale));
       
      imageSize.width*=scale;
      imageSize.height*=scale;
@@ -934,9 +934,9 @@ static NSSize scaledImageSizeInFrameSize(NSSize imageSize,NSSize frameSize,NSIma
      return frameSize;
      
     case NSImageScaleProportionallyUpOrDown:{
-     float xscale=frameSize.width/imageSize.width;
-     float yscale=frameSize.height/imageSize.height;
-     float scale=MIN(xscale,yscale);
+     CGFloat xscale=frameSize.width/imageSize.width;
+     CGFloat yscale=frameSize.height/imageSize.height;
+     CGFloat scale=MIN(xscale,yscale);
       
      imageSize.width*=scale;
      imageSize.height*=scale;

@@ -119,14 +119,14 @@ NSString * const NSSplitViewWillResizeSubviewsNotification = @"NSSplitViewWillRe
 - (void)_adjustSubviewWidths
 {
     // Set all the subview heights to the bounds height of the split view
-    float height = NSHeight([self bounds]);
+    CGFloat height = NSHeight([self bounds]);
 
     int     i,count=[_subviews count];
 
-    float totalWidthBefore=0.;
+    CGFloat totalWidthBefore=0.;
     
     // The available width to the subviews
-    float totalWidthAfter=[self bounds].size.width-[self dividerThickness]*(count-1);
+    CGFloat totalWidthAfter=[self bounds].size.width-[self dividerThickness]*(count-1);
     
     for(i = 0; i < count; i++) {
         NSView *subview = [_subviews objectAtIndex: i];
@@ -135,7 +135,7 @@ NSString * const NSSplitViewWillResizeSubviewsNotification = @"NSSplitViewWillRe
         }
     }
    
-    float delta = totalWidthAfter / totalWidthBefore;
+    CGFloat delta = totalWidthAfter / totalWidthBefore;
     
     NSRect  frame = [self bounds];
     for(i = 0; i < count; i++){
@@ -158,15 +158,15 @@ NSString * const NSSplitViewWillResizeSubviewsNotification = @"NSSplitViewWillRe
 - (void)_adjustSubviewHeights
 {
     // Set all the subview widths to the bounds width of the split view
-    float width = NSWidth([self bounds]);
+    CGFloat width = NSWidth([self bounds]);
 
     int     i,count=[_subviews count];
 
     // We've got to figure out how much the delta is between the old and new heights and multiply
     // all the heights to the new delta to get them to fit (or something like that...) Apple says
     // They resize proportionally
-    float totalHeightBefore=0.;
-    float totalHeightAfter=[self bounds].size.height-[self dividerThickness]*(count-1);
+    CGFloat totalHeightBefore=0.;
+    CGFloat totalHeightAfter=[self bounds].size.height-[self dividerThickness]*(count-1);
     
     for(i=0;i<count;i++) {
         NSView *subview = [_subviews objectAtIndex: i];
@@ -176,7 +176,7 @@ NSString * const NSSplitViewWillResizeSubviewsNotification = @"NSSplitViewWillRe
         }
     }
 
-    float delta = totalHeightAfter / totalHeightBefore;
+    CGFloat delta = totalHeightAfter / totalHeightBefore;
     
 
     NSRect  frame=[self bounds];
@@ -222,7 +222,7 @@ NSString * const NSSplitViewWillResizeSubviewsNotification = @"NSSplitViewWillRe
     [self _postNoteDidResize];
 }
 
--(float)dividerThickness {
+-(CGFloat)dividerThickness {
 	if (_dividerStyle == NSSplitViewDividerStyleThick) {
 		return 10;
 	} else {
@@ -323,7 +323,7 @@ NSString * const NSSplitViewWillResizeSubviewsNotification = @"NSSplitViewWillRe
    return NSNotFound;
 }
 
-static float constrainTo(float value,float min,float max){
+static CGFloat constrainTo(CGFloat value,CGFloat min,CGFloat max){
    if(value<min)
     value=min;
    if(value>max)
@@ -395,13 +395,13 @@ static float constrainTo(float value,float min,float max){
    }
 }
 
-- (float)minPossiblePositionOfDividerAtIndex:(int)index
+- (CGFloat)minPossiblePositionOfDividerAtIndex:(int)index
 {
     NSUnimplementedMethod();
     return 0;
 }
 
-- (float)maxPossiblePositionOfDividerAtIndex:(int)index
+- (CGFloat)maxPossiblePositionOfDividerAtIndex:(int)index
 {
     NSUnimplementedMethod();
     return 0;
@@ -410,7 +410,7 @@ static float constrainTo(float value,float min,float max){
 /** adjusts the subviews on either side of the divider while
  * honoring the constraints imposed by the delegate (if any)
  */
-- (void)setPosition:(float)position ofDividerAtIndex:(int)index
+- (void)setPosition:(CGFloat)position ofDividerAtIndex:(int)index
 {
     NSAssert(index >= 0 && index < [[self subviews] count] - 1, @"divider index out of range");
     
@@ -420,8 +420,8 @@ static float constrainTo(float value,float min,float max){
     BOOL subview0Expanded = [self isSubviewCollapsed: subview0] == NO;
     BOOL subview1Expanded = [self isSubviewCollapsed: subview1] == NO;
     
-    float    minPosition = 0;
-    float    maxPosition = 0;
+    CGFloat  minPosition = 0;
+    CGFloat  maxPosition = 0;
     
     NSRect frame0 = NSZeroRect;
     NSRect frame1 = NSZeroRect;
@@ -501,9 +501,9 @@ static float constrainTo(float value,float min,float max){
     BOOL checkWithDelegateAboutCollapsingViews = [_delegate respondsToSelector:@selector(splitView:canCollapseSubview:)];
     if([self isVertical]){
         
-        float lastPosition = NSMaxX(resize0);
+        CGFloat lastPosition = NSMaxX(resize0);
         
-        float delta = floor(position - lastPosition);
+        CGFloat delta = floor(position - lastPosition);
         
         resize0.size.width += delta;
         
@@ -539,8 +539,8 @@ static float constrainTo(float value,float min,float max){
     }
     else {
         
-        float lastPosition = NSMaxY(resize0);
-        float delta = floor(position - lastPosition);
+        CGFloat lastPosition = NSMaxY(resize0);
+        CGFloat delta = floor(position - lastPosition);
         
         resize0.size.height += delta;
 
