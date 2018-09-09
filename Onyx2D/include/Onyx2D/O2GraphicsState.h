@@ -46,7 +46,7 @@ extern "C" {
     O2LineJoin _lineJoin;
     O2Float _miterLimit;
     O2Float _dashPhase;
-    int _dashLengthsCount;
+    size_t _dashLengthsCount;
     O2Float *_dashLengths;
     O2ColorRenderingIntent _renderingIntent;
     O2BlendMode _blendMode;
@@ -139,7 +139,7 @@ void O2GStateSetLineWidth(O2GState *self, O2Float width);
 void O2GStateSetLineCap(O2GState *self, int lineCap);
 void O2GStateSetLineJoin(O2GState *self, int lineJoin);
 void O2GStateSetMiterLimit(O2GState *self, O2Float limit);
-void O2GStateSetLineDash(O2GState *self, O2Float phase, const O2Float *lengths, unsigned count);
+void O2GStateSetLineDash(O2GState *self, O2Float phase, const O2Float *lengths, size_t count);
 
 - (void)setRenderingIntent:(O2ColorRenderingIntent)intent;
 O2BlendMode O2GStateBlendMode(O2GState *self);

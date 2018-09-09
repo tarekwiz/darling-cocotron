@@ -131,8 +131,8 @@ O2ColorSpaceModel O2ColorSpaceGetModel(O2ColorSpaceRef self) {
 
 @implementation O2ColorSpace_indexed
 
--initWithColorSpace:(O2ColorSpaceRef)baseColorSpace hival:(unsigned)hival bytes:(const unsigned char *)bytes  {
-   int i,max=O2ColorSpaceGetNumberOfComponents(baseColorSpace)*(hival+1);
+-initWithColorSpace:(O2ColorSpaceRef)baseColorSpace hival:(size_t)hival bytes:(const unsigned char *)bytes  {
+   size_t i,max=O2ColorSpaceGetNumberOfComponents(baseColorSpace)*(hival+1);
   
    _type=kO2ColorSpaceModelIndexed;
    _base=[baseColorSpace retain];
@@ -159,7 +159,7 @@ O2ColorSpaceModel O2ColorSpaceGetModel(O2ColorSpaceRef self) {
    if(self->_hival!=other->_hival)
     return NO;
     
-   int i,max=O2ColorSpaceGetNumberOfComponents(self->_base)*(self->_hival+1);
+   size_t i,max=O2ColorSpaceGetNumberOfComponents(self->_base)*(self->_hival+1);
    for(i=0;i<max;i++)
     if(self->_bytes[i]!=other->_bytes[i])
      return NO;
@@ -171,7 +171,7 @@ O2ColorSpaceModel O2ColorSpaceGetModel(O2ColorSpaceRef self) {
    return _base;
 }
 
--(unsigned)hival {
+-(size_t)hival {
    return _hival;
 }
 
@@ -206,7 +206,7 @@ O2ColorSpaceModel O2ColorSpaceGetModel(O2ColorSpaceRef self) {
 }
 
 -(void)dealloc {
-   int i;
+   size_t i;
    
    for(i=0;i<_numberOfComponents;i++)
     free(_names[i]);

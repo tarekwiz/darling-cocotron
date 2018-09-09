@@ -63,20 +63,20 @@ O2ColorSpaceModel O2ColorSpaceGetModel(O2ColorSpaceRef self);
 
 @interface O2ColorSpace_indexed : O2ColorSpace {
     O2ColorSpace *_base;
-    unsigned _hival;
+    size_t _hival;
     unsigned char *_bytes;
 }
 
-- initWithColorSpace:(O2ColorSpaceRef)baseColorSpace hival:(unsigned)hival bytes:(const unsigned char *)bytes;
+- initWithColorSpace:(O2ColorSpaceRef)baseColorSpace hival:(size_t)hival bytes:(const unsigned char *)bytes;
 - (O2ColorSpaceRef)baseColorSpace;
-- (unsigned)hival;
+- (size_t)hival;
 - (const unsigned char *)paletteBytes;
 
 @end
 
 @interface O2ColorSpace_DeviceN : O2ColorSpace {
   @public
-    unsigned _numberOfComponents;
+    size_t _numberOfComponents;
   @protected
     char **_names;
     O2ColorSpaceRef _alternateSpace;

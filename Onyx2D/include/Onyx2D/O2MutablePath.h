@@ -14,8 +14,8 @@ extern "C" {
 #endif
 
 @interface O2MutablePath : O2Path <NSCopying> {
-    unsigned _capacityOfElements;
-    unsigned _capacityOfPoints;
+    size_t _capacityOfElements;
+    size_t _capacityOfPoints;
 }
 
 void O2PathReset(O2MutablePathRef self);

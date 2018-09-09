@@ -12,7 +12,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 @implementation O2Color
 
 -initWithColorSpace:(O2ColorSpaceRef)colorSpace pattern:(O2Pattern *)pattern components:(const O2Float *)components {
-   int i;
+   size_t i;
    
    _colorSpace=[colorSpace retain];
    _pattern=[pattern retain];
@@ -25,7 +25,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 
 O2ColorRef O2ColorInitWithColorSpace(O2ColorRef self,O2ColorSpaceRef colorSpace,const O2Float *components) {
-   int i;
+   size_t i;
    
    self->_colorSpace=[colorSpace retain];
    self->_pattern=nil;
@@ -102,7 +102,7 @@ O2ColorRef O2ColorCreateCopy(O2ColorRef self) {
 }
 
 O2ColorRef O2ColorCreateCopyWithAlpha(O2ColorRef self,O2Float alpha) {
-   int   i;
+   size_t i;
    O2Float components[self->_numberOfComponents];
 
    for(i=0;i<self->_numberOfComponents-1;i++)
@@ -145,7 +145,7 @@ BOOL O2ColorEqualToColor(O2ColorRef self,O2ColorRef other) {
    if(![self->_colorSpace isEqualToColorSpace:other->_colorSpace])
     return NO;
 
-   int i;
+   size_t i;
    for(i=0;i<self->_numberOfComponents;i++)
     if(self->_components[i]!=other->_components[i])
      return NO;

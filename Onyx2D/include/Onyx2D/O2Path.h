@@ -35,19 +35,19 @@ typedef struct {
 typedef void (*O2PathApplierFunction)(void *info, const O2PathElement *element);
 
 @interface O2Path : NSObject <NSCopying> {
-    unsigned _numberOfElements;
+    size_t _numberOfElements;
     unsigned char *_elements;
-    unsigned _numberOfPoints;
+    size_t _numberOfPoints;
     O2Point *_points;
 }
 
-- initWithOperators:(unsigned char *)elements numberOfElements:(unsigned)numberOfElements points:(O2Point *)points numberOfPoints:(unsigned)numberOfPoints;
+- initWithOperators:(unsigned char *)elements numberOfElements:(size_t)numberOfElements points:(O2Point *)points numberOfPoints:(size_t)numberOfPoints;
 
 // internal
-id O2PathInitWithOperators(O2Path *self, unsigned char *elements, unsigned numberOfElements, O2Point *points, unsigned numberOfPoints);
-unsigned O2PathNumberOfElements(O2PathRef self);
+id O2PathInitWithOperators(O2Path *self, unsigned char *elements, size_t numberOfElements, O2Point *points, size_t numberOfPoints);
+size_t O2PathNumberOfElements(O2PathRef self);
 const unsigned char *O2PathElements(O2PathRef self);
-unsigned O2PathNumberOfPoints(O2PathRef self);
+size_t O2PathNumberOfPoints(O2PathRef self);
 const O2Point *O2PathPoints(O2PathRef self);
 
 // O2 public

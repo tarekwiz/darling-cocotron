@@ -12,12 +12,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 @implementation O2Path
 
--initWithOperators:(unsigned char *)elements numberOfElements:(unsigned)numberOfElements points:(O2Point *)points numberOfPoints:(unsigned)numberOfPoints {
+-initWithOperators:(unsigned char *)elements numberOfElements:(size_t)numberOfElements points:(O2Point *)points numberOfPoints:(size_t)numberOfPoints {
    return O2PathInitWithOperators(self,elements,numberOfElements,points,numberOfPoints);
 }
 
-id O2PathInitWithOperators(O2Path *self,unsigned char *elements,unsigned numberOfElements,O2Point *points,unsigned numberOfPoints) {
-   int i;
+id O2PathInitWithOperators(O2Path *self,unsigned char *elements,size_t numberOfElements,O2Point *points,size_t numberOfPoints) {
+   size_t i;
    
    self->_numberOfElements=numberOfElements;
    self->_elements=NSZoneMalloc(NULL,(self->_numberOfElements==0)?1:self->_numberOfElements);
@@ -65,7 +65,7 @@ O2MutablePathRef O2PathCreateMutableCopy(O2PathRef self) {
    return [[O2MutablePath allocWithZone:NULL] initWithOperators:self->_elements numberOfElements:self->_numberOfElements points:self->_points numberOfPoints:self->_numberOfPoints];
 }
 
-unsigned O2PathNumberOfElements(O2PathRef self) {
+size_t O2PathNumberOfElements(O2PathRef self) {
    return self->_numberOfElements;
 }
 
@@ -73,7 +73,7 @@ const unsigned char *O2PathElements(O2PathRef self) {
    return self->_elements;
 }
 
-unsigned O2PathNumberOfPoints(O2PathRef self) {
+size_t O2PathNumberOfPoints(O2PathRef self) {
    return self->_numberOfPoints;
 }
 
@@ -87,15 +87,15 @@ O2Point O2PathGetCurrentPoint(O2PathRef self) {
 }
 
 BOOL    O2PathEqualToPath(O2PathRef self,O2PathRef other){
-   unsigned otherNumberOfOperators=O2PathNumberOfElements(other);
+   size_t otherNumberOfOperators=O2PathNumberOfElements(other);
    
    if(self->_numberOfElements==otherNumberOfOperators){
-    unsigned otherNumberOfPoints=O2PathNumberOfPoints(other);
+    size_t otherNumberOfPoints=O2PathNumberOfPoints(other);
     
     if(self->_numberOfPoints==otherNumberOfPoints){
      const unsigned char *otherOperators=O2PathElements(other);
      const O2Point       *otherPoints;
-     int i;
+     size_t i;
      
      for(i=0;i<self->_numberOfElements;i++)
       if(self->_elements[i]!=otherOperators[i])
@@ -263,8 +263,8 @@ BOOL O2PathContainsPoint(O2PathRef self,const O2AffineTransform *xform,O2Point p
 	
 	int  cn = 0;    // the crossing number counter
 	
-	int count = O2PathNumberOfElements(self);
-	int i = 0;
+	size_t count = O2PathNumberOfElements(self);
+	size_t i = 0;
 	O2Point startPoint = O2PointZero, currentPoint = O2PointZero, toPoint = O2PointZero;
 	O2Point *points = self->_points;
 	uint8_t *element = self->_elements;
@@ -332,7 +332,7 @@ BOOL O2PathContainsPoint(O2PathRef self,const O2AffineTransform *xform,O2Point p
 
 O2Rect O2PathGetBoundingBox(O2PathRef self) {
    O2Rect result;
-   int i;
+   size_t i;
    
    if(self->_numberOfPoints==0)
     return O2RectZero;
@@ -361,7 +361,7 @@ O2Rect O2PathGetBoundingBox(O2PathRef self) {
 }
 
 void O2PathApply(O2PathRef self,void *info,O2PathApplierFunction function) {
-   int           i,pointIndex=0;
+   size_t        i,pointIndex=0;
    O2PathElement element;
    
    for(i=0;i<self->_numberOfElements;i++){

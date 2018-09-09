@@ -16,7 +16,7 @@ void O2MutablePathEllipseToBezier(O2Point *cp,O2Float x,O2Float y,O2Float xrad,O
    O2Float magic=0.551784;
    O2Float xmag=xrad*magic;
    O2Float ymag=yrad*magic;
-   int   i=0;
+   size_t  i=0;
 
 	cp[i++]=O2PointMake(-xrad,0);
 	
@@ -84,7 +84,7 @@ O2MutablePathRef O2PathCreateMutable(void) {
    return [[O2MutablePath allocWithZone:NULL] initWithOperators:NULL numberOfElements:0 points:NULL numberOfPoints:0];
 }
 
--initWithOperators:(unsigned char *)elements numberOfElements:(unsigned)numberOfElements points:(O2Point *)points numberOfPoints:(unsigned)numberOfPoints {
+-initWithOperators:(unsigned char *)elements numberOfElements:(size_t)numberOfElements points:(O2Point *)points numberOfPoints:(size_t)numberOfPoints {
    O2PathInitWithOperators(self,elements,numberOfElements,points,numberOfPoints);
    _capacityOfElements=numberOfElements;
    _capacityOfPoints=numberOfPoints;
@@ -100,7 +100,7 @@ void O2PathReset(O2MutablePathRef self) {
    self->_numberOfPoints=0;
 }
 
-static inline void expandOperatorCapacity(O2MutablePath *self,unsigned delta){
+static inline void expandOperatorCapacity(O2MutablePath *self,size_t delta){
    if(self->_numberOfElements+delta>self->_capacityOfElements){
     self->_capacityOfElements=MAX(1,self->_capacityOfElements);
     
@@ -111,7 +111,7 @@ static inline void expandOperatorCapacity(O2MutablePath *self,unsigned delta){
    }
 }
 
-static inline void expandPointCapacity(O2MutablePath *self,unsigned delta){
+static inline void expandPointCapacity(O2MutablePath *self,size_t delta){
    if(self->_numberOfPoints+delta>self->_capacityOfPoints){
     self->_capacityOfPoints=MAX(1,self->_capacityOfPoints);
     
@@ -187,7 +187,7 @@ void O2PathCloseSubpath(O2MutablePathRef self) {
 }
 
 void O2PathAddLines(O2MutablePathRef self,const O2AffineTransform *matrix,const O2Point *points,size_t count) {
-   int i;
+   size_t i;
    
    if(count==0)
     return;
@@ -207,7 +207,7 @@ void O2PathAddRect(O2MutablePathRef self,const O2AffineTransform *matrix,O2Rect 
 }
 
 void O2PathAddRects(O2MutablePathRef self,const O2AffineTransform *matrix,const O2Rect *rects,size_t count) {
-   int i;
+   size_t i;
    
    for(i=0;i<count;i++)
     O2PathAddRect(self,matrix,rects[i]);
@@ -230,9 +230,9 @@ void O2PathAddArc(O2MutablePathRef self,const O2AffineTransform *matrix,O2Float 
    O2Float radiusx=radius,radiusy=radius;
    double  remainder=ABS(endRadian-startRadian);
    double  delta=M_PI_2; // 90 degrees
-   int     i;
+   size_t  i;
    O2Point points[4*((int)ceil(remainder/delta)+1)];
-   int     pointsIndex=0;
+   size_t  pointsIndex=0;
    
    for(;remainder>0;startRadian+=delta,remainder-=delta){
     double  sweepangle=(remainder>delta)?delta:remainder;
@@ -380,7 +380,7 @@ void O2PathAddEllipseInRect(O2MutablePathRef self,const O2AffineTransform *matri
    O2Float           x=rect.origin.x+xradius;
    O2Float           y=rect.origin.y+yradius;
    O2Point           cp[13];
-   int               i;
+   size_t            i;
     
    O2MutablePathEllipseToBezier(cp,x,y,xradius,yradius);
     
@@ -391,11 +391,11 @@ void O2PathAddEllipseInRect(O2MutablePathRef self,const O2AffineTransform *matri
 }
 
 void O2PathAddPath(O2MutablePathRef self,const O2AffineTransform *matrix,O2PathRef path) {
-   unsigned             opsCount=O2PathNumberOfElements(path);
+   size_t               opsCount=O2PathNumberOfElements(path);
    const unsigned char *ops=O2PathElements(path);
-   unsigned             pointCount=O2PathNumberOfPoints(path);
+   size_t               pointCount=O2PathNumberOfPoints(path);
    const O2Point       *points=O2PathPoints(path);
-   unsigned             i;
+   size_t               i;
    
    expandOperatorCapacity(self,opsCount);
    expandPointCapacity(self,pointCount);
@@ -414,7 +414,7 @@ void O2PathAddPath(O2MutablePathRef self,const O2AffineTransform *matrix,O2PathR
 }
 
 void O2PathApplyTransform(O2MutablePathRef self,const O2AffineTransform matrix) {
-   int i;
+   size_t i;
    
    for(i=0;i<self->_numberOfPoints;i++)
     self->_points[i]=O2PointApplyAffineTransform(self->_points[i],matrix);

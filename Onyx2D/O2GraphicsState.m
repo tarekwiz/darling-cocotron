@@ -364,7 +364,7 @@ void O2GStateSetMiterLimit(O2GState *self,O2Float limit) {
    self->_miterLimit=limit;
 }
 
-void O2GStateSetLineDash(O2GState *self,O2Float phase,const O2Float *lengths,unsigned count){
+void O2GStateSetLineDash(O2GState *self,O2Float phase,const O2Float *lengths,size_t count){
    self->_dashPhase=phase;
    self->_dashLengthsCount=count;
    

@@ -1058,7 +1058,7 @@ O2argb8u *O2ImageRead_CMYK8888_to_argb8u(O2Image *self,int x,int y,O2argb8u *spa
 
 O2argb8u *O2ImageRead_I8_to_argb8u(O2Image *self,int x,int y,O2argb8u *span,int length) {
    O2ColorSpace_indexed *indexed=(O2ColorSpace_indexed *)self->_colorSpace;
-   unsigned hival=[indexed hival];
+   size_t hival=[indexed hival];
    const unsigned char *palette=[indexed paletteBytes];
 
    const uint8_t *scanline = scanlineAtY(self,y);
