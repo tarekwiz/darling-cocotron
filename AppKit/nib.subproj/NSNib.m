@@ -158,7 +158,7 @@ NSString * const NSNibTopLevelObjects=@"NSNibTopLevelObjects";
 		// Rename the first item to have the application name.
 		if ([menu numberOfItems] > 0) {
 			NSMenuItem *firstItem = [menu itemAtIndex: 0];
-			NSString *appName = [[[NSBundle mainBundle] localizedInfoDictionary] objectForKey:(NSString *)kCFBundleNameKey];
+			NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleNameKey];
 			[firstItem setTitle: appName];
 		}
 		[NSApp setMainMenu:menu];
