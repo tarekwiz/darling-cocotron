@@ -47,25 +47,19 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    [[self fontFamilies] addObject:family];
 }
 
++ (NSFontFamily *) addFontFamilyWithName: (NSString *) familyName {
+    NSFontFamily *family = [[self alloc] initWithName: familyName];
+    [self addFontFamily: family];
+    NSArray *typefaces = [[NSDisplay currentDisplay] fontTypefacesForFamilyName: familyName];
+    [family addTypefaces: typefaces];
+    return [family autorelease];
+}
+
 +(void)buildFontFamilies {
-   NSDisplay    *display=[NSDisplay currentDisplay];
-   NSSet        *allNames=[display allFontFamilyNames];
-   NSEnumerator *next=[allNames objectEnumerator];
-   NSString     *name;
-   NSArray      *families;
-   int           i,count;
-
-   while((name=[next nextObject])!=nil)
-    [NSFontFamily addFontFamily:[[[NSFontFamily alloc] initWithName:name] autorelease]];
-
-   families=[self fontFamilies];
-   count=[families count];
-   for(i=0;i<count;i++){
-    NSFontFamily *family=[families objectAtIndex:i];
-    NSArray      *typefaces=[display fontTypefacesForFamilyName:[family name]];
-
-    [family addTypefaces:typefaces];
-   }
+    NSSet *initialFamilyNames = [[NSDisplay currentDisplay] allFontFamilyNames];
+    for (NSString *familyName in initialFamilyNames) {
+        [self addFontFamilyWithName: familyName];
+    }
 }
 
 +(NSFontFamily *)fontFamilyWithName:(NSString *)name {
@@ -78,7 +72,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     if([[check name] isEqualToString:name])
      return check;
    }
-   return nil;
+   // Pretend to have this family.
+   return [self addFontFamilyWithName: name];
 }
 
 +(NSFontFamily *)fontFamilyWithTypefaceName:(NSString *)name {
@@ -92,7 +87,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     if(typeface!=nil)
      return check;
    }
-
+   // TODO: pretend to have this family.
    return nil;
 }
 

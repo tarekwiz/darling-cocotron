@@ -250,16 +250,43 @@ static void socketCallback(
    return ret;
 }
 
+- (NSString *) substituteFamilyName: (NSString *) familyName {
+   FcConfig *config = O2FontSharedFontConfig();
+
+   FcPattern *pat = FcNameParse((FcChar8 *)[familyName UTF8String]);
+   FcConfigSubstitute(config, pat, FcMatchPattern);
+   FcDefaultSubstitute(pat);
+
+   FcResult fcResult;
+   FcPattern *match = FcFontMatch(config, pat, &fcResult);
+   FcPatternDestroy(pat);
+   if (match == NULL) return NULL;
+
+   FcChar8 *rawRes = NULL;
+   FcPatternGetString(match, FC_FAMILY, 0, &rawRes);
+
+   NSString *res = nil;
+   if (rawRes != NULL) {
+      res = [NSString stringWithUTF8String: (char *) rawRes];
+   }
+
+   FcPatternDestroy(match);
+   return res;
+}
+
 -(NSArray *)fontTypefacesForFamilyName:(NSString *)familyName {
-   int i;
-   FcPattern *pat=FcPatternCreate();
-   FcPatternAddString(pat, FC_FAMILY, (unsigned char*)[familyName UTF8String]);
+   familyName = [self substituteFamilyName: familyName];
+   if (familyName == nil) {
+      return @[];
+   }
+   FcPattern *pat = FcPatternCreate();
+   FcPatternAddString(pat, FC_FAMILY, (unsigned char *) [familyName UTF8String]);
    FcObjectSet *props=FcObjectSetBuild(FC_FAMILY, FC_STYLE, FC_SLANT, FC_WIDTH, FC_WEIGHT, NULL);
 
    FcFontSet *set = FcFontList (O2FontSharedFontConfig(), pat, props);
    NSMutableArray* ret=[NSMutableArray array];
    
-   for(i = 0; i < set->nfont; i++)
+   for(int i = 0; i < set->nfont; i++)
    {
       FcChar8 *typeface;
       FcPattern *p=set->fonts[i];
