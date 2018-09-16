@@ -437,6 +437,9 @@ set(AppKit_resources
 	en.lproj/NSColorPickerSliders.nib NSColorPicker.subproj/en.lproj/NSColorPickerSliders.nib/keyedobjects.nib
 
 	en.lproj/NSColorPanel.nib en.lproj/NSColorPanel.nib/keyedobjects.nib
+	en.lproj/NSFontPanel.nib en.lproj/NSFontPanel.nib/keyedobjects.nib
+	en.lproj/NSSystemInfoPanel.nib NSSystemInfoPanel/en.lproj/NSSystemInfoPanel.nib/keyedobjects.nib
+	en.lproj/NSToolbarCustomizationPalette.nib en.lproj/NSToolbarCustomizationPalette.nib/keyedobjects.nib
 )
 
 add_framework(AppKit
