@@ -1,6 +1,6 @@
 #import "X11SubWindow.h"
-#import <AppKit/X11Window.h>
-#import <AppKit/X11Display.h>
+#import "X11Window.h"
+#import "X11Display.h"
 
 @implementation X11SubWindow
 

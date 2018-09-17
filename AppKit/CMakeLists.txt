@@ -51,10 +51,12 @@ include_directories(
 	${CMAKE_CURRENT_SOURCE_DIR}/NSTextView.subproj
 	${CMAKE_CURRENT_SOURCE_DIR}/NSEvent.subproj
 	${CMAKE_CURRENT_SOURCE_DIR}/NSColor.subproj
-	${CMAKE_CURRENT_SOURCE_DIR}/X11.subproj
 	${CMAKE_CURRENT_SOURCE_DIR}/RTF.subproj
 	${CMAKE_CURRENT_SOURCE_DIR}/NSToolbar.subproj
 	${CMAKE_CURRENT_SOURCE_DIR}/NSDrawer.subproj
+
+	${CMAKE_CURRENT_SOURCE_DIR}/Linux.subproj
+	${CMAKE_CURRENT_SOURCE_DIR}/X11.backend
 
 	${X11_INCLUDE_DIRS}
 	${FREETYPE_INCLUDE_DIRS}
@@ -298,18 +300,14 @@ set(AppKit_sources
 	NSInterfacePart/NSGraphicsStyle.m
 	NSInterfacePart/NSInterfacePart.m
 
-	# X11.subproj/O2FontState_cairo.m
-	X11.subproj/X11Event.m
-	# X11.subproj/O2Surface_cairo.m
-	X11.subproj/X11Window.m
-	X11.subproj/X11SubWindow.m
-	X11.subproj/KTFont_FT.m
-	# O2Font_FT.m is built in Onyx2D
-	# CGLContext.m no longer used
-	# X11.subproj/NSOpenGLDrawable_X11.m
-	# X11.subproj/O2Context_cairo.m
-	X11.subproj/X11Display.m
-	X11.subproj/O2Context_builtin_FT.m
+	X11.backend/X11Display.m
+	X11.backend/X11Window.m
+	X11.backend/X11SubWindow.m
+	X11.backend/X11Event.m
+
+	Linux.subproj/KTFont_FT.m
+	Linux.subproj/O2Context_builtin_FT.m
+	# Linux.subproj/O2Font_FT.m is built in Onyx2D
 
 	NSImageView.m
 	NSActionCell.m
