@@ -33,14 +33,6 @@
 #import <fontconfig/fontconfig.h>
 #import <X11/Xutil.h>
 
-@implementation NSDisplay(X11)
-
-+allocWithZone:(NSZone *)zone {
-   return NSAllocateObject([X11Display class],0,NULL);
-}
-
-@end
-
 @implementation X11Display
 
 static int errorHandler(Display *display,XErrorEvent *errorEvent) {
@@ -70,8 +62,8 @@ static void socketCallback(
     }
     
     if(_display==NULL) {
-     NSLog(@"Failed to connect to an X11 display");
-     [self dealloc];
+     // Failed to connect.
+     [self release];
      return nil;
     }
         

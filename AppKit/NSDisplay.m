@@ -7,6 +7,7 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. */
 #import <AppKit/NSDisplay.h>
 #import <AppKit/NSRaise.h>
+#import <AppKit/NSErrors.h>
 
 @implementation NSDisplay
 
@@ -28,9 +29,51 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    return NSThreadSharedInstance(@"NSDisplay");
 }
 
--init {
-   _eventQueue=[NSMutableArray new];
-   return self;
+- (instancetype) init {
+    if ([self class] != [NSDisplay class]) {
+        // Initializing a concrete subclass.
+        _eventQueue = [NSMutableArray new];
+        return self;
+    }
+
+    // NSDisplay is a (singleton) class cluster; we load
+    // the installed backends and initialize on of them.
+    [self release];
+
+    // Discover the installed backends.
+    NSBundle *appKitBundle = [NSBundle bundleForClass: [NSDisplay class]];
+    NSMutableArray *backends = [NSMutableArray new];
+    for (NSString *path in [appKitBundle pathsForResourcesOfType: @"backend" inDirectory: @"Backends"]) {
+        NSBundle *backendBundle = [NSBundle bundleWithPath: path];
+        if ([backendBundle load]) {
+            [backends addObject: backendBundle];
+        }
+    }
+
+    // Sort them according to the NSPriority key in their Info.plist files.
+    [backends sortUsingComparator: ^(NSBundle *b1, NSBundle *b2) {
+        NSNumber *p1 = [b1 objectForInfoDictionaryKey: @"NSPriority"];
+        NSNumber *p2 = [b2 objectForInfoDictionaryKey: @"NSPriority"];
+        return [p2 compare: p1];
+    }];
+
+    // Try to instantiate them in that order.
+    for (NSBundle *backendBundle in backends) {
+        NSDisplay *display = [[[backendBundle principalClass] alloc] init];
+        if (display != nil) {
+            // The first one to initialize successfully becomes the
+            // one that we're going to use.
+            [backends release];
+            return display;
+        }
+    }
+
+    // None of the backends can be used.
+    [NSException raise: NSWindowServerCommunicationException
+                format: @"Failed to connect to a window server. Available backends are: %@", backends];
+
+    [backends release];
+    return nil;
 }
 
 -(NSArray *)screens {
