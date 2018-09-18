@@ -110,6 +110,3 @@ typedef enum {
 - (void)platformWindowShouldZoom:(CGWindow *)window;
 
 @end
-
-CGRect CGInsetRectForNativeWindowBorder(CGRect frame, NSUInteger styleMask);
-CGRect CGOutsetRectForNativeWindowBorder(CGRect frame, NSUInteger styleMask);

@@ -156,7 +156,7 @@ NSString * const NSWindowDidAnimateNotification=@"NSWindowDidAnimateNotification
 }
 
 +(NSRect)frameRectForContentRect:(NSRect)contentRect styleMask:(NSUInteger)styleMask {
-   NSRect result=CGOutsetRectForNativeWindowBorder(contentRect,styleMask);
+   NSRect result = [[NSDisplay currentDisplay] outsetRect: contentRect forNativeWindowBorderWithStyle: styleMask];
    
     if([self hasMainMenuForStyleMask:styleMask])
         result.size.height+=[NSMainMenuView menuHeight];
@@ -165,7 +165,7 @@ NSString * const NSWindowDidAnimateNotification=@"NSWindowDidAnimateNotification
 }
 
 +(NSRect)contentRectForFrameRect:(NSRect)frameRect styleMask:(NSUInteger)styleMask {
-   NSRect result=CGInsetRectForNativeWindowBorder(frameRect,styleMask);
+   NSRect result = [[NSDisplay currentDisplay] insetRect: frameRect forNativeWindowBorderWithStyle: styleMask];
    
     if([self hasMainMenuForStyleMask:styleMask])
         result.size.height-=[NSMainMenuView menuHeight];
@@ -1477,9 +1477,9 @@ NSString * const NSWindowDidAnimateNotification=@"NSWindowDidAnimateNotification
 
 -(NSRect)frameRectForContentRect:(NSRect)contentRect {
 /* hasMainMenu is an instance method so we can't just use the class method frameRectForContentRect:styleMask: */
-    
-   NSRect result=CGOutsetRectForNativeWindowBorder(contentRect,[self styleMask]);
-    
+
+   NSRect result = [[NSDisplay currentDisplay] outsetRect: contentRect forNativeWindowBorderWithStyle: [self styleMask]];
+
    if([self hasMainMenu])
     result.size.height+=[NSMainMenuView menuHeight];
     
@@ -1490,8 +1490,8 @@ NSString * const NSWindowDidAnimateNotification=@"NSWindowDidAnimateNotification
 }
 
 -(NSRect)contentRectForFrameRect:(NSRect)frameRect {
-   NSRect result=CGInsetRectForNativeWindowBorder(frameRect,[self styleMask]);
-       
+   NSRect result = [[NSDisplay currentDisplay] insetRect: frameRect forNativeWindowBorderWithStyle: [self styleMask]];
+
    if([self hasMainMenu])
     result.size.height-=[NSMainMenuView menuHeight];
 

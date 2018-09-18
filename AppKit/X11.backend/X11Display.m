@@ -426,7 +426,7 @@ static void socketCallback(
    return ret;
 }
 
-NSArray *CGSOrderedWindowNumbers() {
+- (NSArray *) orderedWindowNumbers {
     NSMutableArray *result = [NSMutableArray array];
     
     for (NSWindow* win in [NSApp windows]) [result addObject:[NSNumber numberWithInteger:[win windowNumber]]];
@@ -695,6 +695,40 @@ NSArray *CGSOrderedWindowNumbers() {
    NSLog(@"************** ERROR");
    return 0;
 }
+
+void CGNativeBorderFrameWidthsForStyle(NSUInteger styleMask, CGFloat *top, CGFloat *left, CGFloat *bottom, CGFloat *right) {
+   *top = 0.0;
+   *left = 0.0;
+   *bottom = 0.0;
+   *right = 0.0;
+}
+
+- (CGRect) insetRect: (CGRect) frame forNativeWindowBorderWithStyle: (NSUInteger) styleMask {
+    CGFloat top, left, bottom, right;
+
+    CGNativeBorderFrameWidthsForStyle(styleMask, &top, &left, &bottom, &right);
+
+    frame.origin.x += left;
+    frame.origin.y += bottom;
+    frame.size.width -= left + right;
+    frame.size.height -= top + bottom;
+
+    return frame;
+}
+
+- (CGRect) outsetRect: (CGRect) frame forNativeWindowBorderWithStyle: (NSUInteger) styleMask {
+    CGFloat top, left, bottom, right;
+
+    CGNativeBorderFrameWidthsForStyle(styleMask, &top, &left, &bottom, &right);
+
+    frame.origin.x -= left;
+    frame.origin.y -= bottom;
+    frame.size.width += left + right;
+    frame.size.height += top + bottom;
+
+    return frame;
+}
+
 @end
 
 #import <AppKit/NSGraphicsStyle.h>

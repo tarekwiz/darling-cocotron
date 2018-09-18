@@ -223,6 +223,21 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    return 0;
 }
 
+- (NSArray *) orderedWindowNumbers {
+   NSInvalidAbstractInvocation();
+   return nil;
+}
+
+- (CGRect) insetRect: (CGRect) frame forNativeWindowBorderWithStyle: (NSUInteger) styleMask {
+   NSInvalidAbstractInvocation();
+   return frame;
+}
+
+- (CGRect) outsetRect: (CGRect) frame forNativeWindowBorderWithStyle: (NSUInteger) styleMask {
+   NSInvalidAbstractInvocation();
+   return frame;
+}
+
 @end
 
 void NSColorSetCatalogColor(NSString *catalogName,NSString *colorName,NSColor *color){

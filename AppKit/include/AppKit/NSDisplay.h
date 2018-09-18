@@ -65,4 +65,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 - (NSPoint)mouseLocation;
 - (NSUInteger)currentModifierFlags;
 
+- (NSArray *) orderedWindowNumbers;
+
+- (CGRect) insetRect: (CGRect) frame forNativeWindowBorderWithStyle: (NSUInteger) styleMask;
+- (CGRect) outsetRect: (CGRect) frame forNativeWindowBorderWithStyle: (NSUInteger) styleMask;
+
 @end

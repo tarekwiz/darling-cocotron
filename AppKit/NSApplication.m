@@ -261,10 +261,8 @@ id NSApp=nil;
 }
 
 -(NSArray *)orderedWindows {
-  extern NSArray *CGSOrderedWindowNumbers();
-  
   NSMutableArray *result=[NSMutableArray array];
-  NSArray *numbers=CGSOrderedWindowNumbers();
+  NSArray *numbers = [_display orderedWindowNumbers];
   
   for(NSNumber *number in numbers){
    NSWindow *window=[self windowWithWindowNumber:[number integerValue]];

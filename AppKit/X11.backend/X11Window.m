@@ -19,13 +19,6 @@
 #import "X11Window.h"
 #import "X11SubWindow.h"
 
-void CGNativeBorderFrameWidthsForStyle(NSUInteger styleMask,CGFloat *top,CGFloat *left,CGFloat *bottom,CGFloat *right) {
-   *top=0;
-   *left=0;
-   *bottom=0;
-   *right=0;
-}
-
 @implementation X11Window
 
 +(Visual*)visual {
@@ -445,29 +438,3 @@ static int ignoreBadWindow(Display* display,
 }
 
 @end
-
-CGRect CGInsetRectForNativeWindowBorder(CGRect frame,NSUInteger styleMask){
-    CGFloat top,left,bottom,right;
-    
-    CGNativeBorderFrameWidthsForStyle(styleMask,&top,&left,&bottom,&right);
-    
-    frame.origin.x+=left;
-    frame.origin.y+=bottom;
-    frame.size.width-=left+right;
-    frame.size.height-=top+bottom;
-    
-    return frame;
-}
-
-CGRect CGOutsetRectForNativeWindowBorder(CGRect frame,NSUInteger styleMask){
-    CGFloat top,left,bottom,right;
-    
-    CGNativeBorderFrameWidthsForStyle(styleMask,&top,&left,&bottom,&right);
-    
-    frame.origin.x-=left;
-    frame.origin.y-=bottom;
-    frame.size.width+=left+right;
-    frame.size.height+=top+bottom;
-    
-    return frame;
-}
