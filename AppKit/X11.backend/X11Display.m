@@ -112,13 +112,12 @@ static void socketCallback(
 }
 
 -(void)dealloc {
-   if(_display)
+   if(_display) XCloseDisplay(_display);
 #ifdef DARLING
-   CFRelease(_source);
-   CFRelease(_cfSocket);
+   if (_source != NULL) CFRelease(_source);
+   if (_cfSocket != NULL) CFRelease(_cfSocket);
 #endif
-    XCloseDisplay(_display);
-    
+
    [_windowsByID release];
    [super dealloc];
 }
