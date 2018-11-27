@@ -12,30 +12,71 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 @class NSWindow, NSGraphicsContext, NSTrackingArea;
 
-typedef enum {
+typedef NS_ENUM(NSUInteger, NSEventType) {
+    NSEventTypeLeftMouseDown = 1,
     NSLeftMouseDown = 1,
-    NSLeftMouseUp = 2,
-    NSRightMouseDown = 3,
-    NSRightMouseUp = 4,
-    NSMouseMoved = 5,
-    NSLeftMouseDragged = 6,
-    NSRightMouseDragged = 7,
-    NSMouseEntered = 8,
-    NSMouseExited = 9,
-    NSKeyDown = 10,
-    NSKeyUp = 11,
-    NSFlagsChanged = 12,
-    NSPeriodic = 13,
-    NSCursorUpdate = 14,
-    NSPlatformSpecific = 15,
-    NSPlatformSpecificDisplayEvent = 16,
-    NSAppKitSystem = 17,
-    NSScrollWheel = 18,
-    NSApplicationDefined = 19,
-    NSAppKitDefined = 20
-} NSEventType;
 
-enum {
+    NSEventTypeLeftMouseUp = 2,
+    NSLeftMouseUp = 2,
+
+    NSEventTypeRightMouseDown = 3,
+    NSRightMouseDown = 3,
+
+    NSEventTypeRightMouseUp = 4,
+    NSRightMouseUp = 4,
+
+    NSEventTypeMouseMoved = 5,
+    NSMouseMoved = 5,
+
+    NSEventTypeLeftMouseDragged = 6,
+    NSLeftMouseDragged = 6,
+
+    NSEventTypeRightMouseDragged = 7,
+    NSRightMouseDragged = 7,
+
+    NSEventTypeMouseEntered = 8,
+    NSMouseEntered = 8,
+
+    NSEventTypeMouseExited = 9,
+    NSMouseExited = 9,
+
+    NSEventTypeKeyDown = 10,
+    NSKeyDown = 10,
+
+    NSEventTypeKeyUp = 11,
+    NSKeyUp = 11,
+
+    NSEventTypeFlagsChanged = 12,
+    NSFlagsChanged = 12,
+
+    NSEventTypeAppKitDefined = 13,
+    NSAppKitDefined = 13,
+
+    NSEventTypeSystemDefined = 14,
+    NSSystemDefined = 14,
+
+    NSEventTypeApplicationDefined = 15,
+    NSApplicationDefined = 15,
+
+    NSEventTypePeriodic = 16,
+    NSPeriodic = 16,
+
+    NSEventTypeCursorUpdate = 17,
+    NSCursorUpdate = 17,
+
+    NSEventTypeScrollWheel = 22,
+    NSScrollWheel = 22,
+
+    NSEventTypeOtherMouseDown = 25,
+    NSOtherMouseDown = 25,
+
+    NSAppKitSystem = 100,
+
+    NSPlatformSpecific = 29,
+    NSPlatformSpecificDisplayEvent = 30
+};
+
+typedef enum {
     NSLeftMouseDownMask = 1 << NSLeftMouseDown,
     NSLeftMouseUpMask = 1 << NSLeftMouseUp,
     NSRightMouseDownMask = 1 << NSRightMouseDown,
@@ -56,7 +97,7 @@ enum {
     NSAnyEventMask = 0xffffffff,
 
     NSPlatformSpecificDisplayMask = 1 << NSPlatformSpecificDisplayEvent,
-};
+} NSEventMask;
 
 enum {
     NSAlphaShiftKeyMask = 1 << 16,
