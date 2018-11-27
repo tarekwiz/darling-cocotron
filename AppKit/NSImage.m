@@ -19,7 +19,66 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <Foundation/NSKeyedArchiver.h>
 #import <AppKit/NSRaise.h>
 
+NSImageName const NSImageNameActionTemplate = @"NSActionTemplate";
+NSImageName const NSImageNameAddTemplate = @"NSAddTemplate";
+NSImageName const NSImageNameAdvanced = @"NSAdvanced";
 NSImageName const NSImageNameApplicationIcon = @"NSApplicationIcon";
+NSImageName const NSImageNameBluetoothTemplate = @"NSBluetoothTemplate";
+NSImageName const NSImageNameBonjour = @"NSBonjour";
+NSImageName const NSImageNameBookmarksTemplate = @"NSBookmarksTemplate";
+NSImageName const NSImageNameCaution = @"NSCaution";
+NSImageName const NSImageNameColorPanel = @"NSColorPanel";
+NSImageName const NSImageNameColumnViewTemplate = @"NSColumnViewTemplate";
+NSImageName const NSImageNameComputer = @"NSComputer";
+NSImageName const NSImageNameDotMac = @"NSDotMac";
+NSImageName const NSImageNameEnterFullScreenTemplate = @"NSEnterFullScreenTemplate";
+NSImageName const NSImageNameEveryone = @"NSEveryone";
+NSImageName const NSImageNameExitFullScreenTemplate = @"NSExitFullScreenTemplate";
+NSImageName const NSImageNameFlowViewTemplate = @"NSFlowViewTemplate";
+NSImageName const NSImageNameFolder = @"NSFolder";
+NSImageName const NSImageNameFolderBurnable = @"NSFolderBurnable";
+NSImageName const NSImageNameFolderSmart = @"NSFolderSmart";
+NSImageName const NSImageNameFollowLinkFreestandingTemplate = @"NSFollowLinkFreestandingTemplate";
+NSImageName const NSImageNameFontPanel = @"NSFontPanel";
+NSImageName const NSImageNameGoLeftTemplate = @"NSGoLeftTemplate";
+NSImageName const NSImageNameGoRightTemplate = @"NSGoRightTemplate";
+NSImageName const NSImageNameHomeTemplate = @"NSHomeTemplate";
+NSImageName const NSImageNameIChatTheaterTemplate = @"NSIChatTheaterTemplate";
+NSImageName const NSImageNameIconViewTemplate = @"NSIconViewTemplate";
+NSImageName const NSImageNameInfo = @"NSInfo";
+NSImageName const NSImageNameInvalidDataFreestandingTemplate = @"NSInvalidDataFreestandingTemplate";
+NSImageName const NSImageNameLeftFacingTriangleTemplate = @"NSLeftFacingTriangleTemplate";
+NSImageName const NSImageNameListViewTemplate = @"NSListViewTemplate";
+NSImageName const NSImageNameLockLockedTemplate = @"NSLockLockedTemplate";
+NSImageName const NSImageNameLockUnlockedTemplate = @"NSLockUnlockedTemplate";
+NSImageName const NSImageNameMenuMixedStateTemplate = @"NSMenuMixedStateTemplate";
+NSImageName const NSImageNameMenuOnStateTemplate = @"NSMenuOnStateTemplate";
+NSImageName const NSImageNameMobileMe = @"NSMobileMe";
+NSImageName const NSImageNameMultipleDocuments = @"NSMultipleDocuments";
+NSImageName const NSImageNameNetwork = @"NSNetwork";
+NSImageName const NSImageNamePathTemplate = @"NSPathTemplate";
+NSImageName const NSImageNamePreferencesGeneral = @"NSPreferencesGeneral";
+NSImageName const NSImageNameQuickLookTemplate = @"NSQuickLookTemplate";
+NSImageName const NSImageNameRefreshFreestandingTemplate = @"NSRefreshFreestandingTemplate";
+NSImageName const NSImageNameRefreshTemplate = @"NSRefreshTemplate";
+NSImageName const NSImageNameRemoveTemplate = @"NSRemoveTemplate";
+NSImageName const NSImageNameRevealFreestandingTemplate = @"NSRevealFreestandingTemplate";
+NSImageName const NSImageNameRightFacingTriangleTemplate = @"NSRightFacingTriangleTemplate";
+NSImageName const NSImageNameShareTemplate = @"NSShareTemplate";
+NSImageName const NSImageNameSlideshowTemplate = @"NSSlideshowTemplate";
+NSImageName const NSImageNameSmartBadgeTemplate = @"NSSmartBadgeTemplate";
+NSImageName const NSImageNameStatusAvailable = @"NSStatusAvailable";
+NSImageName const NSImageNameStatusNone = @"NSStatusNone";
+NSImageName const NSImageNameStatusPartiallyAvailable = @"NSStatusPartiallyAvailable";
+NSImageName const NSImageNameStatusUnavailable = @"NSStatusUnavailable";
+NSImageName const NSImageNameStopProgressFreestandingTemplate = @"NSStopProgressFreestandingTemplate";
+NSImageName const NSImageNameStopProgressTemplate = @"NSStopProgressTemplate";
+NSImageName const NSImageNameTrashEmpty = @"NSTrashEmpty";
+NSImageName const NSImageNameTrashFull = @"NSTrashFull";
+NSImageName const NSImageNameUser = @"NSUser";
+NSImageName const NSImageNameUserAccounts = @"NSUserAccounts";
+NSImageName const NSImageNameUserGroup = @"NSUserGroup";
+NSImageName const NSImageNameUserGuest = @"NSUserGuest";
 
 // Private class used so the context knows the flipped status of a locked image
 // 10.4 does something like that - probably for more than just getting the flippiness - 10.6 uses some special NSSnapshotBitmapGraphicsContext
