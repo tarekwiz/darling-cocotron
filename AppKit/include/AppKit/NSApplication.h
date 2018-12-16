@@ -40,6 +40,7 @@ typedef double NSAppKitVersion;
 APPKIT_EXPORT const NSAppKitVersion NSAppKitVersionNumber;
 
 typedef id NSModalSession;
+typedef NSInteger NSModalResponse;
 
 enum {
     NSRunStoppedResponse = -1000,
@@ -156,16 +157,16 @@ typedef enum {
 
 - (NSWindow *)modalWindow;
 - (NSModalSession)beginModalSessionForWindow:(NSWindow *)window;
-- (int)runModalSession:(NSModalSession)session;
+- (NSModalResponse)runModalSession:(NSModalSession)session;
 - (void)endModalSession:(NSModalSession)session;
-- (void)stopModalWithCode:(int)code;
+- (void)stopModalWithCode:(NSModalResponse)code;
 
-- (int)runModalForWindow:(NSWindow *)window;
+- (NSModalResponse)runModalForWindow:(NSWindow *)window;
 - (void)stopModal;
 - (void)abortModal;
 
 - (void)beginSheet:(NSWindow *)sheet modalForWindow:(NSWindow *)window modalDelegate:modalDelegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo;
-- (void)endSheet:(NSWindow *)sheet returnCode:(int)returnCode;
+- (void)endSheet:(NSWindow *)sheet returnCode:(NSModalResponse)returnCode;
 - (void)endSheet:(NSWindow *)sheet;
 
 - (void)reportException:(NSException *)exception;

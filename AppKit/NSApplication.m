@@ -847,7 +847,7 @@ id NSApp=nil;
    return session;
 }
 
--(int)runModalSession:(NSModalSession)session {
+-(NSModalResponse)runModalSession:(NSModalSession)session {
     while([session stopCode]==NSRunContinuesResponse) {
         NSAutoreleasePool *pool=[NSAutoreleasePool new];
         NSEvent           *event=[self nextEventMatchingMask:NSAnyEventMask untilDate:[NSDate date] inMode:NSModalPanelRunLoopMode dequeue:YES];
@@ -908,7 +908,7 @@ id NSApp=nil;
     [_modalStack removeLastObject];
 }
 
--(void)stopModalWithCode:(int)code {
+-(void)stopModalWithCode:(NSModalResponse)code {
     // This should silently ignore any attempt to end a session when there is none.
    [[_modalStack lastObject] stopModalWithCode:code];
 }
@@ -917,7 +917,7 @@ id NSApp=nil;
    NSWindow *window=[values objectForKey:@"NSWindow"];
    
    NSModalSession session=[self beginModalSessionForWindow:window];
-   int result;
+   NSModalResponse result;
 
    while((result=[NSApp runModalSession:session])==NSRunContinuesResponse){
     [[NSRunLoop currentRunLoop] runMode:NSModalPanelRunLoopMode beforeDate:[NSDate distantFuture]];
@@ -928,7 +928,7 @@ id NSApp=nil;
    [values setObject:[NSNumber numberWithInteger:result] forKey:@"result"];
 }
 
--(int)runModalForWindow:(NSWindow *)window {
+-(NSModalResponse)runModalForWindow:(NSWindow *)window {
    NSMutableDictionary *values=[NSMutableDictionary dictionary];
    
    [values setObject:window forKey:@"NSWindow"];
