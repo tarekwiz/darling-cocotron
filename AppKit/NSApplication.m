@@ -919,10 +919,7 @@ id NSApp=nil;
    NSModalSession session=[self beginModalSessionForWindow:window];
    NSModalResponse result;
 
-   while((result=[NSApp runModalSession:session])==NSRunContinuesResponse){
-    [[NSRunLoop currentRunLoop] runMode:NSModalPanelRunLoopMode beforeDate:[NSDate distantFuture]];
-   }
-   
+   while ((result = [NSApp runModalSession: session]) == NSRunContinuesResponse);
    [self endModalSession:session];
 
    [values setObject:[NSNumber numberWithInteger:result] forKey:@"result"];
