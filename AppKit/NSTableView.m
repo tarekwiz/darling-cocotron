@@ -386,9 +386,6 @@ static CGFloat rowHeightAtIndex(NSTableView *self, NSInteger index){
     NSInteger i;
     CGFloat height = 0.;
 
-    _rowHeightsCount=numberOfRows;
-    _rowHeights=realloc(_rowHeights,sizeof(CGFloat)*_rowHeightsCount);
-
     for (i = 0; i < numberOfRows; i++) {
         if (height + rowHeightAtIndex(self,i) + _intercellSpacing.height > rect.origin.y)
             break;
