@@ -25,6 +25,7 @@ typedef enum {
 - delegate;
 
 - (void)invalidate;
+- (void)syncDelegateProperties;
 
 - (O2Context *)cgContext;
 

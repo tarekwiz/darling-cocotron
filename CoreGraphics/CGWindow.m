@@ -23,6 +23,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    O2InvalidAbstractInvocation();
 }
 
+- (void) syncDelegateProperties {
+  O2InvalidAbstractInvocation();
+}
+
 
 -(O2Context *)cgContext {
    O2InvalidAbstractInvocation();

@@ -976,6 +976,7 @@ NSString * const NSWindowDidAnimateNotification=@"NSWindowDidAnimateNotification
 
 -(void)setAcceptsMouseMovedEvents:(BOOL)flag {
    _acceptsMouseMovedEvents=flag;
+   [_platformWindow syncDelegateProperties];
 }
 
 -(void)setExcludedFromWindowsMenu:(BOOL)value {

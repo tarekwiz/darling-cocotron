@@ -95,8 +95,7 @@
                               (_visualInfo==NULL)?CopyFromParent:_visualInfo->visual,
                               xattr_mask, &xattr);
 
-   XSelectInput(_display, _window, ExposureMask | KeyPressMask | KeyReleaseMask | StructureNotifyMask |
-    ButtonPressMask | ButtonReleaseMask | ButtonMotionMask | VisibilityChangeMask | FocusChangeMask | SubstructureRedirectMask );
+   [self syncDelegateProperties];
 
    Atom atm=XInternAtom(_display, "WM_DELETE_WINDOW", False);
    XSetWMProtocols(_display, _window, &atm , 1);
@@ -157,10 +156,25 @@
 
 -(void)setDelegate:delegate {
    _delegate=delegate;
+   [self syncDelegateProperties];
 }
 
 -delegate {
    return _delegate;
+}
+
+- (void) syncDelegateProperties {
+    long mask = KeyPressMask | KeyReleaseMask |
+        ExposureMask | StructureNotifyMask |
+        ButtonPressMask | ButtonReleaseMask | ButtonMotionMask |
+        VisibilityChangeMask | FocusChangeMask | SubstructureRedirectMask;
+
+    if ([_delegate acceptsMouseMovedEvents]) {
+        mask |= PointerMotionMask;
+    }
+    XSelectInput(_display, _window, mask);
+
+    // TODO: background color
 }
 
 -(void) invalidate {
