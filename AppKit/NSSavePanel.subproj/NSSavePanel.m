@@ -5,6 +5,7 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. */
+
 #import <AppKit/NSSavePanel.h>
 #import <AppKit/NSView.h>
 #import <AppKit/NSApplication.h>
@@ -13,20 +14,42 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 @implementation NSSavePanel
 
-+(NSSavePanel *)savePanel {
-   return [[self new] autorelease];
+- (id) resetToDefaultValues {
+    _dialogTitle=@"Save";
+    _filename=@"";
+    _directory=[NSHomeDirectory() copy];
+    _requiredFileType=@"";
+    _treatsFilePackagesAsDirectories=NO;
+    _accessoryView=nil;
+    return self;
+}
+
+static NSSavePanel *_newPanel = nil;
+
++ (void) set_newPanel: (NSSavePanel *) newPanel {
+    _newPanel = newPanel;
+}
+
++ (NSSavePanel *) savePanel {
+    if ([[NSDisplay currentDisplay] implementsCustomPanelForClass: self])
+    {
+        _newPanel = [[self alloc]
+            initWithContentRect: NSMakeRect(0, 0, 1, 1)
+                      styleMask: NSTitledWindowMask|NSResizableWindowMask
+                        backing: NSBackingStoreBuffered
+                          defer: YES];
+    }
+    else
+    {
+        [NSBundle loadNibNamed: @"NSSavePanel" owner: self];
+    }
+    // FIXME: release it?
+    return [_newPanel resetToDefaultValues];
 }
 
 -init {
-   [super initWithContentRect:NSMakeRect(0,0,1,1) styleMask:NSTitledWindowMask|NSResizableWindowMask backing:NSBackingStoreBuffered defer:YES];
-
-   _dialogTitle=@"Save";
-   _filename=@"";
-   _directory=[NSHomeDirectory() copy];
-   _requiredFileType=@"";
-   _treatsFilePackagesAsDirectories=NO;
-   _accessoryView=nil;
-   return self;
+    [self release];
+    return [[NSSavePanel savePanel] retain];
 }
 
 -(void)dealloc {
@@ -63,14 +86,37 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    return ret;
 }
 
--(int)runModalForDirectory:(NSString *)directory file:(NSString *)file {
-   [self _setFilename:file];
-   [self setDirectory:directory];
-   return [[NSDisplay currentDisplay] savePanel:self runModalForDirectory:directory file:file];
+- (IBAction) _selectFile: (id) sender {
+    NSURL *url = [_outlineView itemAtRow: [_outlineView selectedRow]];
+    [self _setFilename: [url path]];
+
+    [NSApp stopModalWithCode: NSOKButton];
 }
 
--(int)runModal {
-   return [[NSDisplay currentDisplay] savePanel:self runModalForDirectory:[self directory] file:@""];
+- (IBAction) _cancel: (id) sender {
+    [NSApp stopModalWithCode: NSCancelButton];
+}
+
+- (NSInteger) runModalForDirectory: (NSString *) directory
+                              file: (NSString *) file {
+    [self _setFilename: file];
+    [self setDirectory: directory];
+
+    return [self runModal];
+}
+
+- (NSInteger) runModal {
+    NSInteger res;
+    if ([[NSDisplay currentDisplay] implementsCustomPanelForClass: [self class]])
+    {
+        res = [[NSDisplay currentDisplay] savePanel: self
+                               runModalForDirectory: [self directory]
+                                               file: [self filename]];
+    } else {
+        res = [NSApp runModalForWindow: self];
+        [self close];
+    }
+    return res;
 }
 
 -(NSString *)directory {
@@ -176,7 +222,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 
 -(void)setAllowedFileTypes:(NSArray *)value {
-   NSUnimplementedMethod();
+   [_allowedFileTypes release];
+   _allowedFileTypes = [value copy];
+}
+
+- (NSArray *) allowedFileTypes {
+    return [[_allowedFileTypes copy] autorelease];
 }
 
 -(void)setAllowsOtherFileTypes:(BOOL)value {

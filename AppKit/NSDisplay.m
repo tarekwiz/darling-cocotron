@@ -246,6 +246,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    return nil;
 }
 
+- (BOOL) implementsCustomPanelForClass: (Class) panelClass {
+    return NO;
+}
+
 -(int)savePanel:(NSSavePanel *)savePanel runModalForDirectory:(NSString *)directory file:(NSString *)file {
    NSInvalidAbstractInvocation();
    return 0;

@@ -10,26 +10,50 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <AppKit/NSDisplay.h>
 #import <Foundation/NSURL.h>
 
-@interface NSSavePanel (Private) 
+@interface NSSavePanel (Private)
 -(void)_setFilename:(NSString*)filename;
 @end
 
 @implementation NSOpenPanel
 
-+(NSOpenPanel *)openPanel {
-   return [[self new] autorelease];
+- (id) resetToDefaultValues {
+    self = [super resetToDefaultValues];
+    _filenames=[NSArray new];
+    [_dialogTitle release];
+    _dialogTitle= [NSLocalizedStringFromTableInBundle(@"Open", nil, [NSBundle bundleForClass: [NSOpenPanel class]], @"The title of the open panel") copy];
+    _allowsMultipleSelection=NO;
+    _canChooseDirectories=NO;
+    _canChooseFiles=YES;
+    _resolvesAliases=YES;
+    return self;
 }
 
--init {
-   [super init];
-   _filenames=[NSArray new];
-   [_dialogTitle release];
-   _dialogTitle= [NSLocalizedStringFromTableInBundle(@"Open", nil, [NSBundle bundleForClass: [NSOpenPanel class]], @"The title of the open panel") copy];
-   _allowsMultipleSelection=NO;
-   _canChooseDirectories=NO;
-   _canChooseFiles=YES;
-   _resolvesAliases=YES;
-   return self;
+static NSOpenPanel *_newPanel = nil;
+
++ (void) set_newPanel: (NSOpenPanel *) newPanel {
+    _newPanel = newPanel;
+}
+
++ (NSSavePanel *) openPanel {
+    if ([[NSDisplay currentDisplay] implementsCustomPanelForClass: self])
+    {
+        _newPanel = [[self alloc]
+            initWithContentRect: NSMakeRect(0, 0, 1, 1)
+                      styleMask: NSTitledWindowMask|NSResizableWindowMask
+                        backing: NSBackingStoreBuffered
+                          defer: YES];
+    }
+    else
+    {
+        [NSBundle loadNibNamed: @"NSOpenPanel" owner: self];
+    }
+    // FIXME: release it?
+    return [_newPanel resetToDefaultValues];
+}
+
+- init {
+    [self release];
+    return [[NSOpenPanel openPanel] retain];
 }
 
 -(void)dealloc {
@@ -50,29 +74,49 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    NSArray        *paths=[self filenames];
    NSMutableArray *result=[NSMutableArray arrayWithCapacity:[paths count]];
    int             i,count=[paths count];
-   
+
    for(i=0;i<count;i++)
     [result addObject:[NSURL fileURLWithPath:[paths objectAtIndex:i]]];
-    
+
    return result;
 }
 
--(int)runModalForDirectory:(NSString *)directory file:(NSString *)file types:(NSArray *)types {
+- (void) _setFilename: (NSString *) filename {
+    [super _setFilename: filename];
+    _filenames = [@[filename] retain];
+}
+
+- (NSInteger) runModalForDirectory:(NSString *)directory file:(NSString *)file types:(NSArray *)types {
    [self _setFilename:file];
    [self setDirectory:directory];
-   return [[NSDisplay currentDisplay] openPanel:self runModalForDirectory:directory file:file types:types];
+   [self setAllowedFileTypes: types];
+   return [self runModal];
 }
 
--(int)runModalForTypes:(NSArray *)types {
-   return [self runModalForDirectory:[self directory] file:nil types:types];
+- (NSInteger) runModalForTypes:(NSArray *)types {
+    [self setAllowedFileTypes: types];
+    return [self runModal];
 }
 
--(int)runModalForDirectory:(NSString *)directory file:(NSString *)file {
-   return [self runModalForDirectory:directory file:file types:nil];
+- (NSInteger) runModalForDirectory:(NSString *)directory file:(NSString *)file {
+    [self setDirectory: directory];
+    [self _setFilename:file];
+    return [self runModal];
 }
 
--(int)runModal {
-   return [self runModalForDirectory:nil file:nil types:nil];
+- (NSInteger) runModal {
+    NSInteger res;
+    if ([[NSDisplay currentDisplay] implementsCustomPanelForClass: [self class]])
+    {
+        res = [[NSDisplay currentDisplay] openPanel: self
+                               runModalForDirectory: [self directory]
+                                               file: [self filename]
+                                              types: [self allowedFileTypes]];
+    } else {
+        res = [NSApp runModalForWindow: self];
+        [self close];
+    }
+    return res;
 }
 
 -(BOOL)allowsMultipleSelection {

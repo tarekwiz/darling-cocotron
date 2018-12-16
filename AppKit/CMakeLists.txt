@@ -340,7 +340,6 @@ set(AppKit_sources
 	NSDrawer.subproj/NSDrawerWindow.m
 
 	NSPrinter.m
-	NSOpenPanel.m
 	NSTableHeaderCell.m
 	NSColorPanel.m
 	NSCell.m
@@ -353,7 +352,10 @@ set(AppKit_sources
 
 	NSSystemInfoPanel/NSSystemInfoPanel.m
 
-	NSSavePanel.m
+	NSSavePanel.subproj/_NSFileSystemDataSource.m
+	NSSavePanel.subproj/NSOpenPanel.m
+	NSSavePanel.subproj/NSSavePanel.m
+
 	NSDockTile.m
 	NSGraphics.m
 	NSColorWell.m
@@ -433,6 +435,9 @@ set(AppKit_resources
 	en.lproj/NSFontPanel.nib en.lproj/NSFontPanel.nib/keyedobjects.nib
 	en.lproj/NSSystemInfoPanel.nib NSSystemInfoPanel/en.lproj/NSSystemInfoPanel.nib/keyedobjects.nib
 	en.lproj/NSToolbarCustomizationPalette.nib en.lproj/NSToolbarCustomizationPalette.nib/keyedobjects.nib
+
+	en.lproj/NSSavePanel.nib en.lproj/NSSavePanel.nib
+	en.lproj/NSOpenPanel.nib en.lproj/NSOpenPanel.nib
 )
 
 add_framework(AppKit

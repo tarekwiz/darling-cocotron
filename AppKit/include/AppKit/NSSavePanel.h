@@ -7,8 +7,9 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. */
 
 #import <AppKit/NSPanel.h>
+#import <AppKit/NSNibLoading.h>
 
-@class NSView;
+@class NSView, NSOutlineView;
 
 enum {
     NSFileHandlingPanelCancelButton = NSCancelButton,
@@ -21,11 +22,14 @@ enum {
     NSString *_filename;
     NSString *_directory;
     NSString *_requiredFileType;
+    NSArray *_allowedFileTypes;
     NSString *_message;
     NSString *_prompt;
 
     BOOL _treatsFilePackagesAsDirectories;
     NSView *_accessoryView;
+
+    IBOutlet NSOutlineView *_outlineView;
 }
 
 + (NSSavePanel *)savePanel;
@@ -47,6 +51,8 @@ enum {
 - (void)setRequiredFileType:(NSString *)type;
 - (void)setTreatsFilePackagesAsDirectories:(BOOL)flag;
 
+- (NSArray *) allowedFileTypes;
+
 - (void)setAccessoryView:(NSView *)view;
 - (void)setCanCreateDirectories:(BOOL)value;
 - (void)setAllowedFileTypes:(NSArray *)value;
@@ -64,4 +70,7 @@ enum {
                  modalDelegate:(id)modalDelegate
                 didEndSelector:(SEL)didEndSelector
                    contextInfo:(void *)contextInfo;
+
+- (IBAction) _selectFile: (id) sender;
+- (IBAction) _cancel: (id) sender;
 @end
