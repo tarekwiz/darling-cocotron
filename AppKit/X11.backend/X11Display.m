@@ -478,7 +478,22 @@ static void socketCallback(
          
      pos=[window transformPoint:NSMakePoint(ev->xbutton.x, ev->xbutton.y)];
          
-     event=[NSEvent mouseEventWithType:NSLeftMouseDown
+        switch (ev->xbutton.button) {
+        case Button1:
+            type = NSLeftMouseDown;
+            break;
+        case Button3:
+            type = NSRightMouseDown;
+            break;
+        case Button4:
+        case Button5:
+            // Skip these, we'll send NSScrollWheel on release.
+            return;
+        default:
+            type = NSOtherMouseDown;
+        }
+
+     event=[NSEvent mouseEventWithType:type
                                   location:pos
                              modifierFlags:[self modifierFlagsForState:ev->xbutton.state]
                                     window:delegate
@@ -489,11 +504,32 @@ static void socketCallback(
     case ButtonRelease:;
      pos=[window transformPoint:NSMakePoint(ev->xbutton.x, ev->xbutton.y)];
 
-     event=[NSEvent mouseEventWithType:NSLeftMouseUp
+        CGFloat deltaY = 0.0;
+
+        switch (ev->xbutton.button) {
+        case Button1:
+            type = NSLeftMouseUp;
+            break;
+        case Button3:
+            type = NSRightMouseUp;
+            break;
+        case Button4:
+            type = NSScrollWheel;
+            deltaY = 1.0;
+            break;
+        case Button5:
+            type = NSScrollWheel;
+            deltaY = -1.0;
+            break;
+        default:
+            type = NSOtherMouseUp;
+        }
+
+     event=[NSEvent mouseEventWithType:type
                                   location:pos
                              modifierFlags:[self modifierFlagsForState:ev->xbutton.state]
                                     window:delegate
-                                clickCount:clickCount deltaX:0.0 deltaY:0.0];
+                                clickCount:clickCount deltaX:0.0 deltaY:deltaY];
      [self postEvent:event atStart:NO];
      break;
 
