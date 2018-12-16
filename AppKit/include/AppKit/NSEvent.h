@@ -70,6 +70,9 @@ typedef NS_ENUM(NSUInteger, NSEventType) {
     NSEventTypeOtherMouseDown = 25,
     NSOtherMouseDown = 25,
 
+    NSEventTypeOtherMouseUp = 26,
+    NSOtherMouseUp = 26,
+
     NSAppKitSystem = 100,
 
     NSPlatformSpecific = 29,
