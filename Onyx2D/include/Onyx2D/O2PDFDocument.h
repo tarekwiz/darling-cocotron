@@ -17,6 +17,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 - initWithData:(NSData *)data;
 - initWithDataProvider:(O2DataProvider *)provider;
+- initWithURL:(NSURL *)url;
 
 - (O2PDFxref *)xref;
 

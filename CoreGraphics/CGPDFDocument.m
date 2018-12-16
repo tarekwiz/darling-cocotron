@@ -21,6 +21,10 @@ CGPDFDocumentRef CGPDFDocumentCreateWithProvider(CGDataProviderRef provider) {
    return [[O2PDFDocument alloc] initWithDataProvider:provider];
 }
 
+CGPDFDocumentRef CGPDFDocumentCreateWithURL(CFURLRef url) {
+   return [[O2PDFDocument alloc] initWithURL:url];
+}
+
 size_t CGPDFDocumentGetNumberOfPages(CGPDFDocumentRef self) {
    return [self pageCount];
 }

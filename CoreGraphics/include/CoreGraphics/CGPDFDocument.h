@@ -11,12 +11,15 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 @class O2PDFDocument;
 typedef O2PDFDocument *CGPDFDocumentRef;
 
+#import <CoreFoundation/CFURL.h>
+
 #import <CoreGraphics/CGPDFPage.h>
 #import <CoreGraphics/CGDataProvider.h>
 
 COREGRAPHICS_EXPORT CGPDFDocumentRef CGPDFDocumentRetain(CGPDFDocumentRef self);
 COREGRAPHICS_EXPORT void CGPDFDocumentRelease(CGPDFDocumentRef self);
 
+COREGRAPHICS_EXPORT CGPDFDocumentRef CGPDFDocumentCreateWithURL(CFURLRef url);
 COREGRAPHICS_EXPORT CGPDFDocumentRef CGPDFDocumentCreateWithProvider(CGDataProviderRef provider);
 
 COREGRAPHICS_EXPORT size_t CGPDFDocumentGetNumberOfPages(CGPDFDocumentRef self);

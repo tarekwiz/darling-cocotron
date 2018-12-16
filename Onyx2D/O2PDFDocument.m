@@ -39,6 +39,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    return [self initWithData:[provider data]];
 }
 
+- initWithURL: (NSURL *) url {
+    return [self initWithData: [NSData dataWithContentsOfURL: url]];
+}
+
 -(void)dealloc{
    [_xref release];
    [super dealloc];
