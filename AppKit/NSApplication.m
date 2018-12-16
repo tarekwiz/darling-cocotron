@@ -847,23 +847,23 @@ id NSApp=nil;
    return session;
 }
 
--(NSModalResponse)runModalSession:(NSModalSession)session {
+- (NSModalResponse) runModalSession: (NSModalSession) session {
     while([session stopCode]==NSRunContinuesResponse) {
         NSAutoreleasePool *pool=[NSAutoreleasePool new];
         NSEvent           *event=[self nextEventMatchingMask:NSAnyEventMask untilDate:[NSDate date] inMode:NSModalPanelRunLoopMode dequeue:YES];
-        
-        if(event==nil){
+
+        if (event==nil) {
             [pool release];
             break;
         }
-        
+
         NSWindow          *window=[event window];
-        
-        
+
+
         // in theory this could get weird, but all we want is the ESC-cancel keybinding, afaik NSApp doesn't respond to any other doCommandBySelectors...
         if([event type]==NSKeyDown && window == [session modalWindow])
             [self interpretKeyEvents:[NSArray arrayWithObject:event]];
-        
+
         if(window==[session modalWindow] || [window worksWhenModal])
             [self sendEvent:event];
         else if([event type]==NSLeftMouseDown)
@@ -873,16 +873,16 @@ id NSApp=nil;
             // The particular case we need to handle is mouse down. run modal. then actually receive the mouse up when the modal is done.
             // So we know this works in Cocoa, save the mouse up here.
             // We don't want to save mouse moved or such.
-            // There is kind of adhoc, probably a better way to do it, find out which combinations should work (e.g. mouse enter, do we get mouse exit?) 
+            // There is kind of adhoc, probably a better way to do it, find out which combinations should work (e.g. mouse enter, do we get mouse exit?)
             if([[session unprocessedEvents] count]==0){
-                
+
                 switch([event type]){
-                        
+
                     case NSLeftMouseUp:
                     case NSRightMouseUp:
                         [session addUnprocessedEvent: event];
                         break;
-                        
+
                     default:
                         // don't save
                         break;
@@ -891,31 +891,31 @@ id NSApp=nil;
         }
         [pool release];
     }
-    
-    
+
+
     return [session stopCode];
 }
 
 -(void)endModalSession:(NSModalSession)session {
-    if(session!=[_modalStack lastObject])   
+    if(session!=[_modalStack lastObject])
         [NSException raise:NSInvalidArgumentException format:@"-[%@ %s] modal session %@ is not the current one %@",[self class],sel_getName(_cmd),session,[_modalStack lastObject]];
-    
+
     for(NSEvent *requeue in [session unprocessedEvents]){
         [self postEvent:requeue atStart:YES];
     }
-    
+
     [[session modalWindow] _showMenuViewIfNeeded];
     [_modalStack removeLastObject];
 }
 
--(void)stopModalWithCode:(NSModalResponse)code {
+- (void) stopModalWithCode: (NSModalResponse) code {
     // This should silently ignore any attempt to end a session when there is none.
    [[_modalStack lastObject] stopModalWithCode:code];
 }
 
--(void)_mainThreadRunModalForWindow:(NSMutableDictionary *)values {
+- (void) _mainThreadRunModalForWindow: (NSMutableDictionary *) values {
    NSWindow *window=[values objectForKey:@"NSWindow"];
-   
+
    NSModalSession session=[self beginModalSessionForWindow:window];
    NSModalResponse result;
 
@@ -925,15 +925,15 @@ id NSApp=nil;
    [values setObject:[NSNumber numberWithInteger:result] forKey:@"result"];
 }
 
--(NSModalResponse)runModalForWindow:(NSWindow *)window {
+- (NSModalResponse) runModalForWindow: (NSWindow *) window {
    NSMutableDictionary *values=[NSMutableDictionary dictionary];
-   
+
    [values setObject:window forKey:@"NSWindow"];
-   
+
    [self performSelectorOnMainThread:@selector(_mainThreadRunModalForWindow:) withObject:values waitUntilDone:YES modes:[NSArray arrayWithObjects:NSDefaultRunLoopMode,NSModalPanelRunLoopMode,nil]];
-   
+
    NSNumber *result=[values objectForKey:@"result"];
-   
+
    return [result integerValue];
 }
 

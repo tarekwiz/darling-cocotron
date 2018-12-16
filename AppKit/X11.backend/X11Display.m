@@ -419,65 +419,65 @@ static void socketCallback(
 
 - (NSArray *) orderedWindowNumbers {
     NSMutableArray *result = [NSMutableArray array];
-    
+
     for (NSWindow* win in [NSApp windows]) [result addObject:[NSNumber numberWithInteger:[win windowNumber]]];
-    
+
     NSUnimplementedFunction(); //(Window numbers not even remotely ordered)
-    
+
     return result;
 }
 
--(void)postXEvent:(XEvent *)ev {
-   id event=nil;
+- (void) postXEvent: (XEvent *) ev {
+   id event = nil;
    NSEventType type;
-   id window=[self windowForID:ev->xany.window];
-   id delegate=[window delegate];
-   
-   switch(ev->type) {
-    case KeyPress:
-    case KeyRelease:;
-     unsigned int modifierFlags=[self modifierFlagsForState:ev->xkey.state];
-     char buf[4]={0};
-     
-     XLookupString((XKeyEvent*)ev, buf, 4, NULL, NULL);
-     id str=[[NSString alloc] initWithCString:buf encoding:NSISOLatin1StringEncoding];
-     NSPoint pos=[window transformPoint:NSMakePoint(ev->xkey.x, ev->xkey.y)];
-         
-     id strIg=[str lowercaseString];
-     if(ev->xkey.state) {
-      ev->xkey.state=0;
-      XLookupString((XKeyEvent*)ev, buf, 4, NULL, NULL);
-      strIg=[[NSString alloc] initWithCString:buf encoding:NSISOLatin1StringEncoding];
-     }
-      
-     id event=[NSEvent keyEventWithType:ev->type == KeyPress ? NSKeyDown : NSKeyUp location:pos
-                              modifierFlags:modifierFlags
-                                  timestamp:0.0 
-                               windowNumber:[delegate windowNumber]
-                                    context:nil
-                                 characters:str 
-                charactersIgnoringModifiers:strIg
-                                  isARepeat:NO
-                                    keyCode:ev->xkey.keycode];
-         
-     [self postEvent:event atStart:NO];
-         
-     [str release];
-     break;
+   id window = [self windowForID: ev->xany.window];
+   id delegate = [window delegate];
+
+   switch (ev->type) {
+   case KeyPress:
+   case KeyRelease:;
+       unsigned int modifierFlags = [self modifierFlagsForState: ev->xkey.state];
+       char buf[4] = {0};
+
+       XLookupString((XKeyEvent*) ev, buf, 4, NULL, NULL);
+       id str = [[NSString alloc] initWithCString: buf encoding: NSISOLatin1StringEncoding];
+       NSPoint pos = [window transformPoint: NSMakePoint(ev->xkey.x, ev->xkey.y)];
+
+       id strIg = [str lowercaseString];
+       if (ev->xkey.state) {
+           ev->xkey.state = 0;
+           XLookupString((XKeyEvent*) ev, buf, 4, NULL, NULL);
+           strIg = [[NSString alloc] initWithCString: buf encoding: NSISOLatin1StringEncoding];
+       }
+
+       id event = [NSEvent keyEventWithType: ev->type == KeyPress ? NSKeyDown : NSKeyUp
+                                   location: pos
+                              modifierFlags: modifierFlags
+                                  timestamp: 0.0
+                               windowNumber: [delegate windowNumber]
+                                    context: nil
+                                 characters: str
+                charactersIgnoringModifiers: strIg
+                                  isARepeat: NO
+                                    keyCode: ev->xkey.keycode];
+
+        [self postEvent: event atStart: NO];
+
+        [str release];
+        break;
 
     case ButtonPress:;
-     NSTimeInterval now=[[NSDate date] timeIntervalSinceReferenceDate];
-     
-     if(now-lastClickTimeStamp<[self doubleClickInterval]) {
-      clickCount++;
-     }
-     else {
-      clickCount=1;  
-     }
-     lastClickTimeStamp=now;
-         
-     pos=[window transformPoint:NSMakePoint(ev->xbutton.x, ev->xbutton.y)];
-         
+        NSTimeInterval now = [[NSDate date] timeIntervalSinceReferenceDate];
+
+        if (now - lastClickTimeStamp < [self doubleClickInterval]) {
+            clickCount++;
+        } else {
+            clickCount = 1;
+        }
+        lastClickTimeStamp = now;
+
+        pos = [window transformPoint: NSMakePoint(ev->xbutton.x, ev->xbutton.y)];
+
         switch (ev->xbutton.button) {
         case Button1:
             type = NSLeftMouseDown;
@@ -493,16 +493,18 @@ static void socketCallback(
             type = NSOtherMouseDown;
         }
 
-     event=[NSEvent mouseEventWithType:type
-                                  location:pos
-                             modifierFlags:[self modifierFlagsForState:ev->xbutton.state]
-                                    window:delegate
-                                clickCount:clickCount deltaX:0.0 deltaY:0.0];
-     [self postEvent:event atStart:NO];
-     break;
+         event = [NSEvent mouseEventWithType: type
+                                    location: pos
+                               modifierFlags: [self modifierFlagsForState: ev->xbutton.state]
+                                      window: delegate
+                                  clickCount: clickCount
+                                      deltaX: 0.0
+                                      deltaY: 0.0];
+         [self postEvent: event atStart: NO];
+         break;
 
-    case ButtonRelease:;
-     pos=[window transformPoint:NSMakePoint(ev->xbutton.x, ev->xbutton.y)];
+    case ButtonRelease:
+        pos = [window transformPoint: NSMakePoint(ev->xbutton.x, ev->xbutton.y)];
 
         CGFloat deltaY = 0.0;
 
@@ -525,28 +527,30 @@ static void socketCallback(
             type = NSOtherMouseUp;
         }
 
-     event=[NSEvent mouseEventWithType:type
-                                  location:pos
-                             modifierFlags:[self modifierFlagsForState:ev->xbutton.state]
-                                    window:delegate
-                                clickCount:clickCount deltaX:0.0 deltaY:deltaY];
-     [self postEvent:event atStart:NO];
+        event = [NSEvent mouseEventWithType: type
+                                   location: pos
+                              modifierFlags: [self modifierFlagsForState: ev->xbutton.state]
+                                     window: delegate
+                                 clickCount: clickCount
+                                     deltaX: 0.0
+                                     deltaY: deltaY];
+     [self postEvent: event atStart: NO];
      break;
 
     case MotionNotify:;
      pos=[window transformPoint:NSMakePoint(ev->xmotion.x, ev->xmotion.y)];
      type=NSMouseMoved;
-         
+
      if(ev->xmotion.state&Button1Mask) {
       type=NSLeftMouseDragged;
      }
      else if (ev->xmotion.state&Button2Mask) {
       type=NSRightMouseDragged;
      }
-         
+
      if(type==NSMouseMoved && ![delegate acceptsMouseMovedEvents])
       break;
-         
+
      event=[NSEvent mouseEventWithType:type
                                   location:pos
                              modifierFlags:[self modifierFlagsForState:ev->xmotion.state]

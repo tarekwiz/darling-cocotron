@@ -62,15 +62,15 @@
    GLint att[] = {
     GLX_RGBA,
     GLX_DOUBLEBUFFER,
-    GLX_RED_SIZE, 4,                                         
-    GLX_GREEN_SIZE, 4,                                                 
-    GLX_BLUE_SIZE, 4,                                                  
-    GLX_DEPTH_SIZE, 4,                                                
+    GLX_RED_SIZE, 4,
+    GLX_GREEN_SIZE, 4,
+    GLX_BLUE_SIZE, 4,
+    GLX_DEPTH_SIZE, 4,
     None
    };
-      
+
       int screen = DefaultScreen(_display);
-      
+
       if((_visualInfo=glXChooseVisual(_display,screen,att))==NULL){
        NSLog(@"glXChooseVisual failed at %s %d",__FILE__,__LINE__);
       }
@@ -91,7 +91,7 @@
 
    _window = XCreateWindow(_display, DefaultRootWindow(_display),
                               _frame.origin.x, _frame.origin.y, _frame.size.width, _frame.size.height,
-                              0, (_visualInfo==NULL)?CopyFromParent:_visualInfo->depth, InputOutput, 
+                              0, (_visualInfo==NULL)?CopyFromParent:_visualInfo->depth, InputOutput,
                               (_visualInfo==NULL)?CopyFromParent:_visualInfo->visual,
                               xattr_mask, &xattr);
 
@@ -99,13 +99,13 @@
 
    Atom atm=XInternAtom(_display, "WM_DELETE_WINDOW", False);
    XSetWMProtocols(_display, _window, &atm , 1);
-      
+
    XSetWindowBackgroundPixmap(_display, _window, None);
 
    _cglWindow = CGLGetWindow(_window);
-      
+
    [(X11Display*)[NSDisplay currentDisplay] setWindow:self forID:_window];
-      
+
    if(styleMask == NSBorderlessWindowMask){
      [[self class] removeDecorationForWindow:_window onDisplay:_display];
     }
@@ -147,7 +147,7 @@
 }
 
 -(void)ensureMapped {
-   if(!_mapped){      
+   if(!_mapped){
       XMapWindow(_display, _window);
       _mapped=YES;
    }
