@@ -23,6 +23,7 @@ COREDATA_EXPORT NSString *const NSDeletedObjectsKey;
 COREDATA_EXPORT NSString *const NSRefreshedObjectsKey;
 COREDATA_EXPORT NSString *const NSInvalidatedObjectsKey;
 COREDATA_EXPORT NSString *const NSInvalidatedAllObjectsKey;
+COREDATA_EXPORT NSString *const NSPersistentStoreSaveConflictsErrorKey;
 
 @interface NSManagedObjectContext : NSObject <NSLocking> {
     NSLock *_lock;

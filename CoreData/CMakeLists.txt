@@ -55,6 +55,7 @@ set(CoreData_sources
     NSPropertyDescription.m
     NSRelationshipDescription.m
     NSXMLPersistentStore.m
+    NSMergeConflict.m
 )
 
 set_source_files_properties(${CoreData_sources} LANGUAGE C)

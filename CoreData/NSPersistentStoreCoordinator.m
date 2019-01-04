@@ -25,6 +25,8 @@ NSString * const NSAddedPersistentStoresKey=@"NSAddedPersistentStoresKey";
 NSString * const NSRemovedPersistentStoresKey=@"NSRemovedPersistentStoresKey";
 NSString * const NSUUIDChangedPersistentStoresKey=@"NSUUIDChangedPersistentStoresKey";
 
+NSString *const NSPersistentStoreSaveConflictsErrorKey = @"conflictList";
+
 @implementation NSPersistentStoreCoordinator
 
 static NSMutableDictionary *_storeTypes=nil;

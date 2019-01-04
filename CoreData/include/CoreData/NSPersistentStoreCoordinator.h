@@ -23,6 +23,7 @@ COREDATA_EXPORT NSString *const NSPersistentStoreCoordinatorStoresDidChangeNotif
 COREDATA_EXPORT NSString *const NSAddedPersistentStoresKey;
 COREDATA_EXPORT NSString *const NSRemovedPersistentStoresKey;
 COREDATA_EXPORT NSString *const NSUUIDChangedPersistentStoresKey;
+COREDATA_EXPORT NSString *const NSPersistentStoreSaveConflictsErrorKey;
 
 @interface NSPersistentStoreCoordinator : NSObject <NSLocking> {
     NSLock *_lock;
