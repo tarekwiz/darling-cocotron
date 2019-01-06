@@ -317,6 +317,19 @@ NSString * const NSAccessibilitySelectedChildrenMovedNotification=@"NSAccessibil
 
 NSString * const NSAccessibilityErrorCodeExceptionInfo=@"NSAccessibilityErrorCodeExceptionInfo";
 
+/* The above constants are probably all wrong */
+/* The one below is right */
+NSString *const NSAccessibilityActivationPointAttribute = @"AXActivationPoint";
+
+/* Undocumented */
+NSString *const NSAccessibilityEventProcessedNotification = @"AXEventProcessed";
+NSString *const NSAccessibilityEventSourceProcessIDKey = @"AXEventSourceProcessIDKey";
+NSString *const NSAccessibilityEventSourceStateIDKey = @"AXEventSourceStateID";
+NSString *const NSAccessibilityEventSourceUserDataKey = @"AXEventSourceUserDataKey";
+NSString *const NSAccessibilityEventTimestampKey = @"AXEventTimestampKey";
+NSString *const NSAccessibilityMainThreadIdleNotification = @"AXMainThreadIdle";
+/* End undocumented */
+
 void NSAccessibilityPostNotification (
    id element,
    NSString *notification
