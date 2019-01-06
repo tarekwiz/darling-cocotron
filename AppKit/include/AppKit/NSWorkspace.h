@@ -15,6 +15,11 @@ APPKIT_EXPORT NSString *const NSWorkspaceWillPowerOffNotification;
 
 APPKIT_EXPORT NSString *const NSWorkspaceRecycleOperation;
 
+APPKIT_EXPORT NSString *const NSWorkspaceLaunchConfigurationAppleEvent;
+APPKIT_EXPORT NSString *const NSWorkspaceLaunchConfigurationArguments;
+APPKIT_EXPORT NSString *const NSWorkspaceLaunchConfigurationEnvironment;
+APPKIT_EXPORT NSString *const NSWorkspaceLaunchConfigurationArchitecture;
+
 @interface NSWorkspace : NSObject {
     NSNotificationCenter *_notificationCenter;
 }

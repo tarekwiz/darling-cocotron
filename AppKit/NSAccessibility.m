@@ -328,6 +328,7 @@ NSString *const NSAccessibilityEventSourceStateIDKey = @"AXEventSourceStateID";
 NSString *const NSAccessibilityEventSourceUserDataKey = @"AXEventSourceUserDataKey";
 NSString *const NSAccessibilityEventTimestampKey = @"AXEventTimestampKey";
 NSString *const NSAccessibilityMainThreadIdleNotification = @"AXMainThreadIdle";
+NSString *const NSAccessibilitySupportsMainThreadIdleNotificationAttribute = @"AXSupportsMainThreadIdleNotification";
 /* End undocumented */
 
 void NSAccessibilityPostNotification (

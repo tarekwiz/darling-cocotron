@@ -12,6 +12,11 @@ NSString * const NSWorkspaceWillPowerOffNotification=@"NSWorkspaceWillPowerOffNo
 
 NSString * const NSWorkspaceRecycleOperation=@"NSWorkspaceRecycleOperation";
 
+NSString *const NSWorkspaceLaunchConfigurationAppleEvent = @"NSWorkspaceLaunchConfigurationAppleEvent";
+NSString *const NSWorkspaceLaunchConfigurationArguments = @"NSWorkspaceLaunchConfigurationArguments";
+NSString *const NSWorkspaceLaunchConfigurationEnvironment = @"NSWorkspaceLaunchConfigurationEnvironment";
+NSString *const NSWorkspaceLaunchConfigurationArchitecture = @"NSWorkspaceLaunchConfigurationArchitecture";
+
 @implementation NSWorkspace
 
 +(NSWorkspace *)sharedWorkspace {

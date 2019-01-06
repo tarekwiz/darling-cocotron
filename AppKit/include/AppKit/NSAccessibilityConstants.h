@@ -323,6 +323,7 @@ APPKIT_EXPORT NSString *const NSAccessibilityEventSourceStateIDKey;
 APPKIT_EXPORT NSString *const NSAccessibilityEventSourceUserDataKey;
 APPKIT_EXPORT NSString *const NSAccessibilityEventTimestampKey;
 APPKIT_EXPORT NSString *const NSAccessibilityMainThreadIdleNotification;
+APPKIT_EXPORT NSString *const NSAccessibilitySupportsMainThreadIdleNotificationAttribute;
 /* End undocumented */
 
 APPKIT_EXPORT NSString *const NSAccessibilityErrorCodeExceptionInfo;
