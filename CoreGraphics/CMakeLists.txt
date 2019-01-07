@@ -6,13 +6,43 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} \
 	-include math.h \
 	-include stdlib.h \
 	-include CoreFoundation/CoreFoundation.h \
-	-include Foundation/Foundation.h \
 	-Wno-nonportable-include-path \
 	-mmacosx-version-min=10.10"
 )
 
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(PC_CAIRO cairo)
+
+set_property(SOURCE 
+	CGAffineTransform.m
+	CGBitmapContext.m
+	CGColor.m
+	CGColorSpace.m
+	CGContext.m
+	CGDataConsumer.m
+	CGDataProvider.m
+	CGDirectDisplay.m
+	CGFont.m
+	CGFunction.m
+	CGGeometry.m
+	CGGradient.m
+	CGImageDestination.m
+	CGImage.m
+	CGImageProperties.m
+	CGImageSource.m
+	CGLayer.m
+	CGLPixelSurface.m
+	CGPath.m
+	CGPattern.m
+	CGPDFContext.m
+	CGPDFDocument.m
+	CGPDFPage.m
+	CGShading.m
+	CGWindow.m
+	CGSubWindow.m
+
+	APPEND PROPERTY COMPILE_FLAGS "-include Foundation/Foundation.h"
+)
 
 include_directories(
 	${CMAKE_SOURCE_DIR}/src/external/foundation/include
@@ -48,7 +78,7 @@ set(CoreGraphics_sources
 	CGDataConsumer.m
 	CGDataProvider.m
 	CGDirectDisplay.m
-	CGEvent.m
+	src/CGEvent.c
 	CGFont.m
 	CGFunction.m
 	CGGeometry.m

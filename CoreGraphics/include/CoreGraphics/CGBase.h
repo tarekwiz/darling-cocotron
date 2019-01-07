@@ -3,7 +3,7 @@
 
 #include <float.h>
 
-// Moved over from our CoreFoudnation
+// Moved over from our CoreFoundation
 
 #ifdef __LP64__
 typedef double CGFloat;

@@ -17,11 +17,10 @@
  along with Darling.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef _CGEVENT_H_
-#define _CGEVENT_H_
+#include <CoreGraphics/CGEvent.h>
+#include <stdio.h>
 
-#include <CoreGraphics/CGEventTypes.h>
-
-extern void CGEventPost(CGEventTapLocation tapLocation, CGEventRef event);
-
-#endif
+void CGEventPost(CGEventTapLocation tapLocation, CGEventRef event)
+{
+	printf("STUB CGEventPost called\n");
+}

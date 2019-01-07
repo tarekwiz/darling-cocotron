@@ -1,7 +1,9 @@
 #import <AppKit/CGEvent.h>
 #import <X11/Xlib.h>
 
-@interface X11Event : CGEvent {
+// Does inheriting from CGEvent make sense? The real CG doesn't use any
+// objc and our CGEvent class was empty.
+@interface X11Event : NSObject {
     XEvent _event;
 }
 

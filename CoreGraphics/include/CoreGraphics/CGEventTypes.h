@@ -17,11 +17,19 @@
  along with Darling.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef _CGEVENT_H_
-#define _CGEVENT_H_
+#ifndef _CGEVENTTYPES_H_
+#define _CGEVENTTYPES_H_
 
-#include <CoreGraphics/CGEventTypes.h>
+#include <CoreFoundation/CFBase.h>
+#include <CoreFoundation/CFAvailability.h>
+#include <CoreGraphics/CGBase.h>
 
-extern void CGEventPost(CGEventTapLocation tapLocation, CGEventRef event);
+typedef struct CF_BRIDGED_TYPE(id) __CGEvent *CGEventRef;
+
+typedef CF_ENUM(uint32_t, CGEventTapLocation) {
+	kCGHIDEventTap = 0,
+	kCGSessionEventTap,
+	kCGAnnotatedSessionEventTap
+};
 
 #endif
