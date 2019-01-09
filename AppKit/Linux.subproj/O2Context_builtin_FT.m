@@ -155,6 +155,7 @@ static void renderFreeTypeBitmap(
    
    if(face==NULL){
     NSLog(@"face is NULL");
+    O2SurfaceUnlock(_surface);
     return;
    }
 
@@ -162,6 +163,7 @@ static void renderFreeTypeBitmap(
 
    if ((ftError = FT_Set_Char_Size(face, 0, fontSize.height * 64, 72.0, 72.0))) {
     NSLog(@"FT_Set_Char_Size returned %d",ftError);
+    O2SurfaceUnlock(_surface);
     return;
    }
     
