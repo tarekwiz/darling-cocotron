@@ -12,7 +12,11 @@
 #import <QuartzCore/CAWindowOpenGLContext.h>
 #import <Foundation/NSProcessInfo.h>
 #import <Foundation/NSException.h>
+#import <Foundation/NSMutableData.h>
+#import <Foundation/NSBundle.h>
 #import <Onyx2D/O2Surface.h>
+#import <Onyx2D/O2ImageSource.h>
+#import <Onyx2D/O2BitmapContext.h>
 #import "O2Context_builtin_FT.h"
 
 #import <X11/Xutil.h>
@@ -44,8 +48,86 @@
       if(!ret)
          ret=DefaultVisual(dpy, DefaultScreen(dpy));
    }
-   
+
    return ret;
+}
+
+static NSData *makeWindowIcon() {
+    static NSMutableData *res;
+
+    if (res != nil) return res;
+
+    // Figure out the path.
+    NSBundle *bundle = [NSBundle mainBundle];
+    NSString *name = [bundle objectForInfoDictionaryKey: @"CFBundleIconFile"];
+    if (name == nil || [name length] == 0) return nil;
+    NSString *path = [bundle pathForImageResource: name];
+    if (path == nil) {
+        NSLog(@"Cannot find an icon file named %@", name);
+    }
+    NSURL *url = [NSURL fileURLWithPath: path];
+
+    O2ImageSource *imageSource = [O2ImageSource newImageSourceWithURL: url options: nil];
+    if (imageSource == nil) {
+        NSLog(@"Cannot parse the icon");
+        return nil;
+    }
+
+    res = [[NSMutableData alloc] initWithCapacity: 32 * 32 * 4 + 2];
+    O2ColorSpace *colorSpace = O2ColorSpaceCreateDeviceRGB();
+
+    // Go over the images, turning them into the required format
+    // and appending them to res.
+    for (NSUInteger i = 0; i < [imageSource count]; i++) {
+
+        O2Image *image = [imageSource createImageAtIndex: i options: nil];
+        NSUInteger width = O2ImageGetWidth(image);
+        NSUInteger height = O2ImageGetHeight(image);
+
+        // Render the image in ARGB.
+        O2BitmapContext *context = (O2BitmapContext *) O2BitmapContextCreate(
+            NULL, width, height,
+            8, width * 4,
+            colorSpace,
+            kO2ImageAlphaPremultipliedFirst | kO2BitmapByteOrder32Host
+        );
+
+        [context drawImage: image inRect: O2RectMake(0, 0, width, height)];
+        int *imageData = O2BitmapContextGetData(context);
+
+        // Convert to the format accepted by Xlib.
+        NSMutableData *data = [NSMutableData dataWithLength: width * height * sizeof(long)];
+        long *dataPtr = (long *) [data mutableBytes];
+        int count = width * height;
+        for (int i = 0; i < count; i++) {
+            dataPtr[i] = imageData[i];
+        }
+
+        struct { long w, h; } size = { width, height };
+        [res appendBytes: &size length: sizeof(size)];
+        [res appendData: data];
+
+        [context release];
+        [image release];
+    }
+
+    [colorSpace release];
+    [imageSource release];
+
+    return res;
+}
+
+- (void) setWindowIcon {
+
+    NSData *data = makeWindowIcon();
+
+    if (data == nil) return;
+
+    XChangeProperty(_display, _window,
+        XInternAtom(_display, "_NET_WM_ICON", False),
+        XInternAtom(_display, "CARDINAL", False),
+        32, PropModeReplace,
+        [data bytes], [data length] / sizeof(long));
 }
 
 
@@ -118,6 +200,9 @@
    if(styleMask == NSBorderlessWindowMask){
      [[self class] removeDecorationForWindow:_window onDisplay:_display];
     }
+
+   [self setWindowIcon];
+
    return self;
 }
 
