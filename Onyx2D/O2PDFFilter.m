@@ -19,10 +19,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <string.h>
 #import <Onyx2D/O2ImageSource_JPEG.h>
 
-NSData *O2PDFFilterWithName(const char *name,NSData *data,O2PDFDictionary *parameters) {
-   return [O2PDFFilter decodeWithName:name data:data parameters:parameters];
-}
-
 @implementation O2PDFFilter
 
 
@@ -40,11 +36,15 @@ NSData *O2PDFFilterWithName(const char *name,NSData *data,O2PDFDictionary *param
    return LZWDecodeWithExpectedResultLength(data,[data length]*10);
 }
 
-+(NSData *)decodeWithName:(const char *)name data:(NSData *)data parameters:(O2PDFDictionary *)parameters {
++ (NSData *) decodeWithName: (const char *) name
+                       data: (NSData *) data
+                 parameters: (O2PDFDictionary *) parameters
+                bytesPerRow: (size_t *) pBytesPerRow {
+
    if((strcmp(name,"FlateDecode")==0) || (strcmp(name,"FL")==0))
      data=[self FlateDecode_data:data parameters:parameters];
    else if((strcmp(name,"DCTDecode")==0) || (strcmp(name,"DCT")==0)){
-    return O2DCTDecode(data);
+    return O2DCTDecode(data, pBytesPerRow);
    }
    else if((strcmp(name,"LZWDecode")==0) || (strcmp(name,"LZW")==0)){
     data=LZWDecodeWithExpectedResultLength(data,[data length]*10);
@@ -53,9 +53,9 @@ NSData *O2PDFFilterWithName(const char *name,NSData *data,O2PDFDictionary *param
     O2PDFError(__FILE__,__LINE__,@"Unknown O2PDFFilter name = %s, parameters=%@",name,parameters);
     return nil;
    }
-    
+
    O2PDFInteger predictor=0;
-   
+
     if([parameters getIntegerForKey:"Predictor" value:&predictor]){
      if(predictor>1){
       NSMutableData *mutable=[NSMutableData data];
@@ -66,24 +66,28 @@ NSData *O2PDFFilterWithName(const char *name,NSData *data,O2PDFDictionary *param
       O2PDFInteger columns;
       int          bytesPerRow;
       int          row,rowLength,numberOfRows;
-      
+
       if(![parameters getIntegerForKey:"Colors" value:&colors])
        colors=1;
       if(![parameters getIntegerForKey:"BitsPerComponent" value:&bitsPerComponent])
        bitsPerComponent=8;
       if(![parameters getIntegerForKey:"Columns" value:&columns])
        columns=1;
-       
+
 //NSLog(@"predictor=%d,colors=%d,bpc=%d,columns=%d,length=%d",predictor,colors,bitsPerComponent,columns,length);
 
       bytesPerRow=(((colors*bitsPerComponent)*columns)+7)/8;
       rowLength=bytesPerRow+1;
       numberOfRows=length/rowLength;
 
+      if (pBytesPerRow != NULL) {
+          *pBytesPerRow = bytesPerRow;
+      }
+
 #if 0
       if((length%rowLength)!=0)
        ;//NSLog(@"length mod rowLength=%d",length%rowLength);
-        
+
 #endif
       char *change=__builtin_alloca(rowLength);
        

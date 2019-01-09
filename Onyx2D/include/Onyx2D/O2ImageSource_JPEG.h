@@ -15,6 +15,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     CFDataRef _jpg;
 }
 
-NSData *O2DCTDecode(NSData *data);
+NSData *O2DCTDecode(NSData *data, size_t *pBytesPerRow);
 
 @end

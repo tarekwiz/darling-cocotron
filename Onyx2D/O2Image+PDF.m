@@ -273,11 +273,11 @@ const char *O2ImageNameWithIntent(O2ColorRenderingIntent intent){
     softMask=[self imageWithPDFObject:softMaskStream];
    }
     
-    int               bitsPerPixel=componentsPerPixel*bitsPerComponent;
-    int               bytesPerRow=((width*bitsPerPixel)+7)/8;
-    NSData           *data=[stream data];
-    O2DataProvider * provider;
-    O2Image *image=NULL;
+    NSData *data=[stream data];
+    int bitsPerPixel=componentsPerPixel*bitsPerComponent;
+    int bytesPerRow = ([stream bytesPerRow] != 0) ? [stream bytesPerRow] : ((width*bitsPerPixel)+7)/8;
+    O2DataProvider *provider;
+    O2Image *image = NULL;
        
 //     NSLog(@"width=%d,height=%d,bpc=%d,bpp=%d,bpr=%d,cpp=%d",width,height,bitsPerComponent,bitsPerPixel,bytesPerRow,componentsPerPixel);
      

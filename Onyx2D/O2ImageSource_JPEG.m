@@ -37,15 +37,19 @@ static O2ImageDecoder *createImageDecoderWithDataProvider(O2DataProviderRef data
 #endif
 }
 
-NSData *O2DCTDecode(NSData *data) {
-    O2DataProviderRef dataProvider=O2DataProviderCreateWithCFData((CFDataRef)data);
-    O2ImageDecoderRef decoder=createImageDecoderWithDataProvider(dataProvider);
-    CFDataRef result=O2ImageDecoderCreatePixelData(decoder);
-    
+NSData *O2DCTDecode(NSData *data, size_t *pBytesPerRow) {
+    O2DataProviderRef dataProvider = O2DataProviderCreateWithCFData((CFDataRef) data);
+    O2ImageDecoderRef decoder = createImageDecoderWithDataProvider(dataProvider);
+    CFDataRef result = O2ImageDecoderCreatePixelData(decoder);
+
+    if (pBytesPerRow != NULL) {
+        *pBytesPerRow = O2ImageDecoderGetBytesPerRow(decoder);
+    }
+
     [decoder release];
     O2DataProviderRelease(dataProvider);
-    
-    return (NSData *)result;
+
+    return (NSData *) result;
 }
 
 +(BOOL)isPresentInDataProvider:(O2DataProvider *)provider {

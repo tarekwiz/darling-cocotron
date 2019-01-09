@@ -15,6 +15,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     O2PDFDictionary *_dictionary;
     NSData *_data;
     NSData *_resultData;
+    size_t _bytesPerRow;
     O2PDFxref *_xref;
 }
 
@@ -28,5 +29,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 - (O2PDFDictionary *)dictionary;
 - (NSData *)data;
 - (NSMutableData *)mutableData;
+- (size_t) bytesPerRow;
 
 @end

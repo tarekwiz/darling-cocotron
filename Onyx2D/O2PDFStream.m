@@ -19,9 +19,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 -initWithDictionary:(O2PDFDictionary *)dictionary xref:(O2PDFxref *)xref position:(O2PDFInteger)position {
    O2PDFInteger length;
-   
+
    _dictionary=[dictionary retain];
-   
+
    if(![_dictionary getIntegerForKey:"Length" value:&length])
     _data=nil;
 
@@ -80,6 +80,13 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    return _xref;
 }
 
+- (size_t) bytesPerRow {
+    // Initializes _bytesPerRow as a side effect.
+    [self data];
+
+    return _bytesPerRow;
+}
+
 -(NSData *)resultData {
    O2PDFInteger     length;
    NSData          *result;
@@ -99,7 +106,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     if(![_dictionary getDictionaryForKey:"DecodeParms" value:&parameters])
      parameters=nil;
 
-    result=O2PDFFilterWithName(name,result,parameters);
+    result = [O2PDFFilter decodeWithName: name
+                                    data: result
+                              parameters: parameters
+                             bytesPerRow: &_bytesPerRow];
    }
    else if([_dictionary getArrayForKey:"Filter" value:&filters]){
     O2PDFArray *parameterArray;
@@ -115,11 +125,15 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
      }
      if(![parameterArray getDictionaryAtIndex:i value:&parameters])
       parameters=nil;
-	 result=O2PDFFilterWithName(name,result,parameters);
+      result = [O2PDFFilter decodeWithName: name
+                                      data: result
+                                parameters: parameters
+                               bytesPerRow: &_bytesPerRow];
+
     }
-    
+
    }
-     
+
    return result;
 }
 

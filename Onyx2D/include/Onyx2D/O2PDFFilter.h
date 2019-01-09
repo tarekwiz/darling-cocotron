@@ -10,13 +10,15 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 @class O2PDFDictionary, NSData;
 
-NSData *O2PDFFilterWithName(const char *name, NSData *data, O2PDFDictionary *parameters);
-
 @interface O2PDFFilter : NSObject {
     O2PDFDictionary *_parameters;
 }
 
-+ (NSData *)decodeWithName:(const char *)name data:(NSData *)data parameters:(O2PDFDictionary *)parameters;
++ (NSData *) decodeWithName: (const char *) name
+                       data: (NSData *) data
+                 parameters: (O2PDFDictionary *) parameters
+                bytesPerRow: (size_t *) pBytesPerRow;
+
 + (NSData *)LZWDecode_data:(NSData *)data parameters:(O2PDFDictionary *)parameters;
 
 @end
