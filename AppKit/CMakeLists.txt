@@ -302,7 +302,6 @@ set(AppKit_sources
 
 	Linux.subproj/KTFont_FT.m
 	Linux.subproj/O2Context_builtin_FT.m
-	# Linux.subproj/O2Font_FT.m is built in Onyx2D
 
 	NSImageView.m
 	NSActionCell.m

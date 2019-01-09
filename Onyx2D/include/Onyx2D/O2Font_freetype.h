@@ -7,8 +7,11 @@
 #define __linux__
 #endif
 
-#include <ft2build.h>
-#include FT_FREETYPE_H
+#import <ft2build.h>
+#import FT_FREETYPE_H
+#import FT_RENDER_H
+
+#import <fontconfig/fontconfig.h>
 
 #ifdef DARLING
 #undef __linux__
@@ -22,9 +25,13 @@
     O2Encoding *_winAnsiEncoding;
 }
 
-- initWithDataProvider:(O2DataProviderRef)provider;
+- (instancetype) initWithFace: (FT_Face) face;
+- (instancetype) initWithDataProvider: (O2DataProviderRef) provider;
 
 FT_Face O2FontFreeTypeFace(O2Font_freetype *self);
+
+FT_Library O2FontSharedFreeTypeLibrary();
+FcConfig *O2FontSharedFontConfig();
 
 @end
 

@@ -9,7 +9,7 @@
 #import "KTFont_FT.h"
 #import <AppKit/KTFont.h>
 #import <AppKit/NSRaise.h>
-#import "O2Font_FT.h"
+#import <Onyx2D/O2Font_freetype.h>
 #import <AppKit/NSFontTypeface.h>
 
 @implementation KTFont(KTFont_FT)
@@ -46,7 +46,7 @@
 }
 
 -(void)getGlyphs:(CGGlyph *)glyphs forCharacters:(const unichar *)characters length:(NSUInteger)length {
-   O2Font_FT *o2Font=(O2Font_FT *)_font;
+   O2Font_freetype *o2Font=(O2Font_freetype *)_font;
    FT_Face    face=[o2Font face];
    
    int i;
@@ -57,7 +57,7 @@
 }
 
 -(void)getAdvancements:(CGSize *)advancements forGlyphs:(const CGGlyph *)glyphs count:(NSUInteger)count {
-   O2Font_FT *o2Font=(O2Font_FT *)_font;
+   O2Font_freetype *o2Font=(O2Font_freetype *)_font;
    FT_Face    face=[o2Font face];
 
    int i;
@@ -71,7 +71,7 @@
 }
 
 -(CGPoint)positionOfGlyph:(CGGlyph)current precededByGlyph:(CGGlyph)previous isNominal:(BOOL *)isNominalp {
-   O2Font_FT *o2Font=(O2Font_FT *)_font;
+   O2Font_freetype *o2Font=(O2Font_freetype *)_font;
    FT_Face    face=[o2Font face];
 
    *isNominalp=YES;

@@ -142,8 +142,6 @@ set(Onyx2D_sources
 	O2TTFDecoder.m
 	O2zlib.m
 	VGPath.m
-
-	../AppKit/Linux.subproj/O2Font_FT.m
 )
 
 set_source_files_properties(${Onyx2D_sources} LANGUAGE C)

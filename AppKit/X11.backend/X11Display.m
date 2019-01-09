@@ -22,10 +22,11 @@
 #import <AppKit/NSImage.h>
 #import <AppKit/KTFont_FT.h>
 #import <AppKit/NSRaise.h>
-#import <AppKit/O2Font_FT.h>
 #import <AppKit/NSFontManager.h>
 #import <AppKit/NSFontTypeface.h>
 #import <AppKit/NSWindow.h>
+
+#import <Onyx2D/O2Font_freetype.h>
 
 #import <OpenGL/CGLInternal.h>
 

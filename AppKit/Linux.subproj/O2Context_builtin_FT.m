@@ -1,6 +1,6 @@
 #import "O2Context_builtin_FT.h"
 #import <Onyx2D/O2GraphicsState.h>
-#import "O2Font_FT.h"
+#import <Onyx2D/O2Font_freetype.h>
 #import <Onyx2D/O2Paint_color.h>
 
 @implementation O2Context_builtin_FT
@@ -147,7 +147,7 @@ static void renderFreeTypeBitmap(
 
    [self establishFontStateInDeviceIfDirty];
 
-   O2Font_FT *font=(O2Font_FT *)gState->_font;
+   O2Font_freetype *font = (O2Font_freetype *)gState->_font;
    FT_Face    face=[font face];
 
    int        i;
