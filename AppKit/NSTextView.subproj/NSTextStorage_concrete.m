@@ -143,7 +143,7 @@ static inline void replaceCharactersInRangeWithAttributedString(NSTextStorage_co
 }
 
 -(NSMutableString *)mutableString {
-   return [[[NSClassFromString(@"NSMutableString_proxyToMutableAttributedString") allocWithZone:NULL] performSelector:@selector(initWithMutableAttributedString:) withObject:self] autorelease];
+   return [[[NSClassFromString(@"NSMutableStringProxyForMutableAttributedString") allocWithZone:NULL] performSelector:@selector(initWithMutableAttributedString:) withObject:self] autorelease];
 }
 
 -(void)fixAttributesAfterEditingRange:(NSRange)range {
