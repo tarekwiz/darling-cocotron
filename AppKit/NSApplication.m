@@ -426,36 +426,39 @@ id NSApp=nil;
 
 -(BOOL)openFiles
 {
-   BOOL opened = NO;
-   if(_delegate) {
-      id nsOpen = [[NSUserDefaults standardUserDefaults] objectForKey:@"NSOpen"];
-      NSArray *openFiles = nil;
-      if ([nsOpen isKindOfClass:[NSString class]] && [nsOpen length]) {
-         openFiles = [NSArray arrayWithObject:nsOpen];
-      } else if ([nsOpen isKindOfClass:[NSArray class]]) {
-         openFiles = nsOpen;
-      }
-      if ([openFiles count] > 0) {
-         if ([openFiles count] == 1 && [_delegate respondsToSelector: @selector(application:openFile:)]) {
+    BOOL opened = NO;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
-            if([_delegate application: self openFile: [openFiles lastObject]]) {
-               opened = YES;
-            }
-         } else {
-            if ([_delegate respondsToSelector: @selector(application:openFiles:)]) {
-               [_delegate application: self openFiles: openFiles];
-               opened = YES;
+    id nsOpen = [defaults objectForKey: @"NSOpen"];
+    NSArray *openFiles = nil;
 
-            } else if ([_delegate respondsToSelector: @selector(application:openFile:)]) {
-               for (NSString *aFile in openFiles) {
-                  opened |= [_delegate application: self openFile: aFile];
-               }
-            }
-         }
-      }
-      [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"NSOpen"];
-   }
-   return opened;
+    if ([nsOpen isKindOfClass:[NSString class]] && [nsOpen length]) {
+        openFiles = [NSArray arrayWithObject: nsOpen];
+    } else if ([nsOpen isKindOfClass:[NSArray class]]) {
+        openFiles = nsOpen;
+    }
+
+    if ([openFiles count] == 0) {
+        return NO;
+    }
+
+    if ([openFiles count] == 1 && [_delegate respondsToSelector: @selector(application:openFile:)]) {
+        opened = [_delegate application: self openFile: [openFiles lastObject]];
+    } else if ([_delegate respondsToSelector: @selector(application:openFiles:)]) {
+        [_delegate application: self openFiles: openFiles];
+        opened = YES;
+    } else {
+        id target = _delegate;
+        if (![_delegate respondsToSelector: @selector(application:openFile:)]) {
+            target = [NSDocumentController sharedDocumentController];
+        }
+        for (NSString *aFile in openFiles) {
+            opened |= [target application: self openFile: aFile];
+        }
+    }
+    [defaults removeObjectForKey: @"NSOpen"];
+
+    return opened;
 }
 
 -(void)finishLaunching {
