@@ -6,10 +6,34 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. */
 
+#include <CoreFoundation/CoreFoundation.h>
+
 #import <CoreGraphics/CGGeometry.h>
 
 @class O2ColorSpace;
 typedef O2ColorSpace *CGColorSpaceRef;
+
+extern const CFStringRef kCGColorSpaceGenericGray;
+extern const CFStringRef kCGColorSpaceGenericRGB;
+extern const CFStringRef kCGColorSpaceGenericCMYK;
+extern const CFStringRef kCGColorSpaceDisplayP3;
+extern const CFStringRef kCGColorSpaceGenericRGBLinear;
+extern const CFStringRef kCGColorSpaceAdobeRGB1998;
+extern const CFStringRef kCGColorSpaceSRGB;
+extern const CFStringRef kCGColorSpaceGenericGrayGamma2_2;
+extern const CFStringRef kCGColorSpaceGenericXYZ;
+extern const CFStringRef kCGColorSpaceGenericLab;
+extern const CFStringRef kCGColorSpaceACESCGLinear;
+extern const CFStringRef kCGColorSpaceITUR_709;
+extern const CFStringRef kCGColorSpaceITUR_2020;
+extern const CFStringRef kCGColorSpaceROMMRGB;
+extern const CFStringRef kCGColorSpaceDCIP3;
+extern const CFStringRef kCGColorSpaceExtendedSRGB;
+extern const CFStringRef kCGColorSpaceLinearSRGB;
+extern const CFStringRef kCGColorSpaceExtendedLinearSRGB;
+extern const CFStringRef kCGColorSpaceExtendedGray;
+extern const CFStringRef kCGColorSpaceLinearGray;
+extern const CFStringRef kCGColorSpaceExtendedLinearGray;
 
 typedef enum {
     kCGRenderingIntentDefault,
