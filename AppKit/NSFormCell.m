@@ -221,4 +221,34 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    return rect;
 }
 
+- (void) editWithFrame: (NSRect) frame
+                inView: (NSView *) view
+                editor: (NSText *) editor
+              delegate: (id) delegate
+                 event: (NSEvent *) event {
+
+   frame = [self titleRectForBounds: frame];
+   [super editWithFrame: frame
+                 inView: view
+                 editor: editor
+               delegate: delegate
+                  event: event];
+}
+
+- (void) selectWithFrame: (NSRect) frame
+                  inView: (NSView *) view
+                  editor: (NSText *) editor
+                delegate: (id) delegate
+                   start: (NSInteger) location
+                  length: (NSInteger) length {
+
+   frame = [self titleRectForBounds: frame];
+   [super selectWithFrame: frame
+                   inView: view
+                   editor: editor
+                 delegate: delegate
+                    start: location
+                   length: length];
+}
+
 @end
