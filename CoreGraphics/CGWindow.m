@@ -8,6 +8,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <CoreGraphics/CGWindow.h>
 #import <Onyx2D/O2Exceptions.h>
 
+const CFStringRef kCGWindowAlpha = CFSTR("kCGWindowAlpha");
+const CFStringRef kCGWindowBounds = CFSTR("kCGWindowBounds");
+const CFStringRef kCGWindowLayer = CFSTR("kCGWindowLayer");
+const CFStringRef kCGWindowOwnerPID = CFSTR("kCGWindowOwnerPID");
+
 @implementation CGWindow
 
 -(void)setDelegate:delegate {

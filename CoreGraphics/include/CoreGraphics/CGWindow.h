@@ -10,6 +10,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <CoreGraphics/CGWindowLevel.h>
 #import <CoreGraphics/CGSubWindow.h>
 #import <OpenGL/CGLTypes.h>
+#include <CoreFoundation/CoreFoundation.h>
+
+extern const CFStringRef kCGWindowAlpha;
+extern const CFStringRef kCGWindowBounds;
+extern const CFStringRef kCGWindowLayer;
+extern const CFStringRef kCGWindowOwnerPID;
 
 @class O2Context, CGEvent;
 
