@@ -3,7 +3,7 @@
 #import <QuartzCore/CAMediaTiming.h>
 #import <QuartzCore/CAAction.h>
 
-@class CAMediaTimingFunction;
+@class CAMediaTimingFunction, CAPropertyAnimation;
 
 CA_EXPORT NSString *const kCATransitionFade;
 CA_EXPORT NSString *const kCATransitionMoveIn;
@@ -44,7 +44,34 @@ CA_EXPORT NSString *const kCATransitionFromBottom;
 - (void)animationDidStop:(CAAnimation *)animation finished:(BOOL)finished;
 @end
 
-#import <QuartzCore/CAPropertyAnimation.h>
-#import <QuartzCore/CABasicAnimation.h>
+@interface CAPropertyAnimation : CAAnimation {
+    NSString *_keyPath;
+    BOOL _additive;
+    BOOL _cumulative;
+}
+
++ animationWithKeyPath:(NSString *)keyPath;
+@property(copy) NSString *keyPath;
+@property(getter=isAdditive) BOOL additive;
+@property(getter=isCumulative) BOOL cumulative;
+
+@end
+
+@interface CAKeyframeAnimation : CAPropertyAnimation
+
+@end
+
+@interface CABasicAnimation : CAPropertyAnimation {
+    id _fromValue;
+    id _toValue;
+    id _byValue;
+}
+
+@property(retain) id fromValue;
+@property(retain) id toValue;
+@property(retain) id byValue;
+
+@end
+
 #import <QuartzCore/CATransition.h>
 #import <QuartzCore/CAAnimationGroup.h>

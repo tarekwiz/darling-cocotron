@@ -1,6 +1,9 @@
-#import <Foundation/NSObject.h>
+#import <Foundation/Foundation.h>
 #import <ApplicationServices/ApplicationServices.h>
 #import <CoreVideo/CoreVideo.h>
+#import <QuartzCore/CABase.h>
+
+CA_EXPORT NSString *const kCARendererColorSpace;
 
 @class CALayer, O2Surface;
 

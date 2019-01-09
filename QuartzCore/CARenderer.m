@@ -6,6 +6,8 @@
 #import <OpenGL/OpenGL.h>
 #import <Onyx2D/O2Surface.h>
 
+NSString *const kCARendererColorSpace = @"kCARendererColorSpace";
+
 @interface CALayer(private)
 -(void)_setContext:(CALayerContext *)context;
 -(void)_setTextureId:(NSNumber *)value;

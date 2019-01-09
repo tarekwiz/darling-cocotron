@@ -20,6 +20,9 @@ CA_EXPORT NSString *const kCAFilterLinear;
 CA_EXPORT NSString *const kCAFilterNearest;
 CA_EXPORT NSString *const kCAFilterTrilinear;
 
+CA_EXPORT NSString *const kCAGravityResizeAspect;
+CA_EXPORT NSString *const kCAGravityResizeAspectFill;
+
 @interface CALayer : NSObject {
     CALayerContext *_context;
     CALayer *_superlayer;
@@ -84,5 +87,14 @@ CA_EXPORT NSString *const kCAFilterTrilinear;
 
 - (void)displayLayer:(CALayer *)layer;
 - (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)context;
+
+@end
+
+@protocol CALayoutManager <NSObject>
+@optional
+
+- (CGSize)preferredSizeOfLayer:(CALayer *)layer;
+- (void)invalidateLayoutOfLayer:(CALayer *)layer;
+- (void)layoutSublayersOfLayer:(CALayer *)layer;
 
 @end

@@ -40,6 +40,7 @@ set(QuartzCore_sources
 	CABasicAnimation.m
 	CALayerContext.m
 	CALayer.m
+	CATextLayer.m
 	CAMediaTimingFunction.m
 	CAPropertyAnimation.m
 	CARenderer.m
@@ -58,6 +59,8 @@ set(QuartzCore_sources
 	CIImage.m
 	CILinearGradient.m
 	CIVector.m
+	CAConstraintLayoutManager.m
+	CAFilter.m
 )
 
 set_source_files_properties(${QuartzCore_sources} LANGUAGE C)

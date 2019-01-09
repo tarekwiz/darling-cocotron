@@ -4,9 +4,12 @@
 #import <QuartzCore/CATransaction.h>
 #import <Foundation/NSDictionary.h>
 
-NSString * const kCAFilterLinear=@"linear";
-NSString * const kCAFilterNearest=@"nearest";
-NSString * const kCAFilterTrilinear=@"trilinear";
+NSString *const kCAFilterLinear=@"linear";
+NSString *const kCAFilterNearest=@"nearest";
+NSString *const kCAFilterTrilinear=@"trilinear";
+
+NSString *const kCAGravityResizeAspect = @"resizeAspect";
+NSString *const kCAGravityResizeAspectFill = @"resizeAspectFill";
 
 @implementation CALayer
 
