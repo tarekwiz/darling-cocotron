@@ -22,6 +22,7 @@ static NSDictionary *sNormalMenuTextAttributes = nil;
 static NSDictionary *sSelectedMenuTextAttributes = nil;
 static NSDictionary *sDimmedMenuTextAttributes = nil;
 static NSDictionary *sDimmedMenuTextShadowAttributes = nil;
+static NSDictionary *sScrollerButtonAttributes = nil;
 
 + (void)initialize
 {
@@ -46,6 +47,11 @@ static NSDictionary *sDimmedMenuTextShadowAttributes = nil;
 											menuFont,NSFontAttributeName,
 											[NSColor whiteColor],NSForegroundColorAttributeName,
 											nil] retain];
+
+                sScrollerButtonAttributes = [[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                         [NSFont labelFontOfSize: 8], NSFontAttributeName,
+                                                                         [NSColor grayColor], NSForegroundColorAttributeName,
+                                                                         nil] retain];
 	}
 }
 
@@ -540,37 +546,42 @@ static NSDictionary *sDimmedMenuTextShadowAttributes = nil;
 @implementation NSGraphicsStyle (NSScroller)
 
 -(void)drawScrollerButtonInRect:(NSRect)rect enabled:(BOOL)enabled pressed:(BOOL)pressed vertical:(BOOL)vertical upOrLeft:(BOOL)upOrLeft {
+/*
    unichar code=vertical?(upOrLeft?0x74:0x75):(upOrLeft?0x33:0x34);
    Class   class;
    NSInterfacePart *arrow;
-   
+
    if(enabled)
     class=[NSInterfacePartAttributedString class];
    else
     class=[NSInterfacePartDisabledAttributedString class];
 
    arrow=[[[class alloc] initWithMarlettCharacter:code] autorelease];
-   
-   if(!NSIsEmptyRect(rect)){
-    NSSize arrowSize=[arrow size];
+*/
+   NSString *arrow = vertical ?
+              (upOrLeft ? @"▲" : @"▼"):
+              (upOrLeft ? @"◀" : @"▶");
 
-    if(pressed)
-     NSInterfaceDrawDepressedScrollerButton(rect,rect);
+   if(!NSIsEmptyRect(rect)){
+    NSSize arrowSize=[arrow sizeWithAttributes: sScrollerButtonAttributes];
+
+    if (pressed)
+        [self drawPushButtonPressedInRect: rect];
     else
-     NSInterfaceDrawScrollerButton(rect,rect);
+        [self drawPushButtonNormalInRect: rect defaulted: NO];
 
     if(rect.size.height>8 && rect.size.width>8){
      NSPoint point=rect.origin;
 
      point.x+=floor((rect.size.width-arrowSize.width)/2);
      point.y+=floor((rect.size.height-arrowSize.height)/2);
-     [arrow drawAtPoint:point];
+     [arrow drawAtPoint: point withAttributes: sScrollerButtonAttributes];
     }
    }
 }
 
 -(void)drawScrollerKnobInRect:(NSRect)rect vertical:(BOOL)vertical highlight:(BOOL)highlight {
-   NSDrawButton(rect,rect);
+    [self drawPushButtonNormalInRect: rect defaulted: NO];
 }
 
 -(void)drawScrollerTrackInRect:(NSRect)rect vertical:(BOOL)vertical upOrLeft:(BOOL)upOrLeft {
