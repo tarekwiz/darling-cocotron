@@ -811,13 +811,21 @@ forSaveOperation:(NSSaveOperationType)operation
 // FIX, message delegate
 }
 
--(void)close {
-   int count=[_windowControllers count];
-   
-   while(--count>=0)
-    [[_windowControllers objectAtIndex:count] close];
+- (void) close {
 
-   [[NSDocumentController sharedDocumentController] removeDocument:self];
+    // Make sure the controllers don't call -close on self again.
+
+    NSArray *controllers = _windowControllers;
+    _windowControllers = [NSMutableArray new];
+
+    for (NSWindowController *controller in controllers) {
+        [controller setShouldCloseDocument: NO];
+        [controller close];
+    }
+
+    [controllers release];
+
+    [[NSDocumentController sharedDocumentController] removeDocument: self];
 }
 
 -(void)canCloseDocumentWithDelegate:delegate shouldCloseSelector:(SEL)selector contextInfo:(void *)info 
