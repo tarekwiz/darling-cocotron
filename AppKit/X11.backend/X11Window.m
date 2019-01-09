@@ -10,6 +10,7 @@
 #import <AppKit/NSPanel.h>
 #import <AppKit/NSRaise.h>
 #import <QuartzCore/CAWindowOpenGLContext.h>
+#import <Foundation/NSProcessInfo.h>
 #import <Foundation/NSException.h>
 #import <Onyx2D/O2Surface.h>
 #import "O2Context_builtin_FT.h"
@@ -99,6 +100,14 @@
 
    Atom atm=XInternAtom(_display, "WM_DELETE_WINDOW", False);
    XSetWMProtocols(_display, _window, &atm , 1);
+
+   const char *name = [[[NSProcessInfo processInfo] processName] UTF8String];
+
+   XClassHint classHint = {
+       .res_name = (char *) name,
+       .res_class = (char *) name
+   };
+   XSetClassHint(_display, _window, &classHint);
 
    XSetWindowBackgroundPixmap(_display, _window, None);
 
