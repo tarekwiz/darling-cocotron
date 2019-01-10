@@ -85,6 +85,26 @@ NSString *const NSWebResourceLoadDelegateDocumentOption = @"WebResourceLoadDeleg
 NSString *const NSTextSizeMultiplierDocumentOption = @"TextSizeMultiplier";
 NSString *const NSFileTypeDocumentOption = @"UTI";
 
+NSString *const NSPlainTextDocumentType = @"NSPlainText";
+NSString *const NSRTFTextDocumentType = @"NSRTF";
+NSString *const NSRTFDTextDocumentType = @"NSRTFD";
+NSString *const NSHTMLTextDocumentType = @"NSHTML";
+NSString *const NSMacSimpleTextDocumentType = @"NSMacSimpleText";
+NSString *const NSDocFormatTextDocumentType = @"NSDocFormat";
+NSString *const NSWordMLTextDocumentType = @"NSWordML";
+NSString *const NSWebArchiveTextDocumentType = @"NSWebArchive";
+NSString *const NSOfficeOpenXMLTextDocumentType = @"NSOfficeOpenXML";
+NSString *const NSOpenDocumentTextDocumentType = @"NSOpenDocument";
+
+NSString *const NSTextLayoutSectionOrientation = @"NSTextLayoutSectionOrientation";
+NSString *const NSTextLayoutSectionRange = @"NSTextLayoutSectionRange";
+
+NSString *const NSCharacterShapeAttributeName = @"NSCharacterShape";
+NSString *const NSUsesScreenFontsDocumentAttribute = @"UsesScreenFonts";
+
+NSUInteger NSUnderlineStrikethroughMask = 0x4000;
+NSUInteger NSUnderlineByWordMask = 0x8000;
+
 @implementation NSAttributedString(NSAttributedString_AppKit)
 
 #pragma mark -

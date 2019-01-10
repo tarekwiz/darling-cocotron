@@ -82,6 +82,26 @@ APPKIT_EXPORT NSString *const NSWebResourceLoadDelegateDocumentOption;
 APPKIT_EXPORT NSString *const NSTextSizeMultiplierDocumentOption;
 APPKIT_EXPORT NSString *const NSFileTypeDocumentOption;
 
+APPKIT_EXPORT NSString *const NSPlainTextDocumentType;
+APPKIT_EXPORT NSString *const NSRTFTextDocumentType;
+APPKIT_EXPORT NSString *const NSRTFDTextDocumentType;
+APPKIT_EXPORT NSString *const NSHTMLTextDocumentType;
+APPKIT_EXPORT NSString *const NSMacSimpleTextDocumentType;
+APPKIT_EXPORT NSString *const NSDocFormatTextDocumentType;
+APPKIT_EXPORT NSString *const NSWordMLTextDocumentType;
+APPKIT_EXPORT NSString *const NSWebArchiveTextDocumentType;
+APPKIT_EXPORT NSString *const NSOfficeOpenXMLTextDocumentType;
+APPKIT_EXPORT NSString *const NSOpenDocumentTextDocumentType;
+
+APPKIT_EXPORT NSString *const NSTextLayoutSectionOrientation;
+APPKIT_EXPORT NSString *const NSTextLayoutSectionRange;
+
+APPKIT_EXPORT NSString *const NSCharacterShapeAttributeName;
+APPKIT_EXPORT NSString *const NSUsesScreenFontsDocumentAttribute;
+
+APPKIT_EXPORT NSUInteger NSUnderlineStrikethroughMask;
+APPKIT_EXPORT NSUInteger NSUnderlineByWordMask;
+
 enum {
     NSSpellingStateSpellingFlag = 0x01,
     NSSpellingStateGrammarFlag = 0x02,
