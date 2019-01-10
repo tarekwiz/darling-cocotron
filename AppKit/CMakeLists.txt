@@ -373,6 +373,7 @@ set(AppKit_sources
 
 	NSStepper.m
 	NSAccessibility.m
+	NSAppearance.m
 )
 
 set_source_files_properties(${AppKit_sources} LANGUAGE C)

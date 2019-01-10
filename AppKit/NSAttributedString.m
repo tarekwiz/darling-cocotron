@@ -37,8 +37,53 @@ NSString * const NSShadowAttributeName=@"NSShadowAttributeName";
 NSString * const NSExpansionAttributeName=@"NSExpansionAttributeName";
 NSString * const NSCursorAttributeName=@"NSCursorAttributeName";
 NSString * const NSToolTipAttributeName=@"NSToolTipAttributeName";
-NSString * const NSBackgroundColorDocumentAttribute=@"NSBackgroundColorDocumentAttribute";
 NSString * const NSSpellingStateAttributeName=@"NSSpellingStateAttributeName"; // temporary attribute
+
+NSString *const NSDocumentTypeDocumentAttribute = @"DocumentType";
+NSString *const NSConvertedDocumentAttribute = @"Converted";
+NSString *const NSFileTypeDocumentAttribute = @"UTI";
+NSString *const NSTitleDocumentAttribute = @"NSTitleDocumentAttribute";
+NSString *const NSCompanyDocumentAttribute = @"NSCompanyDocumentAttribute";
+NSString *const NSCopyrightDocumentAttribute = @"NSCopyrightDocumentAttribute";
+NSString *const NSSubjectDocumentAttribute = @"NSSubjectDocumentAttribute";
+NSString *const NSAuthorDocumentAttribute = @"NSAuthorDocumentAttribute";
+NSString *const NSKeywordsDocumentAttribute = @"NSKeywordsDocumentAttribute";
+NSString *const NSCommentDocumentAttribute = @"NSCommentDocumentAttribute";
+NSString *const NSEditorDocumentAttribute = @"NSEditorDocumentAttribute";
+NSString *const NSCreationTimeDocumentAttribute = @"NSCreationTimeDocumentAttribute";
+NSString *const NSModificationTimeDocumentAttribute = @"NSModificationTimeDocumentAttribute";
+NSString *const NSManagerDocumentAttribute = @"NSManagerDocumentAttribute";
+NSString *const NSCategoryDocumentAttribute = @"NSCategoryDocumentAttribute";
+NSString *const NSAppearanceDocumentAttribute = @"NSAppearanceDocumentAttribute";
+NSString *const NSCharacterEncodingDocumentAttribute = @"CharacterEncoding";
+NSString *const NSDefaultAttributesDocumentAttribute = @"DefaultAttributes";
+NSString *const NSPaperSizeDocumentAttribute = @"PaperSize";
+NSString *const NSLeftMarginDocumentAttribute = @"LeftMargin";
+NSString *const NSRightMarginDocumentAttribute = @"RightMargin";
+NSString *const NSTopMarginDocumentAttribute = @"TopMargin";
+NSString *const NSBottomMarginDocumentAttribute = @"BottomMargin";
+NSString *const NSViewSizeDocumentAttribute = @"ViewSize";
+NSString *const NSViewZoomDocumentAttribute = @"ViewZoom";
+NSString *const NSViewModeDocumentAttribute = @"ViewMode";
+NSString *const NSReadOnlyDocumentAttribute = @"ReadOnly";
+NSString *const NSBackgroundColorDocumentAttribute = @"BackgroundColor";
+NSString *const NSHyphenationFactorDocumentAttribute = @"HyphenationFactor";
+NSString *const NSDefaultTabIntervalDocumentAttribute = @"DefaultTabInterval";
+NSString *const NSTextLayoutSectionsAttribute = @"NSTextLayoutSectionsAttribute";
+NSString *const NSExcludedElementsDocumentAttribute = @"ExcludedElements";
+NSString *const NSTextEncodingNameDocumentAttribute = @"TextEncodingName";
+NSString *const NSPrefixSpacesDocumentAttribute = @"PrefixSpaces";
+
+NSString *const NSDocumentTypeDocumentOption = @"DocumentType";
+NSString *const NSDefaultAttributesDocumentOption = @"DefaultAttributes";
+NSString *const NSCharacterEncodingDocumentOption = @"CharacterEncoding";
+NSString *const NSTextEncodingNameDocumentOption = @"TextEncodingName";
+NSString *const NSBaseURLDocumentOption = @"BaseURL";
+NSString *const NSTimeoutDocumentOption = @"Timeout";
+NSString *const NSWebPreferencesDocumentOption = @"WebPreferences";
+NSString *const NSWebResourceLoadDelegateDocumentOption = @"WebResourceLoadDelegate";
+NSString *const NSTextSizeMultiplierDocumentOption = @"TextSizeMultiplier";
+NSString *const NSFileTypeDocumentOption = @"UTI";
 
 @implementation NSAttributedString(NSAttributedString_AppKit)
 

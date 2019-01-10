@@ -33,9 +33,54 @@ APPKIT_EXPORT NSString *const NSShadowAttributeName;
 APPKIT_EXPORT NSString *const NSExpansionAttributeName;
 APPKIT_EXPORT NSString *const NSCursorAttributeName;
 APPKIT_EXPORT NSString *const NSToolTipAttributeName;
-APPKIT_EXPORT NSString *const NSBackgroundColorDocumentAttribute;
 
 APPKIT_EXPORT NSString *const NSSpellingStateAttributeName;
+
+APPKIT_EXPORT NSString *const NSDocumentTypeDocumentAttribute;
+APPKIT_EXPORT NSString *const NSConvertedDocumentAttribute;
+APPKIT_EXPORT NSString *const NSFileTypeDocumentAttribute;
+APPKIT_EXPORT NSString *const NSTitleDocumentAttribute;
+APPKIT_EXPORT NSString *const NSCompanyDocumentAttribute;
+APPKIT_EXPORT NSString *const NSCopyrightDocumentAttribute;
+APPKIT_EXPORT NSString *const NSSubjectDocumentAttribute;
+APPKIT_EXPORT NSString *const NSAuthorDocumentAttribute;
+APPKIT_EXPORT NSString *const NSKeywordsDocumentAttribute;
+APPKIT_EXPORT NSString *const NSCommentDocumentAttribute;
+APPKIT_EXPORT NSString *const NSEditorDocumentAttribute;
+APPKIT_EXPORT NSString *const NSCreationTimeDocumentAttribute;
+APPKIT_EXPORT NSString *const NSModificationTimeDocumentAttribute;
+APPKIT_EXPORT NSString *const NSManagerDocumentAttribute;
+APPKIT_EXPORT NSString *const NSCategoryDocumentAttribute;
+APPKIT_EXPORT NSString *const NSAppearanceDocumentAttribute;
+APPKIT_EXPORT NSString *const NSCharacterEncodingDocumentAttribute;
+APPKIT_EXPORT NSString *const NSDefaultAttributesDocumentAttribute;
+APPKIT_EXPORT NSString *const NSPaperSizeDocumentAttribute;
+APPKIT_EXPORT NSString *const NSLeftMarginDocumentAttribute;
+APPKIT_EXPORT NSString *const NSRightMarginDocumentAttribute;
+APPKIT_EXPORT NSString *const NSTopMarginDocumentAttribute;
+APPKIT_EXPORT NSString *const NSBottomMarginDocumentAttribute;
+APPKIT_EXPORT NSString *const NSViewSizeDocumentAttribute;
+APPKIT_EXPORT NSString *const NSViewZoomDocumentAttribute;
+APPKIT_EXPORT NSString *const NSViewModeDocumentAttribute;
+APPKIT_EXPORT NSString *const NSReadOnlyDocumentAttribute;
+APPKIT_EXPORT NSString *const NSBackgroundColorDocumentAttribute;
+APPKIT_EXPORT NSString *const NSHyphenationFactorDocumentAttribute;
+APPKIT_EXPORT NSString *const NSDefaultTabIntervalDocumentAttribute;
+APPKIT_EXPORT NSString *const NSTextLayoutSectionsAttribute;
+APPKIT_EXPORT NSString *const NSExcludedElementsDocumentAttribute;
+APPKIT_EXPORT NSString *const NSTextEncodingNameDocumentAttribute;
+APPKIT_EXPORT NSString *const NSPrefixSpacesDocumentAttribute;
+
+APPKIT_EXPORT NSString *const NSDocumentTypeDocumentOption;
+APPKIT_EXPORT NSString *const NSDefaultAttributesDocumentOption;
+APPKIT_EXPORT NSString *const NSCharacterEncodingDocumentOption;
+APPKIT_EXPORT NSString *const NSTextEncodingNameDocumentOption;
+APPKIT_EXPORT NSString *const NSBaseURLDocumentOption;
+APPKIT_EXPORT NSString *const NSTimeoutDocumentOption;
+APPKIT_EXPORT NSString *const NSWebPreferencesDocumentOption;
+APPKIT_EXPORT NSString *const NSWebResourceLoadDelegateDocumentOption;
+APPKIT_EXPORT NSString *const NSTextSizeMultiplierDocumentOption;
+APPKIT_EXPORT NSString *const NSFileTypeDocumentOption;
 
 enum {
     NSSpellingStateSpellingFlag = 0x01,
