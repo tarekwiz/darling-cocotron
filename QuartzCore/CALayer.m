@@ -11,6 +11,25 @@ NSString *const kCAFilterTrilinear=@"trilinear";
 NSString *const kCAGravityResizeAspect = @"resizeAspect";
 NSString *const kCAGravityResizeAspectFill = @"resizeAspectFill";
 
+NSString * const kCAGravityCenter = @"center";
+NSString * const kCAGravityTop = @"top";
+NSString * const kCAGravityBottom = @"bottom";
+NSString * const kCAGravityLeft = @"left";
+NSString * const kCAGravityRight = @"right";
+NSString * const kCAGravityTopLeft = @"topLeft";
+NSString * const kCAGravityTopRight = @"topRight";
+NSString * const kCAGravityBottomLeft = @"bottomLeft";
+NSString * const kCAGravityBottomRight = @"bottomRight";
+NSString * const kCAGravityResize = @"resize";
+
+NSString * const kCAOnOrderIn = @"onOrderIn";
+NSString * const kCAOnOrderOut = @"onOrderOut";
+NSString * const kCATransition = @"transition";
+
+NSString * const kCAContentsFormatRGBA8Uint = @"RGBA8";
+NSString * const kCAContentsFormatRGBA16Float = @"RGBAh";
+NSString * const kCAContentsFormatGray8Uint = @"Gray8";
+
 @implementation CALayer
 
 +layer {

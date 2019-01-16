@@ -2,6 +2,25 @@
 #import <QuartzCore/CATransaction.h>
 #import <AppKit/NSRaise.h>
 
+NSString *const kCATransitionFade = @"fade";
+NSString *const kCATransitionMoveIn = @"moveIn";
+NSString *const kCATransitionPush = @"push";
+NSString *const kCATransitionReveal = @"reveal";
+
+NSString *const kCATransitionFromLeft = @"fromLeft";
+NSString *const kCATransitionFromRight = @"fromRight";
+NSString *const kCATransitionFromTop = @"fromTop";
+NSString *const kCATransitionFromBottom = @"fromBottom";
+
+NSString * const kCAAnimationLinear = @"linear";
+NSString * const kCAAnimationDiscrete = @"discrete";
+NSString * const kCAAnimationPaced = @"paced";
+NSString * const kCAAnimationCubic = @"cubic";
+NSString * const kCAAnimationCubicPaced = @"cubicPaced";
+
+NSString * const kCAAnimationRotateAuto = @"auto";
+NSString * const kCAAnimationRotateAutoReverse = @"autoReverse";
+
 @implementation CAAnimation
 
 +animation {

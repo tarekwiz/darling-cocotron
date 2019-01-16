@@ -15,6 +15,15 @@ CA_EXPORT NSString *const kCATransitionFromRight;
 CA_EXPORT NSString *const kCATransitionFromTop;
 CA_EXPORT NSString *const kCATransitionFromBottom;
 
+CA_EXPORT NSString * const kCAAnimationLinear;
+CA_EXPORT NSString * const kCAAnimationDiscrete;
+CA_EXPORT NSString * const kCAAnimationPaced;
+CA_EXPORT NSString * const kCAAnimationCubic;
+CA_EXPORT NSString * const kCAAnimationCubicPaced;
+
+CA_EXPORT NSString * const kCAAnimationRotateAuto;
+CA_EXPORT NSString * const kCAAnimationRotateAutoReverse;
+
 @interface CAAnimation : NSObject <NSCopying, CAMediaTiming, CAAction> {
     id _delegate;
     BOOL _removedOnCompletion;

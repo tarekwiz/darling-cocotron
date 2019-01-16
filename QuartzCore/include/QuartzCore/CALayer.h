@@ -23,6 +23,25 @@ CA_EXPORT NSString *const kCAFilterTrilinear;
 CA_EXPORT NSString *const kCAGravityResizeAspect;
 CA_EXPORT NSString *const kCAGravityResizeAspectFill;
 
+CA_EXPORT NSString * const kCAGravityCenter;
+CA_EXPORT NSString * const kCAGravityTop;
+CA_EXPORT NSString * const kCAGravityBottom;
+CA_EXPORT NSString * const kCAGravityLeft;
+CA_EXPORT NSString * const kCAGravityRight;
+CA_EXPORT NSString * const kCAGravityTopLeft;
+CA_EXPORT NSString * const kCAGravityTopRight;
+CA_EXPORT NSString * const kCAGravityBottomLeft;
+CA_EXPORT NSString * const kCAGravityBottomRight;
+CA_EXPORT NSString * const kCAGravityResize;
+
+CA_EXPORT NSString * const kCAOnOrderIn;
+CA_EXPORT NSString * const kCAOnOrderOut;
+CA_EXPORT NSString * const kCATransition;
+
+CA_EXPORT NSString * const kCAContentsFormatRGBA8Uint;
+CA_EXPORT NSString * const kCAContentsFormatRGBA16Float;
+CA_EXPORT NSString * const kCAContentsFormatGray8Uint;
+
 @interface CALayer : NSObject {
     CALayerContext *_context;
     CALayer *_superlayer;
