@@ -6,6 +6,9 @@
 #import <QuartzCore/CATransaction.h>
 #import <QuartzCore/CAConstraintLayoutManager.h>
 
+#import <QuartzCore/CAGradientLayer.h>
+#import <QuartzCore/CAShapeLayer.h>
+
 /* Undocumented */
 #import <QuartzCore/CAFilter.h>
 /* End undocumented */

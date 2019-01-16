@@ -61,6 +61,9 @@ set(QuartzCore_sources
 	CIVector.m
 	CAConstraintLayoutManager.m
 	CAFilter.m
+	CAGradientLayer.m
+	CAShapeLayer.m
+	CAMediaTiming.m
 )
 
 set_source_files_properties(${QuartzCore_sources} LANGUAGE C)
