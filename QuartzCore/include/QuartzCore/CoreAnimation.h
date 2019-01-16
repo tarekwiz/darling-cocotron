@@ -8,6 +8,8 @@
 
 #import <QuartzCore/CAGradientLayer.h>
 #import <QuartzCore/CAShapeLayer.h>
+#import <QuartzCore/CAReplicatorLayer.h>
+#import <QuartzCore/CAScrollLayer.h>
 
 /* Undocumented */
 #import <QuartzCore/CAFilter.h>
