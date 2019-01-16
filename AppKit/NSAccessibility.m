@@ -331,6 +331,9 @@ NSString *const NSAccessibilityMainThreadIdleNotification = @"AXMainThreadIdle";
 NSString *const NSAccessibilitySupportsMainThreadIdleNotificationAttribute = @"AXSupportsMainThreadIdleNotification";
 /* End undocumented */
 
+NSString * const NSAccessibilityLayoutChangedNotification = @"AXLayoutChanged";
+NSString * const NSAccessibilityUIElementsKey = @"AXUIElementsKey";
+
 void NSAccessibilityPostNotification (
    id element,
    NSString *notification

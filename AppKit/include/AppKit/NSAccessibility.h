@@ -2,6 +2,7 @@
 #import <AppKit/AppKitExport.h>
 
 #import <AppKit/NSAccessibilityConstants.h>
+#import <AppKit/NSAccessibilityProtocols.h>
 
 APPKIT_EXPORT void NSAccessibilityPostNotification(
     id element,

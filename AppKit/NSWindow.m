@@ -55,6 +55,8 @@ NSString * const NSWindowWillAnimateNotification=@"NSWindowWillAnimateNotificati
 NSString * const NSWindowAnimatingNotification=@"NSWindowAnimatingNotification";
 NSString * const NSWindowDidAnimateNotification=@"NSWindowDidAnimateNotification";
 
+NSString * const NSWindowDidChangeScreenNotification = @"NSWindowDidChangeScreenNotification";
+
 @interface CGWindow(private)
 - (void)dirtyRect:(CGRect)rect;
 @end
