@@ -31,6 +31,8 @@ APPKIT_EXPORT NSString * const NSAppearanceNameAccessibilityHighContrastDarkAqua
 APPKIT_EXPORT NSString * const NSAppearanceNameAccessibilityHighContrastVibrantLight;
 APPKIT_EXPORT NSString * const NSAppearanceNameAccessibilityHighContrastVibrantDark;
 
+APPKIT_EXPORT NSString *const NSAppearanceNameControlStrip; //Undocumented
+
 @interface NSAppearance : NSObject <NSSecureCoding>
 
 @end

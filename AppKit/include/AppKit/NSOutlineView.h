@@ -23,6 +23,8 @@ APPKIT_EXPORT NSString *const NSOutlineViewColumnDidResizeNotification;
 APPKIT_EXPORT NSString *const NSOutlineViewSelectionDidChangeNotification;
 APPKIT_EXPORT NSString *const NSOutlineViewSelectionIsChangingNotification;
 
+APPKIT_EXPORT NSString *const NSOutlineViewDisclosureButtonKey;
+
 @interface NSOutlineView : NSTableView {
     NSTableColumn *_outlineTableColumn;
     NSMapTable *_rowToItem;

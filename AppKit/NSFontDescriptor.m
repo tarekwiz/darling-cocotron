@@ -26,6 +26,16 @@ NSString * const NSFontWeightTrait = @"NSFontWeightTrait";
 NSString * const NSFontWidthTrait = @"NSFontWidthTrait";
 NSString * const NSFontSlantTrait = @"NSFontSlantTrait";
 
+const NSFontWeight NSFontWeightThin = 0xbfe3333340000000;
+const NSFontWeight NSFontWeightLight = 0xbfd99999a0000000;
+const NSFontWeight NSFontWeightUltraLight = 0xbfe99999a0000000;
+const NSFontWeight NSFontWeightBlack = 0x3fe3d70a40000000;
+const NSFontWeight NSFontWeightHeavy = 0x3fe1eb8520000000;
+const NSFontWeight NSFontWeightSemibold = 0x3fd3333340000000;
+const NSFontWeight NSFontWeightBold = 0x3fd99999a0000000;
+const NSFontWeight NSFontWeightMedium = 0x3fcd70a3e0000000;
+const NSFontWeight NSFontWeightRegular = 0x0000000000000000;
+
 @implementation NSFontDescriptor : NSObject
 
 -initWithFontAttributes:(NSDictionary *)attributes {

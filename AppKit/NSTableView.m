@@ -19,6 +19,8 @@ NSString * const NSTableViewSelectionDidChangeNotification=@"NSTableViewSelectio
 NSString * const NSTableViewColumnDidMoveNotification=@"NSTableViewColumnDidMoveNotification";
 NSString * const NSTableViewColumnDidResizeNotification=@"NSTableViewColumnDidResizeNotification";
 
+NSString *const NSTableViewRowViewKey = @"NSTableViewRowViewKey";
+
 const CGFloat NSTableViewDefaultRowHeight=16.0f;
 
 

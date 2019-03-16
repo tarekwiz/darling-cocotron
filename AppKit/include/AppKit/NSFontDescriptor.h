@@ -27,6 +27,18 @@ APPKIT_EXPORT NSString *const NSFontWeightTrait;
 APPKIT_EXPORT NSString *const NSFontWidthTrait;
 APPKIT_EXPORT NSString *const NSFontSlantTrait;
 
+typedef CGFloat NSFontWeight;
+
+APPKIT_EXPORT const NSFontWeight NSFontWeightThin;
+APPKIT_EXPORT const NSFontWeight NSFontWeightLight;
+APPKIT_EXPORT const NSFontWeight NSFontWeightUltraLight;
+APPKIT_EXPORT const NSFontWeight NSFontWeightBlack;
+APPKIT_EXPORT const NSFontWeight NSFontWeightHeavy;
+APPKIT_EXPORT const NSFontWeight NSFontWeightSemibold;
+APPKIT_EXPORT const NSFontWeight NSFontWeightBold;
+APPKIT_EXPORT const NSFontWeight NSFontWeightMedium;
+APPKIT_EXPORT const NSFontWeight NSFontWeightRegular;
+
 @interface NSFontDescriptor : NSObject <NSCopying> {
     NSDictionary *_attributes;
 }

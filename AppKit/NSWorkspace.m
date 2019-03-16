@@ -17,6 +17,8 @@ NSString *const NSWorkspaceLaunchConfigurationArguments = @"NSWorkspaceLaunchCon
 NSString *const NSWorkspaceLaunchConfigurationEnvironment = @"NSWorkspaceLaunchConfigurationEnvironment";
 NSString *const NSWorkspaceLaunchConfigurationArchitecture = @"NSWorkspaceLaunchConfigurationArchitecture";
 
+NSString *const NSWorkspaceActiveSpaceDidChangeNotification = @"NSWorkspaceActiveSpaceDidChangeNotification";
+
 @implementation NSWorkspace
 
 +(NSWorkspace *)sharedWorkspace {

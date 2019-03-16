@@ -31,6 +31,8 @@ NSString * const NSOutlineViewColumnDidResizeNotification=@"NSOutlineViewColumnD
 NSString * const NSOutlineViewSelectionDidChangeNotification=@"NSOutlineViewSelectionDidChangeNotification";
 NSString * const NSOutlineViewSelectionIsChangingNotification=@"NSOutlineViewSelectionIsChangingNotification";
 
+NSString *const NSOutlineViewDisclosureButtonKey = @"NSOutlineViewDisclosureButtonKey";
+
 // We probably don't want this public, but NSOutlineView needs it, and it would prove invaluable to
 // other subclasses of NSTableView.
 @interface NSTableView(NSTableView_notifications)

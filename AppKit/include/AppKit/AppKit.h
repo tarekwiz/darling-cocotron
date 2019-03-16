@@ -158,5 +158,26 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <AppKit/NSWorkspace.h>
 #import <AppKit/NSAppearance.h>
 #import <AppKit/NSAccessibilityElement.h>
+#import <AppKit/NSKeyValueBinding.h>
+#import <AppKit/NSCollectionViewFlowLayout.h>
+#import <AppKit/NSRuleEditor.h>
+#import <AppKit/NSLayoutConstraint.h>
+#import <AppKit/NSSpeechSynthesizer.h>
+#import <AppKit/NSTouchBarItem.h>
+#import <AppKit/NSCustomTouchBarItem.h>
+#import <AppKit/NSGestureRecognizer.h>
+#import <AppKit/NSClickGestureRecognizer.h>
+#import <AppKit/NSDraggingItem.h>
+#import <AppKit/NSGroupTouchBarItem.h>
+#import <AppKit/NSKeyBindingManager.h>
+#import <AppKit/NSPasteboardItem.h>
+#import <AppKit/NSPopoverTouchBarItem.h>
+#import <AppKit/NSSpaceTouchBarItem.h>
+#import <AppKit/NSStackView.h>
+#import <AppKit/NSTableCellView.h>
+#import <AppKit/NSTableRowView.h>
+#import <AppKit/NSTouchBar.h>
+#import <AppKit/NSTreeNode.h>
+#import <AppKit/NSVisualEffectView.h>
 
 #import <ApplicationServices/ApplicationServices.h>

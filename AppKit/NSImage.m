@@ -79,6 +79,12 @@ NSImageName const NSImageNameUser = @"NSUser";
 NSImageName const NSImageNameUserAccounts = @"NSUserAccounts";
 NSImageName const NSImageNameUserGroup = @"NSUserGroup";
 NSImageName const NSImageNameUserGuest = @"NSUserGuest";
+NSImageName const NSImageNameGoBackTemplate = @"NSGoBackTemplate";
+NSImageName const NSImageNameGoForwardTemplate = @"NSGoForwardTemplate";
+NSImageName const NSImageNameTouchBarDeleteTemplate = @"NSTouchBarDeleteTemplate";
+NSImageName const NSImageNameTouchBarPauseTemplate = @"NSTouchBarPauseTemplate";
+NSImageName const NSImageNameTouchBarPlayTemplate = @"NSTouchBarPlayTemplate";
+NSImageName const NSImageNameTouchBarRecordStopTemplate = @"NSTouchBarRecordStopTemplate";
 
 // Private class used so the context knows the flipped status of a locked image
 // 10.4 does something like that - probably for more than just getting the flippiness - 10.6 uses some special NSSnapshotBitmapGraphicsContext

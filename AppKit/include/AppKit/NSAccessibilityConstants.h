@@ -1,4 +1,4 @@
-#import <AppKit/AppKitDefines.h>
+#import <AppKit/AppKitExport.h>
 #import <Foundation/Foundation.h>
 
 APPKIT_EXPORT NSString *const NSAccessibilityChildrenAttribute;

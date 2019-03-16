@@ -8,6 +8,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <Foundation/NSObject.h>
 #import <AppKit/AppKitExport.h>
 
+#import <AppKit/NSKeyValueBinding.h>
+
 @class NSDictionary, NSArray, NSString;
 
 @interface NSObject (BindingSupport)
@@ -57,11 +59,17 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 - (void)objectDidEndEditing:editor;
 @end
 
+
+// Not defined in this header
+
+/*
 APPKIT_EXPORT NSString *const NSObservedObjectKey;
 APPKIT_EXPORT NSString *const NSObservedKeyPathKey;
 APPKIT_EXPORT NSString *const NSOptionsKey;
+*/
 
 // Binding option keys
+/*
 APPKIT_EXPORT NSString *const NSNullPlaceholderBindingOption;
 APPKIT_EXPORT NSString *const NSNoSelectionPlaceholderBindingOption;
 APPKIT_EXPORT NSString *const NSMultipleValuesPlaceholderBindingOption;
@@ -74,6 +82,7 @@ APPKIT_EXPORT NSString *const NSConditionallySetsEnabledBindingOption;
 APPKIT_EXPORT NSString *const NSConditionallySetsEditableBindingOption;
 APPKIT_EXPORT NSString *const NSContinuouslyUpdatesValueBindingOption;
 APPKIT_EXPORT NSString *const NSDisplayPatternBindingOption;
+*/
 
 enum {
     kNSBindingDebugLogLevel1 = 1,

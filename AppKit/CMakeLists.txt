@@ -374,6 +374,26 @@ set(AppKit_sources
 	NSAccessibility.m
 	NSAppearance.m
 	NSAccessibilityElement.m
+	NSKeyValueBinding.m
+	NSCollectionViewFlowLayout.m
+	NSTouchBarItem.m
+	NSLayoutConstraint.m
+	NSSpeechSynthesizer.m
+	NSCustomTouchBarItem.m
+	NSGestureRecognizer.m
+	NSClickGestureRecognizer.m
+	NSDraggingItem.m
+	NSGroupTouchBarItem.m
+	NSKeyBindingManager.m
+	NSPasteboardItem.m
+	NSPopoverTouchBarItem.m
+	NSSpaceTouchBarItem.m
+	NSStackView.m
+	NSTableCellView.m
+	NSTableRowView.m
+	NSTouchBar.m
+	NSTreeNode.m
+	NSVisualEffectView.m
 )
 
 set_source_files_properties(${AppKit_sources} LANGUAGE C)

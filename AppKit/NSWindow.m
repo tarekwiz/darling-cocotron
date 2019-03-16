@@ -56,6 +56,13 @@ NSString * const NSWindowAnimatingNotification=@"NSWindowAnimatingNotification";
 NSString * const NSWindowDidAnimateNotification=@"NSWindowDidAnimateNotification";
 
 NSString * const NSWindowDidChangeScreenNotification = @"NSWindowDidChangeScreenNotification";
+NSString *const NSWindowDidEndSheetNotification = @"NSWindowDidEndSheetNotification";
+NSString *const NSWindowDidEnterFullScreenNotification = @"NSWindowDidEnterFullScreenNotification";
+NSString *const NSWindowDidExitFullScreenNotification = @"NSWindowDidExitFullScreenNotification";
+NSString *const NSWindowDidOrderOffScreenNotification = @"NSWindowDidOrderOffScreenNotification";
+NSString *const NSWindowDidOrderOnScreenNotification = @"_NSWindowDidBecomeVisible";
+NSString *const NSWindowWillEnterFullScreenNotification = @"NSWindowWillEnterFullScreenNotification";
+NSString *const NSWindowWillExitFullScreenNotification = @"NSWindowWillExitFullScreenNotification";
 
 @interface CGWindow(private)
 - (void)dirtyRect:(CGRect)rect;

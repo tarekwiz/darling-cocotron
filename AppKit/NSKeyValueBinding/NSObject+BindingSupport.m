@@ -10,7 +10,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <Foundation/NSDictionary.h>
 #import <Foundation/NSValue.h>
 #import <Foundation/NSString.h>
-#import <AppKit/NSObject+BindingSupport.h>
+#import <AppKit/NSObject+BindingSupport.h> // Remove soon
+#import <AppKit/NSKeyValueBinding.h>
 #import <AppKit/NSController.h>
 #import <AppKit/NSObservationProxy.h>
 #import <Foundation/NSBundle.h>
@@ -22,6 +23,10 @@ static NSMutableDictionary *bindersForObjects=nil;
 static NSDictionary *defaultBindingOptions=nil;
 static NSMutableDictionary *defaultBindingOptionsCache=nil;
 
+
+// Not actually in this file
+
+/*
 NSString * const NSObservedObjectKey=@"NSObservedObject";
 NSString * const NSObservedKeyPathKey=@"NSObservedKeyPath";
 NSString * const NSOptionsKey=@"NSOptions";
@@ -38,7 +43,7 @@ NSString * const NSConditionallySetsEnabledBindingOption=@"NSConditionallySetsEn
 NSString * const NSConditionallySetsEditableBindingOption=@"NSConditionallySetsEditable"; // Do not change.
 NSString * const NSContinuouslyUpdatesValueBindingOption=@"NSContinuouslyUpdatesValue"; // Do not change.
 NSString * const NSDisplayPatternBindingOption=@"NSDisplayPattern"; // Do not change.
-
+*/
 
 
 int NSBindingDebugLogLevel = 0; // Defaults to no logging

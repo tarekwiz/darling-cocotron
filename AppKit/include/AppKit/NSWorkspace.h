@@ -20,6 +20,8 @@ APPKIT_EXPORT NSString *const NSWorkspaceLaunchConfigurationArguments;
 APPKIT_EXPORT NSString *const NSWorkspaceLaunchConfigurationEnvironment;
 APPKIT_EXPORT NSString *const NSWorkspaceLaunchConfigurationArchitecture;
 
+APPKIT_EXPORT NSString *const NSWorkspaceActiveSpaceDidChangeNotification;
+
 @interface NSWorkspace : NSObject {
     NSNotificationCenter *_notificationCenter;
 }

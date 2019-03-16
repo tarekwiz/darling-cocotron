@@ -38,6 +38,10 @@ APPKIT_EXPORT NSString *const NSTabularTextPboardType;
 APPKIT_EXPORT NSString *const NSTIFFPboardType;
 APPKIT_EXPORT NSString *const NSURLPboardType;
 
+APPKIT_EXPORT NSString *const NSFilesPromisePboardType;
+APPKIT_EXPORT NSString *const NSPasteboardNameDrag;
+APPKIT_EXPORT NSString *const NSPasteboardURLReadingFileURLsOnlyKey;
+
 APPKIT_EXPORT NSString *const NSDragPboard;
 APPKIT_EXPORT NSString *const NSFindPboard;
 APPKIT_EXPORT NSString *const NSFontPboard;

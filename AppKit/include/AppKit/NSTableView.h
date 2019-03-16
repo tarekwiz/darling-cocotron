@@ -42,6 +42,8 @@ APPKIT_EXPORT NSString *const NSTableViewSelectionDidChangeNotification;
 APPKIT_EXPORT NSString *const NSTableViewColumnDidMoveNotification;
 APPKIT_EXPORT NSString *const NSTableViewColumnDidResizeNotification;
 
+APPKIT_EXPORT NSString *const NSTableViewRowViewKey;
+
 enum {
     NSTableViewGridNone,
     NSTableViewSolidVerticalGridLineMask,

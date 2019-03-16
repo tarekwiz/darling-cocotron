@@ -37,6 +37,10 @@ NSString * const NSTabularTextPboardType=@"NSTabularTextPboardType";
 NSString * const NSTIFFPboardType=@"NSTIFFPboardType";
 NSString * const NSURLPboardType=@"NSURLPboardType";
 
+NSString *const NSFilesPromisePboardType = @"Apple files promise pasteboard type";
+NSString *const NSPasteboardNameDrag = @"Apple CFPasteboard drag";
+NSString *const NSPasteboardURLReadingFileURLsOnlyKey = @"NSPasteboardURLReadingFileURLsOnlyKey";
+
 NSString * const NSDragPboard=@"NSDragPboard";
 NSString * const NSFindPboard=@"NSFindPboard";
 NSString * const NSFontPboard=@"NSFontPboard";

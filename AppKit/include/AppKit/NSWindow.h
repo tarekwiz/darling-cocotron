@@ -103,6 +103,13 @@ APPKIT_EXPORT NSString *const NSWindowDidEndLiveResizeNotification;
 APPKIT_EXPORT NSString *const NSWindowWillBeginSheetNotification;
 
 APPKIT_EXPORT NSString * const NSWindowDidChangeScreenNotification;
+APPKIT_EXPORT NSString *const NSWindowDidEndSheetNotification;
+APPKIT_EXPORT NSString *const NSWindowDidEnterFullScreenNotification;
+APPKIT_EXPORT NSString *const NSWindowDidExitFullScreenNotification;
+APPKIT_EXPORT NSString *const NSWindowDidOrderOffScreenNotification;
+APPKIT_EXPORT NSString *const NSWindowDidOrderOnScreenNotification;
+APPKIT_EXPORT NSString *const NSWindowWillEnterFullScreenNotification;
+APPKIT_EXPORT NSString *const NSWindowWillExitFullScreenNotification;
 
 @interface NSWindow : NSResponder {
     NSRect _frame;

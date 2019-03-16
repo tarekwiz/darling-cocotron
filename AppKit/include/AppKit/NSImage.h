@@ -186,3 +186,10 @@ APPKIT_EXPORT NSImageName const NSImageNameUser;
 APPKIT_EXPORT NSImageName const NSImageNameUserAccounts;
 APPKIT_EXPORT NSImageName const NSImageNameUserGroup;
 APPKIT_EXPORT NSImageName const NSImageNameUserGuest;
+
+APPKIT_EXPORT NSImageName const NSImageNameGoBackTemplate;
+APPKIT_EXPORT NSImageName const NSImageNameGoForwardTemplate;
+APPKIT_EXPORT NSImageName const NSImageNameTouchBarDeleteTemplate;
+APPKIT_EXPORT NSImageName const NSImageNameTouchBarPauseTemplate;
+APPKIT_EXPORT NSImageName const NSImageNameTouchBarPlayTemplate;
+APPKIT_EXPORT NSImageName const NSImageNameTouchBarRecordStopTemplate;

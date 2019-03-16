@@ -29,6 +29,8 @@ NSString * const NSAppearanceNameAccessibilityHighContrastDarkAqua = @"NSAppeara
 NSString * const NSAppearanceNameAccessibilityHighContrastVibrantLight = @"NSAppearanceNameAccessibilityVibrantLight";
 NSString * const NSAppearanceNameAccessibilityHighContrastVibrantDark = @"NSAppearanceNameAccessibilityVibrantDark";
 
+NSString *const NSAppearanceNameControlStrip = @"NSAppearanceNameControlStrip"; // Undocumented
+
 @implementation NSAppearance
 
 @end

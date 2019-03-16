@@ -9,8 +9,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <AppKit/NSView.h>
 #import <AppKit/NSSpellProtocol.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
 @class NSColor, NSFont;
 @protocol NSTextDelegate;
 
@@ -160,5 +158,3 @@ APPKIT_EXPORT NSString *const NSTextDidChangeNotification;
 - (void)textDidChange:(NSNotification *)notification;
 
 @end
-
-NS_ASSUME_NONNULL_END
