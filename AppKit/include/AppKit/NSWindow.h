@@ -209,6 +209,8 @@ APPKIT_EXPORT NSString *const NSWindowWillExitFullScreenNotification;
     NSPoint _mouseDownLocationInWindow;
 }
 
+@property (class) BOOL allowsAutomaticWindowTabbing;
+
 + (NSWindowDepth)defaultDepthLimit;
 
 + (NSRect)frameRectForContentRect:(NSRect)contentRect styleMask:(NSUInteger)styleMask;

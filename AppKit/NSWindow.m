@@ -147,6 +147,8 @@ NSString *const NSWindowWillExitFullScreenNotification = @"NSWindowWillExitFullS
 
 @implementation NSWindow
 
+static BOOL _allowsAutomaticWindowTabbing;
+
 +(NSWindowDepth)defaultDepthLimit {
    return 0;
 }
@@ -3175,5 +3177,16 @@ NSString *const NSWindowWillExitFullScreenNotification = @"NSWindowWillExitFullS
 - (CGSubWindow *) _createSubWindowWithFrame: (CGRect) frame {
     return [_platformWindow createSubWindowWithFrame: frame];
 }
+
++(BOOL)allowsAutomaticWindowTabbing
+{
+	return _allowsAutomaticWindowTabbing;
+}
+
++(void)setAllowsAutomaticWindowTabbing:(BOOL)allowsAutomaticWindowTabbing
+{
+	_allowsAutomaticWindowTabbing=allowsAutomaticWindowTabbing;
+}
+
 @end
 
