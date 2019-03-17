@@ -50,15 +50,18 @@ set(QuartzCore_sources
 	CATransition.m
 	CAValueFunction.m
 	CAWindowOpenGLContext.m
-	CIAffineTransform.m
-	CIBloom.m
-	CIBoxBlur.m
-	CIColor.m
-	CIContext.m
-	CIFilter.m
-	CIImage.m
-	CILinearGradient.m
-	CIVector.m
+
+	# CoreImage is reexported
+	#CIAffineTransform.m
+	#CIBloom.m
+	#CIBoxBlur.m
+	#CIColor.m
+	#CIContext.m
+	#CIFilter.m
+	#CIImage.m
+	#CILinearGradient.m
+	#CIVector.m
+
 	CAConstraintLayoutManager.m
 	CAFilter.m
 	CAGradientLayer.m
@@ -87,4 +90,8 @@ add_framework(QuartzCore
 		Onyx2D
 		OpenGL
 		CoreGraphics
+	LINK_FLAGS
+	" -Wl,-reexport_library,${CMAKE_BINARY_DIR}/src/CoreImage/CoreImage \
+	-Wl,-reexport_library,${CMAKE_BINARY_DIR}/src/CoreVideo/CoreVideo \
+	-Wl,-reexport_library,${CMAKE_BINARY_DIR}/src/external/objc4/runtime/libobjc.A.dylib "
 )
