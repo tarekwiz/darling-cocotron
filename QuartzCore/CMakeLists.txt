@@ -95,3 +95,5 @@ add_framework(QuartzCore
 	-Wl,-reexport_library,${CMAKE_BINARY_DIR}/src/CoreVideo/CoreVideo \
 	-Wl,-reexport_library,${CMAKE_BINARY_DIR}/src/external/objc4/runtime/libobjc.A.dylib "
 )
+
+add_dependencies(QuartzCore CoreImage CoreVideo)
