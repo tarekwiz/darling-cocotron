@@ -99,6 +99,8 @@ APPKIT_EXPORT NSString *const NSTextLayoutSectionRange;
 APPKIT_EXPORT NSString *const NSCharacterShapeAttributeName;
 APPKIT_EXPORT NSString *const NSUsesScreenFontsDocumentAttribute;
 
+APPKIT_EXPORT NSString * const NSTextEffectAttributeName;
+
 APPKIT_EXPORT NSUInteger NSUnderlineStrikethroughMask;
 APPKIT_EXPORT NSUInteger NSUnderlineByWordMask;
 

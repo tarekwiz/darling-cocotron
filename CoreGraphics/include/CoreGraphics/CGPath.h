@@ -60,3 +60,11 @@ COREGRAPHICS_EXPORT void CGPathAddArcToPoint(CGMutablePathRef self, const CGAffi
 COREGRAPHICS_EXPORT void CGPathAddEllipseInRect(CGMutablePathRef self, const CGAffineTransform *xform, CGRect rect);
 
 COREGRAPHICS_EXPORT void CGPathAddPath(CGMutablePathRef self, const CGAffineTransform *xform, CGPathRef other);
+
+COREGRAPHICS_EXPORT CGPathRef CGPathCreateWithEllipseInRect(CGRect rect, const CGAffineTransform *transform);
+
+COREGRAPHICS_EXPORT CGPathRef CGPathCreateWithRect(CGRect rect, const CGAffineTransform *transform);
+
+COREGRAPHICS_EXPORT CGRect CGPathGetPathBoundingBox(CGPathRef path); 
+
+COREGRAPHICS_EXPORT CGPathRef CGPathCreateCopyByTransformingPath(CGPathRef path, CGAffineTransform *transform);

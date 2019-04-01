@@ -8,7 +8,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <CoreGraphics/CGPDFContext.h>
 #import <Onyx2D/O2PDFContext.h>
 
-const CFStringRef kCGPDFContextTitle=(CFStringRef)@"kCGPDFContextTitle";
+#include <CoreFoundation/CFString.h>
+
+const CFStringRef kCGPDFContextTitle = CFSTR("kCGPDFContextTitle");
+const CFStringRef kCGPDFContextKeywords = CFSTR("kCGPDFContextKeywords");
+const CFStringRef kCGPDFContextMediaBox = CFSTR("MediaBox");
 
 CGContextRef CGPDFContextCreate(CGDataConsumerRef consumer,const CGRect *mediaBox,CFDictionaryRef auxiliaryInfo) {
    return [[O2PDFContext alloc] initWithConsumer:consumer mediaBox:mediaBox auxiliaryInfo:(NSDictionary *)auxiliaryInfo];

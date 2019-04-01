@@ -36,7 +36,22 @@ typedef enum {
     NSFloatingPointSamplesBitmapFormat = 0x04,
 } NSBitmapFormat;
 
-APPKIT_EXPORT NSString *NSImageCompressionFactor;
+typedef NSString * NSBitmapImageRepPropertyKey;
+
+APPKIT_EXPORT NSBitmapImageRepPropertyKey NSImageCompressionFactor;
+APPKIT_EXPORT NSBitmapImageRepPropertyKey NSImageCompressionMethod;
+APPKIT_EXPORT NSBitmapImageRepPropertyKey NSImageDitherTransparency;
+APPKIT_EXPORT NSBitmapImageRepPropertyKey NSImageInterlaced;
+APPKIT_EXPORT NSBitmapImageRepPropertyKey NSImageRGBColorTable;
+APPKIT_EXPORT NSBitmapImageRepPropertyKey NSImageFrameCount;
+APPKIT_EXPORT NSBitmapImageRepPropertyKey NSImageColorSyncProfileData;
+APPKIT_EXPORT NSBitmapImageRepPropertyKey NSImageFallbackBackgroundColor;
+APPKIT_EXPORT NSBitmapImageRepPropertyKey NSImageEXIFData;
+APPKIT_EXPORT NSBitmapImageRepPropertyKey NSImageProgressive;
+APPKIT_EXPORT NSBitmapImageRepPropertyKey NSImageGamma;
+APPKIT_EXPORT NSBitmapImageRepPropertyKey NSImageLoopCount;
+APPKIT_EXPORT NSBitmapImageRepPropertyKey NSImageCurrentFrameDuration;
+APPKIT_EXPORT NSBitmapImageRepPropertyKey NSImageCurrentFrame;
 
 @interface NSBitmapImageRep : NSImageRep {
     int _samplesPerPixel;

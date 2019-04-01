@@ -69,6 +69,8 @@ set(QuartzCore_sources
 	CAMediaTiming.m
 	CAReplicatorLayer.m
 	CAScrollLayer.m
+	CAOpenGLLayer.m
+	CAMetalLayer.m
 )
 
 set_source_files_properties(${QuartzCore_sources} LANGUAGE C)

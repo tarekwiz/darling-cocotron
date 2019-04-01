@@ -10,6 +10,8 @@
 #import <QuartzCore/CAShapeLayer.h>
 #import <QuartzCore/CAReplicatorLayer.h>
 #import <QuartzCore/CAScrollLayer.h>
+#import <QuartzCore/CAOpenGLLayer.h>
+#import <QuartzCore/CAMetalLayer.h>
 
 /* Undocumented */
 #import <QuartzCore/CAFilter.h>

@@ -47,6 +47,8 @@ NSString * const NSFontPboard=@"NSFontPboard";
 NSString * const NSGeneralPboard=@"NSGeneralPboard";
 NSString * const NSRulerPboard=@"NSRulerPboard";
 
+NSString * const NSPasteboardNameGeneral = @"Apple CFPasteboard general";
+
 @implementation NSPasteboard
 
 +(NSPasteboard *)generalPasteboard {

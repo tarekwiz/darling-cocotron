@@ -102,6 +102,8 @@ NSString *const NSTextLayoutSectionRange = @"NSTextLayoutSectionRange";
 NSString *const NSCharacterShapeAttributeName = @"NSCharacterShape";
 NSString *const NSUsesScreenFontsDocumentAttribute = @"UsesScreenFonts";
 
+NSString * const NSTextEffectAttributeName = @"NSTextEffect";
+
 NSUInteger NSUnderlineStrikethroughMask = 0x4000;
 NSUInteger NSUnderlineByWordMask = 0x8000;
 

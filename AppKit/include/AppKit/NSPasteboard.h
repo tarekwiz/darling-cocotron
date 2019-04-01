@@ -48,6 +48,8 @@ APPKIT_EXPORT NSString *const NSFontPboard;
 APPKIT_EXPORT NSString *const NSGeneralPboard;
 APPKIT_EXPORT NSString *const NSRulerPboard;
 
+APPKIT_EXPORT NSString *const NSPasteboardNameGeneral;
+
 @interface NSPasteboard : NSObject
 
 + (NSPasteboard *)generalPasteboard;

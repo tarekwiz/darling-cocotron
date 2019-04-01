@@ -44,6 +44,7 @@ NSString *const NSTitleBinding = @"title";
 NSString *const NSValidatesImmediatelyBindingOption = @"NSValidatesImmediately";
 NSString *const NSValueBinding = @"value";
 NSString *const NSVisibleBinding = @"visible";
+NSString *const NSToolTipBinding = @"toolTip";
 
 NSString *const NSNullPlaceholderBindingOption = @"NSNullPlaceholder";
 NSString *const NSNoSelectionPlaceholderBindingOption=@"NSNoSelectionPlaceholder";

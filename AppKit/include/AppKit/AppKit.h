@@ -179,5 +179,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <AppKit/NSTouchBar.h>
 #import <AppKit/NSTreeNode.h>
 #import <AppKit/NSVisualEffectView.h>
+#import <AppKit/NSATSTypesetter.h>
+#import <AppKit/NSOpenGLLayer.h>
 
 #import <ApplicationServices/ApplicationServices.h>

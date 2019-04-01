@@ -45,6 +45,7 @@ APPKIT_EXPORT NSString *const NSTitleBinding;
 APPKIT_EXPORT NSString *const NSValidatesImmediatelyBindingOption;
 APPKIT_EXPORT NSString *const NSValueBinding;
 APPKIT_EXPORT NSString *const NSVisibleBinding;
+APPKIT_EXPORT NSString *const NSToolTipBinding;
 
 APPKIT_EXPORT NSString *const NSNullPlaceholderBindingOption;
 APPKIT_EXPORT NSString *const NSNoSelectionPlaceholderBindingOption;

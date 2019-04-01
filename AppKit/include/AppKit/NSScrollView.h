@@ -14,6 +14,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 APPKIT_EXPORT NSString *const NSScrollViewDidEndLiveScrollNotification;
 APPKIT_EXPORT NSString *const NSScrollViewWillStartLiveScrollNotification;
+APPKIT_EXPORT NSString *const NSScrollViewDidLiveScrollNotification;
 
 @interface NSScrollView : NSView {
     NSClipView *_clipView;

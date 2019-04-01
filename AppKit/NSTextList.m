@@ -8,6 +8,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <AppKit/NSTextList.h>
 #import <AppKit/NSRaise.h>
 
+NSString * const NSTextListMarkerDecimal = @"{decimal}";
+NSString * const NSTextListMarkerDisc = @"{disc}";
+
 @implementation NSTextList
 
 -initWithMarkerFormat:(NSString *)format options:(unsigned)options {

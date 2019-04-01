@@ -24,6 +24,8 @@ const CGRect CGRectZero={{0,0},{0,0}};
 const CGRect CGRectNull={{INFINITY,INFINITY},{0,0}};
 const CGPoint CGPointZero={0,0};
 const CGSize CGSizeZero={0,0};
+// Is this value the same as Apple CG?
+const CGRect CGRectInfinite = {{0,0},{INFINITY, INFINITY}};
 
 CGRect CGRectIntersection(CGRect rect0, CGRect rect1) {
 	CGRect result;

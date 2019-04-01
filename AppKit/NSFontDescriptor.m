@@ -20,6 +20,9 @@ NSString * const NSFontTraitsAttribute=@"NSFontTraitsAttribute";
 NSString * const NSFontFaceAttribute=@"NSFontFaceAttribute";
 NSString * const NSFontFixedAdvanceAttribute=@"NSFontFixedAdvanceAttribute";
 NSString * const NSFontVisibleNameAttribute=@"NSFontVisibleNameAttribute";
+NSString * const NSFontCascadeListAttribute = @"NSCTFontCascadeListAttribute";
+NSString * const NSFontFeatureSettingsAttribute = @"NSCTFontFeatureSettingsAttribute";
+NSString * const NSFontVariationAttribute = @"NSCTFontVariationAttribute";
 
 NSString * const NSFontSymbolicTrait = @"NSFontSymbolicTrait";
 NSString * const NSFontWeightTrait = @"NSFontWeightTrait";

@@ -11,6 +11,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <Onyx2D/O2MutablePath.h>
 #import "CGConversions.h"
 
+#import <CoreGraphics/CGGeometry.h>
+#include <stdio.h>
+
 void CGPathRelease(CGPathRef self) {
    O2PathRelease(self);
 }
@@ -105,4 +108,28 @@ void CGPathAddEllipseInRect(CGMutablePathRef self,const CGAffineTransform *xform
 
 void CGPathAddPath(CGMutablePathRef self,const CGAffineTransform *xform,CGPathRef other) {
    O2PathAddPath(self,O2AffineTransformPtrFromCG(xform),other);
+}
+
+CGPathRef CGPathCreateWithEllipseInRect(CGRect rect, const CGAffineTransform *transform)
+{
+	printf("STUB %s\n", __PRETTY_FUNCTION__);
+	return NULL;
+}
+
+CGPathRef CGPathCreateWithRect(CGRect rect, const CGAffineTransform *transform)
+{
+	printf("STUB %s\n", __PRETTY_FUNCTION__);
+	return NULL;
+}
+
+CGRect CGPathGetPathBoundingBox(CGPathRef path)
+{
+	printf("STUB %s\n", __PRETTY_FUNCTION__);
+	return CGRectNull;
+}
+
+CGPathRef CGPathCreateCopyByTransformingPath(CGPathRef path, CGAffineTransform *transform)
+{
+	printf("STUB %s\n", __PRETTY_FUNCTION__);
+	return NULL;
 }

@@ -13,7 +13,20 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <AppKit/NSRaise.h>
 #import <AppKit/NSPasteboard.h>
 
-NSString* NSImageCompressionFactor = @"NSImageCompressionFactor";
+NSBitmapImageRepPropertyKey NSImageCompressionFactor = @"NSImageCompressionFactor";
+NSBitmapImageRepPropertyKey NSImageCompressionMethod = @"NSImageCompressionMethod";
+NSBitmapImageRepPropertyKey NSImageDitherTransparency = @"NSImageDitherTransparency";
+NSBitmapImageRepPropertyKey NSImageInterlaced = @"NSImageInterlaced";
+NSBitmapImageRepPropertyKey NSImageRGBColorTable = @"NSImageRGBColorTable";
+NSBitmapImageRepPropertyKey NSImageFrameCount = @"NSImageFrameCount";
+NSBitmapImageRepPropertyKey NSImageColorSyncProfileData = @"NSImageColorSyncProfileData";
+NSBitmapImageRepPropertyKey NSImageFallbackBackgroundColor = @"NSImageFallbackBackgroundColor";
+NSBitmapImageRepPropertyKey NSImageEXIFData = @"NSImageEXIFData";
+NSBitmapImageRepPropertyKey NSImageProgressive = @"NSImageProgressive";
+NSBitmapImageRepPropertyKey NSImageGamma = @"NSImageGamma";
+NSBitmapImageRepPropertyKey NSImageLoopCount = @"NSImageLoopCount";
+NSBitmapImageRepPropertyKey NSImageCurrentFrameDuration = @"NSImageCurrentFrameDuration";
+NSBitmapImageRepPropertyKey NSImageCurrentFrame = @"NSImageCurrentFrame";
 
 @implementation NSBitmapImageRep
 

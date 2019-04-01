@@ -394,6 +394,8 @@ set(AppKit_sources
 	NSTouchBar.m
 	NSTreeNode.m
 	NSVisualEffectView.m
+	NSATSTypesetter.m
+	NSOpenGLLayer.m
 )
 
 set_source_files_properties(${AppKit_sources} LANGUAGE C)

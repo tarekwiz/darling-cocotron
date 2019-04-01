@@ -17,23 +17,7 @@
  along with Darling.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef _CG_PDFCONTEXT_H_
-#define _CG_PDFCONTEXT_H_
+#import <QuartzCore/CAOpenGLLayer.h>
 
-#include <CoreFoundation/CFString.h>
-#include <CoreGraphics/CoreGraphicsExport.h>
-
-COREGRAPHICS_EXPORT const CFStringRef kCGPDFContextKeywords;
-COREGRAPHICS_EXPORT const CFStringRef kCGPDFContextTitle;
-COREGRAPHICS_EXPORT const CFStringRef kCGPDFContextMediaBox;
-
-#ifdef __OBJC__
-
-@class O2PDFContext;
-typedef O2PDFContext *CGPDFContextRef;
-COREGRAPHICS_EXPORT CGContextRef CGPDFContextCreate(CGDataConsumerRef consumer, const CGRect *mediaBox, CFDictionaryRef auxiliaryInfo);
-COREGRAPHICS_EXPORT void CGPDFContextClose(CGContextRef self);
-
-#endif
-
-#endif
+@implementation CAOpenGLLayer
+@end
