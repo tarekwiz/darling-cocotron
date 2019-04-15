@@ -1,7 +1,7 @@
 #import <Onyx2D/O2Encoder_PNG.h>
 
 #ifndef __APPLE__
-#import "O2Defines_libpng.h"
+#import <Onyx2D/O2Defines_libpng.h>
 #endif
 
 O2PNGEncoderRef O2PNGEncoderCreate(O2DataConsumerRef consumer) {

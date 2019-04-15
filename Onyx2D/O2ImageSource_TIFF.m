@@ -8,7 +8,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 #import <Onyx2D/O2ImageSource_TIFF.h>
 #import <Onyx2D/O2Decoder_TIFF.h>
-#import "O2TIFFImageDirectory.h"
+#import <Onyx2D/O2TIFFImageDirectory.h>
 #import <Onyx2D/O2DataProvider.h>
 #import <Onyx2D/O2ColorSpace.h>
 #import <Onyx2D/O2Image.h>

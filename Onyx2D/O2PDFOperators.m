@@ -19,8 +19,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <Onyx2D/O2DataProvider.h>
 #import <Onyx2D/O2PDFFunction_Type2.h>
 #import <Onyx2D/O2PDFFunction_Type3.h>
-#import "O2PDFCharWidths.h"
-#import "O2PDFFont.h"
+#import <Onyx2D/O2PDFCharWidths.h>
+#import <Onyx2D/O2PDFFont.h>
 
 #import <Onyx2D/O2Context.h>
 #import <Onyx2D/O2Color.h>

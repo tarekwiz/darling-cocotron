@@ -8,15 +8,15 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 /*  PNG decode is based on the public domain implementation by Sean Barrett  http://www.nothings.org/stb_image.c  V 1.00 */
 
-#import <Onyx2D/O2ImageSource_PNG.h>
 #import <Foundation/NSString.h>
 #import <Foundation/NSData.h>
+#import <Onyx2D/O2ImageSource_PNG.h>
 #import <Onyx2D/O2zlib.h>
 #import <Onyx2D/O2DataProvider.h>
 #import <Onyx2D/O2ColorSpace.h>
 #import <Onyx2D/O2Image.h>
 
-#import "O2Defines_libpng.h"
+#import <Onyx2D/O2Defines_libpng.h>
 #import <assert.h>
 
 // clang-format off

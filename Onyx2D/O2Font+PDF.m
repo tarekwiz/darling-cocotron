@@ -3,7 +3,7 @@
 #import <Onyx2D/O2PDFDictionary.h>
 #import <Onyx2D/O2PDFContext.h>
 #import <Foundation/NSArray.h>
-#import "O2Encoding.h"
+#import <Onyx2D/O2Encoding.h>
 
 @implementation O2Font(PDF)
 

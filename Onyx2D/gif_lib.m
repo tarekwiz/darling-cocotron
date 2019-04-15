@@ -23,7 +23,7 @@ THE SOFTWARE.
 
 #import <stdlib.h>
 #import <string.h>
-#import "gif_lib.h"
+#import "Onyx2D/gif_lib.h"
 #import <Foundation/NSStream.h>
 #import <Foundation/NSString.h>
 

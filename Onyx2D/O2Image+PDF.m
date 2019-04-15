@@ -8,7 +8,7 @@
 
 #ifdef __APPLE__
 #else
-#import "O2Defines_zlib.h"
+#import <Onyx2D/O2Defines_zlib.h>
 #endif
 
 #if ZLIB_PRESENT

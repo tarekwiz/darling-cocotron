@@ -1,4 +1,4 @@
-#import "O2Encoding.h"
+#import <Onyx2D/O2Encoding.h>
 
 @implementation O2Encoding
 

@@ -6,23 +6,23 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. */
 
-#import <Onyx2D/O2ImageSource_JPEG.h>
-#import <Onyx2D/O2ImageSource_TIFF.h>
 #import <Foundation/NSString.h>
 #import <Foundation/NSData.h>
+#import <Onyx2D/O2ImageSource_JPEG.h>
+#import <Onyx2D/O2ImageSource_TIFF.h>
 #import <Onyx2D/O2DataProvider.h>
 #import <Onyx2D/O2ColorSpace.h>
 #import <Onyx2D/O2Image.h>
 
-#import "O2Defines_libjpeg.h"
+#import <Onyx2D/O2Defines_libjpeg.h>
 
 #ifdef LIBJPEG_PRESENT
-#import "O2ImageDecoder_JPEG_libjpeg.h"
+#import <Onyx2D/O2ImageDecoder_JPEG_libjpeg.h>
 #else
-#import "O2ImageDecoder_JPEG_stb.h"
+#import <Onyx2D/O2ImageDecoder_JPEG_stb.h>
 #endif
 
-#import "O2EXIFDecoder.h"
+#import <Onyx2D/O2EXIFDecoder.h>
 
 #import <assert.h>
 #import <string.h>

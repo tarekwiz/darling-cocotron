@@ -26,7 +26,7 @@
  *
  *-------------------------------------------------------------------*/
 
-#import "VGPath.h"
+#import <Onyx2D/VGPath.h>
 #import <Onyx2D/VGmath.h>
 
 static inline void		RI_SWAP(O2Float *a, O2Float *b)				{ O2Float tmp = *a; *a = *b; *b = tmp; }

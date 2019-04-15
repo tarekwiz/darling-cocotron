@@ -1,4 +1,4 @@
-#import "O2ImageDecoder_JPEG_stb.h"
+#import <Onyx2D/O2ImageDecoder_JPEG_stb.h>
 
 /*  JPEG decode is based on the public domain implementation by Sean Barrett  http://www.nothings.org/stb_image.c  V 1.14 */
 // clang-format off

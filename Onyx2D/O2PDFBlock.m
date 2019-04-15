@@ -1,4 +1,4 @@
-#import "O2PDFBlock.h"
+#import <Onyx2D/O2PDFBlock.h>
 #import <Foundation/NSArray.h>
 
 @implementation O2PDFBlock

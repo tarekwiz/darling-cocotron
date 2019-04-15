@@ -1,4 +1,4 @@
-#import "O2PDFCharWidths.h"
+#import <Onyx2D/O2PDFCharWidths.h>
 #import <Onyx2D/O2PDFArray.h>
 
 @implementation O2PDFCharWidths

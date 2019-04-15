@@ -1,8 +1,8 @@
 #import <Onyx2D/O2Function+PDF.h>
-#import "O2PDFFunction_Type0.h"
+#import <Onyx2D/O2PDFFunction_Type0.h>
 #import <Onyx2D/O2PDFFunction_Type2.h>
 #import <Onyx2D/O2PDFFunction_Type3.h>
-#import "O2PDFFunction_Type4.h"
+#import <Onyx2D/O2PDFFunction_Type4.h>
 #import <Onyx2D/O2PDFArray.h>
 #import <Onyx2D/O2PDFDictionary.h>
 #import <Onyx2D/O2PDFStream.h>

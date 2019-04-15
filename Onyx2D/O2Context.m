@@ -16,10 +16,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <Onyx2D/O2PDFPage.h>
 #import <Onyx2D/O2ClipPhase.h>
 #import <Onyx2D/O2Exceptions.h>
+#import <Onyx2D/O2Encoding.h>
+#import <Onyx2D/O2PDFCharWidths.h>
 #import <Foundation/NSBundle.h>
 #import <Foundation/NSArray.h>
-#import "O2Encoding.h"
-#import "O2PDFCharWidths.h"
 
 void O2ContextDefaultShowText(O2ContextRef self,const char *text, NSUInteger length);
 

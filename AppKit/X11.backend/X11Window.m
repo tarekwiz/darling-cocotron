@@ -17,7 +17,7 @@
 #import <Onyx2D/O2Surface.h>
 #import <Onyx2D/O2ImageSource.h>
 #import <Onyx2D/O2BitmapContext.h>
-#import "O2Context_builtin_FT.h"
+#import <Onyx2D/O2Context_builtin_FT.h>
 
 #import <X11/Xutil.h>
 #import "X11Display.h"
