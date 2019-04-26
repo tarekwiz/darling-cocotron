@@ -28,6 +28,8 @@
 - (instancetype) initWithFace: (FT_Face) face;
 - (instancetype) initWithDataProvider: (O2DataProviderRef) provider;
 
+- (FT_Face) face;
+
 FT_Face O2FontFreeTypeFace(O2Font_freetype *self);
 
 FT_Library O2FontSharedFreeTypeLibrary();
