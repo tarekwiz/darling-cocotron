@@ -27,44 +27,19 @@
 #import <Onyx2D/O2Surface.h>
 #import <Onyx2D/O2Exceptions.h>
 #import <Onyx2D/O2GraphicsState.h>
-#import "VGPath.h"
+#import <Onyx2D/VGPath.h>
 #import <Onyx2D/O2Paint_image.h>
 #import <Onyx2D/O2Paint_color.h>
 #import <Onyx2D/O2Paint_axialGradient.h>
 #import <Onyx2D/O2Paint_radialGradient.h>
 #import <Onyx2D/O2Paint_pattern.h>
-#import "O2ClipState.h"
-#import "O2ClipPhase.h"
+#import <Onyx2D/O2ClipState.h>
+#import <Onyx2D/O2ClipPhase.h>
 #import <Onyx2D/O2Shading.h>
 
 #define MAX_SAMPLES     COVERAGE_MULTIPLIER
 
 void O2DContextClipAndFillEdges(O2Context_builtin *self,int fillRuleMask);
-
-@implementation O2Context (O2BitmapContext)
-
-+ (O2Context *) createWithBytes: (void *) bytes
-                          width: (size_t) width
-                         height: (size_t) height
-               bitsPerComponent: (size_t) bitsPerComponent
-                    bytesPerRow: (size_t) bytesPerRow
-                     colorSpace: (O2ColorSpaceRef) colorSpace
-                     bitmapInfo: (O2BitmapInfo) bitmapInfo
-                releaseCallback: (O2BitmapContextReleaseDataCallback) releaseCallback
-                    releaseInfo: (void *) releaseInfo {
-
-    return [[O2Context_builtin alloc] initWithBytes: bytes
-                                              width: width
-                                             height: height
-                                   bitsPerComponent: bitsPerComponent
-                                        bytesPerRow: bytesPerRow
-                                         colorSpace: colorSpace
-                                         bitmapInfo: bitmapInfo
-                                    releaseCallback: releaseCallback
-                                        releaseInfo: releaseInfo];
-}
-
-@end
 
 @implementation O2Context_builtin
 

@@ -20,7 +20,6 @@
 
 #import <AppKit/NSColor.h>
 #import <AppKit/NSImage.h>
-#import <AppKit/KTFont_FT.h>
 #import <AppKit/NSRaise.h>
 #import <AppKit/NSFontManager.h>
 #import <AppKit/NSFontTypeface.h>

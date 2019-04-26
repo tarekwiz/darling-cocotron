@@ -10,13 +10,17 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} \
 	-mmacosx-version-min=10.10"
 )
 
+find_package(Freetype REQUIRED)
+
 include_directories(
 	${CMAKE_CURRENT_SOURCE_DIR}
+	${FREETYPE_INCLUDE_DIRS}
 )
 
 set(CoreText_sources
 	CTFont.m
 	KTFont.m
+	KTFont_FT.m
 )
 
 set_source_files_properties(${CoreText_sources} LANGUAGE C)
@@ -36,4 +40,7 @@ add_framework(CoreText
 		CoreFoundation
 		Foundation
 		CoreGraphics
+		Onyx2D
+		# native
+		FreeType
 )

@@ -64,6 +64,7 @@ set(Onyx2D_sources
 	O2ColorSpace.m
 	O2ColorSpace+PDF.m
 	O2Context_builtin.m
+	O2Context_builtin_FT.m
 	O2Context_distill.m
 	O2Context.m
 	O2DataConsumer.m

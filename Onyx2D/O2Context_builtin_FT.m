@@ -1,7 +1,33 @@
-#import "O2Context_builtin_FT.h"
+#import <Onyx2D/O2Context_builtin_FT.h>
 #import <Onyx2D/O2GraphicsState.h>
 #import <Onyx2D/O2Font_freetype.h>
 #import <Onyx2D/O2Paint_color.h>
+
+@implementation O2Context (O2BitmapContext)
+
++ (O2Context *) createWithBytes: (void *) bytes
+                          width: (size_t) width
+                         height: (size_t) height
+               bitsPerComponent: (size_t) bitsPerComponent
+                    bytesPerRow: (size_t) bytesPerRow
+                     colorSpace: (O2ColorSpaceRef) colorSpace
+                     bitmapInfo: (O2BitmapInfo) bitmapInfo
+                releaseCallback: (O2BitmapContextReleaseDataCallback) releaseCallback
+                    releaseInfo: (void *) releaseInfo {
+
+    return [[O2Context_builtin_FT alloc] initWithBytes: bytes
+                                                width: width
+                                               height: height
+                                     bitsPerComponent: bitsPerComponent
+                                          bytesPerRow: bytesPerRow
+                                           colorSpace: colorSpace
+                                           bitmapInfo: bitmapInfo
+                                      releaseCallback: releaseCallback
+                                          releaseInfo: releaseInfo];
+}
+
+@end
+
 
 @implementation O2Context_builtin_FT
 
@@ -147,8 +173,8 @@ static void renderFreeTypeBitmap(
 
    [self establishFontStateInDeviceIfDirty];
 
-   O2Font_freetype *font = (O2Font_freetype *)gState->_font;
-   FT_Face    face=[font face];
+   O2Font_freetype *font = (O2Font_freetype *) gState->_font;
+   FT_Face face = [font face];
 
    int        i;
    FT_Error   ftError;

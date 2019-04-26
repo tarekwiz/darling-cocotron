@@ -55,7 +55,6 @@ include_directories(
 	${CMAKE_CURRENT_SOURCE_DIR}/NSToolbar.subproj
 	${CMAKE_CURRENT_SOURCE_DIR}/NSDrawer.subproj
 
-	${CMAKE_CURRENT_SOURCE_DIR}/Linux.subproj
 	${CMAKE_CURRENT_SOURCE_DIR}/X11.backend
 
 	${X11_INCLUDE_DIRS}
@@ -299,9 +298,6 @@ set(AppKit_sources
 	NSInterfacePart/NSInterfacePartDisabledAttributedString.m
 	NSInterfacePart/NSGraphicsStyle.m
 	NSInterfacePart/NSInterfacePart.m
-
-	Linux.subproj/KTFont_FT.m
-	Linux.subproj/O2Context_builtin_FT.m
 
 	NSImageView.m
 	NSActionCell.m
