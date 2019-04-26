@@ -52,6 +52,10 @@ typedef struct png_data_t {
 	int len;
 } png_data_t;
 
+static void O2ImageSource_PNGError(png_structp png_ptr, png_const_charp error_message) {
+    [NSException raise: @"PNG exception" format: @"%s", error_message];
+}
+
 static void png_read_data(png_structp pngPtr, png_bytep data, png_size_t length) {
     //Here we get our IO pointer back from the read struct.
     //This is the parameter we passed to the png_set_read_fn() function.
@@ -68,7 +72,7 @@ bool load_png_image(const unsigned char *buffer, int length, int *outWidth, int 
     png_structp png_ptr;
     png_infop info_ptr;
     unsigned int sig_read = 0;
-	
+
     /* Create and initialize the png_struct
      * with the desired error handler
      * functions.  If you want to use the
@@ -80,13 +84,12 @@ bool load_png_image(const unsigned char *buffer, int length, int *outWidth, int 
      * was compiled with a compatible version
      * of the library.  REQUIRED
      */
-    png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING,
-									 NULL, NULL, NULL);
-	
+    png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, O2ImageSource_PNGError, NULL);
+
     if (png_ptr == NULL) {
         return false;
     }
-	
+
     /* Allocate/initialize the memory
      * for image information.  REQUIRED. */
     info_ptr = png_create_info_struct(png_ptr);
@@ -94,81 +97,69 @@ bool load_png_image(const unsigned char *buffer, int length, int *outWidth, int 
         png_destroy_read_struct(&png_ptr, NULL, NULL);
         return false;
     }
-	
-    /* Set error handling if you are
-     * using the setjmp/longjmp method
-     * (this is the normal method of
-     * doing things with libpng).
-     * REQUIRED unless you  set up
-     * your own error handlers in
-     * the png_create_read_struct()
-     * earlier.
-     */
-    if (setjmp(png_jmpbuf(png_ptr))) {
-        /* Free all of the memory associated
-         * with the png_ptr and info_ptr */
-        png_destroy_read_struct(&png_ptr, &info_ptr, NULL);
-        /* If we get here, we had a
-         * problem reading the file */
-        return false;
-    }
-	
-    /* Set up the output control if
-     * you are using standard C streams */
+
+    @try {
+        /* Set up the output control if
+         * you are using standard C streams */
 	png_data_t data = {
 		.data = buffer,
 		.len = length
 	};
-	png_set_read_fn(png_ptr,(png_voidp)&data, png_read_data);
+	png_set_read_fn(png_ptr, (png_voidp) &data, png_read_data);
 
-    /* If we have already
-     * read some of the signature */
-    png_set_sig_bytes(png_ptr, sig_read);
-	
-    png_read_png(png_ptr, info_ptr, PNG_TRANSFORM_STRIP_16 | PNG_TRANSFORM_SHIFT | PNG_TRANSFORM_PACKING | PNG_TRANSFORM_EXPAND | PNG_TRANSFORM_GRAY_TO_RGB, NULL);
-	
-	int nb_comp = png_get_channels(png_ptr, info_ptr);
-    int width = png_get_image_width(png_ptr, info_ptr);
-    int height = png_get_image_height(png_ptr, info_ptr);
-	
-	// Adjust the size to adding the alpha if needed
-    unsigned int row_bytes = png_get_rowbytes(png_ptr, info_ptr);
-	if (nb_comp == 3) {
-		row_bytes += width; // Add some room for the alpha
-	}
-    *outData = (unsigned char*) malloc(row_bytes * height);
-    if (*outData == NULL) {
-        NSLog(@"Can't allocate %d bytes for %dx%d bitmap", row_bytes*height, width, height);
+        /* If we have already
+         * read some of the signature */
+        png_set_sig_bytes(png_ptr, sig_read);
+
+        png_read_png(png_ptr, info_ptr, PNG_TRANSFORM_STRIP_16 | PNG_TRANSFORM_SHIFT | PNG_TRANSFORM_PACKING | PNG_TRANSFORM_EXPAND | PNG_TRANSFORM_GRAY_TO_RGB, NULL);
+
+        int nb_comp = png_get_channels(png_ptr, info_ptr);
+        int width = png_get_image_width(png_ptr, info_ptr);
+        int height = png_get_image_height(png_ptr, info_ptr);
+
+        // Adjust the size to adding the alpha if needed
+        unsigned int row_bytes = png_get_rowbytes(png_ptr, info_ptr);
+        if (nb_comp == 3) {
+            row_bytes += width; // Add some room for the alpha
+        }
+        *outData = (unsigned char*) malloc(row_bytes * height);
+        if (*outData == NULL) {
+            NSLog(@"Can't allocate %d bytes for %dx%d bitmap", row_bytes*height, width, height);
+            png_destroy_read_struct(&png_ptr, &info_ptr, NULL);
+            return false;
+        }
+
+        png_bytepp row_pointers = png_get_rows(png_ptr, info_ptr);
+
+        for (int i = 0; i < height; i++) {
+            if (nb_comp == 3) {
+                // Add the alpha bytes
+                uint8_t *src = row_pointers[i];
+                uint8_t *dest = *outData+(row_bytes * i);
+                for (int j = 0; j < width; ++j, src += 3, dest += 4) {
+                    dest[0] = src[0];
+                    dest[1] = src[1];
+                    dest[2] = src[2];
+                    dest[3] = 0xff;
+                }
+            } else {
+                // Just copy the bytes
+                memcpy(*outData + (row_bytes * i), row_pointers[i], row_bytes);
+            }
+        }
+
+        *outWidth = width;
+        *outHeight = height;
+    } @catch (NSException *ex) {
+        NSLog(@"Error reading PNG: %@", ex);
         png_destroy_read_struct(&png_ptr, &info_ptr, NULL);
         return false;
     }
 
-    png_bytepp row_pointers = png_get_rows(png_ptr, info_ptr);
-	
-    for (int i = 0; i < height; i++) {
-		if (nb_comp == 3) {
-			// Add the alpha bytes
-			uint8_t *src = row_pointers[i];
-			uint8_t *dest = *outData+(row_bytes * i);
-			for (int j = 0; j < width; ++j, src += 3, dest += 4) {
-				dest[0]=src[0];
-				dest[1]=src[1];
-				dest[2]=src[2];
-				dest[3]=0xff;
-			}
-		} else {
-			// Just copy the bytes
-			memcpy(*outData+(row_bytes * i), row_pointers[i], row_bytes);
-		}
-    }
-	
-	*outWidth = width;
-	*outHeight = height;
-
     /* Clean up after the read,
      * and free any memory allocated */
     png_destroy_read_struct(&png_ptr, &info_ptr, NULL);
-	
+
     /* That's it */
     return true;
 }

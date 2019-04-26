@@ -86,7 +86,16 @@ void O2JPGEncoderWriteImage(O2JPGEncoderRef self,O2ImageRef image,CFDictionaryRe
 	
 	jpeg_destroy_compress(&cinfo);
 	
+#ifndef DARLING
 	free(outbuffer);
+#else
+    #include <elfcalls.h>
+    extern const struct elf_calls* _elfcalls;
+    void (*elf_free)(void *);
+    *((void**)(&elf_free)) = _elfcalls->dlsym_fatal(NULL, "free");
+
+    elf_free(outbuffer);
+#endif
 }
 
 #endif

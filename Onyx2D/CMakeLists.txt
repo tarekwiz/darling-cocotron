@@ -38,6 +38,8 @@ include_directories(
 	${CMAKE_SOURCE_DIR}/src/external/libxml2/include
 	${CMAKE_BINARY_DIR}/src/external/libxml2/include
 
+	${CMAKE_SOURCE_DIR}/src/libelfloader/native
+
 	${CMAKE_CURRENT_SOURCE_DIR}
 	${CMAKE_CURRENT_SOURCE_DIR}/..
 	${CMAKE_CURRENT_SOURCE_DIR}/../CoreText
@@ -159,6 +161,7 @@ add_framework(Onyx2D
 		CoreFoundation
 		Foundation
 		z
+		elfloader
 		# native libraries
 		FreeType
 		fontconfig

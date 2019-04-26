@@ -22,110 +22,117 @@ void O2PNGEncoderDealloc(O2PNGEncoderRef self) {
 
 static void o2png_write_data(png_structp png_ptr, png_bytep data, png_size_t length)
 {
-	O2PNGEncoderRef self = (O2PNGEncoderRef)png_get_io_ptr(png_ptr);
-	O2DataConsumerPutBytes(self->_consumer,data,length);
+    O2PNGEncoderRef self = (O2PNGEncoderRef) png_get_io_ptr(png_ptr);
+    O2DataConsumerPutBytes(self->_consumer, data, length);
 }
 
-void O2PNGEncoderWriteImage(O2PNGEncoderRef self,O2ImageRef image,CFDictionaryRef props) 
+static void O2PNGEncoderError(png_structp png_ptr, png_const_charp error_message)
 {
-	// Note: only encoding 32 bits RGBA images have been tested
-	NSDictionary *properties = (NSDictionary *)props;
-	
-	unsigned long length = 0;
-	size_t width = O2ImageGetWidth(image);
-	size_t height = O2ImageGetHeight(image);
-	
-	int bpr = O2ImageGetBytesPerRow(image);
-	png_bytep *row_pointers = calloc(sizeof(void *), height);
-	const uint8_t *bytes = [image directBytes];
-	for (int i = 0; i < height; ++i) {
-		row_pointers[i] = (uint8_t *)(bytes + i*bpr);
-	}
-	
-	png_structp png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
-	png_infop info_ptr = png_create_info_struct(png_ptr);
-    
+    [NSException raise: @"PNG exception" format: @"%s", error_message];
+}
+
+void O2PNGEncoderWriteImage(O2PNGEncoderRef self, O2ImageRef image, CFDictionaryRef props)
+{
+    // Note: only encoding 32 bits RGBA images have been tested
+    NSDictionary *properties = (NSDictionary *) props;
+
+    unsigned long length = 0;
+    size_t width = O2ImageGetWidth(image);
+    size_t height = O2ImageGetHeight(image);
+
+    int bpr = O2ImageGetBytesPerRow(image);
+    png_bytep *row_pointers = calloc(sizeof(void *), height);
+    const uint8_t *bytes = [image directBytes];
+    for (int i = 0; i < height; ++i) {
+        row_pointers[i] = (uint8_t *)(bytes + i*bpr);
+    }
+    png_byte bit_depth = 8;
+
+    png_structp png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
+    png_infop info_ptr = png_create_info_struct(png_ptr);
+
+    png_set_error_fn(png_ptr, NULL, O2PNGEncoderError, NULL);
+
     // Default options for png compression are quite slow.
     // These settings speed it up a lot without sacrificing a lot of disk space
     png_set_filter(png_ptr, PNG_FILTER_TYPE_BASE, PNG_FILTER_SUB);
-	png_set_compression_level(png_ptr, 3); // range is 0 (NONE) to 9 (BEST) - 3 is a reasonable compromise
+    png_set_compression_level(png_ptr, 3); // range is 0 (NONE) to 9 (BEST) - 3 is a reasonable compromise
 
-	if (setjmp(png_jmpbuf(png_ptr))) {
-		NSLog(@"Error initializing png encoder");
-		png_destroy_write_struct(&png_ptr, &info_ptr);
-		return;
-	}
-	png_set_write_fn(png_ptr, self, o2png_write_data, NULL);
-	
-	
-	png_byte color_type = PNG_COLOR_TYPE_RGB_ALPHA;
-	png_byte bit_depth = 8;
-	
-	switch(O2ImageGetBitmapInfo(image)&kO2BitmapAlphaInfoMask){
-		case kO2ImageAlphaNone:
-			color_type = PNG_COLOR_TYPE_RGB;
-			break;
-		case kO2ImageAlphaNoneSkipLast:
-			png_set_filler(png_ptr, 0, PNG_FILLER_AFTER);
-			color_type = PNG_COLOR_TYPE_RGB;
-			break;
-		case kO2ImageAlphaNoneSkipFirst:
-			png_set_filler(png_ptr, 0, PNG_FILLER_BEFORE);
-			color_type = PNG_COLOR_TYPE_RGB;
-			break;
-		default:
-			color_type = PNG_COLOR_TYPE_RGB_ALPHA;
-			break;
-	}
-	
-	png_set_IHDR(png_ptr, info_ptr, width, height,
-				 bit_depth, color_type, PNG_INTERLACE_NONE,
-				 PNG_COMPRESSION_TYPE_BASE, PNG_FILTER_TYPE_BASE);
-	
-	if (setjmp(png_jmpbuf(png_ptr))) {
-		NSLog(@"Error writing png header");
-		png_destroy_write_struct(&png_ptr, &info_ptr);
-		return;
-	}
+    @try {
+        png_set_write_fn(png_ptr, self, o2png_write_data, NULL);
+
+        png_byte color_type;
+        switch (O2ImageGetBitmapInfo(image) & kO2BitmapAlphaInfoMask) {
+            case kO2ImageAlphaNone:
+                color_type = PNG_COLOR_TYPE_RGB;
+                break;
+            case kO2ImageAlphaNoneSkipLast:
+                png_set_filler(png_ptr, 0, PNG_FILLER_AFTER);
+                color_type = PNG_COLOR_TYPE_RGB;
+                break;
+            case kO2ImageAlphaNoneSkipFirst:
+                png_set_filler(png_ptr, 0, PNG_FILLER_BEFORE);
+                color_type = PNG_COLOR_TYPE_RGB;
+                break;
+            default:
+                color_type = PNG_COLOR_TYPE_RGB_ALPHA;
+                break;
+        }
+
+        png_set_IHDR(png_ptr, info_ptr, width, height,
+                     bit_depth, color_type, PNG_INTERLACE_NONE,
+                     PNG_COMPRESSION_TYPE_BASE, PNG_FILTER_TYPE_BASE);
+
+    } @catch (NSException *ex) {
+        NSLog(@"Error initializing PNG encoder: %@", ex);
+        goto out;
+    }
+
+    @try {
 	png_write_info(png_ptr, info_ptr);
-	
-	switch (O2ImageGetBitmapInfo(image) & kO2BitmapByteOrderMask) {
-		case kO2BitmapByteOrder16Little:
-			bit_depth = 4;
-			png_set_bgr(png_ptr);
-			break;
-		case kO2BitmapByteOrder32Little:
-			png_set_bgr(png_ptr);
-			break;
-		case kO2BitmapByteOrder16Big:
-			bit_depth = 4;
-			break;
-		case kO2BitmapByteOrder32Big:
-			break;
-		case kO2BitmapByteOrderDefault:
-		default:
+    } @catch (NSException *ex) {
+        NSLog(@"Error writing PNG header: %@", ex);
+        goto out;
+    }
+
+    switch (O2ImageGetBitmapInfo(image) & kO2BitmapByteOrderMask) {
+        case kO2BitmapByteOrder16Little:
+            bit_depth = 4;
+            png_set_bgr(png_ptr);
+            break;
+        case kO2BitmapByteOrder32Little:
+            png_set_bgr(png_ptr);
+            break;
+        case kO2BitmapByteOrder16Big:
+            bit_depth = 4;
+            break;
+        case kO2BitmapByteOrder32Big:
+            break;
+        case kO2BitmapByteOrderDefault:
+        default:
 #ifdef __LITTLE_ENDIAN__
-			png_set_bgr(png_ptr);
+            png_set_bgr(png_ptr);
 #endif
-			break;
-	}
-	if (setjmp(png_jmpbuf(png_ptr))) {
-		NSLog(@"Error writing png image data");
-		png_destroy_write_struct(&png_ptr, &info_ptr);
-		return;
-	}
-	png_write_image(png_ptr, row_pointers);
-	
-	
-	if (setjmp(png_jmpbuf(png_ptr))) {
-		NSLog(@"Error finishing png image data");
-		png_destroy_write_struct(&png_ptr, &info_ptr);
-		return;
-	}
-	png_write_end(png_ptr, NULL);
-	
-	png_destroy_write_struct(&png_ptr, &info_ptr);
-	free(row_pointers);
+            break;
+    }
+
+    @try {
+        png_write_image(png_ptr, row_pointers);
+    } @catch (NSException *ex) {
+        NSLog(@"Error writing PNG image data: %@", ex);
+        goto out;
+    }
+
+    @try {
+        png_write_end(png_ptr, NULL);
+    } @catch (NSException *ex) {
+        NSLog(@"Error finishing PNG image data: %@", ex);
+        goto out;
+    }
+
+out:
+    png_destroy_write_struct(&png_ptr, &info_ptr);
+    free(row_pointers);
 }
 #else
 /* stbiw-0.92 - public domain - http://nothings.org/stb/stb_image_write.h
