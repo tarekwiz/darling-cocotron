@@ -6,13 +6,13 @@
 #import <Onyx2D/O2PDFStream.h>
 #import <Onyx2D/O2PDFContext.h>
 
-#ifdef __APPLE__
+#if defined(__APPLE__) && !defined(DARLING)
 #else
 #import <Onyx2D/O2Defines_zlib.h>
 #endif
 
 #if ZLIB_PRESENT
-#import <zlib-1.2.5/include/zlib.h>
+#import <zlib.h>
 #endif
 
 @implementation O2Image(PDF)

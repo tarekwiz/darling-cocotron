@@ -158,8 +158,9 @@ add_framework(Onyx2D
 		system
 		CoreFoundation
 		Foundation
+		z
 		# native libraries
 		FreeType
-		jpeg png tiff
 		fontconfig
+		jpeg png tiff
 )

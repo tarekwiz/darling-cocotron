@@ -1,4 +1,4 @@
-#ifdef __APPLE__
+#if defined(__APPLE__) && !defined(DARLING)
 // compiling on OS X
 #else
 #import <Onyx2D/O2Defines_libjpeg.h>

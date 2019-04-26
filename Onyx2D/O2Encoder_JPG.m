@@ -2,7 +2,7 @@
 #import <Onyx2D/O2ImageDestination.h>
 
 #ifdef LIBJPEG_PRESENT
-#import <libjpeg/include/jpeglib.h>
+#import <jpeglib.h>
 
 O2JPGEncoderRef O2JPGEncoderCreate(O2DataConsumerRef consumer) {
    O2JPGEncoderRef self=NSZoneCalloc(NULL,1,sizeof(struct O2JPGEncoder));
