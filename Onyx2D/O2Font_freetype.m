@@ -217,7 +217,15 @@ FT_Face O2FontFreeTypeFace(O2Font_freetype *self) {
 }
 
 - (O2Glyph) glyphWithGlyphName: (NSString *) name {
-   return FT_Get_Name_Index(_face, (char *) [name cString]);
+    return FT_Get_Name_Index(_face, (char *) [name cString]);
+}
+
+- (NSString *) copyGlyphNameForGlyph: (O2Glyph) glyph {
+    unsigned char buffer[100];
+    if (FT_Get_Glyph_Name(_face, glyph, buffer, sizeof(buffer)) != 0) {
+        return nil;
+    }
+    return [[NSString alloc] initWithUTF8String: (const char *) buffer];
 }
 
 - (void) getGlyphs: (O2Glyph *) glyphs
