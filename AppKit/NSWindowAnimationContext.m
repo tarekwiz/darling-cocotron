@@ -95,7 +95,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@[0x%lx] window: %@ targetRect: %@ stepRect: %@ stepCount: %d stepInterval: %g display: %d",
+    return [NSString stringWithFormat:@"<%@[%p] window: %@ targetRect: %@ stepRect: %@ stepCount: %d stepInterval: %g display: %d",
         [self class], self, _window, NSStringFromRect(_targetRect), NSStringFromRect(_stepRect), _stepCount, _stepInterval, _display];
 }
 

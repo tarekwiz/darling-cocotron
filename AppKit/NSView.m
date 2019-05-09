@@ -2403,7 +2403,7 @@ static NSGraphicsContext *graphicsContextForView(NSView *view){
 //}
 
 -(NSString *)description {
-    return [NSString stringWithFormat:@"<%@[0x%lx] frame: %@>", [self class], self, NSStringFromRect(_frame)];
+    return [NSString stringWithFormat:@"<%@[%p] frame: %@>", [self class], self, NSStringFromRect(_frame)];
 }
 
 @end

@@ -561,7 +561,7 @@ extern NSSize _NSToolbarIconSizeSmall;
 }
 
 -(NSString *)description {
-   return [NSString stringWithFormat:@"<%@[0x%lx] %@ label: \"%@\" image: %@ view: %@>",
+   return [NSString stringWithFormat:@"<%@[%p] %@ label: \"%@\" image: %@ view: %@>",
         [self class], self, _itemIdentifier, _label, [self image], _view];
 }
 

@@ -41,7 +41,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 - (NSArray *)selectorNames { return _selectorNames; }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"<%@[0x%lx] string: %@ modifierMask: 0x%lx selectorNames: %@>",
+    return [NSString stringWithFormat:@"<%@[%p] string: %@ modifierMask: %p selectorNames: %@>",
         [self class], self, _string, _modifierMask, _selectorNames];
 }
 

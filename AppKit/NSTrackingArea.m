@@ -109,7 +109,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 
 -(NSString *)description {
-   return [NSString stringWithFormat:@"<%@[0x%lx] rect:%@ options:%d owner:%@ userInfo:%p view:%@ rectInWindow:%@ mouseInside:%@ isToolTip:%@>", [self class], self, NSStringFromRect(_rect), _options, [_owner class], _userData, [_view class], NSStringFromRect(_rectInWindow), _mouseInside ? @"YES" : @"NO", _isToolTip ? @"YES" : @"NO"];
+   return [NSString stringWithFormat:@"<%@[%p] rect:%@ options:%d owner:%@ userInfo:%p view:%@ rectInWindow:%@ mouseInside:%@ isToolTip:%@>", [self class], self, NSStringFromRect(_rect), _options, [_owner class], _userData, [_view class], NSStringFromRect(_rectInWindow), _mouseInside ? @"YES" : @"NO", _isToolTip ? @"YES" : @"NO"];
 }
 
 @end

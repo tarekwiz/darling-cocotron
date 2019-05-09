@@ -928,7 +928,7 @@ NSImageName const NSImageNameTouchBarRecordStopTemplate = @"NSTouchBarRecordStop
 -(NSString *)description {
    NSSize size=[self size];
    
-   return [NSString stringWithFormat:@"<%@[0x%lx] name: %@ size: { %f, %f } representations: %@>", [self class], self, _name, size.width, size.height, _representations];
+   return [NSString stringWithFormat:@"<%@[%p] name: %@ size: { %f, %f } representations: %@>", [self class], self, _name, size.width, size.height, _representations];
 }
 
 @end
