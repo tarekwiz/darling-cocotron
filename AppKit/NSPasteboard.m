@@ -10,36 +10,36 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <AppKit/NSDisplay.h>
 #import <AppKit/NSRaise.h>
 
-NSString *const NSPasteboardTypeString = @"NSStringPboardType";
-NSString *const NSPasteboardTypePDF = @"NSPDFPboardType";
-NSString *const NSPasteboardTypePNG = @"NSPDFPboardType";
-NSString *const NSPasteboardTypeTIFF = @"NSTIFFPboardType";
-NSString *const NSPasteboardTypeRTF = @"NSRTFPboardType";
-NSString *const NSPasteboardTypeRTFD = @"NSRTFDPboardType";
-NSString *const NSPasteboardTypeHTML = @"NSPasteboardTypeHTML";
-NSString *const NSPasteboardTypeTabularText = @"NSTabularTextPboardType";
-NSString *const NSPasteboardTypeFont = @"NSFontPboardType";
-NSString *const NSPasteboardTypeRuler = @"NSRulerPboardType";
-NSString *const NSPasteboardTypeColor = @"NSColorPboardType";
+const NSPasteboardType NSPasteboardTypeString = @"NSStringPboardType";
+const NSPasteboardType NSPasteboardTypePDF = @"NSPDFPboardType";
+const NSPasteboardType NSPasteboardTypePNG = @"NSPDFPboardType";
+const NSPasteboardType NSPasteboardTypeTIFF = @"NSTIFFPboardType";
+const NSPasteboardType NSPasteboardTypeRTF = @"NSRTFPboardType";
+const NSPasteboardType NSPasteboardTypeRTFD = @"NSRTFDPboardType";
+const NSPasteboardType NSPasteboardTypeHTML = @"NSPasteboardTypeHTML";
+const NSPasteboardType NSPasteboardTypeTabularText = @"NSTabularTextPboardType";
+const NSPasteboardType NSPasteboardTypeFont = @"NSFontPboardType";
+const NSPasteboardType NSPasteboardTypeRuler = @"NSRulerPboardType";
+const NSPasteboardType NSPasteboardTypeColor = @"NSColorPboardType";
 
-NSString * const NSColorPboardType=@"NSColorPboardType";
-NSString * const NSFileContentsPboardType=@"NSFileContentsPboardType";
-NSString * const NSFilenamesPboardType=@"NSFilenamesPboardType";
-NSString * const NSFontPboardType=@"NSFontPboardType";
-NSString * const NSPDFPboardType=@"NSPDFPboardType";
-NSString * const NSPICTPboardType=@"NSPICTPboardType";
-NSString * const NSPostScriptPboardType=@"NSPostScriptPboardType";
-NSString * const NSRTFDPboardType=@"NSRTFDPboardType";
-NSString * const NSRTFPboardType=@"NSRTFPboardType";
-NSString * const NSRulerPboardType=@"NSRulerPboardType";
-NSString * const NSStringPboardType=@"NSStringPboardType";
-NSString * const NSTabularTextPboardType=@"NSTabularTextPboardType";
-NSString * const NSTIFFPboardType=@"NSTIFFPboardType";
-NSString * const NSURLPboardType=@"NSURLPboardType";
+const NSPasteboardType NSColorPboardType = @"NSColorPboardType";
+const NSPasteboardType NSFileContentsPboardType = @"NSFileContentsPboardType";
+const NSPasteboardType NSFilenamesPboardType = @"NSFilenamesPboardType";
+const NSPasteboardType NSFontPboardType = @"NSFontPboardType";
+const NSPasteboardType NSPDFPboardType = @"NSPDFPboardType";
+const NSPasteboardType NSPICTPboardType = @"NSPICTPboardType";
+const NSPasteboardType NSPostScriptPboardType = @"NSPostScriptPboardType";
+const NSPasteboardType NSRTFDPboardType = @"NSRTFDPboardType";
+const NSPasteboardType NSRTFPboardType = @"NSRTFPboardType";
+const NSPasteboardType NSRulerPboardType = @"NSRulerPboardType";
+const NSPasteboardType NSStringPboardType = @"NSStringPboardType";
+const NSPasteboardType NSTabularTextPboardType = @"NSTabularTextPboardType";
+const NSPasteboardType NSTIFFPboardType = @"NSTIFFPboardType";
+const NSPasteboardType NSURLPboardType = @"NSURLPboardType";
 
-NSString *const NSFilesPromisePboardType = @"Apple files promise pasteboard type";
-NSString *const NSPasteboardNameDrag = @"Apple CFPasteboard drag";
-NSString *const NSPasteboardURLReadingFileURLsOnlyKey = @"NSPasteboardURLReadingFileURLsOnlyKey";
+const NSPasteboardType NSFilesPromisePboardType = @"Apple files promise pasteboard type";
+NSString * const NSPasteboardNameDrag = @"Apple CFPasteboard drag";
+NSString * const NSPasteboardURLReadingFileURLsOnlyKey = @"NSPasteboardURLReadingFileURLsOnlyKey";
 
 NSString * const NSDragPboard=@"NSDragPboard";
 NSString * const NSFindPboard=@"NSFindPboard";
@@ -51,89 +51,104 @@ NSString * const NSPasteboardNameGeneral = @"Apple CFPasteboard general";
 
 @implementation NSPasteboard
 
-+(NSPasteboard *)generalPasteboard {
-   return [self pasteboardWithName:NSGeneralPboard];
++ (NSPasteboard *) generalPasteboard {
+   return [self pasteboardWithName: NSGeneralPboard];
 }
 
-+(NSPasteboard *)pasteboardWithName:(NSString *)name {
-   return [[NSDisplay currentDisplay] pasteboardWithName:name];
++ (NSPasteboard *) pasteboardWithName: (NSString *) name {
+   return [[NSDisplay currentDisplay] pasteboardWithName: name];
 }
 
--(int)changeCount {
+- (NSString *) name {
+    NSUnimplementedMethod();
+    return nil;
+}
+
+- (NSInteger) changeCount {
    NSUnimplementedMethod();
    return 0;
 }
 
--(NSArray *)types {
-   NSUnimplementedMethod();
-   return nil;
-}
-
--(NSString *)availableTypeFromArray:(NSArray *)types {
-   NSArray *available=[self types];
-   int      i,count=[types count];
-
-   for(i=0;i<count;i++){
-    NSString *check=[types objectAtIndex:i];
-
-    if([available containsObject:check])
-     return check;
-   }
-
-   return nil;
-}
-
-
--(NSData *)dataForType:(NSString *)type {
-   NSUnimplementedMethod();
-   return nil;
-}
-
--(NSString *)stringForType:(NSString *)type {
-   NSData *data=[self dataForType:type];
-
-   return [[[NSString alloc] initWithData:data encoding:NSUnicodeStringEncoding] autorelease];
-}
-
--(id)propertyListForType:(NSString *)type {
-	NSData* data = [self dataForType: type];
-	NSString* errorDesc = nil;
-	id plist = [NSPropertyListSerialization propertyListFromData: data mutabilityOption: NSPropertyListImmutable format: NULL errorDescription: &errorDesc];
-	if (plist && errorDesc == nil) {
-		return plist;
-	}
-	NSLog(@"propertyListForType: produced error: %@", errorDesc);
-	return nil;
-}
-
--(int)declareTypes:(NSArray *)types owner:(id)owner {
-   NSUnimplementedMethod();
-   return 0;
-}
-
--(int)addTypes:(NSArray *)types owner:(id)owner {
+- (NSInteger) clearContents {
     NSUnimplementedMethod();
     return 0;
 }
 
--(BOOL)setData:(NSData *)data forType:(NSString *)type {
+- (oneway void) releaseGlobally {
+    NSUnimplementedMethod();
+}
+
+- (NSArray<NSPasteboardType> *) types {
+   NSUnimplementedMethod();
+   return nil;
+}
+
+- (NSPasteboardType) availableTypeFromArray: (NSArray<NSPasteboardType> *) types {
+    NSArray<NSPasteboardType> *available = [self types];
+    for (NSPasteboardType type in types) {
+        if ([available containsObject: type]) {
+            return type;
+        }
+    }
+    return nil;
+}
+
+
+- (NSData *) dataForType: (NSPasteboardType) type {
+   NSUnimplementedMethod();
+   return nil;
+}
+
+- (NSString *) stringForType: (NSPasteboardType) type {
+   NSData *data = [self dataForType: type];
+
+   return [[[NSString alloc] initWithData: data encoding: NSUnicodeStringEncoding] autorelease];
+}
+
+- (id) propertyListForType: (NSPasteboardType) type {
+    NSData *data = [self dataForType: type];
+    NSString *errorDesc = nil;
+    id plist = [NSPropertyListSerialization propertyListFromData: data
+                                                mutabilityOption: NSPropertyListImmutable
+                                                          format: NULL
+                                                errorDescription: &errorDesc];
+    if (plist && errorDesc == nil) {
+        return plist;
+    }
+    NSLog(@"propertyListForType: produced error: %@", errorDesc);
+    return nil;
+}
+
+- (NSInteger) declareTypes: (NSArray<NSPasteboardType> *) types owner: (id<NSPasteboardTypeOwner>)owner {
+   NSUnimplementedMethod();
+   return 0;
+}
+
+- (NSInteger) addTypes: (NSArray<NSPasteboardType> *) types owner: (id<NSPasteboardTypeOwner>) owner {
+    NSUnimplementedMethod();
+    return 0;
+}
+
+- (BOOL) setData: (NSData *) data forType: (NSPasteboardType) type {
    NSUnimplementedMethod();
    return NO;
 }
 
--(BOOL)setString:(NSString *)string forType:(NSString *)type {
-   NSData *data=[string dataUsingEncoding:NSUnicodeStringEncoding];
-   return [self setData:data forType:type];
+- (BOOL) setString: (NSString *) string forType: (NSPasteboardType) type {
+   NSData *data = [string dataUsingEncoding: NSUnicodeStringEncoding];
+   return [self setData: data forType: type];
 }
 
--(BOOL)setPropertyList:(id)plist forType:(NSString *)type {
-	NSString* errorDesc = nil;
-	NSData* data = [NSPropertyListSerialization dataFromPropertyList: plist format: NSPropertyListXMLFormat_v1_0 errorDescription: &errorDesc];
-	if (data && errorDesc == nil) {
-		return [self setData: data forType: type]; 
-	}
-	NSLog(@"setPropertyList:forType: produced error: %@", errorDesc);
-   return NO;
+- (BOOL) setPropertyList: (id) plist forType: (NSPasteboardType) type {
+    NSString *errorDesc = nil;
+    NSData *data = [NSPropertyListSerialization dataFromPropertyList: plist
+                                                              format: NSPropertyListXMLFormat_v1_0
+                                                    errorDescription: &errorDesc];
+    if (data && errorDesc == nil) {
+        return [self setData: data forType: type];
+    }
+    NSLog(@"setPropertyList:forType: produced error: %@", errorDesc);
+    return NO;
 }
 
 @end
