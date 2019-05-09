@@ -90,6 +90,7 @@ static void socketCallback(
     };
     _cfSocket = CFSocketCreateWithNative(kCFAllocatorDefault, _fileDescriptor, kCFSocketReadCallBack, socketCallback, &context);
     _source = CFSocketCreateRunLoopSource(kCFAllocatorDefault, _cfSocket, 0);
+    CFRunLoopAddSource(CFRunLoopGetMain(), _source, kCFRunLoopCommonModes);
 
     CGLRegisterNativeDisplay(_display);
 #endif
@@ -106,6 +107,7 @@ static void socketCallback(
 -(void)dealloc {
    if(_display) XCloseDisplay(_display);
 #ifdef DARLING
+   CFRunLoopRemoveSource(CFRunLoopGetMain(), _source, kCFRunLoopCommonModes);
    if (_source != NULL) CFRelease(_source);
    if (_cfSocket != NULL) CFRelease(_cfSocket);
 #endif
@@ -391,15 +393,12 @@ static void socketCallback(
    [[NSRunLoop currentRunLoop] addInputSource:_inputSource forMode:mode];
 #else
     [self processPendingEvents];
-    CFRunLoopAddSource(CFRunLoopGetCurrent(), _source, (CFStringRef) mode);
 #endif
 
    result=[super nextEventMatchingMask:mask untilDate:untilDate inMode:mode dequeue:dequeue];
 
 #ifndef DARLING
    [[NSRunLoop currentRunLoop] removeInputSource:_inputSource forMode:mode];
-#else
-    CFRunLoopRemoveSource(CFRunLoopGetCurrent(), _source, (CFStringRef) mode);
 #endif
 
    return result;
