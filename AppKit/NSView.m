@@ -70,7 +70,7 @@ static BOOL NSShowAllViews = NO;
 
 +(NSFocusRingType)defaultFocusRingType {
    NSUnimplementedMethod();
-   return nil;
+   return 0;
 }
 
 -(void)encodeWithCoder:(NSCoder *)coder {
@@ -2424,10 +2424,11 @@ static NSView *viewBeingPrinted = nil;
    _animations=dictionary;
 }
 
-// Blocks aren't supported by the compiler yet.
-//-(void)showDefinitionForAttributedString:(NSAttributedString *)string range:(NSRange)range options:(NSDictionary *)options baselineOriginProvider:(NSPoint (^)(NSRange adjustedRange))originProvider {
-//   NSUnimplementedMethod();
-//}
+#ifdef __BLOCKS__
+-(void)showDefinitionForAttributedString:(NSAttributedString *)string range:(NSRange)range options:(NSDictionary *)options baselineOriginProvider:(NSPoint (^)(NSRange adjustedRange))originProvider {
+   NSUnimplementedMethod();
+}
+#endif
 
 -(NSString *)description {
     return [NSString stringWithFormat:@"<%@[%p] frame: %@>", [self class], self, NSStringFromRect(_frame)];
