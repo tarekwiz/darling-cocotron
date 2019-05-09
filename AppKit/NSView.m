@@ -47,10 +47,17 @@ NSString * const NSViewFocusDidChangeNotification=@"NSViewFocusDidChangeNotifica
 
 @implementation NSView
 
-static BOOL NSViewLayersEnabled=NO;
+static BOOL NSViewLayersEnabled = NO;
+static BOOL NSShowAllViews = NO;
 
-+(void)initialize {
-   NSViewLayersEnabled=[[NSUserDefaults standardUserDefaults] boolForKey:@"NSViewLayersEnabled"];
++ (void) initialize {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSViewLayersEnabled = [defaults boolForKey: @"NSViewLayersEnabled"];
+    NSShowAllViews = [defaults boolForKey: @"NSShowAllViews"];
+}
+
+- (NSColor *) _borderColorForNSShowAllViews {
+    return [NSColor orangeColor];
 }
 
 +(NSView *)focusView {
@@ -2049,8 +2056,13 @@ static NSGraphicsContext *graphicsContextForView(NSView *view){
 		   [[NSColor yellowColor] set];
 		   NSRectFill(rect);
 	   }
-      else
-		   [self drawRect:rect];
+      else {
+          [self drawRect:rect];
+          if (NSShowAllViews) {
+              [[self _borderColorForNSShowAllViews] set];
+              NSFrameRect(rect);
+          }
+      }
 
       [self unlockFocus];
 

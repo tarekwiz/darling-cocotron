@@ -35,6 +35,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    [self setNeedsDisplay:YES];
 }
 
+- (NSColor *) _borderColorForNSShowAllViews {
+    return [NSColor yellowColor];
+}
+
 -(void)drawRect:(NSRect)rect {
    NSRect bounds=[self bounds];
    CGFloat cheatSheet = 0;
