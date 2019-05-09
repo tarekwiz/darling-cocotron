@@ -53,7 +53,7 @@ NSString * const NSTextCheckingDocumentAuthorKey=@"NSTextCheckingDocumentAuthorK
 #pragma mark Getting the Spell Checker
 
 +(NSSpellEngine *)_currentSpellEngine {
-	return [[NSSpellEngine allSpellEngines] objectAtIndex:0];
+    return [[NSSpellEngine allSpellEngines] firstObject];
 }
 
 static NSSpellChecker *shared=nil;
