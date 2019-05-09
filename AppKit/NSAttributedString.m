@@ -208,6 +208,11 @@ NSUInteger NSUnderlineByWordMask = 0x8000;
 	NSRange   result=NSMakeRange(location,0);
 	NSString *string=[self string];
 	unsigned  length=[string length];
+
+	if (length == 0) {
+		return result;
+	}
+
 	unichar   character=[string characterAtIndex:location];
 	NSCharacterSet *set;
 	BOOL      expand=NO;
