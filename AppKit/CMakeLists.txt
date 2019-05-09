@@ -520,6 +520,7 @@ add_backend(X11
 		X11.backend/X11Window.m
 		X11.backend/X11SubWindow.m
 		X11.backend/X11Event.m
+		X11.backend/X11Pasteboard.m
 	INFO_PLIST
 		X11.backend/Info.plist
 	DEPENDENCIES

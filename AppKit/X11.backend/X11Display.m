@@ -9,6 +9,7 @@
 
 #import "X11Display.h"
 #import "X11Window.h"
+#import "X11Pasteboard.h"
 #import <AppKit/NSScreen.h>
 #import <AppKit/NSApplication.h>
 #import <Foundation/NSDebug.h>
@@ -135,9 +136,8 @@ static void socketCallback(
    return [NSArray arrayWithObject:[[[NSScreen alloc] initWithFrame:frame visibleFrame:frame] autorelease]];
 }
 
--(NSPasteboard *)pasteboardWithName:(NSString *)name {
-   NSUnimplementedMethod();
-   return nil;
+- (NSPasteboard *) pasteboardWithName: (NSString *) name {
+    return [X11Pasteboard pasteboardWithName: name];
 }
 
 -(NSDraggingManager *)draggingManager {
@@ -663,19 +663,27 @@ static void socketCallback(
      break;
 
     case PropertyNotify:
-     NSLog(@"PropertyNotify");
+     if ([window respondsToSelector: @selector(propertyNotify:)]) {
+         [window propertyNotify: &ev->xproperty];
+     }
      break;
 
     case SelectionClear:
-     NSLog(@"SelectionClear");
+     if ([window respondsToSelector: @selector(selectionClear:)]) {
+         [window selectionClear: &ev->xselectionclear];
+     }
      break;
 
     case SelectionRequest:
-     NSLog(@"SelectionRequest");
+     if ([window respondsToSelector: @selector(selectionRequest:)]) {
+         [window selectionRequest: &ev->xselectionrequest];
+     }
      break;
 
     case SelectionNotify:
-     NSLog(@"SelectionNotify");
+     if ([window respondsToSelector: @selector(selectionNotify:)]) {
+         [window selectionNotify: &ev->xselection];
+     }
      break;
 
     case ColormapNotify:
