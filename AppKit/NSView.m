@@ -1745,8 +1745,11 @@ static void clearNeedsDisplay(NSView *self){
    NSUnimplementedMethod();
 }
 
--(BOOL)canDraw {
-   return _window!=nil && ![self isHiddenOrHasHiddenAncestor];
+static NSView *viewBeingPrinted = nil;
+
+- (BOOL) canDraw {
+   return (viewBeingPrinted != nil && [self isDescendantOf: viewBeingPrinted])
+       || (_window != nil && ![self isHiddenOrHasHiddenAncestor]);
 }
 
 -(BOOL)canDrawConcurrently {
@@ -1762,47 +1765,52 @@ static void clearNeedsDisplay(NSView *self){
    NSUnimplementedMethod();
 }
 
-static NSGraphicsContext *graphicsContextForView(NSView *view){
-   if(view->_layer!=nil){
-    NSRect             frame=[view frame];
-    size_t             width=frame.size.width;
-    size_t             height=frame.size.height;
-    CGColorSpaceRef    colorSpace=CGColorSpaceCreateDeviceRGB();
-    CGContextRef       context=CGBitmapContextCreate(NULL,width,height,8,0,colorSpace,kCGImageAlphaPremultipliedFirst|kCGBitmapByteOrder32Host);
-    NSGraphicsContext *result=[NSGraphicsContext graphicsContextWithGraphicsPort:context flipped:NO];
-    
-    CGColorSpaceRelease(colorSpace);
-    CGContextRelease(context);
-    
-    return result;
-   }
-   
-   return [[view window] graphicsContext];
-}
+- (void) _lockFocusInContext: (NSGraphicsContext *) context {
+    NSGraphicsContext *windowContext = [_window graphicsContext];
 
--(void)_lockFocusInContext:(NSGraphicsContext *)context {
-    CGContextRef graphicsPort=[context graphicsPort];
+    if (context == nil) {
+        if (viewBeingPrinted != nil) {
+            context = [[NSPrintOperation currentOperation] context];
+        } else if (_layer != nil) {
+            CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+            CGFloat width = _frame.size.width;
+            CGFloat height = _frame.size.height;
+            CGContextRef graphicsPort = CGBitmapContextCreate(NULL, width, height, 8, 0, colorSpace, kCGImageAlphaPremultipliedFirst | kCGBitmapByteOrder32Host);
+            context = [NSGraphicsContext graphicsContextWithGraphicsPort: graphicsPort flipped: NO];
+            CGColorSpaceRelease(colorSpace);
+            CGContextRelease(graphicsPort);  // we'll re-fetch it below
+        } else {
+            context = windowContext;
+        }
+    }
+    CGContextRef graphicsPort = [context graphicsPort];
 
     [NSGraphicsContext saveGraphicsState];
-    [NSGraphicsContext setCurrentContext:context];
-   
-    [[context focusStack] addObject:self];
+    [NSGraphicsContext setCurrentContext: context];
+
+    [[context focusStack] addObject: self];
 
     CGContextSaveGState(graphicsPort);
     CGContextResetClip(graphicsPort);
-    
-    if(_layer!=nil)
-     CGContextSetCTM(graphicsPort,[self transformToLayer]);
-    else
-     CGContextSetCTM(graphicsPort,[self transformToWindow]);
-     
-    CGContextClipToRect(graphicsPort,[self visibleRect]);
+
+    if (context == windowContext) {
+        CGContextSetCTM(graphicsPort, [self transformToWindow]);
+        CGContextClipToRect(graphicsPort, [self visibleRect]);
+    } else {
+        CGAffineTransform transform = CGAffineTransformIdentity;
+        if (viewBeingPrinted != nil) {
+            transform = CGAffineTransformConcat([self transformToWindow], [viewBeingPrinted transformFromWindow]);
+        }
+        NSView *targetView = viewBeingPrinted == nil ? self : viewBeingPrinted;
+        transform = CGAffineTransformConcat(transform, [targetView transformToLayer]);
+        CGContextSetCTM(graphicsPort, transform);
+    }
 
     [self setUpGState];
 }
 
--(void)lockFocus {
-   [self _lockFocusInContext:graphicsContextForView(self)];
+- (void) lockFocus {
+   [self _lockFocusInContext: nil];
 }
 
 -(BOOL)lockFocusIfCanDraw {
@@ -1822,20 +1830,19 @@ static NSGraphicsContext *graphicsContextForView(NSView *view){
 }
 
 
--(void)unlockFocus {
-   NSGraphicsContext *graphicsContext=[NSGraphicsContext currentContext];
-   CGContextRef       context=[graphicsContext graphicsPort];
-   
-   if(_layer!=nil){
-    CGImageRef image=CGBitmapContextCreateImage(context);
-    
-    [_layer setContents:image];
-   }
-   
-   CGContextRestoreGState(context);
+- (void) unlockFocus {
+    NSGraphicsContext *graphicsContext = [NSGraphicsContext currentContext];
+    CGContextRef context = [graphicsContext graphicsPort];
 
-   [[graphicsContext focusStack] removeLastObject];
-   [NSGraphicsContext restoreGraphicsState];
+    if (viewBeingPrinted == nil && _layer != nil) {
+        CGImageRef image = CGBitmapContextCreateImage(context);
+        [_layer setContents:image];
+    }
+
+    CGContextRestoreGState(context);
+
+    [[graphicsContext focusStack] removeLastObject];
+    [NSGraphicsContext restoreGraphicsState];
 }
 
 -(BOOL)needsToDrawRect:(NSRect)rect {
@@ -2034,6 +2041,8 @@ static NSGraphicsContext *graphicsContextForView(NSView *view){
 
    if(NSIsEmptyRect(rect))
     return;
+
+    BOOL shouldFlush = NO;
     
    if ([self canDraw]) {
       // This view must be locked/unlocked prior to drawing subviews otherwise gState changes may affect subviews.
@@ -2041,6 +2050,8 @@ static NSGraphicsContext *graphicsContextForView(NSView *view){
 
       NSGraphicsContext *context=[NSGraphicsContext currentContext];
       CGContextRef       graphicsPort=[context graphicsPort];
+
+      shouldFlush = [context isDrawingToScreen];
 
 	   CGContextClipToRect(graphicsPort,rect);
 	   
@@ -2089,13 +2100,15 @@ static NSGraphicsContext *graphicsContextForView(NSView *view){
 		clearRectsBeingRedrawn(self);
 	}
 
-   // We do the flushWindow here. If any of the display* methods are being used, you want it to update on screen immediately.
-   // If the view hierarchy is being displayed as needed at the end of an event, flushing will be disabled and this will just
-   // mark the window as needing flushing which will happen when all the views have finished being displayed
-   [[self window] flushWindow];
+    if (shouldFlush) {
+        // We do the flushWindow here. If any of the display* methods are being used, you want it to update on screen immediately.
+        // If the view hierarchy is being displayed as needed at the end of an event, flushing will be disabled and this will just
+        // mark the window as needing flushing which will happen when all the views have finished being displayed
+        [[self window] flushWindow];
+    }
 }
 
--(void)displayRectIgnoringOpacity:(NSRect)rect inContext:(NSGraphicsContext *)context {   
+- (void) displayRectIgnoringOpacity: (NSRect) rect inContext: (NSGraphicsContext *) context {
    NSUnimplementedMethod();
 }
 
@@ -2128,10 +2141,12 @@ static NSGraphicsContext *graphicsContextForView(NSView *view){
    [[NSPrintOperation printOperationWithView:self] runOperation];
 }
 
--(void)beginDocument {
+- (void) beginDocument {
+    viewBeingPrinted = self;
 }
 
--(void)endDocument {
+- (void) endDocument {
+    viewBeingPrinted = nil;
 }
 
 -(void)beginPageInRect:(NSRect)rect atPlacement:(NSPoint)placement {

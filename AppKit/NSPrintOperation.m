@@ -277,15 +277,18 @@ static NSPrintOperation *_currentOperation=nil;
    if(_type==NSPrintOperationPrinter){
     [[_printInfo dictionary] removeObjectForKey:@"_KGContext"];
    }
+    [_context release];
+    _context = nil;
 }
 
-// FIX, drawRect: should be changed to displayRect: and displayRect:/NSView should be print aware
+- (NSGraphicsContext *) context {
+    return _context;
+}
 
 -(BOOL)runOperation {
    NSRange            pageRange=NSMakeRange(NSNotFound,NSNotFound);
    BOOL               knowsPageRange;
-   NSGraphicsContext *graphicsContext;
-   CGContextRef      context;
+   CGContextRef      cgContext;
     NSMutableDictionary *dict = [_printInfo dictionary];
     
    _currentOperation=self;
@@ -309,11 +312,11 @@ static NSPrintOperation *_currentOperation=nil;
         }
     }
    
-   graphicsContext=[self createContext];
-	if (graphicsContext == nil) {
-		// It'll be nil if the user cancelled the print panel for example.
-		return NO;
-	}
+    _context = [[self createContext] retain];
+    if (_context == nil) {
+        // It'll be nil if the user cancelled the print panel for example.
+        return NO;
+     }
 	
 	if (knowsPageRange) {
 		int firstPage = [[dict objectForKey:NSPrintFirstPage] intValue];
@@ -321,28 +324,28 @@ static NSPrintOperation *_currentOperation=nil;
 		pageRange.location = firstPage;
 		pageRange.length = lastPage - firstPage + 1;
 	}
-   context=[graphicsContext graphicsPort];
+   cgContext = [_context graphicsPort];
    
    [_printInfo setUpPrintOperationDefaultValues];
 
    [NSGraphicsContext saveGraphicsState];
-   [NSGraphicsContext setCurrentContext:graphicsContext];
+   [NSGraphicsContext setCurrentContext: _context];
    [_view beginDocument];
 
    if(_type==NSPrintOperationPDFInRect){     
     [_view beginPageInRect:_insideRect atPlacement:NSMakePoint(0,0)];
-    [_view drawRect:_insideRect];
+    [_view displayRect:_insideRect];
     [_view endPage];
    }
    else{
 	 if(knowsPageRange)
-     [self _paginateWithPageRange:pageRange context:context];
+     [self _paginateWithPageRange:pageRange context: cgContext];
 	   else
-     [self _autopaginatePageRange:pageRange actualPageRange:&pageRange context:context];
+     [self _autopaginatePageRange:pageRange actualPageRange:&pageRange context: cgContext];
    }
     
    [_view endDocument];
-   CGPDFContextClose(context);
+   CGPDFContextClose(cgContext);
    [NSGraphicsContext restoreGraphicsState];
    
    [self destroyContext];
