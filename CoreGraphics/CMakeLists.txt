@@ -79,6 +79,7 @@ set(CoreGraphics_sources
 	CGDataProvider.m
 	CGDirectDisplay.m
 	src/CGEvent.c
+	src/stubs.c
 	CGFont.m
 	CGFunction.m
 	CGGeometry.m
