@@ -478,11 +478,15 @@ add_framework(AppKit
 		OpenGL
 		QuartzCore
 		CoreGraphics
+		ImageIO
 		# native libraries
 		FreeType
 		fontconfig
 		jpeg png tiff
 )
+
+reexport(AppKit Foundation)
+reexport(AppKit ApplicationServices)
 
 function(add_backend name)
 	cmake_parse_arguments(BACKEND "" "INFO_PLIST" "SOURCES;DEPENDENCIES;RESOURCES" ${ARGN})

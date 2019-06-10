@@ -22,6 +22,9 @@
 #include <CoreGraphics/CGDirectDisplay.h>
 #include <CoreGraphics/CGGeometry.h>
 
+typedef float CGGammaValue;
+typedef int32_t CGWindowLevel;
+
 static int verbose = 0;
 
 __attribute__((constructor))

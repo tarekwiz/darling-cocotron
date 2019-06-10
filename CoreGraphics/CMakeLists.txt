@@ -84,10 +84,7 @@ set(CoreGraphics_sources
 	CGFunction.m
 	CGGeometry.m
 	CGGradient.m
-	CGImageDestination.m
 	CGImage.m
-	CGImageProperties.m
-	CGImageSource.m
 	CGLayer.m
 	CGLPixelSurface.m
 	CGPath.m
