@@ -8,6 +8,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <AppKit/NSWorkspace.h>
 #import <AppKit/NSRaise.h>
 
+NSString * const NSWorkspaceApplicationKey = @"NSWorkspaceApplicationKey";
+
 NSString * const NSWorkspaceWillPowerOffNotification=@"NSWorkspaceWillPowerOffNotification";
 
 NSString * const NSWorkspaceRecycleOperation=@"NSWorkspaceRecycleOperation";
@@ -18,6 +20,8 @@ NSString *const NSWorkspaceLaunchConfigurationEnvironment = @"NSWorkspaceLaunchC
 NSString *const NSWorkspaceLaunchConfigurationArchitecture = @"NSWorkspaceLaunchConfigurationArchitecture";
 
 NSString *const NSWorkspaceActiveSpaceDidChangeNotification = @"NSWorkspaceActiveSpaceDidChangeNotification";
+NSString *const NSWorkspaceDidLaunchApplicationNotification = @"NSWorkspaceDidLaunchApplicationNotification";
+NSString *const NSWorkspaceDidTerminateApplicationNotification = @"NSWorkspaceDidTerminateApplicationNotification";
 
 @implementation NSWorkspace
 

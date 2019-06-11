@@ -16,8 +16,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 NSString * const NSStoreTypeKey=@"NSStoreTypeKey";
 NSString * const NSStoreUUIDKey=@"NSStoreUUIDKey";
 
-NSString * const NSXMLStoreType=@"NSXMLStoreType";
-NSString * const NSInMemoryStoreType=@"NSInMemoryStoreType";
+NSString * const NSXMLStoreType=@"XML";
+NSString * const NSInMemoryStoreType=@"Memory";
+NSString * const NSSQLiteStoreType=@"SQLite";
+NSString * const NSBinaryStoreType=@"Binary";
 NSString * const NSMigratePersistentStoresAutomaticallyOption=@"NSMigratePersistentStoresAutomaticallyOption";
 
 NSString * const NSPersistentStoreCoordinatorStoresDidChangeNotification=@"NSPersistentStoreCoordinatorStoresDidChangeNotification";
@@ -26,6 +28,9 @@ NSString * const NSRemovedPersistentStoresKey=@"NSRemovedPersistentStoresKey";
 NSString * const NSUUIDChangedPersistentStoresKey=@"NSUUIDChangedPersistentStoresKey";
 
 NSString *const NSPersistentStoreSaveConflictsErrorKey = @"conflictList";
+
+NSString *const NSInferMappingModelAutomaticallyOption = @"NSInferMappingModelAutomaticallyOption";
+NSString *const NSReadOnlyPersistentStoreOption = @"NSReadOnlyPersistentStoreOption";
 
 @implementation NSPersistentStoreCoordinator
 

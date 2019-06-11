@@ -17,6 +17,8 @@ COREDATA_EXPORT NSString *const NSStoreUUIDKey;
 
 COREDATA_EXPORT NSString *const NSXMLStoreType;
 COREDATA_EXPORT NSString *const NSInMemoryStoreType;
+COREDATA_EXPORT NSString *const NSSQLiteStoreType;
+COREDATA_EXPORT NSString *const NSBinaryStoreType;
 COREDATA_EXPORT NSString *const NSMigratePersistentStoresAutomaticallyOption;
 
 COREDATA_EXPORT NSString *const NSPersistentStoreCoordinatorStoresDidChangeNotification;
@@ -24,6 +26,9 @@ COREDATA_EXPORT NSString *const NSAddedPersistentStoresKey;
 COREDATA_EXPORT NSString *const NSRemovedPersistentStoresKey;
 COREDATA_EXPORT NSString *const NSUUIDChangedPersistentStoresKey;
 COREDATA_EXPORT NSString *const NSPersistentStoreSaveConflictsErrorKey;
+
+COREDATA_EXPORT NSString *const NSInferMappingModelAutomaticallyOption;
+COREDATA_EXPORT NSString *const NSReadOnlyPersistentStoreOption;
 
 @interface NSPersistentStoreCoordinator : NSObject <NSLocking> {
     NSLock *_lock;
