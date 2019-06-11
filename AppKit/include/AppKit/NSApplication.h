@@ -9,6 +9,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <AppKit/NSResponder.h>
 #import <AppKit/AppKitExport.h>
 #import <AppKit/NSGraphics.h>
+#import <AppKit/NSRunningApplication.h>
 
 @class NSWindow, NSImage, NSMenu, NSPasteboard, NSDisplay, NSDockTile;
 
@@ -96,6 +97,8 @@ typedef enum {
     NSTimer *_attentionTimer;
 }
 
+APPKIT_EXPORT NSApplication * NSApp;
+
 + (NSApplication *)sharedApplication;
 
 + (void)detachDrawingThread:(SEL)selector toTarget:target withObject:object;
@@ -127,6 +130,9 @@ typedef enum {
 - (void)setDelegate:delegate;
 - (void)setMainMenu:(NSMenu *)menu;
 - (void)setApplicationIconImage:(NSImage *)image;
+
+- (NSApplicationActivationPolicy)activationPolicy;
+- (BOOL)setActivationPolicy:(NSApplicationActivationPolicy)activationPolicy;
 
 - (void)setWindowsMenu:(NSMenu *)menu;
 - (void)addWindowsItem:(NSWindow *)window title:(NSString *)title filename:(BOOL)filename;

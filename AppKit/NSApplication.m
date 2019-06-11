@@ -57,6 +57,8 @@ NSString * const NSApplicationDidChangeScreenParametersNotification=@"NSApplicat
 
 const NSAppKitVersion NSAppKitVersionNumber = 1504; // macOS 10.12
 
+NSApplication * NSApp = nil;
+
 @interface NSDocumentController(forward) 
 -(void)_updateRecentDocumentsMenu; 
 @end 
@@ -71,12 +73,11 @@ const NSAppKitVersion NSAppKitVersionNumber = 1504; // macOS 10.12
 
 @implementation NSApplication
 
-id NSApp=nil;
 
 +(NSApplication *)sharedApplication {
 
    if(NSApp==nil){
-      [[self alloc] init]; // NSApp must be nil inside init
+       [[self alloc] init]; // NSApp must be nil inside init
    }
 
    return NSApp;
@@ -348,11 +349,21 @@ id NSApp=nil;
 }
 
 -(void)setApplicationIconImage:(NSImage *)image {
-   image=[image retain];
-   [_applicationIconImage release];
-   _applicationIconImage=image;
-   
-	[image setName: NSImageNameApplicationIcon];
+    image=[image retain];
+    [_applicationIconImage release];
+    _applicationIconImage=image;
+
+    [image setName: NSImageNameApplicationIcon];
+}
+
+- (NSApplicationActivationPolicy)activationPolicy {
+    //TODO: Implement
+    return NSApplicationActivationPolicyRegular;
+}
+
+- (BOOL)setActivationPolicy:(NSApplicationActivationPolicy)activationPolicy {
+    //TODO: Implement
+    return NO;
 }
 
 -(void)setWindowsMenu:(NSMenu *)menu {

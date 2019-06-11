@@ -11,6 +11,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 @class NSImage, NSView;
 
+APPKIT_EXPORT NSString *const NSWorkspaceApplicationKey;
+
 APPKIT_EXPORT NSString *const NSWorkspaceWillPowerOffNotification;
 
 APPKIT_EXPORT NSString *const NSWorkspaceRecycleOperation;
@@ -21,6 +23,8 @@ APPKIT_EXPORT NSString *const NSWorkspaceLaunchConfigurationEnvironment;
 APPKIT_EXPORT NSString *const NSWorkspaceLaunchConfigurationArchitecture;
 
 APPKIT_EXPORT NSString *const NSWorkspaceActiveSpaceDidChangeNotification;
+APPKIT_EXPORT NSString *const NSWorkspaceDidLaunchApplicationNotification;
+APPKIT_EXPORT NSString *const NSWorkspaceDidTerminateApplicationNotification;
 
 @interface NSWorkspace : NSObject {
     NSNotificationCenter *_notificationCenter;
