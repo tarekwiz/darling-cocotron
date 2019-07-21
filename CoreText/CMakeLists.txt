@@ -1,11 +1,6 @@
 project(CoreText)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} \
-	-include math.h \
-	-include stdlib.h \
-	-include CoreFoundation/CoreFoundation.h \
-	-include Foundation/Foundation.h \
-	-Wno-nonportable-include-path \
 	-Wno-deprecated-objc-isa-usage \
 	-mmacosx-version-min=10.10"
 )
@@ -21,6 +16,7 @@ set(CoreText_sources
 	CTFont.m
 	KTFont.m
 	KTFont_FT.m
+	constants.c
 )
 
 set_source_files_properties(${CoreText_sources} LANGUAGE C)

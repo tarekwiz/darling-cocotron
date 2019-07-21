@@ -8,6 +8,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 #import <CoreGraphics/CGAffineTransform.h>
 
+#include <stdio.h>
+
 const CGAffineTransform CGAffineTransformIdentity={1,0,0,1,0,0};
 
 bool CGAffineTransformIsIdentity(CGAffineTransform xform)
@@ -98,4 +100,9 @@ CGSize CGSizeApplyAffineTransform(CGSize size,CGAffineTransform xform){
     s.height=xform.b*size.width+xform.d*size.height;
 
     return s;
+}
+
+CGRect CGRectApplyAffineTransform(CGRect rect, CGAffineTransform t) {
+	printf("CGRectApplyAffineTransform STUB\n");
+	return rect;
 }

@@ -64,6 +64,9 @@ O2MutablePathRef O2PathCreateMutableCopy(O2PathRef self);
 O2PathRef O2PathCreateCopy(O2PathRef self);
 BOOL O2PathContainsPoint(O2PathRef self, const O2AffineTransform *xform, O2Point point, BOOL evenOdd);
 
+O2PathRef O2PathCreateWithEllipseInRect(O2Rect rect, const O2AffineTransform *transform);
+O2PathRef O2PathCreateWithRect(O2Rect rect, const O2AffineTransform *transform);
+
 @end
 
 #ifdef __cplusplus

@@ -395,4 +395,18 @@ void O2PathApply(O2PathRef self,void *info,O2PathApplierFunction function) {
    }
 }
 
+O2PathRef O2PathCreateWithEllipseInRect(O2Rect rect, const O2AffineTransform *transform)
+{
+   O2MutablePathRef path = O2PathCreateMutable();
+   O2PathAddEllipseInRect(path, transform, rect);
+   return path;
+}
+
+O2PathRef O2PathCreateWithRect(O2Rect rect, const O2AffineTransform *transform)
+{
+	O2MutablePathRef path = O2PathCreateMutable();
+	O2PathAddRect(path, transform, rect);
+	return path;
+}
+
 @end

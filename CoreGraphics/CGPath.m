@@ -112,24 +112,22 @@ void CGPathAddPath(CGMutablePathRef self,const CGAffineTransform *xform,CGPathRe
 
 CGPathRef CGPathCreateWithEllipseInRect(CGRect rect, const CGAffineTransform *transform)
 {
-	printf("STUB %s\n", __PRETTY_FUNCTION__);
-	return NULL;
+   return (CGPathRef) O2PathCreateWithEllipseInRect(rect, (O2AffineTransform *)transform);
 }
 
 CGPathRef CGPathCreateWithRect(CGRect rect, const CGAffineTransform *transform)
 {
-	printf("STUB %s\n", __PRETTY_FUNCTION__);
-	return NULL;
+	return (CGPathRef) O2PathCreateWithRect(rect, (O2AffineTransform *)transform);
 }
 
 CGRect CGPathGetPathBoundingBox(CGPathRef path)
 {
-	printf("STUB %s\n", __PRETTY_FUNCTION__);
-	return CGRectNull;
+	return O2PathGetBoundingBox(path);
 }
 
 CGPathRef CGPathCreateCopyByTransformingPath(CGPathRef path, CGAffineTransform *transform)
 {
-	printf("STUB %s\n", __PRETTY_FUNCTION__);
-	return NULL;
+	O2MutablePathRef copy = O2PathCreateMutableCopy(path);
+	O2PathApplyTransform(copy, *(O2AffineTransform *)transform);
+	return copy;
 }
