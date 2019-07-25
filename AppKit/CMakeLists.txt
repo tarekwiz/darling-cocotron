@@ -392,6 +392,7 @@ set(AppKit_sources
 	NSVisualEffectView.m
 	NSATSTypesetter.m
 	NSOpenGLLayer.m
+	NSCollectionViewLayout.m
 )
 
 set_source_files_properties(${AppKit_sources} LANGUAGE C)

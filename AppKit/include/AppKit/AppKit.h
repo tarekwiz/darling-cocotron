@@ -181,5 +181,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <AppKit/NSVisualEffectView.h>
 #import <AppKit/NSATSTypesetter.h>
 #import <AppKit/NSOpenGLLayer.h>
+#import <AppKit/NSCollectionViewLayout.h>
 
 #import <ApplicationServices/ApplicationServices.h>
