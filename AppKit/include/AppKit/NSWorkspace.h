@@ -23,8 +23,13 @@ APPKIT_EXPORT NSString *const NSWorkspaceLaunchConfigurationEnvironment;
 APPKIT_EXPORT NSString *const NSWorkspaceLaunchConfigurationArchitecture;
 
 APPKIT_EXPORT NSString *const NSWorkspaceActiveSpaceDidChangeNotification;
+APPKIT_EXPORT const NSNotificationName NSWorkspaceDidDeactivateApplicationNotification;
 APPKIT_EXPORT NSString *const NSWorkspaceDidLaunchApplicationNotification;
 APPKIT_EXPORT NSString *const NSWorkspaceDidTerminateApplicationNotification;
+APPKIT_EXPORT const NSNotificationName NSWorkspaceSessionDidBecomeActiveNotification;
+APPKIT_EXPORT const NSNotificationName NSWorkspaceSessionDidResignActiveNotification;
+
+
 
 @interface NSWorkspace : NSObject {
     NSNotificationCenter *_notificationCenter;
