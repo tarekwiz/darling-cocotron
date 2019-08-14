@@ -1365,4 +1365,30 @@ bool O2ContextIsBitmapContext(O2ContextRef self)
 {
 	return [self isBitmapContext];
 }
+
+void O2ContextSetAllowsFontSmoothing(O2ContextRef self, BOOL allowsFontSmoothing)
+{
+	self->_allowsFontSmoothing = allowsFontSmoothing;
+}
+
+void O2ContextSetAllowsFontSubpixelQuantization(O2ContextRef self, BOOL allowsFontSubpixelQuantization)
+{
+	self->_allowsFontSubpixelQuantization = allowsFontSubpixelQuantization;
+}
+
+void O2ContextSetShouldSubpixelQuantizeFonts(O2ContextRef self, BOOL shouldSubpixelQuantizeFonts)
+{
+	self->_shouldSubpixelQuantizeFonts = shouldSubpixelQuantizeFonts;
+}
+
+void O2ContextSetAllowsFontSubpixelPositioning(O2ContextRef self, BOOL allowsFontSubpixelPositioning)
+{
+	self->_allowsFontSubpixelPositioning = allowsFontSubpixelPositioning;
+}
+
+void O2ContextSetShouldSubpixelPositionFonts(O2ContextRef self, BOOL shouldSubpixelPositionFonts)
+{
+	self->_shouldSubpixelPositionFonts = shouldSubpixelPositionFonts;
+}
+
 @end

@@ -119,6 +119,11 @@ typedef void (*O2ContextShowGlyphsFunction)(O2ContextRef, SEL, const O2Glyph *, 
     O2GState *_currentState;
     O2MutablePath *_path;
     BOOL _allowsAntialiasing;
+	BOOL _allowsFontSmoothing;
+	BOOL _allowsFontSubpixelQuantization;
+	BOOL _shouldSubpixelQuantizeFonts;
+	BOOL _allowsFontSubpixelPositioning;
+	BOOL _shouldSubpixelPositionFonts;
     O2AffineTransform _textMatrix;
     O2AffineTransform _textLineMatrix;
 
@@ -281,13 +286,16 @@ void O2ContextSetFont(O2ContextRef self, O2FontRef font);
 void O2ContextSetFontSize(O2ContextRef self, O2Float size);
 void O2ContextSelectFont(O2ContextRef self, const char *name, O2Float size, O2TextEncoding encoding);
 void O2ContextSetShouldSmoothFonts(O2ContextRef self, BOOL yesOrNo);
-
+void O2ContextSetAllowsFontSmoothing(O2ContextRef self, BOOL allowsFontSmoothing);
+void O2ContextSetAllowsFontSubpixelQuantization(O2ContextRef self, BOOL allowsFontSubpixelQuantization);
+void O2ContextSetShouldSubpixelQuantizeFonts(O2ContextRef self, BOOL shouldSubpixelQuantizeFonts);
 void O2ContextSetLineWidth(O2ContextRef self, O2Float width);
 void O2ContextSetLineCap(O2ContextRef self, O2LineCap lineCap);
 void O2ContextSetLineJoin(O2ContextRef self, O2LineJoin lineJoin);
 void O2ContextSetMiterLimit(O2ContextRef self, O2Float miterLimit);
 void O2ContextSetLineDash(O2ContextRef self, O2Float phase, const O2Float *lengths, NSUInteger count);
-
+void O2ContextSetAllowsFontSubpixelPositioning(O2ContextRef self, BOOL allowsFontSubpixelPositioning);
+void O2ContextSetShouldSubpixelPositionFonts(O2ContextRef self, BOOL shouldSubpixelPositionFonts);
 void O2ContextSetRenderingIntent(O2ContextRef self, O2ColorRenderingIntent renderingIntent);
 void O2ContextSetBlendMode(O2ContextRef self, O2BlendMode blendMode);
 

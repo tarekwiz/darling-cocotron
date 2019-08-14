@@ -260,3 +260,8 @@ COREGRAPHICS_EXPORT CFDataRef CGContextCaptureBitmap(CGContextRef context, CGRec
 COREGRAPHICS_EXPORT void CGContextCopyBits(CGContextRef context, CGRect rect, CGPoint point, int gState);
 COREGRAPHICS_EXPORT bool CGContextSupportsGlobalAlpha(CGContextRef context);
 COREGRAPHICS_EXPORT bool CGContextIsBitmapContext(CGContextRef context);
+COREGRAPHICS_EXPORT void CGContextSetAllowsFontSmoothing(CGContextRef context, bool allowsFontSmoothing);
+COREGRAPHICS_EXPORT void CGContextSetAllowsFontSubpixelQuantization(CGContextRef context, bool allowsFontSubpixelQuantization);
+COREGRAPHICS_EXPORT void CGContextSetShouldSubpixelQuantizeFonts(CGContextRef context, bool shouldSubpixelQuantizeFonts);
+COREGRAPHICS_EXPORT void CGContextSetAllowsFontSubpixelPositioning(CGContextRef context, bool allowsFontSubpixelPositioning);
+COREGRAPHICS_EXPORT void CGContextSetShouldSubpixelPositionFonts(CGContextRef context, bool shouldSubpixelPositionFonts);

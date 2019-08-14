@@ -35,6 +35,7 @@ typedef enum {
 @interface O2ColorSpace : NSObject <NSCopying> {
     O2ColorSpaceModel _type;
     BOOL _isPlatformRGB;
+	CFStringRef _name;
 }
 
 - (O2ColorSpaceModel)type;
@@ -58,6 +59,8 @@ O2ColorSpaceModel O2ColorSpaceGetModel(O2ColorSpaceRef self);
 - initWithPlatformRGB;
 
 - (BOOL)isEqualToColorSpace:(O2ColorSpaceRef)other;
+
+O2ColorSpaceRef O2ColorSpaceCreateWithName(CFStringRef name);
 
 @end
 

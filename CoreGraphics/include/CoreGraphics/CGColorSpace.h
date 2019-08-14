@@ -13,27 +13,27 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 @class O2ColorSpace;
 typedef O2ColorSpace *CGColorSpaceRef;
 
-extern const CFStringRef kCGColorSpaceGenericGray;
-extern const CFStringRef kCGColorSpaceGenericRGB;
-extern const CFStringRef kCGColorSpaceGenericCMYK;
-extern const CFStringRef kCGColorSpaceDisplayP3;
-extern const CFStringRef kCGColorSpaceGenericRGBLinear;
-extern const CFStringRef kCGColorSpaceAdobeRGB1998;
-extern const CFStringRef kCGColorSpaceSRGB;
-extern const CFStringRef kCGColorSpaceGenericGrayGamma2_2;
-extern const CFStringRef kCGColorSpaceGenericXYZ;
-extern const CFStringRef kCGColorSpaceGenericLab;
-extern const CFStringRef kCGColorSpaceACESCGLinear;
-extern const CFStringRef kCGColorSpaceITUR_709;
-extern const CFStringRef kCGColorSpaceITUR_2020;
-extern const CFStringRef kCGColorSpaceROMMRGB;
-extern const CFStringRef kCGColorSpaceDCIP3;
-extern const CFStringRef kCGColorSpaceExtendedSRGB;
-extern const CFStringRef kCGColorSpaceLinearSRGB;
-extern const CFStringRef kCGColorSpaceExtendedLinearSRGB;
-extern const CFStringRef kCGColorSpaceExtendedGray;
-extern const CFStringRef kCGColorSpaceLinearGray;
-extern const CFStringRef kCGColorSpaceExtendedLinearGray;
+COREGRAPHICS_EXPORT const CFStringRef kCGColorSpaceGenericGray;
+COREGRAPHICS_EXPORT const CFStringRef kCGColorSpaceGenericRGB;
+COREGRAPHICS_EXPORT const CFStringRef kCGColorSpaceGenericCMYK;
+COREGRAPHICS_EXPORT const CFStringRef kCGColorSpaceDisplayP3;
+COREGRAPHICS_EXPORT const CFStringRef kCGColorSpaceGenericRGBLinear;
+COREGRAPHICS_EXPORT const CFStringRef kCGColorSpaceAdobeRGB1998;
+COREGRAPHICS_EXPORT const CFStringRef kCGColorSpaceSRGB;
+COREGRAPHICS_EXPORT const CFStringRef kCGColorSpaceGenericGrayGamma2_2;
+COREGRAPHICS_EXPORT const CFStringRef kCGColorSpaceGenericXYZ;
+COREGRAPHICS_EXPORT const CFStringRef kCGColorSpaceGenericLab;
+COREGRAPHICS_EXPORT const CFStringRef kCGColorSpaceACESCGLinear;
+COREGRAPHICS_EXPORT const CFStringRef kCGColorSpaceITUR_709;
+COREGRAPHICS_EXPORT const CFStringRef kCGColorSpaceITUR_2020;
+COREGRAPHICS_EXPORT const CFStringRef kCGColorSpaceROMMRGB;
+COREGRAPHICS_EXPORT const CFStringRef kCGColorSpaceDCIP3;
+COREGRAPHICS_EXPORT const CFStringRef kCGColorSpaceExtendedSRGB;
+COREGRAPHICS_EXPORT const CFStringRef kCGColorSpaceLinearSRGB;
+COREGRAPHICS_EXPORT const CFStringRef kCGColorSpaceExtendedLinearSRGB;
+COREGRAPHICS_EXPORT const CFStringRef kCGColorSpaceExtendedGray;
+COREGRAPHICS_EXPORT const CFStringRef kCGColorSpaceLinearGray;
+COREGRAPHICS_EXPORT const CFStringRef kCGColorSpaceExtendedLinearGray;
 
 typedef enum {
     kCGRenderingIntentDefault,
@@ -64,3 +64,5 @@ COREGRAPHICS_EXPORT CGColorSpaceRef CGColorSpaceCreatePattern(CGColorSpaceRef ba
 
 COREGRAPHICS_EXPORT CGColorSpaceModel CGColorSpaceGetModel(CGColorSpaceRef self);
 COREGRAPHICS_EXPORT size_t CGColorSpaceGetNumberOfComponents(CGColorSpaceRef self);
+
+COREGRAPHICS_EXPORT CGColorSpaceRef CGColorSpaceCreateWithName(CFStringRef name);

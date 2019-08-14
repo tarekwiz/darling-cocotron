@@ -473,3 +473,28 @@ void CGContextCopyBits(CGContextRef context,CGRect rect,CGPoint point,int gState
 CFDataRef CGContextCaptureBitmap(CGContextRef context,CGRect rect) {
    return (CFDataRef)O2ContextCaptureBitmap(context,rect);
 }
+
+void CGContextSetAllowsFontSmoothing(CGContextRef context, bool allowsFontSmoothing)
+{
+	O2ContextSetAllowsFontSmoothing((O2ContextRef)context, allowsFontSmoothing);
+}
+
+void CGContextSetAllowsFontSubpixelQuantization(CGContextRef context, bool allowsFontSubpixelQuantization)
+{
+	O2ContextSetAllowsFontSubpixelQuantization((O2ContextRef)context, allowsFontSubpixelQuantization);
+}
+
+void CGContextSetShouldSubpixelQuantizeFonts(CGContextRef context, bool shouldSubpixelQuantizeFonts)
+{
+	O2ContextSetShouldSubpixelQuantizeFonts((O2ContextRef)context, shouldSubpixelQuantizeFonts);
+}
+
+void CGContextSetAllowsFontSubpixelPositioning(CGContextRef context, bool allowsFontSubpixelPositioning)
+{
+	O2ContextSetAllowsFontSubpixelPositioning((O2ContextRef)context, allowsFontSubpixelPositioning);
+}
+
+void CGContextSetShouldSubpixelPositionFonts(CGContextRef context, bool shouldSubpixelPositionFonts)
+{
+	O2ContextSetShouldSubpixelPositionFonts((O2ContextRef)context, shouldSubpixelPositionFonts);
+}

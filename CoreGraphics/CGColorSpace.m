@@ -62,3 +62,8 @@ CGColorSpaceModel CGColorSpaceGetModel(CGColorSpaceRef self) {
 size_t CGColorSpaceGetNumberOfComponents(CGColorSpaceRef self) {
    return O2ColorSpaceGetNumberOfComponents(self);
 }
+
+CGColorSpaceRef CGColorSpaceCreateWithName(CFStringRef name)
+{
+	return (CGColorSpaceRef)O2ColorSpaceCreateWithName(name);
+}

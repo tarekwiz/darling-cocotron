@@ -10,6 +10,28 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <Foundation/NSString.h>
 #import <CoreFoundation/CFBase.h>
 
+const CFStringRef kO2ColorSpaceDisplayP3 = CFSTR("kCGColorSpaceDisplayP3");
+const CFStringRef kO2ColorSpaceGenericGray = CFSTR("kCGColorSpaceGenericGray");
+const CFStringRef kO2ColorSpaceGenericRGB = CFSTR("kCGColorSpaceGenericRGB");
+const CFStringRef kO2ColorSpaceGenericCMYK = CFSTR("kCGColorSpaceGenericCMYK");
+const CFStringRef kO2ColorSpaceGenericRGBLinear = CFSTR("kCGColorSpaceGenericRGBLinear");
+const CFStringRef kO2ColorSpaceAdobeRGB1998 = CFSTR("kCGColorSpaceAdobeRGB1998");
+const CFStringRef kO2ColorSpaceSRGB = CFSTR("kCGColorSpaceSRGB");
+const CFStringRef kO2ColorSpaceGenericGrayGamma2_2 = CFSTR("kCGColorSpaceGenericGrayGamma2_2");
+const CFStringRef kO2ColorSpaceGenericXYZ = CFSTR("kCGColorSpaceGenericXYZ");
+const CFStringRef kO2ColorSpaceGenericLab = CFSTR("kCGColorSpaceGenericLab");
+const CFStringRef kO2ColorSpaceACESCGLinear = CFSTR("kCGColorSpaceACESCGLinear");
+const CFStringRef kO2ColorSpaceITUR_709 = CFSTR("kCGColorSpaceITUR_709");
+const CFStringRef kO2ColorSpaceITUR_2020 = CFSTR("kCGColorSpaceITUR_2020");
+const CFStringRef kO2ColorSpaceROMMRGB = CFSTR("kCGColorSpaceROMMRGB");
+const CFStringRef kO2ColorSpaceDCIP3 = CFSTR("kCGColorSpaceDCIP3");
+const CFStringRef kO2ColorSpaceExtendedSRGB = CFSTR("kCGColorSpaceExtendedSRGB");
+const CFStringRef kO2ColorSpaceLinearSRGB = CFSTR("kCGColorSpaceLinearSRGB");
+const CFStringRef kO2ColorSpaceExtendedLinearSRGB = CFSTR("kCGColorSpaceExtendedLinearSRGB");
+const CFStringRef kO2ColorSpaceExtendedGray = CFSTR("kCGColorSpaceExtendedGray");
+const CFStringRef kO2ColorSpaceLinearGray = CFSTR("kCGColorSpaceLinearGray");
+const CFStringRef kO2ColorSpaceExtendedLinearGray = CFSTR("kCGColorSpaceExtendedLinearGray");
+
 @implementation O2ColorSpace
 
 -initWithDeviceGray {
@@ -84,6 +106,26 @@ O2ColorSpaceRef O2ColorSpaceCreatePattern(O2ColorSpaceRef baseSpace) {
 
 O2ColorSpaceRef O2ColorSpaceCreateDeviceN(const char **names,O2ColorSpaceRef alternateSpace,O2FunctionRef tintTransform) {
    return [[O2ColorSpace_DeviceN alloc] initWithComponentNames:names alternateSpace:alternateSpace tintTransform:tintTransform];
+}
+
+O2ColorSpaceRef O2ColorSpaceCreateWithName(CFStringRef name)
+{
+	printf("CALLED: O2ColorSpaceCreateWithName\n");
+	if (CFStringCompare(name, kO2ColorSpaceSRGB, 0) == kCFCompareEqualTo)
+	{
+		O2ColorSpaceRef cs = [[O2ColorSpace alloc] initWithDeviceRGB];
+		cs->_name = kO2ColorSpaceSRGB;
+		return cs;
+	}
+	if (CFStringCompare(name, kO2ColorSpaceDisplayP3, 0) == kCFCompareEqualTo)
+	{
+		O2ColorSpaceRef cs = [[O2ColorSpace alloc] init];
+		cs->_type = kO2ColorSpaceModelRGB;
+		return cs;
+	}
+	printf("unknown color space name\n");
+	CFShow(name);
+	return NULL;
 }
 
 BOOL O2ColorSpaceIsPlatformRGB(O2ColorSpaceRef self) {

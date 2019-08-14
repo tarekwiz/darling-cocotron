@@ -337,7 +337,7 @@ static inline CGFloat calibratedWhiteFromRGB(CGFloat r, CGFloat g, CGFloat b) {
    NSLog(@"-[%@ %s] failed",[self class],_cmd);
 }
 
--(CGColorRef)CGColorRef {
+-(CGColorRef)CGColor {
    return CGColorRetain(_colorRef);
 }
 
