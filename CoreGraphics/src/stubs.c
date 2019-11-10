@@ -183,7 +183,7 @@ CGWindowLevel CGShieldingWindowLevel(void)
 	return 0;
 }
 
-io_service_t IOServicePortFromCGDisplayID(CGDirectDisplayID displayID)
+io_service_t CGDisplayIOServicePort(CGDirectDisplayID displayID)
 {
     io_iterator_t iter;
     io_service_t serv, servicePort = 0;
