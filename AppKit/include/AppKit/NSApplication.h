@@ -13,8 +13,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 @class NSWindow, NSImage, NSMenu, NSPasteboard, NSDisplay, NSDockTile;
 
-APPKIT_EXPORT NSString *const NSModalPanelRunLoopMode;
-APPKIT_EXPORT NSString *const NSEventTrackingRunLoopMode;
+APPKIT_EXPORT NSString * NSModalPanelRunLoopMode;
+APPKIT_EXPORT NSString * NSEventTrackingRunLoopMode;
 
 APPKIT_EXPORT NSString *const NSApplicationWillFinishLaunchingNotification;
 APPKIT_EXPORT NSString *const NSApplicationDidFinishLaunchingNotification;
@@ -35,6 +35,9 @@ APPKIT_EXPORT NSString *const NSApplicationDidUnhideNotification;
 APPKIT_EXPORT NSString *const NSApplicationWillTerminateNotification;
 
 APPKIT_EXPORT NSString *const NSApplicationDidChangeScreenParametersNotification;
+
+APPKIT_EXPORT NSString *const NSMarkedClauseSegmentAttributeName;
+APPKIT_EXPORT NSString *const NSTextInputReplacementRangeAttributeName;
 
 APPKIT_EXPORT id NSApp;
 typedef double NSAppKitVersion;

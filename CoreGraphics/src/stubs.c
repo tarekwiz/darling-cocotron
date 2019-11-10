@@ -18,6 +18,7 @@
 */
 
 #include <stdio.h>
+#include <IOKit/graphics/IOGraphicsLib.h>
 #include <CoreFoundation/CoreFoundation.h>
 #include <CoreGraphics/CGDirectDisplay.h>
 #include <CoreGraphics/CGGeometry.h>
@@ -41,7 +42,7 @@ CGError CGDisplayShowCursor(CGDirectDisplayID display)
 boolean_t CGCursorIsVisible(void)
 {
     if (verbose) puts("STUB: CGCursorIsVisible called");
-	return false;
+	return true;
 }
 
 CFArrayRef CGDisplayAvailableModes(CGDirectDisplayID a)
@@ -121,9 +122,16 @@ void CGDisplayRestoreColorSyncSettings(void)
 	
 }
 
-CGError CGGetActiveDisplayList(uint32_t a, CGDirectDisplayID *b, uint32_t *c)
+CGError CGGetActiveDisplayList(uint32_t maxDisplays, CGDirectDisplayID *activeDspys, uint32_t *dspyCnt)
 {
     if (verbose) puts("STUB: CGGetActiveDisplayList called");
+    
+    if(dspyCnt)
+        *dspyCnt = 1;
+
+    if(activeDspys)
+        *activeDspys = 1;
+    
 	return (CGError)0;
 }
 
@@ -148,7 +156,7 @@ void CGGetLastMouseDelta(int32_t *a, int32_t *b)
 CGDirectDisplayID CGMainDisplayID(void)
 {
     if (verbose) puts("STUB: CGMainDisplayID called");
-	return (CGDirectDisplayID)0;
+	return (CGDirectDisplayID)1;
 }
 
 CGError CGSetDisplayTransferByFormula(CGDirectDisplayID a, CGGammaValue b, CGGammaValue c, CGGammaValue d, CGGammaValue e, CGGammaValue f, CGGammaValue g, CGGammaValue h, CGGammaValue i, CGGammaValue j)
@@ -173,4 +181,71 @@ CGWindowLevel CGShieldingWindowLevel(void)
 {
     if (verbose) puts("STUB: CGShieldingWindowLevel called");
 	return 0;
+}
+
+io_service_t IOServicePortFromCGDisplayID(CGDirectDisplayID displayID)
+{
+    io_iterator_t iter;
+    io_service_t serv, servicePort = 0;
+    
+    CFMutableDictionaryRef matching = IOServiceMatching("IODisplayConnect");
+    
+    // releases matching for us
+    kern_return_t err = IOServiceGetMatchingServices(kIOMasterPortDefault,
+                                                     matching,
+                                                     &iter);
+    if (err)
+        return 0;
+    
+    while ((serv = IOIteratorNext(iter)) != 0)
+    {
+        CFDictionaryRef info;
+        CFIndex vendorID, productID, serialNumber;
+        CFNumberRef vendorIDRef, productIDRef, serialNumberRef;
+        Boolean success;
+        
+        info = IODisplayCreateInfoDictionary(serv,
+                                             kIODisplayOnlyPreferredName);
+        
+        vendorIDRef = CFDictionaryGetValue(info,
+                                           CFSTR(kDisplayVendorID));
+        productIDRef = CFDictionaryGetValue(info,
+                                            CFSTR(kDisplayProductID));
+        serialNumberRef = CFDictionaryGetValue(info,
+                                               CFSTR(kDisplaySerialNumber));
+        
+        success = CFNumberGetValue(vendorIDRef, kCFNumberCFIndexType,
+                                   &vendorID);
+        success &= CFNumberGetValue(productIDRef, kCFNumberCFIndexType,
+                                    &productID);
+        success &= CFNumberGetValue(serialNumberRef, kCFNumberCFIndexType,
+                                    &serialNumber);
+        
+        if (!success)
+        {
+            CFRelease(info);
+            continue;
+        }
+        
+        // If the vendor and product id along with the serial don't match
+        // then we are not looking at the correct monitor.
+        // NOTE: The serial number is important in cases where two monitors
+        //       are the exact same.
+        // if (CGDisplayVendorNumber(displayID) != vendorID  ||
+        //     CGDisplayModelNumber(displayID) != productID  ||
+        //     CGDisplaySerialNumber(displayID) != serialNumber)
+        // {
+        //     CFRelease(info);
+        //     continue;
+        // }
+        
+        // The VendorID, Product ID, and the Serial Number all Match Up!
+        // Therefore we have found the appropriate display io_service
+        servicePort = serv;
+        CFRelease(info);
+        break;
+    }
+    
+    IOObjectRelease(iter);
+    return servicePort;
 }

@@ -16,83 +16,64 @@ const CFStringRef kCGWindowOwnerPID = CFSTR("kCGWindowOwnerPID");
 @implementation CGWindow
 
 -(void)setDelegate:delegate {
-   O2InvalidAbstractInvocation();
 }
 
 -delegate {
-   O2InvalidAbstractInvocation();
    return nil;
 }
 
 -(void)invalidate {
-   O2InvalidAbstractInvocation();
 }
 
 - (void) syncDelegateProperties {
-  O2InvalidAbstractInvocation();
 }
 
 
 -(O2Context *)cgContext {
-   O2InvalidAbstractInvocation();
    return nil;
 }
 
 -(NSUInteger)styleMask {
-   O2InvalidAbstractInvocation();
    return 0;
 }
 
 -(void)setLevel:(int)value {
-   O2InvalidAbstractInvocation();
 }
 
 -(void)setStyleMask:(NSUInteger)mask {
-   O2InvalidAbstractInvocation();
 }
 
 -(void)setTitle:(NSString *)title {
-   O2InvalidAbstractInvocation();
 }
 
 -(void)setFrame:(CGRect)frame {
-   O2InvalidAbstractInvocation();
 }
 
 -(void)setOpaque:(BOOL)value {
-   O2InvalidAbstractInvocation();
 }
 
 -(void)setAlphaValue:(CGFloat)value {
-   O2InvalidAbstractInvocation();
 }
 
 -(void)setHasShadow:(BOOL)value {
-   O2InvalidAbstractInvocation();
 }
 
 -(void)sheetOrderFrontFromFrame:(NSRect)frame aboveWindow:(CGWindow *)aboveWindow {
-   O2InvalidAbstractInvocation();
 }
 
 -(void)sheetOrderOutToFrame:(NSRect)frame {
-   O2InvalidAbstractInvocation();
 }
 
 -(void)showWindowForAppActivation:(NSRect)frame {
-   O2InvalidAbstractInvocation();
 }
 
 -(void)hideWindowForAppDeactivation:(NSRect)frame {
-   O2InvalidAbstractInvocation();
 }
 
 -(void)showWindowWithoutActivation {
-   O2InvalidAbstractInvocation();
 }
 
 -(void)hideWindow {
-   O2InvalidAbstractInvocation();
 }
 
 // these suck
@@ -105,36 +86,28 @@ const CFStringRef kCGWindowOwnerPID = CFSTR("kCGWindowOwnerPID");
 }
 
 -(void)placeAboveWindow:(NSInteger)other {
-   O2InvalidAbstractInvocation();
 }
 
 -(void)placeBelowWindow:(NSInteger)other {
-   O2InvalidAbstractInvocation();
 }
 
 
 -(void)makeKey {
-   O2InvalidAbstractInvocation();
 }
 
 -(void)makeMain {
-   O2InvalidAbstractInvocation();
 }
 
 -(void)captureEvents {
-   O2InvalidAbstractInvocation();
 }
 
 -(void)miniaturize {
-   O2InvalidAbstractInvocation();
 }
 
 -(void)deminiaturize {
-   O2InvalidAbstractInvocation();
 }
 
 -(BOOL)isMiniaturized {
-   O2InvalidAbstractInvocation();
    return NO;
 }
 
@@ -145,7 +118,6 @@ const CFStringRef kCGWindowOwnerPID = CFSTR("kCGWindowOwnerPID");
 }
 
 -(void)flushBuffer {
-   O2InvalidAbstractInvocation();
 }
 
 
@@ -155,21 +127,17 @@ const CFStringRef kCGWindowOwnerPID = CFSTR("kCGWindowOwnerPID");
 }
 
 -(NSPoint)mouseLocationOutsideOfEventStream {
-   O2InvalidAbstractInvocation();
    return NSZeroPoint;
 }
 
 
 -(void)sendEvent:(CGEvent *)event {
-   O2InvalidAbstractInvocation();
 }
 
 -(void)addEntriesToDeviceDictionary:(NSDictionary *)entries {
-   O2InvalidAbstractInvocation();
 }
 
 -(void)flashWindow {
-   O2InvalidAbstractInvocation();
 }
 
 -(void)addCGLContext:(CGLContextObj)cglContext {
@@ -182,7 +150,6 @@ const CFStringRef kCGWindowOwnerPID = CFSTR("kCGWindowOwnerPID");
 }
 
 - (CGSubWindow *) createSubWindowWithFrame: (CGRect) frame {
-    O2InvalidAbstractInvocation();
     return nil;
 }
 

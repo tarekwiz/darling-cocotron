@@ -32,8 +32,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #import <objc/message.h>
 #import <pthread.h>
 
-NSString * const NSModalPanelRunLoopMode=@"NSModalPanelRunLoopMode";
-NSString * const NSEventTrackingRunLoopMode=@"NSEventTrackingRunLoopMode";
+NSString * NSModalPanelRunLoopMode=@"NSModalPanelRunLoopMode";
+NSString * NSEventTrackingRunLoopMode=@"NSEventTrackingRunLoopMode";
 
 NSString * const NSApplicationWillFinishLaunchingNotification=@"NSApplicationWillFinishLaunchingNotification";
 NSString * const NSApplicationDidFinishLaunchingNotification=@"NSApplicationDidFinishLaunchingNotification";
@@ -54,6 +54,14 @@ NSString * const NSApplicationDidUnhideNotification=@"NSApplicationDidUnhideNoti
 NSString * const NSApplicationWillTerminateNotification=@"NSApplicationWillTerminateNotification";
 
 NSString * const NSApplicationDidChangeScreenParametersNotification=@"NSApplicationDidChangeScreenParametersNotification";
+
+NSString * const NSMarkedClauseSegmentAttributeName=@"NSMarkedClauseSegmentAttributeName";
+NSString * const NSTextInputReplacementRangeAttributeName=@"NSTextInputReplacementRangeAttributeName";
+
+static void initRunLoopModesHack(void) __attribute__((constructor)) {
+   NSModalPanelRunLoopMode=NSDefaultRunLoopMode;
+   NSEventTrackingRunLoopMode=NSDefaultRunLoopMode;
+}
 
 const NSAppKitVersion NSAppKitVersionNumber = 1504; // macOS 10.12
 
